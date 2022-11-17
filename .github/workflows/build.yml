@@ -27,3 +27,5 @@ jobs:
         with:
           commit_message: Update mappings
           file_pattern: 'dist/*.js dist/*.js.map'
+          commit_user_name: r2-action-bot[bot]
+          commit_user_email: 118486773+r2-action-bot[bot]@users.noreply.github.com

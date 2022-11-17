@@ -106,7 +106,7 @@ run(config)
         if (err.hasOwnProperty('$metadata')) {
             console.error(`R2 Error - ${err.message}`);
         } else {
-            console.error('Error', err);
+            console.error('JS Error', err);
         }
         
         setOutput('result', 'failure');
