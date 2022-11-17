@@ -1,6 +1,6 @@
 {
   "name": "r2-upload-action",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "GitHub Action to upload files to a Cloudflare R2 bucket",
   "main": "dist/index.js",
   "type": "module",
