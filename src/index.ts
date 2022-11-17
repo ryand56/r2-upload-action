@@ -1,10 +1,13 @@
 import { R2Config } from "./types.js";
-import { getInput } from "@actions/core";
+import { getInput, setOutput, setFailed } from "@actions/core";
 import {
     S3Client,
     PutObjectCommandInput,
-    PutObjectCommand
+    PutObjectCommand,
+    PutObjectCommandOutput,
+    
 } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import * as fs from "fs";
 import md5 from "md5";
 
@@ -14,7 +17,8 @@ let config: R2Config = {
     secretAccessKey: getInput("r2-secret-access-key", { required: true }),
     bucket: getInput("r2-bucket", { required: true }),
     sourceDir: getInput("source-dir", { required: true }),
-    destinationDir: getInput("destination-dir")
+    destinationDir: getInput("destination-dir"),
+    outputFileUrl: getInput("output-file-url") === 'true'
 };
 
 const S3 = new S3Client({
@@ -46,7 +50,9 @@ const getFileList = (dir: string) => {
 
 const files: string[] = getFileList(config.sourceDir);
 
-try {
+const run = async (config: R2Config) => {
+    const map = new Map<string, PutObjectCommandOutput>();
+
     for (const file of files) {
         const fileStream = fs.readFileSync(file);
         const sourceDirRegex = new RegExp(config.sourceDir, 'g');
@@ -78,16 +84,27 @@ try {
         });
 
         const data = await S3.send(cmd);
-        console.log(`Success - ${data.$metadata.httpStatusCode}`);
+        console.log(`Success - ${data.$metadata.httpStatusCode} - ${file}`);
+        map.set(file, data);
+
+        if (config.outputFileUrl) {
+            const fileUrl = await getSignedUrl(S3, cmd);
+            setOutput('file-url', fileUrl);
+        }
     }
-} catch (err) {
-    if (err instanceof Error) {
+
+    return map;
+};
+
+run(config)
+    .then(result => setOutput('result', 'success'))
+    .catch(err => {
         if (err.hasOwnProperty('$metadata')) {
             console.error(`S3 Error - ${err.message}`);
         } else {
             console.error('Error', err);
         }
-    }
-
-    process.exitCode = 1;
-}
+        
+        setOutput('result', 'failure');
+        setFailed(err.message);
+    });

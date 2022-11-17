@@ -5,4 +5,5 @@ export interface R2Config {
     bucket: string
     sourceDir: string
     destinationDir: string
+    outputFileUrl: boolean
 }

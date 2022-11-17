@@ -22,6 +22,16 @@ inputs:
     required: true
   destination-dir:
     description: ''
+    required: false
+  output-file-url:
+    description: ''
+    default: 'true'
+    required: false
+outputs:
+  result:
+    description: '`success` or `failure`'
+  file-url:
+    description: ''
 runs:
   using: 'node16'
   main: 'dist/index.js'
