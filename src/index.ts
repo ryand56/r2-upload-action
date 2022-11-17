@@ -89,7 +89,7 @@ const run = async (config: R2Config) => {
         });
 
         const data = await S3.send(cmd);
-        console.log(`Success - ${data.$metadata.httpStatusCode} - ${file}`);
+        console.log(`R2 Success - ${data.$metadata.httpStatusCode} - ${file}`);
         map.set(file, data);
 
         const fileUrl = await getSignedUrl(S3, cmd);
@@ -104,7 +104,7 @@ run(config)
     .then(result => setOutput('result', 'success'))
     .catch(err => {
         if (err.hasOwnProperty('$metadata')) {
-            console.error(`S3 Error - ${err.message}`);
+            console.error(`R2 Error - ${err.message}`);
         } else {
             console.error('Error', err);
         }
