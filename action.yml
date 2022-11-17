@@ -1,0 +1,27 @@
+name: 'R2 Upload Action'
+description: 'GitHub Action to upload files to a Cloudflare R2 bucket'
+author: 'elementemerald'
+branding:
+  icon: 'upload-cloud'
+  color: 'white'
+inputs:
+  r2-account-id:
+    description: ''
+    required: true
+  r2-access-key-id:
+    description: ''
+    required: true
+  r2-secret-access-key:
+    description: ''
+    required: true
+  r2-bucket:
+    description: ''
+    required: true
+  source-dir:
+    description: ''
+    required: true
+  destination-dir:
+    description: ''
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
