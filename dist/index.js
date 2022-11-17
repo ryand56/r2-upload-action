@@ -1,6 +1,8 @@
-import { getInput } from "@actions/core";
+import { getInput, setOutput, setFailed } from "@actions/core";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import * as fs from "fs";
+import mime from "mime";
 import md5 from "md5";
 let config = {
     accountId: getInput("r2-account-id", { required: true }),
@@ -8,7 +10,8 @@ let config = {
     secretAccessKey: getInput("r2-secret-access-key", { required: true }),
     bucket: getInput("r2-bucket", { required: true }),
     sourceDir: getInput("source-dir", { required: true }),
-    destinationDir: getInput("destination-dir")
+    destinationDir: getInput("destination-dir"),
+    outputFileUrl: getInput("output-file-url") === 'true'
 };
 const S3 = new S3Client({
     region: "auto",
@@ -26,29 +29,35 @@ const getFileList = (dir) => {
     for (const item of items) {
         const isDir = item.isDirectory();
         if (isDir) {
-            files = [...files, ...getFileList(`${dir}/${item.name}`)];
+            files = [...files, ...getFileList(`${dir}${item.name}`)];
         }
         else {
-            files.push(`${dir}/${item.name}`);
+            files.push(`${dir}${item.name}`);
         }
     }
     return files;
 };
-const files = getFileList(config.sourceDir);
-try {
+const run = async (config) => {
+    const map = new Map();
+    const urls = {};
+    const files = getFileList(config.sourceDir);
     for (const file of files) {
+        console.log(file);
         const fileStream = fs.readFileSync(file);
+        console.log(config.sourceDir);
         const sourceDirRegex = new RegExp(config.sourceDir, 'g');
+        console.log(config.destinationDir);
         const fileName = file.replace(sourceDirRegex, config.destinationDir);
         if (fileName.includes('.gitkeep'))
             continue;
         console.log(fileName);
+        const mimeType = mime.getType(file);
         const uploadParams = {
             Bucket: config.bucket,
             Key: fileName,
             Body: fileStream,
             ContentLength: fs.statSync(file).size,
-            ContentType: 'application/octet-stream'
+            ContentType: mimeType ?? 'application/octet-stream'
         };
         const cmd = new PutObjectCommand(uploadParams);
         const digest = md5(fileStream);
@@ -60,18 +69,25 @@ try {
             name: 'addETag'
         });
         const data = await S3.send(cmd);
-        console.log(`Success - ${data.$metadata.httpStatusCode}`);
+        console.log(`Success - ${data.$metadata.httpStatusCode} - ${file}`);
+        map.set(file, data);
+        const fileUrl = await getSignedUrl(S3, cmd);
+        urls[file] = fileUrl;
     }
-}
-catch (err) {
-    if (err instanceof Error) {
-        if (err.hasOwnProperty('$metadata')) {
-            console.error(`S3 Error - ${err.message}`);
-        }
-        else {
-            console.error('Error', err);
-        }
+    if (config.outputFileUrl)
+        setOutput('file-urls', urls);
+    return map;
+};
+run(config)
+    .then(result => setOutput('result', 'success'))
+    .catch(err => {
+    if (err.hasOwnProperty('$metadata')) {
+        console.error(`S3 Error - ${err.message}`);
     }
-    process.exitCode = 1;
-}
+    else {
+        console.error('Error', err);
+    }
+    setOutput('result', 'failure');
+    setFailed(err.message);
+});
 //# sourceMappingURL=index.js.map

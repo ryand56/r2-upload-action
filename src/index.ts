@@ -1,4 +1,4 @@
-import { R2Config } from "./types.js";
+import { R2Config, FileMap } from "./types.js";
 import { getInput, setOutput, setFailed } from "@actions/core";
 import {
     S3Client,
@@ -8,6 +8,7 @@ import {
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import * as fs from "fs";
+import mime from "mime";
 import md5 from "md5";
 
 let config: R2Config = {
@@ -38,36 +39,41 @@ const getFileList = (dir: string) => {
     for (const item of items) {
         const isDir = item.isDirectory();
         if (isDir) {
-            files = [...files, ...getFileList(`${dir}/${item.name}`)];
+            files = [...files, ...getFileList(`${dir}${item.name}`)];
         } else {
-            files.push(`${dir}/${item.name}`);
+            files.push(`${dir}${item.name}`);
         }
     }
 
     return files;
 };
 
-const files: string[] = getFileList(config.sourceDir);
-
 const run = async (config: R2Config) => {
     const map = new Map<string, PutObjectCommandOutput>();
+    const urls: FileMap = {};
+
+    const files: string[] = getFileList(config.sourceDir);
 
     for (const file of files) {
+        console.log(file);
         const fileStream = fs.readFileSync(file);
+        console.log(config.sourceDir);
         const sourceDirRegex = new RegExp(config.sourceDir, 'g');
+        console.log(config.destinationDir);
         const fileName = file.replace(sourceDirRegex, config.destinationDir);
 
         if (fileName.includes('.gitkeep'))
             continue;
         
         console.log(fileName);
+        const mimeType = mime.getType(file);
 
         const uploadParams: PutObjectCommandInput = {
             Bucket: config.bucket,
             Key: fileName,
             Body: fileStream,
             ContentLength: fs.statSync(file).size,
-            ContentType: 'application/octet-stream'
+            ContentType: mimeType ?? 'application/octet-stream'
         };
         
         const cmd = new PutObjectCommand(uploadParams);
@@ -86,12 +92,11 @@ const run = async (config: R2Config) => {
         console.log(`Success - ${data.$metadata.httpStatusCode} - ${file}`);
         map.set(file, data);
 
-        if (config.outputFileUrl) {
-            const fileUrl = await getSignedUrl(S3, cmd);
-            setOutput('file-url', fileUrl);
-        }
+        const fileUrl = await getSignedUrl(S3, cmd);
+        urls[file] = fileUrl;
     }
 
+    if (config.outputFileUrl) setOutput('file-urls', urls);
     return map;
 };
 

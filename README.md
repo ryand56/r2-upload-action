@@ -13,3 +13,10 @@ Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-u
 | `r2-bucket` | **(Required)** Your Cloudflare R2 bucket name. | *N/A* |
 | `source-dir` | **(Required)** The directory to upload to the Cloudflare R2 bucket. | *N/A* |
 | `destination-dir` | (Optional) The destination to upload the directory to in the Cloudflare R2 bucket. | Empty string |
+
+## Outputs
+
+| Name | Description |
+| --- | --- |
+| `result` | Result of this action. Either `success` or `failure` is set. |
+| `file-urls` | The URLs of the uploaded files in the directory. |

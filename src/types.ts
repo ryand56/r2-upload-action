@@ -7,3 +7,7 @@ export interface R2Config {
     destinationDir: string
     outputFileUrl: boolean
 }
+
+export interface FileMap {
+    [file: string]: string
+}

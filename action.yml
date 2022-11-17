@@ -30,7 +30,7 @@ inputs:
 outputs:
   result:
     description: '`success` or `failure`'
-  file-url:
+  file-urls:
     description: ''
 runs:
   using: 'node16'
