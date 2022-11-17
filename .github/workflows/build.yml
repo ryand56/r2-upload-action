@@ -3,7 +3,7 @@ name: Action CI
 on:
   push:
     branches:
-      - '*'
+      - master
 
 jobs:
   build:
@@ -26,3 +26,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Update mappings
+          file_pattern: 'dist/*.js dist/*.js.map'
