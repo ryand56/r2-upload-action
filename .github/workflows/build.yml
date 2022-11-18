@@ -27,3 +27,4 @@ jobs:
           file_pattern: 'dist/*.js dist/*.js.map'
           commit_user_name: r2-action-bot[bot]
           commit_user_email: 118486773+r2-action-bot[bot]@users.noreply.github.com
+          commit_author: r2-action-bot[bot] <118486773+r2-action-bot[bot]@users.noreply.github.com>
