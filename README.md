@@ -22,3 +22,8 @@ Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-u
 | --- | --- |
 | `result` | Result of this action. Either `success` or `failure` is set. |
 | `file-urls` | The URLs of the uploaded files in the directory. |
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+See the [contributing guide](https://github.com/elementemerald/r2-upload-action/blob/readme-refactor/CONTRIBUTING.md) for more detail on how to implement something into the project.
