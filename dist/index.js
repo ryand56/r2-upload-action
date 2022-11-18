@@ -85,7 +85,7 @@ run(config)
         console.error(`R2 Error - ${err.message}`);
     }
     else {
-        console.error('JS Error', err);
+        console.error('Error', err);
     }
     setOutput('result', 'failure');
     setFailed(err.message);
