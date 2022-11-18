@@ -3,6 +3,7 @@ GitHub Action to upload files to a Cloudflare R2 bucket, built on top of @aws-sd
 <br>
 Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-upload-action) and [Cloudflare R2 Upload](https://github.com/Karbust/Cloudflare_R2_Upload).
 
+<!-- ACTION INPUTS -->
 ## Inputs
 
 | Name | Description | Default |
@@ -14,6 +15,7 @@ Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-u
 | `source-dir` | **(Required)** The directory to upload to the Cloudflare R2 bucket. | *N/A* |
 | `destination-dir` | (Optional) The destination to upload the directory to in the Cloudflare R2 bucket. | Empty string |
 
+<!-- ACTION OUTPUTS -->
 ## Outputs
 
 | Name | Description |
