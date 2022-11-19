@@ -26,4 +26,4 @@ jobs:
       - name: Install Build Tool
         run: npm i -g @vercel/ncc
       - name: Build
-        run: ncc build src/index.ts -o dist
+        run: ncc build src/index.ts -s -o dist
