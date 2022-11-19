@@ -3,6 +3,22 @@ GitHub Action to upload files to a Cloudflare R2 bucket, built on top of @aws-sd
 <br>
 Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-upload-action) and [Cloudflare R2 Upload](https://github.com/Karbust/Cloudflare_R2_Upload).
 
+<!-- ACTION USAGE -->
+## Usage
+
+<!-- BASIC USAGE -->
+### Basic Usage
+```yaml
+- uses: elementemerald/r2-upload-action@v1.0.5
+  with:
+    r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
+    r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
+    r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+    r2-bucket: ${{ secrets.R2_BUCKET }}
+    source-dir: src/
+```
+<!-- -->
+
 <!-- ACTION INPUTS -->
 ## Inputs
 
