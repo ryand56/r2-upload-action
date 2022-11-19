@@ -3,6 +3,41 @@ GitHub Action to upload files to a Cloudflare R2 bucket, built on top of @aws-sd
 <br>
 Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-upload-action) and [Cloudflare R2 Upload](https://github.com/Karbust/Cloudflare_R2_Upload).
 
+<!-- ACTION USAGE -->
+## Usage
+
+<!-- BASIC USAGE -->
+### Basic Usage
+```yaml
+- uses: elementemerald/r2-upload-action@v1.0.5
+  with:
+    r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
+    r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
+    r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+    r2-bucket: ${{ secrets.R2_BUCKET }}
+    source-dir: src/
+```
+
+In this example, `source-dir` is stored in the root of the bucket.
+Specify `destination-dir` input to change the location of where the directory will be uploaded.
+<!-- -->
+
+<!-- CUSTOM USAGE -->
+### Custom Usage
+```yaml
+- uses: elementemerald/r2-upload-action@v1.0.5
+  with:
+    r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
+    r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
+    r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+    r2-bucket: ${{ secrets.R2_BUCKET }}
+    source-dir: src/
+    destination-dir: artifacts/ # Can be anything as long as it is an actual path
+    output-file-url: 'true' # defaults to true
+```
+See the latest [action.yml](https://github.com/elementemerald/r2-upload-action/blob/master/action.yml) for every input and output or take a look below.
+<!-- -->
+
 <!-- ACTION INPUTS -->
 ## Inputs
 
@@ -26,4 +61,4 @@ Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-u
 <!-- CONTRIBUTING -->
 ## Contributing
 
-See the [contributing guide](https://github.com/elementemerald/r2-upload-action/blob/readme-refactor/CONTRIBUTING.md) for more detail on how to implement something into the project.
+See the [contributing guide](https://github.com/elementemerald/r2-upload-action/blob/master/CONTRIBUTING.md) for more detail on how to implement something into the project.
