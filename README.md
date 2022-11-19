@@ -61,4 +61,4 @@ See the latest [action.yml](https://github.com/elementemerald/r2-upload-action/b
 <!-- CONTRIBUTING -->
 ## Contributing
 
-See the [contributing guide](https://github.com/elementemerald/r2-upload-action/blob/readme-refactor/CONTRIBUTING.md) for more detail on how to implement something into the project.
+See the [contributing guide](https://github.com/elementemerald/r2-upload-action/blob/master/CONTRIBUTING.md) for more detail on how to implement something into the project.
