@@ -17,6 +17,9 @@ Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-u
     r2-bucket: ${{ secrets.R2_BUCKET }}
     source-dir: src/
 ```
+
+In this example, `source-dir` is stored in the root of the bucket.
+Specify `destination-dir` input to change the location of where the directory will be uploaded.
 <!-- -->
 
 <!-- ACTION INPUTS -->
