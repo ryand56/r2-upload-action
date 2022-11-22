@@ -27,7 +27,7 @@ jobs:
       - name: Update Mappings
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Update mappings
+          commit_message: '[skip ci] Update mappings'
           file_pattern: 'dist/*.js dist/*.js.map'
           commit_user_name: r2-action-bot[bot]
           commit_user_email: 118486773+r2-action-bot[bot]@users.noreply.github.com
