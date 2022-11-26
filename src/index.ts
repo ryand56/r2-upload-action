@@ -10,7 +10,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import * as fs from "fs";
 import mime from "mime";
 import md5 from "md5";
-
+import path from "path";
 let config: R2Config = {
     accountId: getInput("r2-account-id", { required: true }),
     accessKeyId: getInput("r2-access-key-id", { required: true }),
@@ -31,22 +31,23 @@ const S3 = new S3Client({
 });
 
 const getFileList = (dir: string) => {
-    let files: string[] = [];
-    const items = fs.readdirSync(dir, {
-        withFileTypes: true
-    });
+  let files: string[] = []
+  const items = fs.readdirSync(dir, {
+    withFileTypes: true,
+  })
 
-    for (const item of items) {
-        const isDir = item.isDirectory();
-        if (isDir) {
-            files = [...files, ...getFileList(`${dir}${item.name}`)];
-        } else {
-            files.push(`${dir}${item.name}`);
-        }
+  for (const item of items) {
+    const isDir = item.isDirectory()
+    const absolutePath = path.join(dir, item.name)
+    if (isDir) {
+      files = [...files, ...getFileList(path.join(absolutePath))]
+    } else {
+      files.push(absolutePath)
     }
+  }
 
-    return files;
-};
+  return files
+}
 
 const run = async (config: R2Config) => {
     const map = new Map<string, PutObjectCommandOutput>();
@@ -108,7 +109,7 @@ run(config)
         } else {
             console.error('Error', err);
         }
-        
+
         setOutput('result', 'failure');
         setFailed(err.message);
     });
