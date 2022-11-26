@@ -40,7 +40,7 @@ const getFileList = (dir: string) => {
         const isDir = item.isDirectory();
         const absolutePath = path.join(dir, item.name);
         if (isDir) {
-            files = [...files, ...getFileList(path.join(absolutePath))];
+            files = [...files, ...getFileList(absolutePath)];
         } else {
             files.push(absolutePath);
         }
