@@ -26,28 +26,28 @@ const S3 = new S3Client({
     endpoint: `https://${config.accountId}.r2.cloudflarestorage.com`,
     credentials: {
         accessKeyId: config.accessKeyId,
-        secretAccessKey: config.secretAccessKey
-    }
+        secretAccessKey: config.secretAccessKey,
+    },
 });
 
 const getFileList = (dir: string) => {
-  let files: string[] = []
-  const items = fs.readdirSync(dir, {
-    withFileTypes: true,
-  })
+    let files: string[] = [];
+    const items = fs.readdirSync(dir, {
+        withFileTypes: true,
+    });
 
-  for (const item of items) {
-    const isDir = item.isDirectory()
-    const absolutePath = path.join(dir, item.name)
-    if (isDir) {
-      files = [...files, ...getFileList(path.join(absolutePath))]
-    } else {
-      files.push(absolutePath)
+    for (const item of items) {
+        const isDir = item.isDirectory();
+        const absolutePath = path.join(dir, item.name);
+        if (isDir) {
+            files = [...files, ...getFileList(path.join(absolutePath))];
+        } else {
+            files.push(absolutePath);
+        }
     }
-  }
 
-  return files
-}
+    return files;
+};
 
 const run = async (config: R2Config) => {
     const map = new Map<string, PutObjectCommandOutput>();
