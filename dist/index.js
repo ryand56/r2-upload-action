@@ -53443,6 +53443,8 @@ const getFileList = (dir) => {
     return files;
 };
 const run = async (config) => {
+    // Remove slashes in source dir
+    config.sourceDir = config.sourceDir.replace(/\\/g, "").replace(/\//g, "");
     const map = new Map();
     const urls = {};
     const files = getFileList(config.sourceDir);
@@ -53450,9 +53452,9 @@ const run = async (config) => {
         console.log(file);
         const fileStream = fs__WEBPACK_IMPORTED_MODULE_2__.readFileSync(file);
         console.log(config.sourceDir);
-        const sourceDirRegex = new RegExp(config.sourceDir, 'g');
+        const sourceDirRegex = new RegExp(config.sourceDir + "\\\\", 'g');
         console.log(config.destinationDir);
-        const fileName = file.replace(sourceDirRegex, config.destinationDir);
+        const fileName = file.replace(sourceDirRegex, path__WEBPACK_IMPORTED_MODULE_5___default().join(config.destinationDir));
         if (fileName.includes('.gitkeep'))
             continue;
         console.log(fileName);
