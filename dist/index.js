@@ -53389,8 +53389,8 @@ var __webpack_exports__ = {};
 (() => {
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(32168);
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_5__ = __nccwpck_require__(33488);
-/* harmony import */ var _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__nccwpck_require__.n(_aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(33488);
+/* harmony import */ var _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__nccwpck_require__.n(_aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var _aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(91658);
 /* harmony import */ var _aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(57147);
@@ -53399,6 +53399,9 @@ var __webpack_exports__ = {};
 /* harmony import */ var mime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__nccwpck_require__.n(mime__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var md5__WEBPACK_IMPORTED_MODULE_4__ = __nccwpck_require__(65034);
 /* harmony import */ var md5__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__nccwpck_require__.n(md5__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_5__ = __nccwpck_require__(71017);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__nccwpck_require__.n(path__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
@@ -53414,26 +53417,27 @@ let config = {
     destinationDir: (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("destination-dir"),
     outputFileUrl: (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("output-file-url") === 'true'
 };
-const S3 = new _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_5__.S3Client({
+const S3 = new _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6__.S3Client({
     region: "auto",
     endpoint: `https://${config.accountId}.r2.cloudflarestorage.com`,
     credentials: {
         accessKeyId: config.accessKeyId,
-        secretAccessKey: config.secretAccessKey
-    }
+        secretAccessKey: config.secretAccessKey,
+    },
 });
 const getFileList = (dir) => {
     let files = [];
     const items = fs__WEBPACK_IMPORTED_MODULE_2__.readdirSync(dir, {
-        withFileTypes: true
+        withFileTypes: true,
     });
     for (const item of items) {
         const isDir = item.isDirectory();
+        const absolutePath = path__WEBPACK_IMPORTED_MODULE_5___default().join(dir, item.name);
         if (isDir) {
-            files = [...files, ...getFileList(`${dir}${item.name}`)];
+            files = [...files, ...getFileList(absolutePath)];
         }
         else {
-            files.push(`${dir}${item.name}`);
+            files.push(absolutePath);
         }
     }
     return files;
@@ -53460,7 +53464,7 @@ const run = async (config) => {
             ContentLength: fs__WEBPACK_IMPORTED_MODULE_2__.statSync(file).size,
             ContentType: mimeType ?? 'application/octet-stream'
         };
-        const cmd = new _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_5__.PutObjectCommand(uploadParams);
+        const cmd = new _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6__.PutObjectCommand(uploadParams);
         const digest = md5__WEBPACK_IMPORTED_MODULE_4___default()(fileStream);
         cmd.middlewareStack.add((next) => async (args) => {
             args.request.headers['if-none-match'] = `"${digest}"`;
