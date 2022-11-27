@@ -50,6 +50,9 @@ const getFileList = (dir: string) => {
 };
 
 const run = async (config: R2Config) => {
+    // Remove slashes in source dir
+    config.sourceDir = config.sourceDir.replace(/\\/g, "").replace(/\//g, "");
+
     const map = new Map<string, PutObjectCommandOutput>();
     const urls: FileMap = {};
 
@@ -59,9 +62,9 @@ const run = async (config: R2Config) => {
         console.log(file);
         const fileStream = fs.readFileSync(file);
         console.log(config.sourceDir);
-        const sourceDirRegex = new RegExp(config.sourceDir, 'g');
+        const sourceDirRegex = new RegExp(config.sourceDir + "\\\\", 'g');
         console.log(config.destinationDir);
-        const fileName = file.replace(sourceDirRegex, config.destinationDir);
+        const fileName = file.replace(sourceDirRegex, path.join(config.destinationDir));
 
         if (fileName.includes('.gitkeep'))
             continue;
