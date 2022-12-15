@@ -4140,7 +4140,7 @@ const middleware_host_header_1 = __nccwpck_require__(45216);
 const middleware_logger_1 = __nccwpck_require__(28378);
 const middleware_recursion_detection_1 = __nccwpck_require__(46077);
 const middleware_retry_1 = __nccwpck_require__(12236);
-const middleware_sdk_s3_1 = __nccwpck_require__(19373);
+const middleware_sdk_s3_1 = __nccwpck_require__(42039);
 const middleware_signing_1 = __nccwpck_require__(15585);
 const middleware_user_agent_1 = __nccwpck_require__(21768);
 const smithy_client_1 = __nccwpck_require__(48);
@@ -4245,7 +4245,7 @@ exports.AbortMultipartUploadCommand = AbortMultipartUploadCommand;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CompleteMultipartUploadCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
-const middleware_sdk_s3_1 = __nccwpck_require__(19373);
+const middleware_sdk_s3_1 = __nccwpck_require__(42039);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
 const smithy_client_1 = __nccwpck_require__(48);
@@ -4308,7 +4308,7 @@ exports.CompleteMultipartUploadCommand = CompleteMultipartUploadCommand;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CopyObjectCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
-const middleware_sdk_s3_1 = __nccwpck_require__(19373);
+const middleware_sdk_s3_1 = __nccwpck_require__(42039);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
 const smithy_client_1 = __nccwpck_require__(48);
@@ -9138,7 +9138,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PutObjectCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
-const middleware_sdk_s3_1 = __nccwpck_require__(19373);
+const middleware_sdk_s3_1 = __nccwpck_require__(42039);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
 const smithy_client_1 = __nccwpck_require__(48);
@@ -9724,7 +9724,7 @@ exports.UploadPartCommand = UploadPartCommand;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.UploadPartCopyCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
-const middleware_sdk_s3_1 = __nccwpck_require__(19373);
+const middleware_sdk_s3_1 = __nccwpck_require__(42039);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
 const smithy_client_1 = __nccwpck_require__(48);
@@ -32639,171 +32639,6 @@ exports.waitUntilObjectNotExists = waitUntilObjectNotExists;
 
 /***/ }),
 
-/***/ 15714:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getCheckContentLengthHeaderPlugin = exports.checkContentLengthHeaderMiddlewareOptions = exports.checkContentLengthHeader = void 0;
-const protocol_http_1 = __nccwpck_require__(73632);
-const CONTENT_LENGTH_HEADER = "content-length";
-function checkContentLengthHeader() {
-    return (next, context) => async (args) => {
-        var _a;
-        const { request } = args;
-        if (protocol_http_1.HttpRequest.isInstance(request)) {
-            if (!request.headers[CONTENT_LENGTH_HEADER]) {
-                const message = `Are you using a Stream of unknown length as the Body of a PutObject request? Consider using Upload instead from @aws-sdk/lib-storage.`;
-                if (typeof ((_a = context === null || context === void 0 ? void 0 : context.logger) === null || _a === void 0 ? void 0 : _a.warn) === "function") {
-                    context.logger.warn(message);
-                }
-                else {
-                    console.warn(message);
-                }
-            }
-        }
-        return next({ ...args });
-    };
-}
-exports.checkContentLengthHeader = checkContentLengthHeader;
-exports.checkContentLengthHeaderMiddlewareOptions = {
-    step: "finalizeRequest",
-    tags: ["CHECK_CONTENT_LENGTH_HEADER"],
-    name: "getCheckContentLengthHeaderPlugin",
-    override: true,
-};
-const getCheckContentLengthHeaderPlugin = (unused) => ({
-    applyToStack: (clientStack) => {
-        clientStack.add(checkContentLengthHeader(), exports.checkContentLengthHeaderMiddlewareOptions);
-    },
-});
-exports.getCheckContentLengthHeaderPlugin = getCheckContentLengthHeaderPlugin;
-
-
-/***/ }),
-
-/***/ 89327:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.resolveS3Config = void 0;
-const resolveS3Config = (input) => {
-    var _a, _b, _c;
-    return ({
-        ...input,
-        forcePathStyle: (_a = input.forcePathStyle) !== null && _a !== void 0 ? _a : false,
-        useAccelerateEndpoint: (_b = input.useAccelerateEndpoint) !== null && _b !== void 0 ? _b : false,
-        disableMultiregionAccessPoints: (_c = input.disableMultiregionAccessPoints) !== null && _c !== void 0 ? _c : false,
-    });
-};
-exports.resolveS3Config = resolveS3Config;
-
-
-/***/ }),
-
-/***/ 19373:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __nccwpck_require__(15609);
-tslib_1.__exportStar(__nccwpck_require__(15714), exports);
-tslib_1.__exportStar(__nccwpck_require__(89327), exports);
-tslib_1.__exportStar(__nccwpck_require__(371), exports);
-tslib_1.__exportStar(__nccwpck_require__(9332), exports);
-
-
-/***/ }),
-
-/***/ 371:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getThrow200ExceptionsPlugin = exports.throw200ExceptionsMiddlewareOptions = exports.throw200ExceptionsMiddleware = void 0;
-const protocol_http_1 = __nccwpck_require__(73632);
-const throw200ExceptionsMiddleware = (config) => (next) => async (args) => {
-    const result = await next(args);
-    const { response } = result;
-    if (!protocol_http_1.HttpResponse.isInstance(response))
-        return result;
-    const { statusCode, body } = response;
-    if (statusCode < 200 || statusCode >= 300)
-        return result;
-    const bodyBytes = await collectBody(body, config);
-    const bodyString = await collectBodyString(bodyBytes, config);
-    if (bodyBytes.length === 0) {
-        const err = new Error("S3 aborted request");
-        err.name = "InternalError";
-        throw err;
-    }
-    if (bodyString && bodyString.match("<Error>")) {
-        response.statusCode = 400;
-    }
-    response.body = bodyBytes;
-    return result;
-};
-exports.throw200ExceptionsMiddleware = throw200ExceptionsMiddleware;
-const collectBody = (streamBody = new Uint8Array(), context) => {
-    if (streamBody instanceof Uint8Array) {
-        return Promise.resolve(streamBody);
-    }
-    return context.streamCollector(streamBody) || Promise.resolve(new Uint8Array());
-};
-const collectBodyString = (streamBody, context) => collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
-exports.throw200ExceptionsMiddlewareOptions = {
-    relation: "after",
-    toMiddleware: "deserializerMiddleware",
-    tags: ["THROW_200_EXCEPTIONS", "S3"],
-    name: "throw200ExceptionsMiddleware",
-    override: true,
-};
-const getThrow200ExceptionsPlugin = (config) => ({
-    applyToStack: (clientStack) => {
-        clientStack.addRelativeTo((0, exports.throw200ExceptionsMiddleware)(config), exports.throw200ExceptionsMiddlewareOptions);
-    },
-});
-exports.getThrow200ExceptionsPlugin = getThrow200ExceptionsPlugin;
-
-
-/***/ }),
-
-/***/ 9332:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getValidateBucketNamePlugin = exports.validateBucketNameMiddlewareOptions = exports.validateBucketNameMiddleware = void 0;
-const util_arn_parser_1 = __nccwpck_require__(50472);
-function validateBucketNameMiddleware() {
-    return (next) => async (args) => {
-        const { input: { Bucket }, } = args;
-        if (typeof Bucket === "string" && !(0, util_arn_parser_1.validate)(Bucket) && Bucket.indexOf("/") >= 0) {
-            const err = new Error(`Bucket name shouldn't contain '/', received '${Bucket}'`);
-            err.name = "InvalidBucketName";
-            throw err;
-        }
-        return next({ ...args });
-    };
-}
-exports.validateBucketNameMiddleware = validateBucketNameMiddleware;
-exports.validateBucketNameMiddlewareOptions = {
-    step: "initialize",
-    tags: ["VALIDATE_BUCKET_NAME"],
-    name: "validateBucketNameMiddleware",
-    override: true,
-};
-const getValidateBucketNamePlugin = (unused) => ({
-    applyToStack: (clientStack) => {
-        clientStack.add(validateBucketNameMiddleware(), exports.validateBucketNameMiddlewareOptions);
-    },
-});
-exports.getValidateBucketNamePlugin = getValidateBucketNamePlugin;
-
-
-/***/ }),
-
 /***/ 22089:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
@@ -43135,6 +42970,171 @@ const asSdkError = (error) => {
     return new Error(`AWS SDK error wrapper for ${error}`);
 };
 exports.asSdkError = asSdkError;
+
+
+/***/ }),
+
+/***/ 24388:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getCheckContentLengthHeaderPlugin = exports.checkContentLengthHeaderMiddlewareOptions = exports.checkContentLengthHeader = void 0;
+const protocol_http_1 = __nccwpck_require__(73632);
+const CONTENT_LENGTH_HEADER = "content-length";
+function checkContentLengthHeader() {
+    return (next, context) => async (args) => {
+        var _a;
+        const { request } = args;
+        if (protocol_http_1.HttpRequest.isInstance(request)) {
+            if (!request.headers[CONTENT_LENGTH_HEADER]) {
+                const message = `Are you using a Stream of unknown length as the Body of a PutObject request? Consider using Upload instead from @aws-sdk/lib-storage.`;
+                if (typeof ((_a = context === null || context === void 0 ? void 0 : context.logger) === null || _a === void 0 ? void 0 : _a.warn) === "function") {
+                    context.logger.warn(message);
+                }
+                else {
+                    console.warn(message);
+                }
+            }
+        }
+        return next({ ...args });
+    };
+}
+exports.checkContentLengthHeader = checkContentLengthHeader;
+exports.checkContentLengthHeaderMiddlewareOptions = {
+    step: "finalizeRequest",
+    tags: ["CHECK_CONTENT_LENGTH_HEADER"],
+    name: "getCheckContentLengthHeaderPlugin",
+    override: true,
+};
+const getCheckContentLengthHeaderPlugin = (unused) => ({
+    applyToStack: (clientStack) => {
+        clientStack.add(checkContentLengthHeader(), exports.checkContentLengthHeaderMiddlewareOptions);
+    },
+});
+exports.getCheckContentLengthHeaderPlugin = getCheckContentLengthHeaderPlugin;
+
+
+/***/ }),
+
+/***/ 45256:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.resolveS3Config = void 0;
+const resolveS3Config = (input) => {
+    var _a, _b, _c;
+    return ({
+        ...input,
+        forcePathStyle: (_a = input.forcePathStyle) !== null && _a !== void 0 ? _a : false,
+        useAccelerateEndpoint: (_b = input.useAccelerateEndpoint) !== null && _b !== void 0 ? _b : false,
+        disableMultiregionAccessPoints: (_c = input.disableMultiregionAccessPoints) !== null && _c !== void 0 ? _c : false,
+    });
+};
+exports.resolveS3Config = resolveS3Config;
+
+
+/***/ }),
+
+/***/ 42039:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __nccwpck_require__(15609);
+tslib_1.__exportStar(__nccwpck_require__(24388), exports);
+tslib_1.__exportStar(__nccwpck_require__(45256), exports);
+tslib_1.__exportStar(__nccwpck_require__(68341), exports);
+tslib_1.__exportStar(__nccwpck_require__(85406), exports);
+
+
+/***/ }),
+
+/***/ 68341:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getThrow200ExceptionsPlugin = exports.throw200ExceptionsMiddlewareOptions = exports.throw200ExceptionsMiddleware = void 0;
+const protocol_http_1 = __nccwpck_require__(73632);
+const throw200ExceptionsMiddleware = (config) => (next) => async (args) => {
+    const result = await next(args);
+    const { response } = result;
+    if (!protocol_http_1.HttpResponse.isInstance(response))
+        return result;
+    const { statusCode, body } = response;
+    if (statusCode < 200 || statusCode >= 300)
+        return result;
+    const bodyBytes = await collectBody(body, config);
+    const bodyString = await collectBodyString(bodyBytes, config);
+    if (bodyBytes.length === 0) {
+        const err = new Error("S3 aborted request");
+        err.name = "InternalError";
+        throw err;
+    }
+    if (bodyString && bodyString.match("<Error>")) {
+        response.statusCode = 400;
+    }
+    response.body = bodyBytes;
+    return result;
+};
+exports.throw200ExceptionsMiddleware = throw200ExceptionsMiddleware;
+const collectBody = (streamBody = new Uint8Array(), context) => {
+    if (streamBody instanceof Uint8Array) {
+        return Promise.resolve(streamBody);
+    }
+    return context.streamCollector(streamBody) || Promise.resolve(new Uint8Array());
+};
+const collectBodyString = (streamBody, context) => collectBody(streamBody, context).then((body) => context.utf8Encoder(body));
+exports.throw200ExceptionsMiddlewareOptions = {
+    relation: "after",
+    toMiddleware: "deserializerMiddleware",
+    tags: ["THROW_200_EXCEPTIONS", "S3"],
+    name: "throw200ExceptionsMiddleware",
+    override: true,
+};
+const getThrow200ExceptionsPlugin = (config) => ({
+    applyToStack: (clientStack) => {
+        clientStack.addRelativeTo((0, exports.throw200ExceptionsMiddleware)(config), exports.throw200ExceptionsMiddlewareOptions);
+    },
+});
+exports.getThrow200ExceptionsPlugin = getThrow200ExceptionsPlugin;
+
+
+/***/ }),
+
+/***/ 85406:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getValidateBucketNamePlugin = exports.validateBucketNameMiddlewareOptions = exports.validateBucketNameMiddleware = void 0;
+const util_arn_parser_1 = __nccwpck_require__(50472);
+function validateBucketNameMiddleware() {
+    return (next) => async (args) => {
+        const { input: { Bucket }, } = args;
+        if (typeof Bucket === "string" && !(0, util_arn_parser_1.validate)(Bucket) && Bucket.indexOf("/") >= 0) {
+            const err = new Error(`Bucket name shouldn't contain '/', received '${Bucket}'`);
+            err.name = "InvalidBucketName";
+            throw err;
+        }
+        return next({ ...args });
+    };
+}
+exports.validateBucketNameMiddleware = validateBucketNameMiddleware;
+exports.validateBucketNameMiddlewareOptions = {
+    step: "initialize",
+    tags: ["VALIDATE_BUCKET_NAME"],
+    name: "validateBucketNameMiddleware",
+    override: true,
+};
+const getValidateBucketNamePlugin = (unused) => ({
+    applyToStack: (clientStack) => {
+        clientStack.add(validateBucketNameMiddleware(), exports.validateBucketNameMiddlewareOptions);
+    },
+});
+exports.getValidateBucketNamePlugin = getValidateBucketNamePlugin;
 
 
 /***/ }),
