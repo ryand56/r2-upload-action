@@ -9,7 +9,7 @@ Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-u
 <!-- BASIC USAGE -->
 ### Basic Usage
 ```yaml
-- uses: elementemerald/r2-upload-action@v1.1
+- uses: elementemerald/r2-upload-action@v1.1.1
   with:
     r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
     r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
@@ -25,7 +25,7 @@ Specify `destination-dir` input to change the location of where the directory wi
 <!-- CUSTOM USAGE -->
 ### Custom Usage
 ```yaml
-- uses: elementemerald/r2-upload-action@v1.1
+- uses: elementemerald/r2-upload-action@v1.1.1
   with:
     r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
     r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
