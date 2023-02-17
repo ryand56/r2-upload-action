@@ -50,9 +50,6 @@ const getFileList = (dir: string) => {
 };
 
 const run = async (config: R2Config) => {
-    // Remove slashes in source dir
-    config.sourceDir = config.sourceDir.replace(/\\/g, "").replace(/\//g, "");
-
     const map = new Map<string, PutObjectCommandOutput>();
     const urls: FileMap = {};
 
@@ -62,19 +59,19 @@ const run = async (config: R2Config) => {
         console.log(file);
         const fileStream = fs.readFileSync(file);
         console.log(config.sourceDir);
-        const sourceDirRegex = new RegExp(config.sourceDir + "\\\\", 'g');
         console.log(config.destinationDir);
-        const fileName = file.replace(sourceDirRegex, path.join(config.destinationDir));
+        const fileName = file.replace(config.sourceDir, "");
+        const fileKey = (path.join(config.destinationDir, fileName)).replace(/\\/g, "/");
 
-        if (fileName.includes('.gitkeep'))
+        if (fileKey.includes('.gitkeep'))
             continue;
         
-        console.log(fileName);
+        console.log(fileKey);
         const mimeType = mime.getType(file);
 
         const uploadParams: PutObjectCommandInput = {
             Bucket: config.bucket,
-            Key: fileName,
+            Key: fileKey,
             Body: fileStream,
             ContentLength: fs.statSync(file).size,
             ContentType: mimeType ?? 'application/octet-stream'
