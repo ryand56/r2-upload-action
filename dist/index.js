@@ -1773,16 +1773,19 @@ var AwsCrc32 = /** @class */ (function () {
         this.crc32.update((0, util_1.convertToBuffer)(toHash));
     };
     AwsCrc32.prototype.digest = function () {
-        return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-            return (0, tslib_1.__generator)(this, function (_a) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            return tslib_1.__generator(this, function (_a) {
                 return [2 /*return*/, (0, util_1.numToUint8)(this.crc32.digest())];
             });
         });
     };
+    AwsCrc32.prototype.reset = function () {
+        this.crc32 = new index_1.Crc32();
+    };
     return AwsCrc32;
 }());
 exports.AwsCrc32 = AwsCrc32;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXdzX2NyYzMyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vc3JjL2F3c19jcmMzMi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsb0VBQW9FO0FBQ3BFLHNDQUFzQzs7OztBQUd0Qyx5Q0FBNEU7QUFDNUUsaUNBQWdDO0FBRWhDO0lBQUE7UUFDbUIsVUFBSyxHQUFHLElBQUksYUFBSyxFQUFFLENBQUM7SUFXdkMsQ0FBQztJQVRDLHlCQUFNLEdBQU4sVUFBTyxNQUFrQjtRQUN2QixJQUFJLElBQUEsa0JBQVcsRUFBQyxNQUFNLENBQUM7WUFBRSxPQUFPO1FBRWhDLElBQUksQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLElBQUEsc0JBQWUsRUFBQyxNQUFNLENBQUMsQ0FBQyxDQUFDO0lBQzdDLENBQUM7SUFFSyx5QkFBTSxHQUFaOzs7Z0JBQ0Usc0JBQU8sSUFBQSxpQkFBVSxFQUFDLElBQUksQ0FBQyxLQUFLLENBQUMsTUFBTSxFQUFFLENBQUMsRUFBQzs7O0tBQ3hDO0lBQ0gsZUFBQztBQUFELENBQUMsQUFaRCxJQVlDO0FBWlksNEJBQVEiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgQW1hem9uLmNvbSBJbmMuIG9yIGl0cyBhZmZpbGlhdGVzLiBBbGwgUmlnaHRzIFJlc2VydmVkLlxuLy8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEFwYWNoZS0yLjBcblxuaW1wb3J0IHsgSGFzaCwgU291cmNlRGF0YSB9IGZyb20gXCJAYXdzLXNkay90eXBlc1wiO1xuaW1wb3J0IHsgY29udmVydFRvQnVmZmVyLCBpc0VtcHR5RGF0YSwgbnVtVG9VaW50OCB9IGZyb20gXCJAYXdzLWNyeXB0by91dGlsXCI7XG5pbXBvcnQgeyBDcmMzMiB9IGZyb20gXCIuL2luZGV4XCI7XG5cbmV4cG9ydCBjbGFzcyBBd3NDcmMzMiBpbXBsZW1lbnRzIEhhc2gge1xuICBwcml2YXRlIHJlYWRvbmx5IGNyYzMyID0gbmV3IENyYzMyKCk7XG5cbiAgdXBkYXRlKHRvSGFzaDogU291cmNlRGF0YSkge1xuICAgIGlmIChpc0VtcHR5RGF0YSh0b0hhc2gpKSByZXR1cm47XG5cbiAgICB0aGlzLmNyYzMyLnVwZGF0ZShjb252ZXJ0VG9CdWZmZXIodG9IYXNoKSk7XG4gIH1cblxuICBhc3luYyBkaWdlc3QoKTogUHJvbWlzZTxVaW50OEFycmF5PiB7XG4gICAgcmV0dXJuIG51bVRvVWludDgodGhpcy5jcmMzMi5kaWdlc3QoKSk7XG4gIH1cbn1cbiJdfQ==
+//# sourceMappingURL=aws_crc32.js.map
 
 /***/ }),
 
@@ -1805,7 +1808,7 @@ var Crc32 = /** @class */ (function () {
     Crc32.prototype.update = function (data) {
         var e_1, _a;
         try {
-            for (var data_1 = (0, tslib_1.__values)(data), data_1_1 = data_1.next(); !data_1_1.done; data_1_1 = data_1.next()) {
+            for (var data_1 = tslib_1.__values(data), data_1_1 = data_1.next(); !data_1_1.done; data_1_1 = data_1.next()) {
                 var byte = data_1_1.value;
                 this.checksum =
                     (this.checksum >>> 8) ^ lookupTable[(this.checksum ^ byte) & 0xff];
@@ -1896,7 +1899,7 @@ var a_lookUpTable = [
 var lookupTable = (0, util_1.uint32ArrayFrom)(a_lookUpTable);
 var aws_crc32_1 = __nccwpck_require__(86730);
 Object.defineProperty(exports, "AwsCrc32", ({ enumerable: true, get: function () { return aws_crc32_1.AwsCrc32; } }));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLHlDQUFpRDtBQUVqRCxTQUFnQixLQUFLLENBQUMsSUFBZ0I7SUFDcEMsT0FBTyxJQUFJLEtBQUssRUFBRSxDQUFDLE1BQU0sQ0FBQyxJQUFJLENBQUMsQ0FBQyxNQUFNLEVBQUUsQ0FBQztBQUMzQyxDQUFDO0FBRkQsc0JBRUM7QUFFRDtJQUFBO1FBQ1UsYUFBUSxHQUFHLFVBQVUsQ0FBQztJQWNoQyxDQUFDO0lBWkMsc0JBQU0sR0FBTixVQUFPLElBQWdCOzs7WUFDckIsS0FBbUIsSUFBQSxTQUFBLHNCQUFBLElBQUksQ0FBQSwwQkFBQSw0Q0FBRTtnQkFBcEIsSUFBTSxJQUFJLGlCQUFBO2dCQUNiLElBQUksQ0FBQyxRQUFRO29CQUNYLENBQUMsSUFBSSxDQUFDLFFBQVEsS0FBSyxDQUFDLENBQUMsR0FBRyxXQUFXLENBQUMsQ0FBQyxJQUFJLENBQUMsUUFBUSxHQUFHLElBQUksQ0FBQyxHQUFHLElBQUksQ0FBQyxDQUFDO2FBQ3RFOzs7Ozs7Ozs7UUFFRCxPQUFPLElBQUksQ0FBQztJQUNkLENBQUM7SUFFRCxzQkFBTSxHQUFOO1FBQ0UsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEdBQUcsVUFBVSxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBQzVDLENBQUM7SUFDSCxZQUFDO0FBQUQsQ0FBQyxBQWZELElBZUM7QUFmWSxzQkFBSztBQWlCbEIsa0JBQWtCO0FBQ2xCLElBQU0sYUFBYSxHQUFHO0lBQ3BCLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVTtJQUM5QyxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVO0lBQzlDLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7Q0FDL0MsQ0FBQztBQUNGLElBQU0sV0FBVyxHQUFnQixJQUFBLHNCQUFlLEVBQUMsYUFBYSxDQUFDLENBQUE7QUFDL0QseUNBQXVDO0FBQTlCLHFHQUFBLFFBQVEsT0FBQSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7dWludDMyQXJyYXlGcm9tfSBmcm9tIFwiQGF3cy1jcnlwdG8vdXRpbFwiO1xuXG5leHBvcnQgZnVuY3Rpb24gY3JjMzIoZGF0YTogVWludDhBcnJheSk6IG51bWJlciB7XG4gIHJldHVybiBuZXcgQ3JjMzIoKS51cGRhdGUoZGF0YSkuZGlnZXN0KCk7XG59XG5cbmV4cG9ydCBjbGFzcyBDcmMzMiB7XG4gIHByaXZhdGUgY2hlY2tzdW0gPSAweGZmZmZmZmZmO1xuXG4gIHVwZGF0ZShkYXRhOiBVaW50OEFycmF5KTogdGhpcyB7XG4gICAgZm9yIChjb25zdCBieXRlIG9mIGRhdGEpIHtcbiAgICAgIHRoaXMuY2hlY2tzdW0gPVxuICAgICAgICAodGhpcy5jaGVja3N1bSA+Pj4gOCkgXiBsb29rdXBUYWJsZVsodGhpcy5jaGVja3N1bSBeIGJ5dGUpICYgMHhmZl07XG4gICAgfVxuXG4gICAgcmV0dXJuIHRoaXM7XG4gIH1cblxuICBkaWdlc3QoKTogbnVtYmVyIHtcbiAgICByZXR1cm4gKHRoaXMuY2hlY2tzdW0gXiAweGZmZmZmZmZmKSA+Pj4gMDtcbiAgfVxufVxuXG4vLyBwcmV0dGllci1pZ25vcmVcbmNvbnN0IGFfbG9va1VwVGFibGUgPSBbXG4gIDB4MDAwMDAwMDAsIDB4NzcwNzMwOTYsIDB4RUUwRTYxMkMsIDB4OTkwOTUxQkEsXG4gIDB4MDc2REM0MTksIDB4NzA2QUY0OEYsIDB4RTk2M0E1MzUsIDB4OUU2NDk1QTMsXG4gIDB4MEVEQjg4MzIsIDB4NzlEQ0I4QTQsIDB4RTBENUU5MUUsIDB4OTdEMkQ5ODgsXG4gIDB4MDlCNjRDMkIsIDB4N0VCMTdDQkQsIDB4RTdCODJEMDcsIDB4OTBCRjFEOTEsXG4gIDB4MURCNzEwNjQsIDB4NkFCMDIwRjIsIDB4RjNCOTcxNDgsIDB4ODRCRTQxREUsXG4gIDB4MUFEQUQ0N0QsIDB4NkREREU0RUIsIDB4RjRENEI1NTEsIDB4ODNEMzg1QzcsXG4gIDB4MTM2Qzk4NTYsIDB4NjQ2QkE4QzAsIDB4RkQ2MkY5N0EsIDB4OEE2NUM5RUMsXG4gIDB4MTQwMTVDNEYsIDB4NjMwNjZDRDksIDB4RkEwRjNENjMsIDB4OEQwODBERjUsXG4gIDB4M0I2RTIwQzgsIDB4NEM2OTEwNUUsIDB4RDU2MDQxRTQsIDB4QTI2NzcxNzIsXG4gIDB4M0MwM0U0RDEsIDB4NEIwNEQ0NDcsIDB4RDIwRDg1RkQsIDB4QTUwQUI1NkIsXG4gIDB4MzVCNUE4RkEsIDB4NDJCMjk4NkMsIDB4REJCQkM5RDYsIDB4QUNCQ0Y5NDAsXG4gIDB4MzJEODZDRTMsIDB4NDVERjVDNzUsIDB4RENENjBEQ0YsIDB4QUJEMTNENTksXG4gIDB4MjZEOTMwQUMsIDB4NTFERTAwM0EsIDB4QzhENzUxODAsIDB4QkZEMDYxMTYsXG4gIDB4MjFCNEY0QjUsIDB4NTZCM0M0MjMsIDB4Q0ZCQTk1OTksIDB4QjhCREE1MEYsXG4gIDB4MjgwMkI4OUUsIDB4NUYwNTg4MDgsIDB4QzYwQ0Q5QjIsIDB4QjEwQkU5MjQsXG4gIDB4MkY2RjdDODcsIDB4NTg2ODRDMTEsIDB4QzE2MTFEQUIsIDB4QjY2NjJEM0QsXG4gIDB4NzZEQzQxOTAsIDB4MDFEQjcxMDYsIDB4OThEMjIwQkMsIDB4RUZENTEwMkEsXG4gIDB4NzFCMTg1ODksIDB4MDZCNkI1MUYsIDB4OUZCRkU0QTUsIDB4RThCOEQ0MzMsXG4gIDB4NzgwN0M5QTIsIDB4MEYwMEY5MzQsIDB4OTYwOUE4OEUsIDB4RTEwRTk4MTgsXG4gIDB4N0Y2QTBEQkIsIDB4MDg2RDNEMkQsIDB4OTE2NDZDOTcsIDB4RTY2MzVDMDEsXG4gIDB4NkI2QjUxRjQsIDB4MUM2QzYxNjIsIDB4ODU2NTMwRDgsIDB4RjI2MjAwNEUsXG4gIDB4NkMwNjk1RUQsIDB4MUIwMUE1N0IsIDB4ODIwOEY0QzEsIDB4RjUwRkM0NTcsXG4gIDB4NjVCMEQ5QzYsIDB4MTJCN0U5NTAsIDB4OEJCRUI4RUEsIDB4RkNCOTg4N0MsXG4gIDB4NjJERDFEREYsIDB4MTVEQTJENDksIDB4OENEMzdDRjMsIDB4RkJENDRDNjUsXG4gIDB4NERCMjYxNTgsIDB4M0FCNTUxQ0UsIDB4QTNCQzAwNzQsIDB4RDRCQjMwRTIsXG4gIDB4NEFERkE1NDEsIDB4M0REODk1RDcsIDB4QTREMUM0NkQsIDB4RDNENkY0RkIsXG4gIDB4NDM2OUU5NkEsIDB4MzQ2RUQ5RkMsIDB4QUQ2Nzg4NDYsIDB4REE2MEI4RDAsXG4gIDB4NDQwNDJENzMsIDB4MzMwMzFERTUsIDB4QUEwQTRDNUYsIDB4REQwRDdDQzksXG4gIDB4NTAwNTcxM0MsIDB4MjcwMjQxQUEsIDB4QkUwQjEwMTAsIDB4QzkwQzIwODYsXG4gIDB4NTc2OEI1MjUsIDB4MjA2Rjg1QjMsIDB4Qjk2NkQ0MDksIDB4Q0U2MUU0OUYsXG4gIDB4NUVERUY5MEUsIDB4MjlEOUM5OTgsIDB4QjBEMDk4MjIsIDB4QzdEN0E4QjQsXG4gIDB4NTlCMzNEMTcsIDB4MkVCNDBEODEsIDB4QjdCRDVDM0IsIDB4QzBCQTZDQUQsXG4gIDB4RURCODgzMjAsIDB4OUFCRkIzQjYsIDB4MDNCNkUyMEMsIDB4NzRCMUQyOUEsXG4gIDB4RUFENTQ3MzksIDB4OUREMjc3QUYsIDB4MDREQjI2MTUsIDB4NzNEQzE2ODMsXG4gIDB4RTM2MzBCMTIsIDB4OTQ2NDNCODQsIDB4MEQ2RDZBM0UsIDB4N0E2QTVBQTgsXG4gIDB4RTQwRUNGMEIsIDB4OTMwOUZGOUQsIDB4MEEwMEFFMjcsIDB4N0QwNzlFQjEsXG4gIDB4RjAwRjkzNDQsIDB4ODcwOEEzRDIsIDB4MUUwMUYyNjgsIDB4NjkwNkMyRkUsXG4gIDB4Rjc2MjU3NUQsIDB4ODA2NTY3Q0IsIDB4MTk2QzM2NzEsIDB4NkU2QjA2RTcsXG4gIDB4RkVENDFCNzYsIDB4ODlEMzJCRTAsIDB4MTBEQTdBNUEsIDB4NjdERDRBQ0MsXG4gIDB4RjlCOURGNkYsIDB4OEVCRUVGRjksIDB4MTdCN0JFNDMsIDB4NjBCMDhFRDUsXG4gIDB4RDZENkEzRTgsIDB4QTFEMTkzN0UsIDB4MzhEOEMyQzQsIDB4NEZERkYyNTIsXG4gIDB4RDFCQjY3RjEsIDB4QTZCQzU3NjcsIDB4M0ZCNTA2REQsIDB4NDhCMjM2NEIsXG4gIDB4RDgwRDJCREEsIDB4QUYwQTFCNEMsIDB4MzYwMzRBRjYsIDB4NDEwNDdBNjAsXG4gIDB4REY2MEVGQzMsIDB4QTg2N0RGNTUsIDB4MzE2RThFRUYsIDB4NDY2OUJFNzksXG4gIDB4Q0I2MUIzOEMsIDB4QkM2NjgzMUEsIDB4MjU2RkQyQTAsIDB4NTI2OEUyMzYsXG4gIDB4Q0MwQzc3OTUsIDB4QkIwQjQ3MDMsIDB4MjIwMjE2QjksIDB4NTUwNTI2MkYsXG4gIDB4QzVCQTNCQkUsIDB4QjJCRDBCMjgsIDB4MkJCNDVBOTIsIDB4NUNCMzZBMDQsXG4gIDB4QzJEN0ZGQTcsIDB4QjVEMENGMzEsIDB4MkNEOTlFOEIsIDB4NUJERUFFMUQsXG4gIDB4OUI2NEMyQjAsIDB4RUM2M0YyMjYsIDB4NzU2QUEzOUMsIDB4MDI2RDkzMEEsXG4gIDB4OUMwOTA2QTksIDB4RUIwRTM2M0YsIDB4NzIwNzY3ODUsIDB4MDUwMDU3MTMsXG4gIDB4OTVCRjRBODIsIDB4RTJCODdBMTQsIDB4N0JCMTJCQUUsIDB4MENCNjFCMzgsXG4gIDB4OTJEMjhFOUIsIDB4RTVENUJFMEQsIDB4N0NEQ0VGQjcsIDB4MEJEQkRGMjEsXG4gIDB4ODZEM0QyRDQsIDB4RjFENEUyNDIsIDB4NjhEREIzRjgsIDB4MUZEQTgzNkUsXG4gIDB4ODFCRTE2Q0QsIDB4RjZCOTI2NUIsIDB4NkZCMDc3RTEsIDB4MThCNzQ3NzcsXG4gIDB4ODgwODVBRTYsIDB4RkYwRjZBNzAsIDB4NjYwNjNCQ0EsIDB4MTEwMTBCNUMsXG4gIDB4OEY2NTlFRkYsIDB4Rjg2MkFFNjksIDB4NjE2QkZGRDMsIDB4MTY2Q0NGNDUsXG4gIDB4QTAwQUUyNzgsIDB4RDcwREQyRUUsIDB4NEUwNDgzNTQsIDB4MzkwM0IzQzIsXG4gIDB4QTc2NzI2NjEsIDB4RDA2MDE2RjcsIDB4NDk2OTQ3NEQsIDB4M0U2RTc3REIsXG4gIDB4QUVEMTZBNEEsIDB4RDlENjVBREMsIDB4NDBERjBCNjYsIDB4MzdEODNCRjAsXG4gIDB4QTlCQ0FFNTMsIDB4REVCQjlFQzUsIDB4NDdCMkNGN0YsIDB4MzBCNUZGRTksXG4gIDB4QkRCREYyMUMsIDB4Q0FCQUMyOEEsIDB4NTNCMzkzMzAsIDB4MjRCNEEzQTYsXG4gIDB4QkFEMDM2MDUsIDB4Q0RENzA2OTMsIDB4NTRERTU3MjksIDB4MjNEOTY3QkYsXG4gIDB4QjM2NjdBMkUsIDB4QzQ2MTRBQjgsIDB4NUQ2ODFCMDIsIDB4MkE2RjJCOTQsXG4gIDB4QjQwQkJFMzcsIDB4QzMwQzhFQTEsIDB4NUEwNURGMUIsIDB4MkQwMkVGOEQsXG5dO1xuY29uc3QgbG9va3VwVGFibGU6IFVpbnQzMkFycmF5ID0gdWludDMyQXJyYXlGcm9tKGFfbG9va1VwVGFibGUpXG5leHBvcnQgeyBBd3NDcmMzMiB9IGZyb20gXCIuL2F3c19jcmMzMlwiO1xuIl19
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 
@@ -2212,16 +2215,19 @@ var AwsCrc32c = /** @class */ (function () {
         this.crc32c.update((0, util_1.convertToBuffer)(toHash));
     };
     AwsCrc32c.prototype.digest = function () {
-        return (0, tslib_1.__awaiter)(this, void 0, void 0, function () {
-            return (0, tslib_1.__generator)(this, function (_a) {
+        return tslib_1.__awaiter(this, void 0, void 0, function () {
+            return tslib_1.__generator(this, function (_a) {
                 return [2 /*return*/, (0, util_1.numToUint8)(this.crc32c.digest())];
             });
         });
     };
+    AwsCrc32c.prototype.reset = function () {
+        this.crc32c = new index_1.Crc32c();
+    };
     return AwsCrc32c;
 }());
 exports.AwsCrc32c = AwsCrc32c;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXdzX2NyYzMyYy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3NyYy9hd3NfY3JjMzJjLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxvRUFBb0U7QUFDcEUsc0NBQXNDOzs7O0FBR3RDLHlDQUE0RTtBQUM1RSxpQ0FBaUM7QUFFakM7SUFBQTtRQUNtQixXQUFNLEdBQUcsSUFBSSxjQUFNLEVBQUUsQ0FBQztJQVd6QyxDQUFDO0lBVEMsMEJBQU0sR0FBTixVQUFPLE1BQWtCO1FBQ3ZCLElBQUksSUFBQSxrQkFBVyxFQUFDLE1BQU0sQ0FBQztZQUFFLE9BQU87UUFFaEMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxNQUFNLENBQUMsSUFBQSxzQkFBZSxFQUFDLE1BQU0sQ0FBQyxDQUFDLENBQUM7SUFDOUMsQ0FBQztJQUVLLDBCQUFNLEdBQVo7OztnQkFDRSxzQkFBTyxJQUFBLGlCQUFVLEVBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxNQUFNLEVBQUUsQ0FBQyxFQUFDOzs7S0FDekM7SUFDSCxnQkFBQztBQUFELENBQUMsQUFaRCxJQVlDO0FBWlksOEJBQVMiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBDb3B5cmlnaHQgQW1hem9uLmNvbSBJbmMuIG9yIGl0cyBhZmZpbGlhdGVzLiBBbGwgUmlnaHRzIFJlc2VydmVkLlxuLy8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEFwYWNoZS0yLjBcblxuaW1wb3J0IHsgSGFzaCwgU291cmNlRGF0YSB9IGZyb20gXCJAYXdzLXNkay90eXBlc1wiO1xuaW1wb3J0IHsgY29udmVydFRvQnVmZmVyLCBpc0VtcHR5RGF0YSwgbnVtVG9VaW50OCB9IGZyb20gXCJAYXdzLWNyeXB0by91dGlsXCI7XG5pbXBvcnQgeyBDcmMzMmMgfSBmcm9tIFwiLi9pbmRleFwiO1xuXG5leHBvcnQgY2xhc3MgQXdzQ3JjMzJjIGltcGxlbWVudHMgSGFzaCB7XG4gIHByaXZhdGUgcmVhZG9ubHkgY3JjMzJjID0gbmV3IENyYzMyYygpO1xuXG4gIHVwZGF0ZSh0b0hhc2g6IFNvdXJjZURhdGEpIHtcbiAgICBpZiAoaXNFbXB0eURhdGEodG9IYXNoKSkgcmV0dXJuO1xuXG4gICAgdGhpcy5jcmMzMmMudXBkYXRlKGNvbnZlcnRUb0J1ZmZlcih0b0hhc2gpKTtcbiAgfVxuXG4gIGFzeW5jIGRpZ2VzdCgpOiBQcm9taXNlPFVpbnQ4QXJyYXk+IHtcbiAgICByZXR1cm4gbnVtVG9VaW50OCh0aGlzLmNyYzMyYy5kaWdlc3QoKSk7XG4gIH1cbn1cbiJdfQ==
+//# sourceMappingURL=aws_crc32c.js.map
 
 /***/ }),
 
@@ -2246,7 +2252,7 @@ var Crc32c = /** @class */ (function () {
     Crc32c.prototype.update = function (data) {
         var e_1, _a;
         try {
-            for (var data_1 = (0, tslib_1.__values)(data), data_1_1 = data_1.next(); !data_1_1.done; data_1_1 = data_1.next()) {
+            for (var data_1 = tslib_1.__values(data), data_1_1 = data_1.next(); !data_1_1.done; data_1_1 = data_1.next()) {
                 var byte = data_1_1.value;
                 this.checksum =
                     (this.checksum >>> 8) ^ lookupTable[(this.checksum ^ byte) & 0xff];
@@ -2305,7 +2311,7 @@ var a_lookupTable = [
 var lookupTable = (0, util_1.uint32ArrayFrom)(a_lookupTable);
 var aws_crc32c_1 = __nccwpck_require__(42182);
 Object.defineProperty(exports, "AwsCrc32c", ({ enumerable: true, get: function () { return aws_crc32c_1.AwsCrc32c; } }));
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi9zcmMvaW5kZXgudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLG9FQUFvRTtBQUNwRSxzQ0FBc0M7Ozs7QUFFdEMseUNBQWlEO0FBRWpELFNBQWdCLE1BQU0sQ0FBQyxJQUFnQjtJQUNyQyxPQUFPLElBQUksTUFBTSxFQUFFLENBQUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLE1BQU0sRUFBRSxDQUFDO0FBQzVDLENBQUM7QUFGRCx3QkFFQztBQUVEO0lBQUE7UUFDVSxhQUFRLEdBQUcsVUFBVSxDQUFDO0lBY2hDLENBQUM7SUFaQyx1QkFBTSxHQUFOLFVBQU8sSUFBZ0I7OztZQUNyQixLQUFtQixJQUFBLFNBQUEsc0JBQUEsSUFBSSxDQUFBLDBCQUFBLDRDQUFFO2dCQUFwQixJQUFNLElBQUksaUJBQUE7Z0JBQ2IsSUFBSSxDQUFDLFFBQVE7b0JBQ1gsQ0FBQyxJQUFJLENBQUMsUUFBUSxLQUFLLENBQUMsQ0FBQyxHQUFHLFdBQVcsQ0FBQyxDQUFDLElBQUksQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDLEdBQUcsSUFBSSxDQUFDLENBQUM7YUFDdEU7Ozs7Ozs7OztRQUVELE9BQU8sSUFBSSxDQUFDO0lBQ2QsQ0FBQztJQUVELHVCQUFNLEdBQU47UUFDRSxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsR0FBRyxVQUFVLENBQUMsS0FBSyxDQUFDLENBQUM7SUFDNUMsQ0FBQztJQUNILGFBQUM7QUFBRCxDQUFDLEFBZkQsSUFlQztBQWZZLHdCQUFNO0FBaUJuQixrQkFBa0I7QUFDbEIsSUFBTSxhQUFhLEdBQUc7SUFDcEIsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7SUFDOUYsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVUsRUFBRSxVQUFVLEVBQUUsVUFBVSxFQUFFLFVBQVU7Q0FDL0YsQ0FBQztBQUVGLElBQU0sV0FBVyxHQUFnQixJQUFBLHNCQUFlLEVBQUMsYUFBYSxDQUFDLENBQUE7QUFDL0QsMkNBQXlDO0FBQWhDLHVHQUFBLFNBQVMsT0FBQSIsInNvdXJjZXNDb250ZW50IjpbIi8vIENvcHlyaWdodCBBbWF6b24uY29tIEluYy4gb3IgaXRzIGFmZmlsaWF0ZXMuIEFsbCBSaWdodHMgUmVzZXJ2ZWQuXG4vLyBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogQXBhY2hlLTIuMFxuXG5pbXBvcnQge3VpbnQzMkFycmF5RnJvbX0gZnJvbSBcIkBhd3MtY3J5cHRvL3V0aWxcIjtcblxuZXhwb3J0IGZ1bmN0aW9uIGNyYzMyYyhkYXRhOiBVaW50OEFycmF5KTogbnVtYmVyIHtcbiAgcmV0dXJuIG5ldyBDcmMzMmMoKS51cGRhdGUoZGF0YSkuZGlnZXN0KCk7XG59XG5cbmV4cG9ydCBjbGFzcyBDcmMzMmMge1xuICBwcml2YXRlIGNoZWNrc3VtID0gMHhmZmZmZmZmZjtcblxuICB1cGRhdGUoZGF0YTogVWludDhBcnJheSk6IHRoaXMge1xuICAgIGZvciAoY29uc3QgYnl0ZSBvZiBkYXRhKSB7XG4gICAgICB0aGlzLmNoZWNrc3VtID1cbiAgICAgICAgKHRoaXMuY2hlY2tzdW0gPj4+IDgpIF4gbG9va3VwVGFibGVbKHRoaXMuY2hlY2tzdW0gXiBieXRlKSAmIDB4ZmZdO1xuICAgIH1cblxuICAgIHJldHVybiB0aGlzO1xuICB9XG5cbiAgZGlnZXN0KCk6IG51bWJlciB7XG4gICAgcmV0dXJuICh0aGlzLmNoZWNrc3VtIF4gMHhmZmZmZmZmZikgPj4+IDA7XG4gIH1cbn1cblxuLy8gcHJldHRpZXItaWdub3JlXG5jb25zdCBhX2xvb2t1cFRhYmxlID0gW1xuICAweDAwMDAwMDAwLCAweEYyNkI4MzAzLCAweEUxM0I3MEY3LCAweDEzNTBGM0Y0LCAweEM3OUE5NzFGLCAweDM1RjExNDFDLCAweDI2QTFFN0U4LCAweEQ0Q0E2NEVCLFxuICAweDhBRDk1OENGLCAweDc4QjJEQkNDLCAweDZCRTIyODM4LCAweDk5ODlBQjNCLCAweDRENDNDRkQwLCAweEJGMjg0Q0QzLCAweEFDNzhCRjI3LCAweDVFMTMzQzI0LFxuICAweDEwNUVDNzZGLCAweEUyMzU0NDZDLCAweEYxNjVCNzk4LCAweDAzMEUzNDlCLCAweEQ3QzQ1MDcwLCAweDI1QUZEMzczLCAweDM2RkYyMDg3LCAweEM0OTRBMzg0LFxuICAweDlBODc5RkEwLCAweDY4RUMxQ0EzLCAweDdCQkNFRjU3LCAweDg5RDc2QzU0LCAweDVEMUQwOEJGLCAweEFGNzY4QkJDLCAweEJDMjY3ODQ4LCAweDRFNERGQjRCLFxuICAweDIwQkQ4RURFLCAweEQyRDYwRERELCAweEMxODZGRTI5LCAweDMzRUQ3RDJBLCAweEU3MjcxOUMxLCAweDE1NEM5QUMyLCAweDA2MUM2OTM2LCAweEY0NzdFQTM1LFxuICAweEFBNjRENjExLCAweDU4MEY1NTEyLCAweDRCNUZBNkU2LCAweEI5MzQyNUU1LCAweDZERkU0MTBFLCAweDlGOTVDMjBELCAweDhDQzUzMUY5LCAweDdFQUVCMkZBLFxuICAweDMwRTM0OUIxLCAweEMyODhDQUIyLCAweEQxRDgzOTQ2LCAweDIzQjNCQTQ1LCAweEY3NzlERUFFLCAweDA1MTI1REFELCAweDE2NDJBRTU5LCAweEU0MjkyRDVBLFxuICAweEJBM0ExMTdFLCAweDQ4NTE5MjdELCAweDVCMDE2MTg5LCAweEE5NkFFMjhBLCAweDdEQTA4NjYxLCAweDhGQ0IwNTYyLCAweDlDOUJGNjk2LCAweDZFRjA3NTk1LFxuICAweDQxN0IxREJDLCAweEIzMTA5RUJGLCAweEEwNDA2RDRCLCAweDUyMkJFRTQ4LCAweDg2RTE4QUEzLCAweDc0OEEwOUEwLCAweDY3REFGQTU0LCAweDk1QjE3OTU3LFxuICAweENCQTI0NTczLCAweDM5QzlDNjcwLCAweDJBOTkzNTg0LCAweEQ4RjJCNjg3LCAweDBDMzhEMjZDLCAweEZFNTM1MTZGLCAweEVEMDNBMjlCLCAweDFGNjgyMTk4LFxuICAweDUxMjVEQUQzLCAweEEzNEU1OUQwLCAweEIwMUVBQTI0LCAweDQyNzUyOTI3LCAweDk2QkY0RENDLCAweDY0RDRDRUNGLCAweDc3ODQzRDNCLCAweDg1RUZCRTM4LFxuICAweERCRkM4MjFDLCAweDI5OTcwMTFGLCAweDNBQzdGMkVCLCAweEM4QUM3MUU4LCAweDFDNjYxNTAzLCAweEVFMEQ5NjAwLCAweEZENUQ2NUY0LCAweDBGMzZFNkY3LFxuICAweDYxQzY5MzYyLCAweDkzQUQxMDYxLCAweDgwRkRFMzk1LCAweDcyOTY2MDk2LCAweEE2NUMwNDdELCAweDU0Mzc4NzdFLCAweDQ3Njc3NDhBLCAweEI1MENGNzg5LFxuICAweEVCMUZDQkFELCAweDE5NzQ0OEFFLCAweDBBMjRCQjVBLCAweEY4NEYzODU5LCAweDJDODU1Q0IyLCAweERFRUVERkIxLCAweENEQkUyQzQ1LCAweDNGRDVBRjQ2LFxuICAweDcxOTg1NDBELCAweDgzRjNENzBFLCAweDkwQTMyNEZBLCAweDYyQzhBN0Y5LCAweEI2MDJDMzEyLCAweDQ0Njk0MDExLCAweDU3MzlCM0U1LCAweEE1NTIzMEU2LFxuICAweEZCNDEwQ0MyLCAweDA5MkE4RkMxLCAweDFBN0E3QzM1LCAweEU4MTFGRjM2LCAweDNDREI5QkRELCAweENFQjAxOERFLCAweERERTBFQjJBLCAweDJGOEI2ODI5LFxuICAweDgyRjYzQjc4LCAweDcwOURCODdCLCAweDYzQ0Q0QjhGLCAweDkxQTZDODhDLCAweDQ1NkNBQzY3LCAweEI3MDcyRjY0LCAweEE0NTdEQzkwLCAweDU2M0M1RjkzLFxuICAweDA4MkY2M0I3LCAweEZBNDRFMEI0LCAweEU5MTQxMzQwLCAweDFCN0Y5MDQzLCAweENGQjVGNEE4LCAweDNEREU3N0FCLCAweDJFOEU4NDVGLCAweERDRTUwNzVDLFxuICAweDkyQThGQzE3LCAweDYwQzM3RjE0LCAweDczOTM4Q0UwLCAweDgxRjgwRkUzLCAweDU1MzI2QjA4LCAweEE3NTlFODBCLCAweEI0MDkxQkZGLCAweDQ2NjI5OEZDLFxuICAweDE4NzFBNEQ4LCAweEVBMUEyN0RCLCAweEY5NEFENDJGLCAweDBCMjE1NzJDLCAweERGRUIzM0M3LCAweDJEODBCMEM0LCAweDNFRDA0MzMwLCAweENDQkJDMDMzLFxuICAweEEyNEJCNUE2LCAweDUwMjAzNkE1LCAweDQzNzBDNTUxLCAweEIxMUI0NjUyLCAweDY1RDEyMkI5LCAweDk3QkFBMUJBLCAweDg0RUE1MjRFLCAweDc2ODFEMTRELFxuICAweDI4OTJFRDY5LCAweERBRjk2RTZBLCAweEM5QTk5RDlFLCAweDNCQzIxRTlELCAweEVGMDg3QTc2LCAweDFENjNGOTc1LCAweDBFMzMwQTgxLCAweEZDNTg4OTgyLFxuICAweEIyMTU3MkM5LCAweDQwN0VGMUNBLCAweDUzMkUwMjNFLCAweEExNDU4MTNELCAweDc1OEZFNUQ2LCAweDg3RTQ2NkQ1LCAweDk0QjQ5NTIxLCAweDY2REYxNjIyLFxuICAweDM4Q0MyQTA2LCAweENBQTdBOTA1LCAweEQ5Rjc1QUYxLCAweDJCOUNEOUYyLCAweEZGNTZCRDE5LCAweDBEM0QzRTFBLCAweDFFNkRDREVFLCAweEVDMDY0RUVELFxuICAweEMzOEQyNkM0LCAweDMxRTZBNUM3LCAweDIyQjY1NjMzLCAweEQwRERENTMwLCAweDA0MTdCMURCLCAweEY2N0MzMkQ4LCAweEU1MkNDMTJDLCAweDE3NDc0MjJGLFxuICAweDQ5NTQ3RTBCLCAweEJCM0ZGRDA4LCAweEE4NkYwRUZDLCAweDVBMDQ4REZGLCAweDhFQ0VFOTE0LCAweDdDQTU2QTE3LCAweDZGRjU5OUUzLCAweDlEOUUxQUUwLFxuICAweEQzRDNFMUFCLCAweDIxQjg2MkE4LCAweDMyRTg5MTVDLCAweEMwODMxMjVGLCAweDE0NDk3NkI0LCAweEU2MjJGNUI3LCAweEY1NzIwNjQzLCAweDA3MTk4NTQwLFxuICAweDU5MEFCOTY0LCAweEFCNjEzQTY3LCAweEI4MzFDOTkzLCAweDRBNUE0QTkwLCAweDlFOTAyRTdCLCAweDZDRkJBRDc4LCAweDdGQUI1RThDLCAweDhEQzBERDhGLFxuICAweEUzMzBBODFBLCAweDExNUIyQjE5LCAweDAyMEJEOEVELCAweEYwNjA1QkVFLCAweDI0QUEzRjA1LCAweEQ2QzFCQzA2LCAweEM1OTE0RkYyLCAweDM3RkFDQ0YxLFxuICAweDY5RTlGMEQ1LCAweDlCODI3M0Q2LCAweDg4RDI4MDIyLCAweDdBQjkwMzIxLCAweEFFNzM2N0NBLCAweDVDMThFNEM5LCAweDRGNDgxNzNELCAweEJEMjM5NDNFLFxuICAweEYzNkU2Rjc1LCAweDAxMDVFQzc2LCAweDEyNTUxRjgyLCAweEUwM0U5QzgxLCAweDM0RjRGODZBLCAweEM2OUY3QjY5LCAweEQ1Q0Y4ODlELCAweDI3QTQwQjlFLFxuICAweDc5QjczN0JBLCAweDhCRENCNEI5LCAweDk4OEM0NzRELCAweDZBRTdDNDRFLCAweEJFMkRBMEE1LCAweDRDNDYyM0E2LCAweDVGMTZEMDUyLCAweEFEN0Q1MzUxLFxuXTtcblxuY29uc3QgbG9va3VwVGFibGU6IFVpbnQzMkFycmF5ID0gdWludDMyQXJyYXlGcm9tKGFfbG9va3VwVGFibGUpXG5leHBvcnQgeyBBd3NDcmMzMmMgfSBmcm9tIFwiLi9hd3NfY3JjMzJjXCI7XG4iXX0=
+//# sourceMappingURL=index.js.map
 
 /***/ }),
 
@@ -9989,9 +9995,9 @@ exports.defaultEndpointResolver = defaultEndpointResolver;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ruleSet = void 0;
-const bV = "required", bW = "type", bX = "rules", bY = "conditions", bZ = "fn", ca = "argv", cb = "ref", cc = "assign", cd = "url", ce = "properties", cf = "authSchemes", cg = "signingName", ch = "disableDoubleEncoding", ci = "signingRegion", cj = "headers";
-const a = false, b = true, c = "tree", d = "isSet", e = "substring", f = "hardwareType", g = "regionPrefix", h = "abbaSuffix", i = "outpostId", j = "aws.partition", k = "stringEquals", l = "isValidHostLabel", m = "not", n = "error", o = "parseURL", p = "s3-outposts", q = "endpoint", r = "booleanEquals", s = "aws.parseArn", t = "s3", u = "aws.isVirtualHostableS3Bucket", v = "getAttr", w = "name", x = "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate", y = "https://{Bucket}.s3.{partitionResult#dnsSuffix}", z = "bucketArn", A = "arnType", B = "", C = "s3-object-lambda", D = "accesspoint", E = "accessPointName", F = "{url#scheme}://{accessPointName}-{bucketArn#accountId}.{url#authority}{url#path}", G = "mrapPartition", H = "outpostType", I = "arnPrefix", J = "{url#scheme}://{url#authority}{url#path}", K = "https://s3.{partitionResult#dnsSuffix}", L = { [bV]: false, [bW]: "String" }, M = { [bV]: true, "default": false, [bW]: "Boolean" }, N = { [bV]: false, [bW]: "Boolean" }, O = { [bZ]: d, [ca]: [{ [cb]: "Bucket" }] }, P = { [cb]: "Bucket" }, Q = { [cb]: f }, R = { [bY]: [{ [bZ]: m, [ca]: [{ [bZ]: d, [ca]: [{ [cb]: "Endpoint" }] }] }], [n]: "Expected a endpoint to be specified but no endpoint was found", [bW]: n }, S = { [bZ]: m, [ca]: [{ [bZ]: d, [ca]: [{ [cb]: "Endpoint" }] }] }, T = { [bZ]: d, [ca]: [{ [cb]: "Endpoint" }] }, U = { [bZ]: o, [ca]: [{ [cb]: "Endpoint" }], [cc]: "url" }, V = { [cf]: [{ [w]: "sigv4", [cg]: p, [ch]: true, [ci]: "{Region}" }] }, W = {}, X = { [cb]: "ForcePathStyle" }, Y = { [bY]: [{ [bZ]: "uriEncode", [ca]: [P], [cc]: "uri_encoded_bucket" }], [bW]: c, [bX]: [{ [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, T], [n]: "Cannot set dual-stack in combination with a custom endpoint.", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: j, [ca]: [{ [cb]: "Region" }], [cc]: "partitionResult" }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "Accelerate" }, false] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3.dualstack.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3.dualstack.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, S, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, true] }], [bW]: c, [bX]: [{ [q]: { [cd]: "https://s3.dualstack.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "{Region}" }] }, [cj]: {} }, [bW]: q }] }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, S, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, false] }], [q]: { [cd]: "https://s3.dualstack.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "{Region}" }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, T, U, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, T, U, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, T, U, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, true] }], [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "us-east-1"] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "{Region}" }] }, [cj]: {} }, [bW]: q }, { [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "{Region}" }] }, [cj]: {} }, [bW]: q }] }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, T, U, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, false] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "{Region}" }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, S, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, true] }], [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "us-east-1"] }], [q]: { [cd]: "https://s3.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "{Region}" }] }, [cj]: {} }, [bW]: q }, { [q]: { [cd]: "https://s3.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "{Region}" }] }, [cj]: {} }, [bW]: q }] }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, S, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, false] }], [q]: { [cd]: "https://s3.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "{Region}" }] }, [cj]: {} }, [bW]: q }] }] }, { [n]: "Path-style addressing cannot be used with FIPS", [bW]: n }] }] }, { [n]: "Path-style addressing cannot be used with S3 Accelerate", [bW]: n }] }] }, { [n]: "A valid partition could not be determined", [bW]: n }] }] }, Z = { [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, aa = { [bZ]: r, [ca]: [{ [cb]: "Accelerate" }, false] }, ab = { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, ac = { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, ad = { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, true] }, ae = { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "{Region}" }] }, af = { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, false] }, ag = { [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, ah = { [n]: "A valid partition could not be determined", [bW]: n }, ai = { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: k, [ca]: [{ [bZ]: v, [ca]: [{ [cb]: "partitionResult" }, w] }, "aws-cn"] }], [n]: "Partition does not support FIPS", [bW]: n }, aj = { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, ak = { [bZ]: k, [ca]: [{ [bZ]: v, [ca]: [{ [cb]: "partitionResult" }, w] }, "aws-cn"] }, al = { [bZ]: r, [ca]: [{ [cb]: "Accelerate" }, true] }, am = { [bY]: [Z, aj, aa, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://{Bucket}.s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, an = { [cd]: "https://{Bucket}.s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, ao = { [bY]: [ag, aj, aa, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://{Bucket}.s3-fips.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, ap = { [cd]: "https://{Bucket}.s3-fips.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, aq = { [bY]: [Z, ab, al, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://{Bucket}.s3-accelerate.dualstack.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, ar = { [cd]: "https://{Bucket}.s3-accelerate.dualstack.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, as = { [bY]: [Z, ab, aa, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://{Bucket}.s3.dualstack.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, at = { [cd]: "https://{Bucket}.s3.dualstack.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, au = { [bY]: [ag, ab, aa, T, U, { [bZ]: r, [ca]: [{ [bZ]: v, [ca]: [{ [cb]: "url" }, "isIp"] }, true] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{Bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, av = { [bZ]: r, [ca]: [{ [bZ]: v, [ca]: [{ [cb]: "url" }, "isIp"] }, true] }, aw = { [cb]: "url" }, ax = { [bY]: [ag, ab, aa, T, U, { [bZ]: r, [ca]: [{ [bZ]: v, [ca]: [aw, "isIp"] }, false] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "{url#scheme}://{Bucket}.{url#authority}{url#path}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, ay = { [bZ]: r, [ca]: [{ [bZ]: v, [ca]: [aw, "isIp"] }, false] }, az = { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{Bucket}", [ce]: ae, [cj]: {} }, aA = { [cd]: "{url#scheme}://{Bucket}.{url#authority}{url#path}", [ce]: ae, [cj]: {} }, aB = { [q]: aA, [bW]: q }, aC = { [bY]: [ag, ab, al, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://{Bucket}.s3-accelerate.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, aD = { [cd]: "https://{Bucket}.s3-accelerate.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, aE = { [bY]: [ag, ab, aa, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: y, [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, aF = { [cd]: "https://{Bucket}.s3.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, aG = { [n]: "Invalid region: region was not a valid DNS name.", [bW]: n }, aH = { [cb]: z }, aI = { [cb]: A }, aJ = { [bZ]: v, [ca]: [aH, "service"] }, aK = { [cb]: E }, aL = { [bY]: [Z], [n]: "S3 Object Lambda does not support Dual-stack", [bW]: n }, aM = { [bY]: [al], [n]: "S3 Object Lambda does not support S3 Accelerate", [bW]: n }, aN = { [bY]: [{ [bZ]: d, [ca]: [{ [cb]: "DisableAccessPoints" }] }, { [bZ]: r, [ca]: [{ [cb]: "DisableAccessPoints" }, true] }], [n]: "Access points are not supported for this operation", [bW]: n }, aO = { [bY]: [{ [bZ]: d, [ca]: [{ [cb]: "UseArnRegion" }] }, { [bZ]: r, [ca]: [{ [cb]: "UseArnRegion" }, false] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [bZ]: v, [ca]: [aH, "region"] }, "{Region}"] }] }], [n]: "Invalid configuration: region from ARN `{bucketArn#region}` does not match client region `{Region}` and UseArnRegion is `false`", [bW]: n }, aP = { [bZ]: v, [ca]: [{ [cb]: "bucketPartition" }, w] }, aQ = { [bZ]: v, [ca]: [aH, "accountId"] }, aR = { [bY]: [aj, { [bZ]: k, [ca]: [aP, "aws-cn"] }], [n]: "Partition does not support FIPS", [bW]: n }, aS = { [cf]: [{ [w]: "sigv4", [cg]: C, [ch]: true, [ci]: "{bucketArn#region}" }] }, aT = { [n]: "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `{accessPointName}`", [bW]: n }, aU = { [n]: "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `{bucketArn#accountId}`", [bW]: n }, aV = { [n]: "Invalid region in ARN: `{bucketArn#region}` (invalid DNS name)", [bW]: n }, aW = { [n]: "Client was configured for partition `{partitionResult#name}` but ARN (`{Bucket}`) has `{bucketPartition#name}`", [bW]: n }, aX = { [n]: "Could not load partition for ARN region `{bucketArn#region}`", [bW]: n }, aY = { [n]: "Invalid ARN: The ARN may only contain a single resource component after `accesspoint`.", [bW]: n }, aZ = { [n]: "Invalid ARN: bucket ARN is missing a region", [bW]: n }, ba = { [n]: "Invalid ARN: Expected a resource of the format `accesspoint:<accesspoint name>` but no name was provided", [bW]: n }, bb = { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "{bucketArn#region}" }] }, bc = { [cf]: [{ [w]: "sigv4", [cg]: p, [ch]: true, [ci]: "{bucketArn#region}" }] }, bd = { [cb]: "UseObjectLambdaEndpoint" }, be = { [cf]: [{ [w]: "sigv4", [cg]: C, [ch]: true, [ci]: "{Region}" }] }, bf = { [bY]: [aj, Z, T, U, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: J, [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, bg = { [q]: { [cd]: J, [ce]: ae, [cj]: {} }, [bW]: q }, bh = { [cd]: J, [ce]: ae, [cj]: {} }, bi = { [bY]: [aj, Z, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, bj = { [cd]: "https://s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, bk = { [bY]: [aj, ag, T, U, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: J, [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, bl = { [bY]: [aj, ag, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3-fips.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, bm = { [cd]: "https://s3-fips.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, bn = { [bY]: [ab, Z, T, U, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: J, [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, bo = { [bY]: [ab, Z, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3.dualstack.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, bp = { [cd]: "https://s3.dualstack.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, bq = { [bY]: [ab, ag, T, U, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: J, [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, br = { [bY]: [ab, ag, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: K, [ce]: { [cf]: [{ [w]: "sigv4", [cg]: t, [ch]: true, [ci]: "us-east-1" }] }, [cj]: {} }, [bW]: q }, bs = { [cd]: "https://s3.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, bt = [{ [cb]: "Region" }], bu = [P], bv = [{ [bZ]: l, [ca]: [{ [cb]: i }, false] }], bw = [{ [bZ]: k, [ca]: [{ [cb]: g }, "beta"] }], bx = [{ [cb]: "Endpoint" }], by = [T, U], bz = [O], bA = [{ [bZ]: s, [ca]: [P] }], bB = [Z, T], bC = [{ [bZ]: j, [ca]: bt, [cc]: "partitionResult" }], bD = [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "us-east-1"] }], bE = [{ [bZ]: l, [ca]: [{ [cb]: "Region" }, false] }], bF = [{ [bZ]: k, [ca]: [aI, D] }], bG = [{ [bZ]: v, [ca]: [aH, "resourceId[1]"], [cc]: E }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [aK, B] }] }], bH = [aH, "resourceId[1]"], bI = [Z], bJ = [al], bK = [{ [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [bZ]: v, [ca]: [aH, "region"] }, B] }] }], bL = [{ [bZ]: m, [ca]: [{ [bZ]: d, [ca]: [{ [bZ]: v, [ca]: [aH, "resourceId[2]"] }] }] }], bM = [aH, "resourceId[2]"], bN = [{ [bZ]: j, [ca]: [{ [bZ]: v, [ca]: [aH, "region"] }], [cc]: "bucketPartition" }], bO = [{ [bZ]: k, [ca]: [aP, { [bZ]: v, [ca]: [{ [cb]: "partitionResult" }, w] }] }], bP = [{ [bZ]: l, [ca]: [{ [bZ]: v, [ca]: [aH, "region"] }, true] }], bQ = [{ [bZ]: l, [ca]: [aQ, false] }], bR = [{ [bZ]: l, [ca]: [aK, false] }], bS = [aj], bT = [{ [bZ]: l, [ca]: [{ [cb]: "Region" }, true] }], bU = [bg];
-const _data = { version: "1.0", parameters: { Bucket: L, Region: L, UseFIPS: M, UseDualStack: M, Endpoint: L, ForcePathStyle: N, Accelerate: M, UseGlobalEndpoint: M, UseObjectLambdaEndpoint: N, DisableAccessPoints: N, DisableMultiRegionAccessPoints: M, UseArnRegion: N }, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: d, [ca]: bt }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [O, { [bZ]: e, [ca]: [P, 49, 50, b], [cc]: f }, { [bZ]: e, [ca]: [P, 8, 12, b], [cc]: g }, { [bZ]: e, [ca]: [P, 0, 7, b], [cc]: h }, { [bZ]: e, [ca]: [P, 32, 49, b], [cc]: i }, { [bZ]: j, [ca]: bt, [cc]: "regionPartition" }, { [bZ]: k, [ca]: [{ [cb]: h }, "--op-s3"] }], [bW]: c, [bX]: [{ [bY]: bv, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [Q, "e"] }], [bW]: c, [bX]: [{ [bY]: bw, [bW]: c, [bX]: [R, { [bY]: by, endpoint: { [cd]: "https://{Bucket}.ec2.{url#authority}", [ce]: V, [cj]: W }, [bW]: q }] }, { endpoint: { [cd]: "https://{Bucket}.ec2.s3-outposts.{Region}.{regionPartition#dnsSuffix}", [ce]: V, [cj]: W }, [bW]: q }] }, { [bY]: [{ [bZ]: k, [ca]: [Q, "o"] }], [bW]: c, [bX]: [{ [bY]: bw, [bW]: c, [bX]: [R, { [bY]: by, endpoint: { [cd]: "https://{Bucket}.op-{outpostId}.{url#authority}", [ce]: V, [cj]: W }, [bW]: q }] }, { endpoint: { [cd]: "https://{Bucket}.op-{outpostId}.s3-outposts.{Region}.{regionPartition#dnsSuffix}", [ce]: V, [cj]: W }, [bW]: q }] }, { error: "Unrecognized hardware type: \"Expected hardware type o or e but got {hardwareType}\"", [bW]: n }] }] }, { error: "Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`.", [bW]: n }] }, { [bY]: bz, [bW]: c, [bX]: [{ [bY]: [T, { [bZ]: m, [ca]: [{ [bZ]: d, [ca]: [{ [bZ]: o, [ca]: bx }] }] }], error: "Custom endpoint `{Endpoint}` was not a valid URI", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: d, [ca]: [X] }, { [bZ]: r, [ca]: [X, b] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bA, error: "Path-style addressing cannot be used with ARN buckets", [bW]: n }, Y] }] }, { [bY]: [{ [bZ]: u, [ca]: [P, a] }], [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bE, [bW]: c, [bX]: [{ [bW]: c, [bX]: [ai, { [bW]: c, [bX]: [{ [bY]: [al, aj], error: "Accelerate cannot be used with FIPS", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [al, ak], error: "S3 Accelerate cannot be used in this region", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [T, Z], error: x, [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [T, aj], error: x, [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [T, al], error: x, [bW]: n }, { [bW]: c, [bX]: [am, am, { [bY]: [Z, aj, aa, S, ac, ad], [bW]: c, [bX]: [{ endpoint: an, [bW]: q }] }, { [bY]: [Z, aj, aa, S, ac, af], endpoint: an, [bW]: q }, ao, ao, { [bY]: [ag, aj, aa, S, ac, ad], [bW]: c, [bX]: [{ endpoint: ap, [bW]: q }] }, { [bY]: [ag, aj, aa, S, ac, af], endpoint: ap, [bW]: q }, aq, aq, { [bY]: [Z, ab, al, S, ac, ad], [bW]: c, [bX]: [{ endpoint: ar, [bW]: q }] }, { [bY]: [Z, ab, al, S, ac, af], endpoint: ar, [bW]: q }, as, as, { [bY]: [Z, ab, aa, S, ac, ad], [bW]: c, [bX]: [{ endpoint: at, [bW]: q }] }, { [bY]: [Z, ab, aa, S, ac, af], endpoint: at, [bW]: q }, au, ax, au, ax, { [bY]: [ag, ab, aa, T, U, av, ac, ad], [bW]: c, [bX]: [{ [bY]: bD, endpoint: az, [bW]: q }, { endpoint: az, [bW]: q }] }, { [bY]: [ag, ab, aa, T, U, ay, ac, ad], [bW]: c, [bX]: [{ [bY]: bD, endpoint: aA, [bW]: q }, aB] }, { [bY]: [ag, ab, aa, T, U, av, ac, af], endpoint: az, [bW]: q }, { [bY]: [ag, ab, aa, T, U, ay, ac, af], endpoint: aA, [bW]: q }, aC, aC, { [bY]: [ag, ab, al, S, ac, ad], [bW]: c, [bX]: [{ [bY]: bD, endpoint: aD, [bW]: q }, { endpoint: aD, [bW]: q }] }, { [bY]: [ag, ab, al, S, ac, af], endpoint: aD, [bW]: q }, aE, aE, { [bY]: [ag, ab, aa, S, ac, ad], [bW]: c, [bX]: [{ [bY]: bD, endpoint: { [cd]: y, [ce]: ae, [cj]: W }, [bW]: q }, { endpoint: aF, [bW]: q }] }, { [bY]: [ag, ab, aa, S, ac, af], endpoint: aF, [bW]: q }] }] }] }] }] }] }] }] }, aG] }] }, ah] }, { [bY]: [T, U, { [bZ]: k, [ca]: [{ [bZ]: v, [ca]: [aw, "scheme"] }, "http"] }, { [bZ]: u, [ca]: [P, b] }, ab, ag, aa], [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bE, [bW]: c, [bX]: [aB] }, aG] }] }, ah] }, { [bY]: [{ [bZ]: s, [ca]: bu, [cc]: z }], [bW]: c, [bX]: [{ [bY]: [{ [bZ]: v, [ca]: [aH, "resourceId[0]"], [cc]: A }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [aI, B] }] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [aJ, C] }], [bW]: c, [bX]: [{ [bY]: bF, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bG, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aL, { [bW]: c, [bX]: [aM, { [bW]: c, [bX]: [{ [bY]: bK, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aN, { [bW]: c, [bX]: [{ [bY]: bL, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aO, { [bW]: c, [bX]: [{ [bY]: bN, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bO, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bP, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [aQ, B] }], error: "Invalid ARN: Missing account id", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: bQ, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bR, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aR, { [bW]: c, [bX]: [{ [bY]: by, endpoint: { [cd]: F, [ce]: aS, [cj]: W }, [bW]: q }, { [bY]: bS, endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.s3-object-lambda-fips.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: aS, [cj]: W }, [bW]: q }, { endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.s3-object-lambda.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: aS, [cj]: W }, [bW]: q }] }] }] }, aT] }] }, aU] }] }] }, aV] }] }, aW] }] }, ah] }] }, aX] }] }] }, aY] }] }] }, aZ] }] }] }] }, ba] }] }, { error: "Invalid ARN: Object Lambda ARNs only support `accesspoint` arn types, but found: `{arnType}`", [bW]: n }] }, { [bY]: bF, [bW]: c, [bX]: [{ [bY]: bG, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bK, [bW]: c, [bX]: [{ [bY]: bF, [bW]: c, [bX]: [{ [bY]: bK, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aN, { [bW]: c, [bX]: [{ [bY]: bL, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aO, { [bW]: c, [bX]: [{ [bY]: bN, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [aP, "{partitionResult#name}"] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bP, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [aJ, t] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bQ, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bR, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bJ, error: "Access Points do not support S3 Accelerate", [bW]: n }, { [bW]: c, [bX]: [aR, { [bW]: c, [bX]: [{ [bY]: bB, error: "DualStack cannot be combined with a Host override (PrivateLink)", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [aj, Z], endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint-fips.dualstack.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: bb, [cj]: W }, [bW]: q }, { [bY]: [aj, ag], endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint-fips.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: bb, [cj]: W }, [bW]: q }, { [bY]: [ab, Z], endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint.dualstack.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: bb, [cj]: W }, [bW]: q }, { [bY]: [ab, ag, T, U], endpoint: { [cd]: F, [ce]: bb, [cj]: W }, [bW]: q }, { [bY]: [ab, ag], endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: bb, [cj]: W }, [bW]: q }] }] }] }] }] }, aT] }] }, aU] }] }, { error: "Invalid ARN: The ARN was not for the S3 service, found: {bucketArn#service}", [bW]: n }] }] }, aV] }] }, aW] }] }, ah] }] }, aX] }] }] }, aY] }] }] }, aZ] }] }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: l, [ca]: [aK, b] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bI, error: "S3 MRAP does not support dual-stack", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: bS, error: "S3 MRAP does not support FIPS", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: bJ, error: "S3 MRAP does not support S3 Accelerate", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "DisableMultiRegionAccessPoints" }, b] }], error: "Invalid configuration: Multi-Region Access Point ARNs are disabled.", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: j, [ca]: bt, [cc]: G }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [{ [bZ]: v, [ca]: [{ [cb]: G }, w] }, { [bZ]: v, [ca]: [aH, "partition"] }] }], [bW]: c, [bX]: [{ endpoint: { [cd]: "https://{accessPointName}.accesspoint.s3-global.{mrapPartition#dnsSuffix}", [ce]: { [cf]: [{ name: "sigv4a", [cg]: t, [ch]: b, signingRegionSet: ["*"] }] }, [cj]: W }, [bW]: q }] }, { error: "Client was configured for partition `{mrapPartition#name}` but bucket referred to partition `{bucketArn#partition}`", [bW]: n }] }] }, { error: "{Region} was not a valid region", [bW]: n }] }] }] }] }] }] }, { error: "Invalid Access Point Name", [bW]: n }] }] }] }, ba] }, { [bY]: [{ [bZ]: k, [ca]: [aJ, p] }], [bW]: c, [bX]: [{ [bY]: bI, error: "S3 Outposts does not support Dual-stack", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: bS, error: "S3 Outposts does not support FIPS", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: bJ, error: "S3 Outposts does not support S3 Accelerate", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: d, [ca]: [{ [bZ]: v, [ca]: [aH, "resourceId[4]"] }] }], error: "Invalid Arn: Outpost Access Point ARN contains sub resources", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: v, [ca]: bH, [cc]: i }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bv, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aO, { [bW]: c, [bX]: [{ [bY]: bN, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bO, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bP, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bQ, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: v, [ca]: bM, [cc]: H }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: v, [ca]: [aH, "resourceId[3]"], [cc]: E }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [{ [cb]: H }, D] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: by, endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.{outpostId}.{url#authority}", [ce]: bc, [cj]: W }, [bW]: q }, { endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.{outpostId}.s3-outposts.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: bc, [cj]: W }, [bW]: q }] }] }, { error: "Expected an outpost type `accesspoint`, found {outpostType}", [bW]: n }] }] }, { error: "Invalid ARN: expected an access point name", [bW]: n }] }] }, { error: "Invalid ARN: Expected a 4-component resource", [bW]: n }] }] }, aU] }] }, aV] }] }, aW] }] }, ah] }] }, { error: "Could not load partition for ARN region {bucketArn#region}", [bW]: n }] }] }] }, { error: "Invalid ARN: The outpost Id may only contain a-z, A-Z, 0-9 and `-`. Found: `{outpostId}`", [bW]: n }] }] }, { error: "Invalid ARN: The Outpost Id was not set", [bW]: n }] }] }] }] }] }, { error: "Invalid ARN: Unrecognized format: {Bucket} (type: {arnType})", [bW]: n }] }] }, { error: "Invalid ARN: No ARN type specified", [bW]: n }] }, { [bY]: [{ [bZ]: e, [ca]: [P, 0, 4, a], [cc]: I }, { [bZ]: k, [ca]: [{ [cb]: I }, "arn:"] }, { [bZ]: m, [ca]: [{ [bZ]: d, [ca]: bA }] }], error: "Invalid ARN: `{Bucket}` was not a valid ARN", [bW]: n }, Y] }] }, { [bY]: [{ [bZ]: d, [ca]: [bd] }, { [bZ]: r, [ca]: [bd, b] }], [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bT, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aL, { [bW]: c, [bX]: [aM, { [bW]: c, [bX]: [ai, { [bW]: c, [bX]: [{ [bY]: by, endpoint: { [cd]: J, [ce]: be, [cj]: W }, [bW]: q }, { [bY]: bS, endpoint: { [cd]: "https://s3-object-lambda-fips.{Region}.{partitionResult#dnsSuffix}", [ce]: be, [cj]: W }, [bW]: q }, { endpoint: { [cd]: "https://s3-object-lambda.{Region}.{partitionResult#dnsSuffix}", [ce]: be, [cj]: W }, [bW]: q }] }] }] }] }] }, aG] }] }, ah] }, { [bY]: [{ [bZ]: m, [ca]: bz }], [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bT, [bW]: c, [bX]: [{ [bW]: c, [bX]: [ai, { [bW]: c, [bX]: [bf, bf, { [bY]: [aj, Z, T, U, ac, ad], [bW]: c, [bX]: bU }, { [bY]: [aj, Z, T, U, ac, af], endpoint: bh, [bW]: q }, bi, bi, { [bY]: [aj, Z, S, ac, ad], [bW]: c, [bX]: [{ endpoint: bj, [bW]: q }] }, { [bY]: [aj, Z, S, ac, af], endpoint: bj, [bW]: q }, bk, bk, { [bY]: [aj, ag, T, U, ac, ad], [bW]: c, [bX]: bU }, { [bY]: [aj, ag, T, U, ac, af], endpoint: bh, [bW]: q }, bl, bl, { [bY]: [aj, ag, S, ac, ad], [bW]: c, [bX]: [{ endpoint: bm, [bW]: q }] }, { [bY]: [aj, ag, S, ac, af], endpoint: bm, [bW]: q }, bn, bn, { [bY]: [ab, Z, T, U, ac, ad], [bW]: c, [bX]: bU }, { [bY]: [ab, Z, T, U, ac, af], endpoint: bh, [bW]: q }, bo, bo, { [bY]: [ab, Z, S, ac, ad], [bW]: c, [bX]: [{ endpoint: bp, [bW]: q }] }, { [bY]: [ab, Z, S, ac, af], endpoint: bp, [bW]: q }, bq, bq, { [bY]: [ab, ag, T, U, ac, ad], [bW]: c, [bX]: [{ [bY]: bD, endpoint: bh, [bW]: q }, bg] }, { [bY]: [ab, ag, T, U, ac, af], endpoint: bh, [bW]: q }, br, br, { [bY]: [ab, ag, S, ac, ad], [bW]: c, [bX]: [{ [bY]: bD, endpoint: { [cd]: K, [ce]: ae, [cj]: W }, [bW]: q }, { endpoint: bs, [bW]: q }] }, { [bY]: [ab, ag, S, ac, af], endpoint: bs, [bW]: q }] }] }] }, aG] }] }, ah] }] }] }, { error: "A region must be set when sending requests to S3.", [bW]: n }] }] };
+const bV = "required", bW = "type", bX = "rules", bY = "conditions", bZ = "fn", ca = "argv", cb = "ref", cc = "assign", cd = "url", ce = "properties", cf = "authSchemes", cg = "signingRegion", ch = "signingName", ci = "disableDoubleEncoding", cj = "headers";
+const a = false, b = true, c = "tree", d = "isSet", e = "substring", f = "hardwareType", g = "regionPrefix", h = "abbaSuffix", i = "outpostId", j = "aws.partition", k = "stringEquals", l = "isValidHostLabel", m = "not", n = "error", o = "parseURL", p = "s3-outposts", q = "endpoint", r = "booleanEquals", s = "aws.parseArn", t = "s3", u = "aws.isVirtualHostableS3Bucket", v = "getAttr", w = "name", x = "Host override cannot be combined with Dualstack, FIPS, or S3 Accelerate", y = "https://{Bucket}.s3.{partitionResult#dnsSuffix}", z = "bucketArn", A = "arnType", B = "", C = "s3-object-lambda", D = "accesspoint", E = "accessPointName", F = "{url#scheme}://{accessPointName}-{bucketArn#accountId}.{url#authority}{url#path}", G = "mrapPartition", H = "outpostType", I = "arnPrefix", J = "{url#scheme}://{url#authority}{url#path}", K = "https://s3.{partitionResult#dnsSuffix}", L = { [bV]: false, [bW]: "String" }, M = { [bV]: true, "default": false, [bW]: "Boolean" }, N = { [bV]: false, [bW]: "Boolean" }, O = { [bZ]: d, [ca]: [{ [cb]: "Bucket" }] }, P = { [cb]: "Bucket" }, Q = { [cb]: f }, R = { [bY]: [{ [bZ]: m, [ca]: [{ [bZ]: d, [ca]: [{ [cb]: "Endpoint" }] }] }], [n]: "Expected a endpoint to be specified but no endpoint was found", [bW]: n }, S = { [bZ]: m, [ca]: [{ [bZ]: d, [ca]: [{ [cb]: "Endpoint" }] }] }, T = { [bZ]: d, [ca]: [{ [cb]: "Endpoint" }] }, U = { [bZ]: o, [ca]: [{ [cb]: "Endpoint" }], [cc]: "url" }, V = { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: p, [ci]: true }] }, W = {}, X = { [cb]: "ForcePathStyle" }, Y = { [bY]: [{ [bZ]: "uriEncode", [ca]: [P], [cc]: "uri_encoded_bucket" }], [bW]: c, [bX]: [{ [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, T], [n]: "Cannot set dual-stack in combination with a custom endpoint.", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: j, [ca]: [{ [cb]: "Region" }], [cc]: "partitionResult" }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "Accelerate" }, false] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, true] }], [bW]: c, [bX]: [{ [q]: { [cd]: "https://s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }] }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, false] }], [q]: { [cd]: "https://s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, T, U, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, T, U, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, T, U, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, true] }], [bW]: c, [bX]: [{ [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }] }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, T, U, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, false] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3-fips.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3-fips.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, true] }], [bW]: c, [bX]: [{ [q]: { [cd]: "https://s3-fips.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }] }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, false] }], [q]: { [cd]: "https://s3-fips.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3.dualstack.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3.dualstack.us-east-1.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, true] }], [bW]: c, [bX]: [{ [q]: { [cd]: "https://s3.dualstack.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }] }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, false] }], [q]: { [cd]: "https://s3.dualstack.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, T, U, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, T, U, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, T, U, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, true] }], [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "us-east-1"] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }] }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, T, U, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, false] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, true] }], [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "us-east-1"] }], [q]: { [cd]: "https://s3.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, { [q]: { [cd]: "https://s3.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }] }, { [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, S, { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, false] }], [q]: { [cd]: "https://s3.{Region}.{partitionResult#dnsSuffix}/{uri_encoded_bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }] }] }, { [n]: "Path-style addressing cannot be used with S3 Accelerate", [bW]: n }] }] }, { [n]: "A valid partition could not be determined", [bW]: n }] }] }, Z = { [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, true] }, aa = { [bZ]: r, [ca]: [{ [cb]: "Accelerate" }, false] }, ab = { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, true] }, ac = { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }] }, ad = { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, true] }, ae = { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: t, [ci]: true }] }, af = { [bZ]: r, [ca]: [{ [cb]: "UseGlobalEndpoint" }, false] }, ag = { [bZ]: r, [ca]: [{ [cb]: "UseDualStack" }, false] }, ah = { [bZ]: r, [ca]: [{ [cb]: "UseFIPS" }, false] }, ai = { [n]: "A valid partition could not be determined", [bW]: n }, aj = { [bY]: [ab, { [bZ]: k, [ca]: [{ [bZ]: v, [ca]: [{ [cb]: "partitionResult" }, w] }, "aws-cn"] }], [n]: "Partition does not support FIPS", [bW]: n }, ak = { [bZ]: k, [ca]: [{ [bZ]: v, [ca]: [{ [cb]: "partitionResult" }, w] }, "aws-cn"] }, al = { [bZ]: r, [ca]: [{ [cb]: "Accelerate" }, true] }, am = { [bY]: [Z, ab, aa, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://{Bucket}.s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, an = { [cd]: "https://{Bucket}.s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, ao = { [bY]: [ag, ab, aa, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://{Bucket}.s3-fips.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, ap = { [cd]: "https://{Bucket}.s3-fips.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, aq = { [bY]: [Z, ah, al, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://{Bucket}.s3-accelerate.dualstack.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, ar = { [cd]: "https://{Bucket}.s3-accelerate.dualstack.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, as = { [bY]: [Z, ah, aa, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://{Bucket}.s3.dualstack.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, at = { [cd]: "https://{Bucket}.s3.dualstack.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, au = { [bY]: [ag, ah, aa, T, U, { [bZ]: r, [ca]: [{ [bZ]: v, [ca]: [{ [cb]: "url" }, "isIp"] }, true] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{Bucket}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, av = { [bZ]: r, [ca]: [{ [bZ]: v, [ca]: [{ [cb]: "url" }, "isIp"] }, true] }, aw = { [cb]: "url" }, ax = { [bY]: [ag, ah, aa, T, U, { [bZ]: r, [ca]: [{ [bZ]: v, [ca]: [aw, "isIp"] }, false] }, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "{url#scheme}://{Bucket}.{url#authority}{url#path}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, ay = { [bZ]: r, [ca]: [{ [bZ]: v, [ca]: [aw, "isIp"] }, false] }, az = { [cd]: "{url#scheme}://{url#authority}{url#normalizedPath}{Bucket}", [ce]: ae, [cj]: {} }, aA = { [cd]: "{url#scheme}://{Bucket}.{url#authority}{url#path}", [ce]: ae, [cj]: {} }, aB = { [q]: aA, [bW]: q }, aC = { [bY]: [ag, ah, al, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://{Bucket}.s3-accelerate.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, aD = { [cd]: "https://{Bucket}.s3-accelerate.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, aE = { [bY]: [ag, ah, aa, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: y, [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, aF = { [cd]: "https://{Bucket}.s3.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, aG = { [n]: "Invalid region: region was not a valid DNS name.", [bW]: n }, aH = { [cb]: z }, aI = { [cb]: A }, aJ = { [bZ]: v, [ca]: [aH, "service"] }, aK = { [cb]: E }, aL = { [bY]: [Z], [n]: "S3 Object Lambda does not support Dual-stack", [bW]: n }, aM = { [bY]: [al], [n]: "S3 Object Lambda does not support S3 Accelerate", [bW]: n }, aN = { [bY]: [{ [bZ]: d, [ca]: [{ [cb]: "DisableAccessPoints" }] }, { [bZ]: r, [ca]: [{ [cb]: "DisableAccessPoints" }, true] }], [n]: "Access points are not supported for this operation", [bW]: n }, aO = { [bY]: [{ [bZ]: d, [ca]: [{ [cb]: "UseArnRegion" }] }, { [bZ]: r, [ca]: [{ [cb]: "UseArnRegion" }, false] }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [bZ]: v, [ca]: [aH, "region"] }, "{Region}"] }] }], [n]: "Invalid configuration: region from ARN `{bucketArn#region}` does not match client region `{Region}` and UseArnRegion is `false`", [bW]: n }, aP = { [bZ]: v, [ca]: [{ [cb]: "bucketPartition" }, w] }, aQ = { [bZ]: v, [ca]: [aH, "accountId"] }, aR = { [bY]: [ab, { [bZ]: k, [ca]: [aP, "aws-cn"] }], [n]: "Partition does not support FIPS", [bW]: n }, aS = { [cf]: [{ [w]: "sigv4", [cg]: "{bucketArn#region}", [ch]: C, [ci]: true }] }, aT = { [n]: "Invalid ARN: The access point name may only contain a-z, A-Z, 0-9 and `-`. Found: `{accessPointName}`", [bW]: n }, aU = { [n]: "Invalid ARN: The account id may only contain a-z, A-Z, 0-9 and `-`. Found: `{bucketArn#accountId}`", [bW]: n }, aV = { [n]: "Invalid region in ARN: `{bucketArn#region}` (invalid DNS name)", [bW]: n }, aW = { [n]: "Client was configured for partition `{partitionResult#name}` but ARN (`{Bucket}`) has `{bucketPartition#name}`", [bW]: n }, aX = { [n]: "Could not load partition for ARN region `{bucketArn#region}`", [bW]: n }, aY = { [n]: "Invalid ARN: The ARN may only contain a single resource component after `accesspoint`.", [bW]: n }, aZ = { [n]: "Invalid ARN: bucket ARN is missing a region", [bW]: n }, ba = { [n]: "Invalid ARN: Expected a resource of the format `accesspoint:<accesspoint name>` but no name was provided", [bW]: n }, bb = { [cf]: [{ [w]: "sigv4", [cg]: "{bucketArn#region}", [ch]: t, [ci]: true }] }, bc = { [cf]: [{ [w]: "sigv4", [cg]: "{bucketArn#region}", [ch]: p, [ci]: true }] }, bd = { [cb]: "UseObjectLambdaEndpoint" }, be = { [cf]: [{ [w]: "sigv4", [cg]: "{Region}", [ch]: C, [ci]: true }] }, bf = { [bY]: [ab, Z, T, U, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: J, [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, bg = { [q]: { [cd]: J, [ce]: ae, [cj]: {} }, [bW]: q }, bh = { [cd]: J, [ce]: ae, [cj]: {} }, bi = { [bY]: [ab, Z, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3-fips.dualstack.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, bj = { [cd]: "https://s3-fips.dualstack.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, bk = { [bY]: [ab, ag, T, U, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: J, [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, bl = { [bY]: [ab, ag, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3-fips.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, bm = { [cd]: "https://s3-fips.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, bn = { [bY]: [ah, Z, T, U, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: J, [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, bo = { [bY]: [ah, Z, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: "https://s3.dualstack.us-east-1.{partitionResult#dnsSuffix}", [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, bp = { [cd]: "https://s3.dualstack.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, bq = { [bY]: [ah, ag, T, U, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: J, [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, br = { [bY]: [ah, ag, S, { [bZ]: k, [ca]: [{ [cb]: "Region" }, "aws-global"] }], [q]: { [cd]: K, [ce]: { [cf]: [{ [w]: "sigv4", [cg]: "us-east-1", [ch]: t, [ci]: true }] }, [cj]: {} }, [bW]: q }, bs = { [cd]: "https://s3.{Region}.{partitionResult#dnsSuffix}", [ce]: ae, [cj]: {} }, bt = [{ [cb]: "Region" }], bu = [P], bv = [{ [bZ]: l, [ca]: [{ [cb]: i }, false] }], bw = [{ [bZ]: k, [ca]: [{ [cb]: g }, "beta"] }], bx = [{ [cb]: "Endpoint" }], by = [T, U], bz = [O], bA = [{ [bZ]: s, [ca]: [P] }], bB = [Z, T], bC = [{ [bZ]: j, [ca]: bt, [cc]: "partitionResult" }], bD = [{ [bZ]: k, [ca]: [{ [cb]: "Region" }, "us-east-1"] }], bE = [{ [bZ]: l, [ca]: [{ [cb]: "Region" }, false] }], bF = [{ [bZ]: k, [ca]: [aI, D] }], bG = [{ [bZ]: v, [ca]: [aH, "resourceId[1]"], [cc]: E }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [aK, B] }] }], bH = [aH, "resourceId[1]"], bI = [Z], bJ = [al], bK = [{ [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [{ [bZ]: v, [ca]: [aH, "region"] }, B] }] }], bL = [{ [bZ]: m, [ca]: [{ [bZ]: d, [ca]: [{ [bZ]: v, [ca]: [aH, "resourceId[2]"] }] }] }], bM = [aH, "resourceId[2]"], bN = [{ [bZ]: j, [ca]: [{ [bZ]: v, [ca]: [aH, "region"] }], [cc]: "bucketPartition" }], bO = [{ [bZ]: k, [ca]: [aP, { [bZ]: v, [ca]: [{ [cb]: "partitionResult" }, w] }] }], bP = [{ [bZ]: l, [ca]: [{ [bZ]: v, [ca]: [aH, "region"] }, true] }], bQ = [{ [bZ]: l, [ca]: [aQ, false] }], bR = [{ [bZ]: l, [ca]: [aK, false] }], bS = [ab], bT = [{ [bZ]: l, [ca]: [{ [cb]: "Region" }, true] }], bU = [bg];
+const _data = { version: "1.0", parameters: { Bucket: L, Region: L, UseFIPS: M, UseDualStack: M, Endpoint: L, ForcePathStyle: N, Accelerate: M, UseGlobalEndpoint: M, UseObjectLambdaEndpoint: N, DisableAccessPoints: N, DisableMultiRegionAccessPoints: M, UseArnRegion: N }, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: d, [ca]: bt }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [O, { [bZ]: e, [ca]: [P, 49, 50, b], [cc]: f }, { [bZ]: e, [ca]: [P, 8, 12, b], [cc]: g }, { [bZ]: e, [ca]: [P, 0, 7, b], [cc]: h }, { [bZ]: e, [ca]: [P, 32, 49, b], [cc]: i }, { [bZ]: j, [ca]: bt, [cc]: "regionPartition" }, { [bZ]: k, [ca]: [{ [cb]: h }, "--op-s3"] }], [bW]: c, [bX]: [{ [bY]: bv, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [Q, "e"] }], [bW]: c, [bX]: [{ [bY]: bw, [bW]: c, [bX]: [R, { [bY]: by, endpoint: { [cd]: "https://{Bucket}.ec2.{url#authority}", [ce]: V, [cj]: W }, [bW]: q }] }, { endpoint: { [cd]: "https://{Bucket}.ec2.s3-outposts.{Region}.{regionPartition#dnsSuffix}", [ce]: V, [cj]: W }, [bW]: q }] }, { [bY]: [{ [bZ]: k, [ca]: [Q, "o"] }], [bW]: c, [bX]: [{ [bY]: bw, [bW]: c, [bX]: [R, { [bY]: by, endpoint: { [cd]: "https://{Bucket}.op-{outpostId}.{url#authority}", [ce]: V, [cj]: W }, [bW]: q }] }, { endpoint: { [cd]: "https://{Bucket}.op-{outpostId}.s3-outposts.{Region}.{regionPartition#dnsSuffix}", [ce]: V, [cj]: W }, [bW]: q }] }, { error: "Unrecognized hardware type: \"Expected hardware type o or e but got {hardwareType}\"", [bW]: n }] }] }, { error: "Invalid ARN: The outpost Id must only contain a-z, A-Z, 0-9 and `-`.", [bW]: n }] }, { [bY]: bz, [bW]: c, [bX]: [{ [bY]: [T, { [bZ]: m, [ca]: [{ [bZ]: d, [ca]: [{ [bZ]: o, [ca]: bx }] }] }], error: "Custom endpoint `{Endpoint}` was not a valid URI", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: d, [ca]: [X] }, { [bZ]: r, [ca]: [X, b] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bA, error: "Path-style addressing cannot be used with ARN buckets", [bW]: n }, Y] }] }, { [bY]: [{ [bZ]: u, [ca]: [P, a] }], [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bE, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aj, { [bW]: c, [bX]: [{ [bY]: [al, ab], error: "Accelerate cannot be used with FIPS", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [al, ak], error: "S3 Accelerate cannot be used in this region", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [T, Z], error: x, [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [T, ab], error: x, [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [T, al], error: x, [bW]: n }, { [bW]: c, [bX]: [am, am, { [bY]: [Z, ab, aa, S, ac, ad], [bW]: c, [bX]: [{ endpoint: an, [bW]: q }] }, { [bY]: [Z, ab, aa, S, ac, af], endpoint: an, [bW]: q }, ao, ao, { [bY]: [ag, ab, aa, S, ac, ad], [bW]: c, [bX]: [{ endpoint: ap, [bW]: q }] }, { [bY]: [ag, ab, aa, S, ac, af], endpoint: ap, [bW]: q }, aq, aq, { [bY]: [Z, ah, al, S, ac, ad], [bW]: c, [bX]: [{ endpoint: ar, [bW]: q }] }, { [bY]: [Z, ah, al, S, ac, af], endpoint: ar, [bW]: q }, as, as, { [bY]: [Z, ah, aa, S, ac, ad], [bW]: c, [bX]: [{ endpoint: at, [bW]: q }] }, { [bY]: [Z, ah, aa, S, ac, af], endpoint: at, [bW]: q }, au, ax, au, ax, { [bY]: [ag, ah, aa, T, U, av, ac, ad], [bW]: c, [bX]: [{ [bY]: bD, endpoint: az, [bW]: q }, { endpoint: az, [bW]: q }] }, { [bY]: [ag, ah, aa, T, U, ay, ac, ad], [bW]: c, [bX]: [{ [bY]: bD, endpoint: aA, [bW]: q }, aB] }, { [bY]: [ag, ah, aa, T, U, av, ac, af], endpoint: az, [bW]: q }, { [bY]: [ag, ah, aa, T, U, ay, ac, af], endpoint: aA, [bW]: q }, aC, aC, { [bY]: [ag, ah, al, S, ac, ad], [bW]: c, [bX]: [{ [bY]: bD, endpoint: aD, [bW]: q }, { endpoint: aD, [bW]: q }] }, { [bY]: [ag, ah, al, S, ac, af], endpoint: aD, [bW]: q }, aE, aE, { [bY]: [ag, ah, aa, S, ac, ad], [bW]: c, [bX]: [{ [bY]: bD, endpoint: { [cd]: y, [ce]: ae, [cj]: W }, [bW]: q }, { endpoint: aF, [bW]: q }] }, { [bY]: [ag, ah, aa, S, ac, af], endpoint: aF, [bW]: q }] }] }] }] }] }] }] }] }, aG] }] }, ai] }, { [bY]: [T, U, { [bZ]: k, [ca]: [{ [bZ]: v, [ca]: [aw, "scheme"] }, "http"] }, { [bZ]: u, [ca]: [P, b] }, ah, ag, aa], [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bE, [bW]: c, [bX]: [aB] }, aG] }] }, ai] }, { [bY]: [{ [bZ]: s, [ca]: bu, [cc]: z }], [bW]: c, [bX]: [{ [bY]: [{ [bZ]: v, [ca]: [aH, "resourceId[0]"], [cc]: A }, { [bZ]: m, [ca]: [{ [bZ]: k, [ca]: [aI, B] }] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [aJ, C] }], [bW]: c, [bX]: [{ [bY]: bF, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bG, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aL, { [bW]: c, [bX]: [aM, { [bW]: c, [bX]: [{ [bY]: bK, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aN, { [bW]: c, [bX]: [{ [bY]: bL, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aO, { [bW]: c, [bX]: [{ [bY]: bN, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bO, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bP, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [aQ, B] }], error: "Invalid ARN: Missing account id", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: bQ, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bR, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aR, { [bW]: c, [bX]: [{ [bY]: by, endpoint: { [cd]: F, [ce]: aS, [cj]: W }, [bW]: q }, { [bY]: bS, endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.s3-object-lambda-fips.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: aS, [cj]: W }, [bW]: q }, { endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.s3-object-lambda.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: aS, [cj]: W }, [bW]: q }] }] }] }, aT] }] }, aU] }] }] }, aV] }] }, aW] }] }, ai] }] }, aX] }] }] }, aY] }] }] }, aZ] }] }] }] }, ba] }] }, { error: "Invalid ARN: Object Lambda ARNs only support `accesspoint` arn types, but found: `{arnType}`", [bW]: n }] }, { [bY]: bF, [bW]: c, [bX]: [{ [bY]: bG, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bK, [bW]: c, [bX]: [{ [bY]: bF, [bW]: c, [bX]: [{ [bY]: bK, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aN, { [bW]: c, [bX]: [{ [bY]: bL, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aO, { [bW]: c, [bX]: [{ [bY]: bN, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [aP, "{partitionResult#name}"] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bP, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [aJ, t] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bQ, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bR, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bJ, error: "Access Points do not support S3 Accelerate", [bW]: n }, { [bW]: c, [bX]: [aR, { [bW]: c, [bX]: [{ [bY]: bB, error: "DualStack cannot be combined with a Host override (PrivateLink)", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [ab, Z], endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint-fips.dualstack.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: bb, [cj]: W }, [bW]: q }, { [bY]: [ab, ag], endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint-fips.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: bb, [cj]: W }, [bW]: q }, { [bY]: [ah, Z], endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint.dualstack.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: bb, [cj]: W }, [bW]: q }, { [bY]: [ah, ag, T, U], endpoint: { [cd]: F, [ce]: bb, [cj]: W }, [bW]: q }, { [bY]: [ah, ag], endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.s3-accesspoint.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: bb, [cj]: W }, [bW]: q }] }] }] }] }] }, aT] }] }, aU] }] }, { error: "Invalid ARN: The ARN was not for the S3 service, found: {bucketArn#service}", [bW]: n }] }] }, aV] }] }, aW] }] }, ai] }] }, aX] }] }] }, aY] }] }] }, aZ] }] }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: l, [ca]: [aK, b] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bI, error: "S3 MRAP does not support dual-stack", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: bS, error: "S3 MRAP does not support FIPS", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: bJ, error: "S3 MRAP does not support S3 Accelerate", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: r, [ca]: [{ [cb]: "DisableMultiRegionAccessPoints" }, b] }], error: "Invalid configuration: Multi-Region Access Point ARNs are disabled.", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: j, [ca]: bt, [cc]: G }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [{ [bZ]: v, [ca]: [{ [cb]: G }, w] }, { [bZ]: v, [ca]: [aH, "partition"] }] }], [bW]: c, [bX]: [{ endpoint: { [cd]: "https://{accessPointName}.accesspoint.s3-global.{mrapPartition#dnsSuffix}", [ce]: { [cf]: [{ name: "sigv4a", signingRegionSet: ["*"], [ch]: t, [ci]: b }] }, [cj]: W }, [bW]: q }] }, { error: "Client was configured for partition `{mrapPartition#name}` but bucket referred to partition `{bucketArn#partition}`", [bW]: n }] }] }, { error: "{Region} was not a valid region", [bW]: n }] }] }] }] }] }] }, { error: "Invalid Access Point Name", [bW]: n }] }] }] }, ba] }, { [bY]: [{ [bZ]: k, [ca]: [aJ, p] }], [bW]: c, [bX]: [{ [bY]: bI, error: "S3 Outposts does not support Dual-stack", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: bS, error: "S3 Outposts does not support FIPS", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: bJ, error: "S3 Outposts does not support S3 Accelerate", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: d, [ca]: [{ [bZ]: v, [ca]: [aH, "resourceId[4]"] }] }], error: "Invalid Arn: Outpost Access Point ARN contains sub resources", [bW]: n }, { [bW]: c, [bX]: [{ [bY]: [{ [bZ]: v, [ca]: bH, [cc]: i }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bv, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aO, { [bW]: c, [bX]: [{ [bY]: bN, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bO, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bP, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bQ, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: v, [ca]: bM, [cc]: H }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: v, [ca]: [aH, "resourceId[3]"], [cc]: E }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: [{ [bZ]: k, [ca]: [{ [cb]: H }, D] }], [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: by, endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.{outpostId}.{url#authority}", [ce]: bc, [cj]: W }, [bW]: q }, { endpoint: { [cd]: "https://{accessPointName}-{bucketArn#accountId}.{outpostId}.s3-outposts.{bucketArn#region}.{bucketPartition#dnsSuffix}", [ce]: bc, [cj]: W }, [bW]: q }] }] }, { error: "Expected an outpost type `accesspoint`, found {outpostType}", [bW]: n }] }] }, { error: "Invalid ARN: expected an access point name", [bW]: n }] }] }, { error: "Invalid ARN: Expected a 4-component resource", [bW]: n }] }] }, aU] }] }, aV] }] }, aW] }] }, ai] }] }, { error: "Could not load partition for ARN region {bucketArn#region}", [bW]: n }] }] }] }, { error: "Invalid ARN: The outpost Id may only contain a-z, A-Z, 0-9 and `-`. Found: `{outpostId}`", [bW]: n }] }] }, { error: "Invalid ARN: The Outpost Id was not set", [bW]: n }] }] }] }] }] }, { error: "Invalid ARN: Unrecognized format: {Bucket} (type: {arnType})", [bW]: n }] }] }, { error: "Invalid ARN: No ARN type specified", [bW]: n }] }, { [bY]: [{ [bZ]: e, [ca]: [P, 0, 4, a], [cc]: I }, { [bZ]: k, [ca]: [{ [cb]: I }, "arn:"] }, { [bZ]: m, [ca]: [{ [bZ]: d, [ca]: bA }] }], error: "Invalid ARN: `{Bucket}` was not a valid ARN", [bW]: n }, Y] }] }, { [bY]: [{ [bZ]: d, [ca]: [bd] }, { [bZ]: r, [ca]: [bd, b] }], [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bT, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aL, { [bW]: c, [bX]: [aM, { [bW]: c, [bX]: [aj, { [bW]: c, [bX]: [{ [bY]: by, endpoint: { [cd]: J, [ce]: be, [cj]: W }, [bW]: q }, { [bY]: bS, endpoint: { [cd]: "https://s3-object-lambda-fips.{Region}.{partitionResult#dnsSuffix}", [ce]: be, [cj]: W }, [bW]: q }, { endpoint: { [cd]: "https://s3-object-lambda.{Region}.{partitionResult#dnsSuffix}", [ce]: be, [cj]: W }, [bW]: q }] }] }] }] }] }, aG] }] }, ai] }, { [bY]: [{ [bZ]: m, [ca]: bz }], [bW]: c, [bX]: [{ [bY]: bC, [bW]: c, [bX]: [{ [bW]: c, [bX]: [{ [bY]: bT, [bW]: c, [bX]: [{ [bW]: c, [bX]: [aj, { [bW]: c, [bX]: [bf, bf, { [bY]: [ab, Z, T, U, ac, ad], [bW]: c, [bX]: bU }, { [bY]: [ab, Z, T, U, ac, af], endpoint: bh, [bW]: q }, bi, bi, { [bY]: [ab, Z, S, ac, ad], [bW]: c, [bX]: [{ endpoint: bj, [bW]: q }] }, { [bY]: [ab, Z, S, ac, af], endpoint: bj, [bW]: q }, bk, bk, { [bY]: [ab, ag, T, U, ac, ad], [bW]: c, [bX]: bU }, { [bY]: [ab, ag, T, U, ac, af], endpoint: bh, [bW]: q }, bl, bl, { [bY]: [ab, ag, S, ac, ad], [bW]: c, [bX]: [{ endpoint: bm, [bW]: q }] }, { [bY]: [ab, ag, S, ac, af], endpoint: bm, [bW]: q }, bn, bn, { [bY]: [ah, Z, T, U, ac, ad], [bW]: c, [bX]: bU }, { [bY]: [ah, Z, T, U, ac, af], endpoint: bh, [bW]: q }, bo, bo, { [bY]: [ah, Z, S, ac, ad], [bW]: c, [bX]: [{ endpoint: bp, [bW]: q }] }, { [bY]: [ah, Z, S, ac, af], endpoint: bp, [bW]: q }, bq, bq, { [bY]: [ah, ag, T, U, ac, ad], [bW]: c, [bX]: [{ [bY]: bD, endpoint: bh, [bW]: q }, bg] }, { [bY]: [ah, ag, T, U, ac, af], endpoint: bh, [bW]: q }, br, br, { [bY]: [ah, ag, S, ac, ad], [bW]: c, [bX]: [{ [bY]: bD, endpoint: { [cd]: K, [ce]: ae, [cj]: W }, [bW]: q }, { endpoint: bs, [bW]: q }] }, { [bY]: [ah, ag, S, ac, af], endpoint: bs, [bW]: q }] }] }] }, aG] }] }, ai] }] }] }, { error: "A region must be set when sending requests to S3.", [bW]: n }] }] };
 exports.ruleSet = _data;
 
 
@@ -12088,14 +12094,14 @@ const serializeAws_restXmlCopyObjectCommand = async (input, context) => {
         "x-amz-copy-source-if-match": input.CopySourceIfMatch,
         "x-amz-copy-source-if-modified-since": [
             () => isSerializableHeaderValue(input.CopySourceIfModifiedSince),
-            () => (0, smithy_client_1.dateToUtcString)(input.CopySourceIfModifiedSince),
+            () => (0, smithy_client_1.dateToUtcString)(input.CopySourceIfModifiedSince).toString(),
         ],
         "x-amz-copy-source-if-none-match": input.CopySourceIfNoneMatch,
         "x-amz-copy-source-if-unmodified-since": [
             () => isSerializableHeaderValue(input.CopySourceIfUnmodifiedSince),
-            () => (0, smithy_client_1.dateToUtcString)(input.CopySourceIfUnmodifiedSince),
+            () => (0, smithy_client_1.dateToUtcString)(input.CopySourceIfUnmodifiedSince).toString(),
         ],
-        expires: [() => isSerializableHeaderValue(input.Expires), () => (0, smithy_client_1.dateToUtcString)(input.Expires)],
+        expires: [() => isSerializableHeaderValue(input.Expires), () => (0, smithy_client_1.dateToUtcString)(input.Expires).toString()],
         "x-amz-grant-full-control": input.GrantFullControl,
         "x-amz-grant-read": input.GrantRead,
         "x-amz-grant-read-acp": input.GrantReadACP,
@@ -12122,7 +12128,7 @@ const serializeAws_restXmlCopyObjectCommand = async (input, context) => {
         "x-amz-object-lock-mode": input.ObjectLockMode,
         "x-amz-object-lock-retain-until-date": [
             () => isSerializableHeaderValue(input.ObjectLockRetainUntilDate),
-            () => input.ObjectLockRetainUntilDate.toISOString().split(".")[0] + "Z",
+            () => (input.ObjectLockRetainUntilDate.toISOString().split(".")[0] + "Z").toString(),
         ],
         "x-amz-object-lock-legal-hold": input.ObjectLockLegalHoldStatus,
         "x-amz-expected-bucket-owner": input.ExpectedBucketOwner,
@@ -12201,7 +12207,7 @@ const serializeAws_restXmlCreateMultipartUploadCommand = async (input, context) 
         "content-encoding": input.ContentEncoding,
         "content-language": input.ContentLanguage,
         "content-type": input.ContentType,
-        expires: [() => isSerializableHeaderValue(input.Expires), () => (0, smithy_client_1.dateToUtcString)(input.Expires)],
+        expires: [() => isSerializableHeaderValue(input.Expires), () => (0, smithy_client_1.dateToUtcString)(input.Expires).toString()],
         "x-amz-grant-full-control": input.GrantFullControl,
         "x-amz-grant-read": input.GrantRead,
         "x-amz-grant-read-acp": input.GrantReadACP,
@@ -12223,7 +12229,7 @@ const serializeAws_restXmlCreateMultipartUploadCommand = async (input, context) 
         "x-amz-object-lock-mode": input.ObjectLockMode,
         "x-amz-object-lock-retain-until-date": [
             () => isSerializableHeaderValue(input.ObjectLockRetainUntilDate),
-            () => input.ObjectLockRetainUntilDate.toISOString().split(".")[0] + "Z",
+            () => (input.ObjectLockRetainUntilDate.toISOString().split(".")[0] + "Z").toString(),
         ],
         "x-amz-object-lock-legal-hold": input.ObjectLockLegalHoldStatus,
         "x-amz-expected-bucket-owner": input.ExpectedBucketOwner,
@@ -13144,12 +13150,12 @@ const serializeAws_restXmlGetObjectCommand = async (input, context) => {
         "if-match": input.IfMatch,
         "if-modified-since": [
             () => isSerializableHeaderValue(input.IfModifiedSince),
-            () => (0, smithy_client_1.dateToUtcString)(input.IfModifiedSince),
+            () => (0, smithy_client_1.dateToUtcString)(input.IfModifiedSince).toString(),
         ],
         "if-none-match": input.IfNoneMatch,
         "if-unmodified-since": [
             () => isSerializableHeaderValue(input.IfUnmodifiedSince),
-            () => (0, smithy_client_1.dateToUtcString)(input.IfUnmodifiedSince),
+            () => (0, smithy_client_1.dateToUtcString)(input.IfUnmodifiedSince).toString(),
         ],
         range: input.Range,
         "x-amz-server-side-encryption-customer-algorithm": input.SSECustomerAlgorithm,
@@ -13169,7 +13175,10 @@ const serializeAws_restXmlGetObjectCommand = async (input, context) => {
         "response-content-encoding": [, input.ResponseContentEncoding],
         "response-content-language": [, input.ResponseContentLanguage],
         "response-content-type": [, input.ResponseContentType],
-        "response-expires": [() => input.ResponseExpires !== void 0, () => (0, smithy_client_1.dateToUtcString)(input.ResponseExpires)],
+        "response-expires": [
+            () => input.ResponseExpires !== void 0,
+            () => (0, smithy_client_1.dateToUtcString)(input.ResponseExpires).toString(),
+        ],
         versionId: [, input.VersionId],
         partNumber: [() => input.PartNumber !== void 0, () => input.PartNumber.toString()],
     });
@@ -13421,12 +13430,12 @@ const serializeAws_restXmlHeadObjectCommand = async (input, context) => {
         "if-match": input.IfMatch,
         "if-modified-since": [
             () => isSerializableHeaderValue(input.IfModifiedSince),
-            () => (0, smithy_client_1.dateToUtcString)(input.IfModifiedSince),
+            () => (0, smithy_client_1.dateToUtcString)(input.IfModifiedSince).toString(),
         ],
         "if-none-match": input.IfNoneMatch,
         "if-unmodified-since": [
             () => isSerializableHeaderValue(input.IfUnmodifiedSince),
-            () => (0, smithy_client_1.dateToUtcString)(input.IfUnmodifiedSince),
+            () => (0, smithy_client_1.dateToUtcString)(input.IfUnmodifiedSince).toString(),
         ],
         range: input.Range,
         "x-amz-server-side-encryption-customer-algorithm": input.SSECustomerAlgorithm,
@@ -14390,7 +14399,7 @@ const serializeAws_restXmlPutObjectCommand = async (input, context) => {
         "x-amz-checksum-crc32c": input.ChecksumCRC32C,
         "x-amz-checksum-sha1": input.ChecksumSHA1,
         "x-amz-checksum-sha256": input.ChecksumSHA256,
-        expires: [() => isSerializableHeaderValue(input.Expires), () => (0, smithy_client_1.dateToUtcString)(input.Expires)],
+        expires: [() => isSerializableHeaderValue(input.Expires), () => (0, smithy_client_1.dateToUtcString)(input.Expires).toString()],
         "x-amz-grant-full-control": input.GrantFullControl,
         "x-amz-grant-read": input.GrantRead,
         "x-amz-grant-read-acp": input.GrantReadACP,
@@ -14412,7 +14421,7 @@ const serializeAws_restXmlPutObjectCommand = async (input, context) => {
         "x-amz-object-lock-mode": input.ObjectLockMode,
         "x-amz-object-lock-retain-until-date": [
             () => isSerializableHeaderValue(input.ObjectLockRetainUntilDate),
-            () => input.ObjectLockRetainUntilDate.toISOString().split(".")[0] + "Z",
+            () => (input.ObjectLockRetainUntilDate.toISOString().split(".")[0] + "Z").toString(),
         ],
         "x-amz-object-lock-legal-hold": input.ObjectLockLegalHoldStatus,
         "x-amz-expected-bucket-owner": input.ExpectedBucketOwner,
@@ -14841,12 +14850,12 @@ const serializeAws_restXmlUploadPartCopyCommand = async (input, context) => {
         "x-amz-copy-source-if-match": input.CopySourceIfMatch,
         "x-amz-copy-source-if-modified-since": [
             () => isSerializableHeaderValue(input.CopySourceIfModifiedSince),
-            () => (0, smithy_client_1.dateToUtcString)(input.CopySourceIfModifiedSince),
+            () => (0, smithy_client_1.dateToUtcString)(input.CopySourceIfModifiedSince).toString(),
         ],
         "x-amz-copy-source-if-none-match": input.CopySourceIfNoneMatch,
         "x-amz-copy-source-if-unmodified-since": [
             () => isSerializableHeaderValue(input.CopySourceIfUnmodifiedSince),
-            () => (0, smithy_client_1.dateToUtcString)(input.CopySourceIfUnmodifiedSince),
+            () => (0, smithy_client_1.dateToUtcString)(input.CopySourceIfUnmodifiedSince).toString(),
         ],
         "x-amz-copy-source-range": input.CopySourceRange,
         "x-amz-server-side-encryption-customer-algorithm": input.SSECustomerAlgorithm,
@@ -14909,12 +14918,12 @@ const serializeAws_restXmlWriteGetObjectResponseCommand = async (input, context)
         "x-amz-fwd-header-etag": input.ETag,
         "x-amz-fwd-header-expires": [
             () => isSerializableHeaderValue(input.Expires),
-            () => (0, smithy_client_1.dateToUtcString)(input.Expires),
+            () => (0, smithy_client_1.dateToUtcString)(input.Expires).toString(),
         ],
         "x-amz-fwd-header-x-amz-expiration": input.Expiration,
         "x-amz-fwd-header-last-modified": [
             () => isSerializableHeaderValue(input.LastModified),
-            () => (0, smithy_client_1.dateToUtcString)(input.LastModified),
+            () => (0, smithy_client_1.dateToUtcString)(input.LastModified).toString(),
         ],
         "x-amz-fwd-header-x-amz-missing-meta": [
             () => isSerializableHeaderValue(input.MissingMeta),
@@ -14924,7 +14933,7 @@ const serializeAws_restXmlWriteGetObjectResponseCommand = async (input, context)
         "x-amz-fwd-header-x-amz-object-lock-legal-hold": input.ObjectLockLegalHoldStatus,
         "x-amz-fwd-header-x-amz-object-lock-retain-until-date": [
             () => isSerializableHeaderValue(input.ObjectLockRetainUntilDate),
-            () => input.ObjectLockRetainUntilDate.toISOString().split(".")[0] + "Z",
+            () => (input.ObjectLockRetainUntilDate.toISOString().split(".")[0] + "Z").toString(),
         ],
         "x-amz-fwd-header-x-amz-mp-parts-count": [
             () => isSerializableHeaderValue(input.PartsCount),
@@ -16308,7 +16317,7 @@ const deserializeAws_restXmlGetObjectCommand = async (output, context) => {
         ObjectLockMode: [, output.headers["x-amz-object-lock-mode"]],
         ObjectLockRetainUntilDate: [
             () => void 0 !== output.headers["x-amz-object-lock-retain-until-date"],
-            () => (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output.headers["x-amz-object-lock-retain-until-date"])),
+            () => (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output.headers["x-amz-object-lock-retain-until-date"])),
         ],
         ObjectLockLegalHoldStatus: [, output.headers["x-amz-object-lock-legal-hold"]],
         Metadata: [
@@ -16702,7 +16711,7 @@ const deserializeAws_restXmlHeadObjectCommand = async (output, context) => {
         ObjectLockMode: [, output.headers["x-amz-object-lock-mode"]],
         ObjectLockRetainUntilDate: [
             () => void 0 !== output.headers["x-amz-object-lock-retain-until-date"],
-            () => (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output.headers["x-amz-object-lock-retain-until-date"])),
+            () => (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output.headers["x-amz-object-lock-retain-until-date"])),
         ],
         ObjectLockLegalHoldStatus: [, output.headers["x-amz-object-lock-legal-hold"]],
         Metadata: [
@@ -19035,7 +19044,7 @@ const serializeAws_restXmlLambdaFunctionConfigurationList = (input, context) => 
 const serializeAws_restXmlLifecycleExpiration = (input, context) => {
     const bodyNode = new xml_builder_1.XmlNode("LifecycleExpiration");
     if (input.Date != null) {
-        const node = xml_builder_1.XmlNode.of("Date", input.Date.toISOString().split(".")[0] + "Z").withName("Date");
+        const node = xml_builder_1.XmlNode.of("Date", (input.Date.toISOString().split(".")[0] + "Z").toString()).withName("Date");
         bodyNode.addChildNode(node);
     }
     if (input.Days != null) {
@@ -19391,7 +19400,7 @@ const serializeAws_restXmlObjectLockRetention = (input, context) => {
     }
     if (input.RetainUntilDate != null) {
         const node = xml_builder_1.XmlNode
-            .of("Date", input.RetainUntilDate.toISOString().split(".")[0] + "Z")
+            .of("Date", (input.RetainUntilDate.toISOString().split(".")[0] + "Z").toString())
             .withName("RetainUntilDate");
         bodyNode.addChildNode(node);
     }
@@ -20044,7 +20053,7 @@ const serializeAws_restXmlTopicConfigurationList = (input, context) => {
 const serializeAws_restXmlTransition = (input, context) => {
     const bodyNode = new xml_builder_1.XmlNode("Transition");
     if (input.Date != null) {
-        const node = xml_builder_1.XmlNode.of("Date", input.Date.toISOString().split(".")[0] + "Z").withName("Date");
+        const node = xml_builder_1.XmlNode.of("Date", (input.Date.toISOString().split(".")[0] + "Z").toString()).withName("Date");
         bodyNode.addChildNode(node);
     }
     if (input.Days != null) {
@@ -20247,7 +20256,7 @@ const deserializeAws_restXmlBucket = (output, context) => {
         contents.Name = (0, smithy_client_1.expectString)(output["Name"]);
     }
     if (output["CreationDate"] !== undefined) {
-        contents.CreationDate = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output["CreationDate"]));
+        contents.CreationDate = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output["CreationDate"]));
     }
     return contents;
 };
@@ -20332,7 +20341,7 @@ const deserializeAws_restXmlCopyObjectResult = (output, context) => {
         contents.ETag = (0, smithy_client_1.expectString)(output["ETag"]);
     }
     if (output["LastModified"] !== undefined) {
-        contents.LastModified = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output["LastModified"]));
+        contents.LastModified = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output["LastModified"]));
     }
     if (output["ChecksumCRC32"] !== undefined) {
         contents.ChecksumCRC32 = (0, smithy_client_1.expectString)(output["ChecksumCRC32"]);
@@ -20361,7 +20370,7 @@ const deserializeAws_restXmlCopyPartResult = (output, context) => {
         contents.ETag = (0, smithy_client_1.expectString)(output["ETag"]);
     }
     if (output["LastModified"] !== undefined) {
-        contents.LastModified = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output["LastModified"]));
+        contents.LastModified = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output["LastModified"]));
     }
     if (output["ChecksumCRC32"] !== undefined) {
         contents.ChecksumCRC32 = (0, smithy_client_1.expectString)(output["ChecksumCRC32"]);
@@ -20491,7 +20500,7 @@ const deserializeAws_restXmlDeleteMarkerEntry = (output, context) => {
         contents.IsLatest = (0, smithy_client_1.parseBoolean)(output["IsLatest"]);
     }
     if (output["LastModified"] !== undefined) {
-        contents.LastModified = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output["LastModified"]));
+        contents.LastModified = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output["LastModified"]));
     }
     return contents;
 };
@@ -20957,7 +20966,7 @@ const deserializeAws_restXmlLifecycleExpiration = (output, context) => {
         ExpiredObjectDeleteMarker: undefined,
     };
     if (output["Date"] !== undefined) {
-        contents.Date = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output["Date"]));
+        contents.Date = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output["Date"]));
     }
     if (output["Days"] !== undefined) {
         contents.Days = (0, smithy_client_1.strictParseInt32)(output["Days"]);
@@ -21190,7 +21199,7 @@ const deserializeAws_restXmlMultipartUpload = (output, context) => {
         contents.Key = (0, smithy_client_1.expectString)(output["Key"]);
     }
     if (output["Initiated"] !== undefined) {
-        contents.Initiated = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output["Initiated"]));
+        contents.Initiated = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output["Initiated"]));
     }
     if (output["StorageClass"] !== undefined) {
         contents.StorageClass = (0, smithy_client_1.expectString)(output["StorageClass"]);
@@ -21273,7 +21282,7 @@ const deserializeAws_restXml_Object = (output, context) => {
         contents.Key = (0, smithy_client_1.expectString)(output["Key"]);
     }
     if (output["LastModified"] !== undefined) {
-        contents.LastModified = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output["LastModified"]));
+        contents.LastModified = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output["LastModified"]));
     }
     if (output["ETag"] !== undefined) {
         contents.ETag = (0, smithy_client_1.expectString)(output["ETag"]);
@@ -21333,7 +21342,7 @@ const deserializeAws_restXmlObjectLockRetention = (output, context) => {
         contents.Mode = (0, smithy_client_1.expectString)(output["Mode"]);
     }
     if (output["RetainUntilDate"] !== undefined) {
-        contents.RetainUntilDate = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output["RetainUntilDate"]));
+        contents.RetainUntilDate = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output["RetainUntilDate"]));
     }
     return contents;
 };
@@ -21412,7 +21421,7 @@ const deserializeAws_restXmlObjectVersion = (output, context) => {
         contents.IsLatest = (0, smithy_client_1.parseBoolean)(output["IsLatest"]);
     }
     if (output["LastModified"] !== undefined) {
-        contents.LastModified = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output["LastModified"]));
+        contents.LastModified = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output["LastModified"]));
     }
     if (output["Owner"] !== undefined) {
         contents.Owner = deserializeAws_restXmlOwner(output["Owner"], context);
@@ -21482,7 +21491,7 @@ const deserializeAws_restXmlPart = (output, context) => {
         contents.PartNumber = (0, smithy_client_1.strictParseInt32)(output["PartNumber"]);
     }
     if (output["LastModified"] !== undefined) {
-        contents.LastModified = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output["LastModified"]));
+        contents.LastModified = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output["LastModified"]));
     }
     if (output["ETag"] !== undefined) {
         contents.ETag = (0, smithy_client_1.expectString)(output["ETag"]);
@@ -22014,7 +22023,7 @@ const deserializeAws_restXmlTransition = (output, context) => {
         StorageClass: undefined,
     };
     if (output["Date"] !== undefined) {
-        contents.Date = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output["Date"]));
+        contents.Date = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output["Date"]));
     }
     if (output["Days"] !== undefined) {
         contents.Days = (0, smithy_client_1.strictParseInt32)(output["Days"]);
@@ -22082,7 +22091,7 @@ const parseErrorBody = async (errorBody, context) => {
     return value;
 };
 const loadRestXmlErrorCode = (output, data) => {
-    if (data.Code !== undefined) {
+    if (data?.Code !== undefined) {
         return data.Code;
     }
     if (output.statusCode == 404) {
@@ -22115,7 +22124,6 @@ const util_body_length_node_1 = __nccwpck_require__(64379);
 const util_retry_1 = __nccwpck_require__(63687);
 const util_stream_node_1 = __nccwpck_require__(97040);
 const util_user_agent_node_1 = __nccwpck_require__(7306);
-const util_utf8_node_1 = __nccwpck_require__(67385);
 const runtimeConfig_shared_1 = __nccwpck_require__(97373);
 const smithy_client_1 = __nccwpck_require__(48);
 const util_defaults_mode_node_1 = __nccwpck_require__(61984);
@@ -22153,8 +22161,6 @@ const getRuntimeConfig = (config) => {
         useArnRegion: config?.useArnRegion ?? (0, node_config_provider_1.loadConfig)(middleware_bucket_endpoint_1.NODE_USE_ARN_REGION_CONFIG_OPTIONS),
         useDualstackEndpoint: config?.useDualstackEndpoint ?? (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
         useFipsEndpoint: config?.useFipsEndpoint ?? (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
-        utf8Decoder: config?.utf8Decoder ?? util_utf8_node_1.fromUtf8,
-        utf8Encoder: config?.utf8Encoder ?? util_utf8_node_1.toUtf8,
     };
 };
 exports.getRuntimeConfig = getRuntimeConfig;
@@ -22172,6 +22178,7 @@ const signature_v4_multi_region_1 = __nccwpck_require__(87688);
 const smithy_client_1 = __nccwpck_require__(48);
 const url_parser_1 = __nccwpck_require__(92942);
 const util_base64_1 = __nccwpck_require__(46669);
+const util_utf8_1 = __nccwpck_require__(82166);
 const endpointResolver_1 = __nccwpck_require__(40433);
 const getRuntimeConfig = (config) => ({
     apiVersion: "2006-03-01",
@@ -22185,6 +22192,8 @@ const getRuntimeConfig = (config) => ({
     signingEscapePath: config?.signingEscapePath ?? false,
     urlParser: config?.urlParser ?? url_parser_1.parseUrl,
     useArnRegion: config?.useArnRegion ?? false,
+    utf8Decoder: config?.utf8Decoder ?? util_utf8_1.fromUtf8,
+    utf8Encoder: config?.utf8Encoder ?? util_utf8_1.toUtf8,
 });
 exports.getRuntimeConfig = getRuntimeConfig;
 
@@ -23488,7 +23497,6 @@ const node_http_handler_1 = __nccwpck_require__(4117);
 const util_body_length_node_1 = __nccwpck_require__(64379);
 const util_retry_1 = __nccwpck_require__(63687);
 const util_user_agent_node_1 = __nccwpck_require__(7306);
-const util_utf8_node_1 = __nccwpck_require__(67385);
 const runtimeConfig_shared_1 = __nccwpck_require__(56100);
 const smithy_client_1 = __nccwpck_require__(48);
 const util_defaults_mode_node_1 = __nccwpck_require__(61984);
@@ -23518,8 +23526,6 @@ const getRuntimeConfig = (config) => {
         streamCollector: config?.streamCollector ?? node_http_handler_1.streamCollector,
         useDualstackEndpoint: config?.useDualstackEndpoint ?? (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
         useFipsEndpoint: config?.useFipsEndpoint ?? (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
-        utf8Decoder: config?.utf8Decoder ?? util_utf8_node_1.fromUtf8,
-        utf8Encoder: config?.utf8Encoder ?? util_utf8_node_1.toUtf8,
     };
 };
 exports.getRuntimeConfig = getRuntimeConfig;
@@ -23536,6 +23542,7 @@ exports.getRuntimeConfig = void 0;
 const smithy_client_1 = __nccwpck_require__(48);
 const url_parser_1 = __nccwpck_require__(92942);
 const util_base64_1 = __nccwpck_require__(46669);
+const util_utf8_1 = __nccwpck_require__(82166);
 const endpointResolver_1 = __nccwpck_require__(26372);
 const getRuntimeConfig = (config) => ({
     apiVersion: "2019-06-10",
@@ -23546,6 +23553,8 @@ const getRuntimeConfig = (config) => ({
     logger: config?.logger ?? new smithy_client_1.NoOpLogger(),
     serviceId: config?.serviceId ?? "SSO OIDC",
     urlParser: config?.urlParser ?? url_parser_1.parseUrl,
+    utf8Decoder: config?.utf8Decoder ?? util_utf8_1.fromUtf8,
+    utf8Encoder: config?.utf8Encoder ?? util_utf8_1.toUtf8,
 });
 exports.getRuntimeConfig = getRuntimeConfig;
 
@@ -24654,7 +24663,6 @@ const node_http_handler_1 = __nccwpck_require__(4117);
 const util_body_length_node_1 = __nccwpck_require__(64379);
 const util_retry_1 = __nccwpck_require__(63687);
 const util_user_agent_node_1 = __nccwpck_require__(7306);
-const util_utf8_node_1 = __nccwpck_require__(67385);
 const runtimeConfig_shared_1 = __nccwpck_require__(32338);
 const smithy_client_1 = __nccwpck_require__(48);
 const util_defaults_mode_node_1 = __nccwpck_require__(61984);
@@ -24684,8 +24692,6 @@ const getRuntimeConfig = (config) => {
         streamCollector: config?.streamCollector ?? node_http_handler_1.streamCollector,
         useDualstackEndpoint: config?.useDualstackEndpoint ?? (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
         useFipsEndpoint: config?.useFipsEndpoint ?? (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
-        utf8Decoder: config?.utf8Decoder ?? util_utf8_node_1.fromUtf8,
-        utf8Encoder: config?.utf8Encoder ?? util_utf8_node_1.toUtf8,
     };
 };
 exports.getRuntimeConfig = getRuntimeConfig;
@@ -24702,6 +24708,7 @@ exports.getRuntimeConfig = void 0;
 const smithy_client_1 = __nccwpck_require__(48);
 const url_parser_1 = __nccwpck_require__(92942);
 const util_base64_1 = __nccwpck_require__(46669);
+const util_utf8_1 = __nccwpck_require__(82166);
 const endpointResolver_1 = __nccwpck_require__(94622);
 const getRuntimeConfig = (config) => ({
     apiVersion: "2019-06-10",
@@ -24712,6 +24719,8 @@ const getRuntimeConfig = (config) => ({
     logger: config?.logger ?? new smithy_client_1.NoOpLogger(),
     serviceId: config?.serviceId ?? "SSO",
     urlParser: config?.urlParser ?? url_parser_1.parseUrl,
+    utf8Decoder: config?.utf8Decoder ?? util_utf8_1.fromUtf8,
+    utf8Encoder: config?.utf8Encoder ?? util_utf8_1.toUtf8,
 });
 exports.getRuntimeConfig = getRuntimeConfig;
 
@@ -25523,9 +25532,9 @@ exports.defaultEndpointResolver = defaultEndpointResolver;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ruleSet = void 0;
-const H = "required", I = "fn", J = "argv", K = "ref", L = "properties", M = "headers";
-const a = false, b = true, c = "PartitionResult", d = "tree", e = "booleanEquals", f = "stringEquals", g = "https://sts.amazonaws.com", h = "sigv4", i = "sts", j = "us-east-1", k = "endpoint", l = "https://sts.{Region}.{PartitionResult#dnsSuffix}", m = "error", n = "getAttr", o = { [H]: false, "type": "String" }, p = { [H]: true, "default": false, "type": "Boolean" }, q = { [K]: "Region" }, r = { [K]: "UseFIPS" }, s = { [K]: "UseDualStack" }, t = { [I]: "isSet", [J]: [{ [K]: "Endpoint" }] }, u = { [K]: "Endpoint" }, v = { "url": g, [L]: { "authSchemes": [{ "name": h, "signingName": i, "signingRegion": j }] }, [M]: {} }, w = {}, x = { [I]: e, [J]: [r, true] }, y = { [I]: e, [J]: [s, true] }, z = { [I]: e, [J]: [true, { [I]: n, [J]: [{ [K]: c }, "supportsFIPS"] }] }, A = { [K]: c }, B = { [I]: e, [J]: [true, { [I]: n, [J]: [A, "supportsDualStack"] }] }, C = { "url": l, [L]: {}, [M]: {} }, D = [u], E = [{ [I]: f, [J]: [q, "aws-global"] }], F = [x], G = [y];
-const _data = { version: "1.0", parameters: { Region: o, UseDualStack: p, UseFIPS: p, Endpoint: o, UseGlobalEndpoint: p }, rules: [{ conditions: [{ [I]: "aws.partition", [J]: [q], assign: c }], type: d, rules: [{ conditions: [{ [I]: e, [J]: [{ [K]: "UseGlobalEndpoint" }, b] }, { [I]: e, [J]: [r, a] }, { [I]: e, [J]: [s, a] }, { [I]: "not", [J]: [t] }], type: d, rules: [{ conditions: [{ [I]: f, [J]: [q, "ap-northeast-1"] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "ap-south-1"] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "ap-southeast-1"] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "ap-southeast-2"] }], endpoint: v, type: k }, { conditions: E, endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "ca-central-1"] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "eu-central-1"] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "eu-north-1"] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "eu-west-1"] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "eu-west-2"] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "eu-west-3"] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "sa-east-1"] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, j] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "us-east-2"] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "us-west-1"] }], endpoint: v, type: k }, { conditions: [{ [I]: f, [J]: [q, "us-west-2"] }], endpoint: v, type: k }, { endpoint: { url: l, [L]: { authSchemes: [{ name: h, signingName: i, signingRegion: "{Region}" }] }, [M]: w }, type: k }] }, { conditions: [t, { [I]: "parseURL", [J]: D, assign: "url" }], type: d, rules: [{ conditions: F, error: "Invalid Configuration: FIPS and custom endpoint are not supported", type: m }, { type: d, rules: [{ conditions: G, error: "Invalid Configuration: Dualstack and custom endpoint are not supported", type: m }, { endpoint: { url: u, [L]: w, [M]: w }, type: k }] }] }, { conditions: [x, y], type: d, rules: [{ conditions: [z, B], type: d, rules: [{ endpoint: { url: "https://sts-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", [L]: w, [M]: w }, type: k }] }, { error: "FIPS and DualStack are enabled, but this partition does not support one or both", type: m }] }, { conditions: F, type: d, rules: [{ conditions: [z], type: d, rules: [{ type: d, rules: [{ conditions: [{ [I]: f, [J]: ["aws-us-gov", { [I]: n, [J]: [A, "name"] }] }], endpoint: C, type: k }, { endpoint: { url: "https://sts-fips.{Region}.{PartitionResult#dnsSuffix}", [L]: w, [M]: w }, type: k }] }] }, { error: "FIPS is enabled but this partition does not support FIPS", type: m }] }, { conditions: G, type: d, rules: [{ conditions: [B], type: d, rules: [{ endpoint: { url: "https://sts.{Region}.{PartitionResult#dualStackDnsSuffix}", [L]: w, [M]: w }, type: k }] }, { error: "DualStack is enabled but this partition does not support DualStack", type: m }] }, { type: d, rules: [{ conditions: E, endpoint: { url: g, [L]: { authSchemes: [{ name: h, signingRegion: j, signingName: i }] }, [M]: w }, type: k }, { endpoint: C, type: k }] }] }] };
+const G = "required", H = "type", I = "fn", J = "argv", K = "ref", L = "properties", M = "headers";
+const a = false, b = true, c = "PartitionResult", d = "tree", e = "booleanEquals", f = "stringEquals", g = "sigv4", h = "us-east-1", i = "sts", j = "endpoint", k = "https://sts.{Region}.{PartitionResult#dnsSuffix}", l = "error", m = "getAttr", n = { [G]: false, [H]: "String" }, o = { [G]: true, "default": false, [H]: "Boolean" }, p = { [K]: "Region" }, q = { [K]: "UseFIPS" }, r = { [K]: "UseDualStack" }, s = { [I]: "isSet", [J]: [{ [K]: "Endpoint" }] }, t = { [K]: "Endpoint" }, u = { "url": "https://sts.amazonaws.com", [L]: { "authSchemes": [{ "name": g, "signingRegion": h, "signingName": i }] }, [M]: {} }, v = {}, w = { "conditions": [{ [I]: f, [J]: [p, "aws-global"] }], [j]: u, [H]: j }, x = { [I]: e, [J]: [q, true] }, y = { [I]: e, [J]: [r, true] }, z = { [I]: e, [J]: [true, { [I]: m, [J]: [{ [K]: c }, "supportsFIPS"] }] }, A = { [K]: c }, B = { [I]: e, [J]: [true, { [I]: m, [J]: [A, "supportsDualStack"] }] }, C = { "url": k, [L]: {}, [M]: {} }, D = [t], E = [x], F = [y];
+const _data = { version: "1.0", parameters: { Region: n, UseDualStack: o, UseFIPS: o, Endpoint: n, UseGlobalEndpoint: o }, rules: [{ conditions: [{ [I]: "aws.partition", [J]: [p], assign: c }], [H]: d, rules: [{ conditions: [{ [I]: e, [J]: [{ [K]: "UseGlobalEndpoint" }, b] }, { [I]: e, [J]: [q, a] }, { [I]: e, [J]: [r, a] }, { [I]: "not", [J]: [s] }], [H]: d, rules: [{ conditions: [{ [I]: f, [J]: [p, "ap-northeast-1"] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, "ap-south-1"] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, "ap-southeast-1"] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, "ap-southeast-2"] }], endpoint: u, [H]: j }, w, { conditions: [{ [I]: f, [J]: [p, "ca-central-1"] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, "eu-central-1"] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, "eu-north-1"] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, "eu-west-1"] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, "eu-west-2"] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, "eu-west-3"] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, "sa-east-1"] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, h] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, "us-east-2"] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, "us-west-1"] }], endpoint: u, [H]: j }, { conditions: [{ [I]: f, [J]: [p, "us-west-2"] }], endpoint: u, [H]: j }, { endpoint: { url: k, [L]: { authSchemes: [{ name: g, signingRegion: "{Region}", signingName: i }] }, [M]: v }, [H]: j }] }, { conditions: [s, { [I]: "parseURL", [J]: D, assign: "url" }], [H]: d, rules: [{ conditions: E, error: "Invalid Configuration: FIPS and custom endpoint are not supported", [H]: l }, { [H]: d, rules: [{ conditions: F, error: "Invalid Configuration: Dualstack and custom endpoint are not supported", [H]: l }, { endpoint: { url: t, [L]: v, [M]: v }, [H]: j }] }] }, { conditions: [x, y], [H]: d, rules: [{ conditions: [z, B], [H]: d, rules: [{ endpoint: { url: "https://sts-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", [L]: v, [M]: v }, [H]: j }] }, { error: "FIPS and DualStack are enabled, but this partition does not support one or both", [H]: l }] }, { conditions: E, [H]: d, rules: [{ conditions: [z], [H]: d, rules: [{ [H]: d, rules: [{ conditions: [{ [I]: f, [J]: ["aws-us-gov", { [I]: m, [J]: [A, "name"] }] }], endpoint: C, [H]: j }, { endpoint: { url: "https://sts-fips.{Region}.{PartitionResult#dnsSuffix}", [L]: v, [M]: v }, [H]: j }] }] }, { error: "FIPS is enabled but this partition does not support FIPS", [H]: l }] }, { conditions: F, [H]: d, rules: [{ conditions: [B], [H]: d, rules: [{ endpoint: { url: "https://sts.{Region}.{PartitionResult#dualStackDnsSuffix}", [L]: v, [M]: v }, [H]: j }] }, { error: "DualStack is enabled but this partition does not support DualStack", [H]: l }] }, { [H]: d, rules: [w, { endpoint: C, [H]: j }] }] }] };
 exports.ruleSet = _data;
 
 
@@ -26639,7 +26648,7 @@ const deserializeAws_queryCredentials = (output, context) => {
         contents.SessionToken = (0, smithy_client_1.expectString)(output["SessionToken"]);
     }
     if (output["Expiration"] !== undefined) {
-        contents.Expiration = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTime)(output["Expiration"]));
+        contents.Expiration = (0, smithy_client_1.expectNonNull)((0, smithy_client_1.parseRfc3339DateTimeWithOffset)(output["Expiration"]));
     }
     return contents;
 };
@@ -26856,7 +26865,7 @@ const buildFormUrlencodedString = (formEntries) => Object.entries(formEntries)
     .map(([key, value]) => (0, smithy_client_1.extendedEncodeURIComponent)(key) + "=" + (0, smithy_client_1.extendedEncodeURIComponent)(value))
     .join("&");
 const loadQueryErrorCode = (output, data) => {
-    if (data.Error.Code !== undefined) {
+    if (data.Error?.Code !== undefined) {
         return data.Error.Code;
     }
     if (output.statusCode == 404) {
@@ -26885,7 +26894,6 @@ const node_http_handler_1 = __nccwpck_require__(4117);
 const util_body_length_node_1 = __nccwpck_require__(64379);
 const util_retry_1 = __nccwpck_require__(63687);
 const util_user_agent_node_1 = __nccwpck_require__(7306);
-const util_utf8_node_1 = __nccwpck_require__(67385);
 const runtimeConfig_shared_1 = __nccwpck_require__(3821);
 const smithy_client_1 = __nccwpck_require__(48);
 const util_defaults_mode_node_1 = __nccwpck_require__(61984);
@@ -26916,8 +26924,6 @@ const getRuntimeConfig = (config) => {
         streamCollector: config?.streamCollector ?? node_http_handler_1.streamCollector,
         useDualstackEndpoint: config?.useDualstackEndpoint ?? (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS),
         useFipsEndpoint: config?.useFipsEndpoint ?? (0, node_config_provider_1.loadConfig)(config_resolver_1.NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS),
-        utf8Decoder: config?.utf8Decoder ?? util_utf8_node_1.fromUtf8,
-        utf8Encoder: config?.utf8Encoder ?? util_utf8_node_1.toUtf8,
     };
 };
 exports.getRuntimeConfig = getRuntimeConfig;
@@ -26934,6 +26940,7 @@ exports.getRuntimeConfig = void 0;
 const smithy_client_1 = __nccwpck_require__(48);
 const url_parser_1 = __nccwpck_require__(92942);
 const util_base64_1 = __nccwpck_require__(46669);
+const util_utf8_1 = __nccwpck_require__(82166);
 const endpointResolver_1 = __nccwpck_require__(57910);
 const getRuntimeConfig = (config) => ({
     apiVersion: "2011-06-15",
@@ -26944,6 +26951,8 @@ const getRuntimeConfig = (config) => ({
     logger: config?.logger ?? new smithy_client_1.NoOpLogger(),
     serviceId: config?.serviceId ?? "STS",
     urlParser: config?.urlParser ?? url_parser_1.parseUrl,
+    utf8Decoder: config?.utf8Decoder ?? util_utf8_1.fromUtf8,
+    utf8Encoder: config?.utf8Encoder ?? util_utf8_1.toUtf8,
 });
 exports.getRuntimeConfig = getRuntimeConfig;
 
@@ -28909,39 +28918,7 @@ class EventStreamMarshaller {
         return this.universalMarshaller.deserialize(bodyIterable, deserializer);
     }
     serialize(input, serializer) {
-        const serializedIterable = this.universalMarshaller.serialize(input, serializer);
-        if (typeof stream_1.Readable.from === "function") {
-            return stream_1.Readable.from(serializedIterable);
-        }
-        else {
-            const iterator = serializedIterable[Symbol.asyncIterator]();
-            const serializedStream = new stream_1.Readable({
-                autoDestroy: true,
-                objectMode: true,
-                async read() {
-                    iterator
-                        .next()
-                        .then(({ done, value }) => {
-                        if (done) {
-                            this.push(null);
-                        }
-                        else {
-                            this.push(value);
-                        }
-                    })
-                        .catch((err) => {
-                        this.destroy(err);
-                    });
-                },
-            });
-            serializedStream.on("error", () => {
-                serializedStream.destroy();
-            });
-            serializedStream.on("end", () => {
-                serializedStream.destroy();
-            });
-            return serializedStream;
-        }
+        return stream_1.Readable.from(this.universalMarshaller.serialize(input, serializer));
     }
 }
 exports.EventStreamMarshaller = EventStreamMarshaller;
@@ -29211,17 +29188,25 @@ exports.eventStreamSerdeProvider = eventStreamSerdeProvider;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Hash = void 0;
 const util_buffer_from_1 = __nccwpck_require__(74132);
+const util_utf8_1 = __nccwpck_require__(82166);
 const buffer_1 = __nccwpck_require__(14300);
 const crypto_1 = __nccwpck_require__(6113);
 class Hash {
     constructor(algorithmIdentifier, secret) {
-        this.hash = secret ? (0, crypto_1.createHmac)(algorithmIdentifier, castSourceData(secret)) : (0, crypto_1.createHash)(algorithmIdentifier);
+        this.algorithmIdentifier = algorithmIdentifier;
+        this.secret = secret;
+        this.reset();
     }
     update(toHash, encoding) {
-        this.hash.update(castSourceData(toHash, encoding));
+        this.hash.update((0, util_utf8_1.toUint8Array)(castSourceData(toHash, encoding)));
     }
     digest() {
         return Promise.resolve(this.hash.digest());
+    }
+    reset() {
+        this.hash = this.secret
+            ? (0, crypto_1.createHmac)(this.algorithmIdentifier, castSourceData(this.secret))
+            : (0, crypto_1.createHash)(this.algorithmIdentifier);
     }
 }
 exports.Hash = Hash;
@@ -29247,6 +29232,7 @@ function castSourceData(toCast, encoding) {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.HashCalculator = void 0;
+const util_utf8_1 = __nccwpck_require__(82166);
 const stream_1 = __nccwpck_require__(12781);
 class HashCalculator extends stream_1.Writable {
     constructor(hash, options) {
@@ -29255,7 +29241,7 @@ class HashCalculator extends stream_1.Writable {
     }
     _write(chunk, encoding, callback) {
         try {
-            this.hash.update(chunk);
+            this.hash.update((0, util_utf8_1.toUint8Array)(chunk));
         }
         catch (err) {
             return callback(err);
@@ -30281,7 +30267,9 @@ const flexibleChecksumsMiddleware = (config, middlewareConfig) => (next) => asyn
             });
             updatedHeaders = {
                 ...headers,
-                "content-encoding": "aws-chunked",
+                "content-encoding": headers["content-encoding"]
+                    ? `${headers["content-encoding"]},aws-chunked`
+                    : "aws-chunked",
                 "transfer-encoding": "chunked",
                 "x-amz-decoded-content-length": headers["content-length"],
                 "x-amz-content-sha256": "STREAMING-UNSIGNED-PAYLOAD-TRAILER",
@@ -30486,14 +30474,15 @@ exports.selectChecksumAlgorithmFunction = selectChecksumAlgorithmFunction;
 /***/ }),
 
 /***/ 2771:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.stringHasher = void 0;
+const util_utf8_1 = __nccwpck_require__(82166);
 const stringHasher = (checksumAlgorithmFn, body) => {
     const hash = new checksumAlgorithmFn();
-    hash.update(body || "");
+    hash.update((0, util_utf8_1.toUint8Array)(body || ""));
     return hash.digest();
 };
 exports.stringHasher = stringHasher;
@@ -32815,6 +32804,87 @@ exports.memoize = memoize;
 
 /***/ }),
 
+/***/ 1093:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Field = void 0;
+const FieldPosition_1 = __nccwpck_require__(73483);
+class Field {
+    constructor({ name, kind = FieldPosition_1.FieldPosition.HEADER, values = [] }) {
+        this.name = name;
+        this.kind = kind;
+        this.values = values;
+    }
+    add(value) {
+        this.values.push(value);
+    }
+    set(values) {
+        this.values = values;
+    }
+    remove(value) {
+        this.values = this.values.filter((v) => v !== value);
+    }
+    toString() {
+        return this.values
+            .map((v) => (v.includes(",") || v.includes(" ") ? `"${v}"` : v))
+            .join(", ");
+    }
+    get() {
+        return this.values;
+    }
+}
+exports.Field = Field;
+
+
+/***/ }),
+
+/***/ 73483:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FieldPosition = void 0;
+var FieldPosition;
+(function (FieldPosition) {
+    FieldPosition[FieldPosition["HEADER"] = 0] = "HEADER";
+    FieldPosition[FieldPosition["TRAILER"] = 1] = "TRAILER";
+})(FieldPosition = exports.FieldPosition || (exports.FieldPosition = {}));
+
+
+/***/ }),
+
+/***/ 17295:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Fields = void 0;
+class Fields {
+    constructor({ fields = [], encoding = "utf-8" }) {
+        this.entries = {};
+        fields.forEach(this.setField.bind(this));
+        this.encoding = encoding;
+    }
+    setField(field) {
+        this.entries[field.name] = field;
+    }
+    getField(name) {
+        return this.entries[name];
+    }
+    removeField(name) {
+        delete this.entries[name];
+    }
+    getByType(kind) {
+        return Object.values(this.entries).filter((field) => field.kind === kind);
+    }
+}
+exports.Fields = Fields;
+
+
+/***/ }),
+
 /***/ 27243:
 /***/ ((__unused_webpack_module, exports) => {
 
@@ -32910,6 +32980,9 @@ exports.HttpResponse = HttpResponse;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __nccwpck_require__(15609);
+tslib_1.__exportStar(__nccwpck_require__(1093), exports);
+tslib_1.__exportStar(__nccwpck_require__(73483), exports);
+tslib_1.__exportStar(__nccwpck_require__(17295), exports);
 tslib_1.__exportStar(__nccwpck_require__(27243), exports);
 tslib_1.__exportStar(__nccwpck_require__(49890), exports);
 tslib_1.__exportStar(__nccwpck_require__(92813), exports);
@@ -33589,6 +33662,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SignatureV4 = void 0;
 const util_hex_encoding_1 = __nccwpck_require__(86010);
 const util_middleware_1 = __nccwpck_require__(90297);
+const util_utf8_1 = __nccwpck_require__(82166);
 const constants_1 = __nccwpck_require__(5251);
 const credentialDerivation_1 = __nccwpck_require__(42416);
 const getCanonicalHeaders_1 = __nccwpck_require__(27115);
@@ -33665,7 +33739,7 @@ class SignatureV4 {
         const region = signingRegion !== null && signingRegion !== void 0 ? signingRegion : (await this.regionProvider());
         const { shortDate } = formatDate(signingDate);
         const hash = new this.sha256(await this.getSigningKey(credentials, region, shortDate, signingService));
-        hash.update(stringToSign);
+        hash.update((0, util_utf8_1.toUint8Array)(stringToSign));
         return (0, util_hex_encoding_1.toHex)(await hash.digest());
     }
     async signRequest(requestToSign, { signingDate = new Date(), signableHeaders, unsignableHeaders, signingRegion, signingService, } = {}) {
@@ -33704,7 +33778,7 @@ ${payloadHash}`;
     }
     async createStringToSign(longDate, credentialScope, canonicalRequest) {
         const hash = new this.sha256();
-        hash.update(canonicalRequest);
+        hash.update((0, util_utf8_1.toUint8Array)(canonicalRequest));
         const hashedRequest = await hash.digest();
         return `${constants_1.ALGORITHM_IDENTIFIER}
 ${longDate}
@@ -33735,7 +33809,7 @@ ${(0, util_hex_encoding_1.toHex)(hashedRequest)}`;
     async getSignature(longDate, credentialScope, keyPromise, canonicalRequest) {
         const stringToSign = await this.createStringToSign(longDate, credentialScope, canonicalRequest);
         const hash = new this.sha256(await keyPromise);
-        hash.update(stringToSign);
+        hash.update((0, util_utf8_1.toUint8Array)(stringToSign));
         return (0, util_hex_encoding_1.toHex)(await hash.digest());
     }
     getSigningKey(credentials, region, shortDate, service) {
@@ -33846,6 +33920,7 @@ exports.MAX_PRESIGNED_TTL = 60 * 60 * 24 * 7;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.clearCredentialCache = exports.getSigningKey = exports.createScope = void 0;
 const util_hex_encoding_1 = __nccwpck_require__(86010);
+const util_utf8_1 = __nccwpck_require__(82166);
 const constants_1 = __nccwpck_require__(5251);
 const signingKeyCache = {};
 const cacheQueue = [];
@@ -33877,7 +33952,7 @@ const clearCredentialCache = () => {
 exports.clearCredentialCache = clearCredentialCache;
 const hmac = (ctor, secret, data) => {
     const hash = new ctor(secret);
-    hash.update(data);
+    hash.update((0, util_utf8_1.toUint8Array)(data));
     return hash.digest();
 };
 
@@ -33961,6 +34036,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getPayloadHash = void 0;
 const is_array_buffer_1 = __nccwpck_require__(9907);
 const util_hex_encoding_1 = __nccwpck_require__(86010);
+const util_utf8_1 = __nccwpck_require__(82166);
 const constants_1 = __nccwpck_require__(5251);
 const getPayloadHash = async ({ headers, body }, hashConstructor) => {
     for (const headerName of Object.keys(headers)) {
@@ -33973,7 +34049,7 @@ const getPayloadHash = async ({ headers, body }, hashConstructor) => {
     }
     else if (typeof body === "string" || ArrayBuffer.isView(body) || (0, is_array_buffer_1.isArrayBuffer)(body)) {
         const hashCtor = new hashConstructor();
-        hashCtor.update(body);
+        hashCtor.update((0, util_utf8_1.toUint8Array)(body));
         return (0, util_hex_encoding_1.toHex)(await hashCtor.digest());
     }
     return constants_1.UNSIGNED_PAYLOAD;
@@ -34208,7 +34284,7 @@ exports.SENSITIVE_STRING = "***SensitiveInformation***";
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parseEpochTimestamp = exports.parseRfc7231DateTime = exports.parseRfc3339DateTime = exports.dateToUtcString = void 0;
+exports.parseEpochTimestamp = exports.parseRfc7231DateTime = exports.parseRfc3339DateTimeWithOffset = exports.parseRfc3339DateTime = exports.dateToUtcString = void 0;
 const parse_utils_1 = __nccwpck_require__(62725);
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -34246,6 +34322,29 @@ const parseRfc3339DateTime = (value) => {
     return buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
 };
 exports.parseRfc3339DateTime = parseRfc3339DateTime;
+const RFC3339_WITH_OFFSET = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(([-+]\d{2}\:\d{2})|[zZ])$/);
+const parseRfc3339DateTimeWithOffset = (value) => {
+    if (value === null || value === undefined) {
+        return undefined;
+    }
+    if (typeof value !== "string") {
+        throw new TypeError("RFC-3339 date-times must be expressed as strings");
+    }
+    const match = RFC3339_WITH_OFFSET.exec(value);
+    if (!match) {
+        throw new TypeError("Invalid RFC-3339 date-time value");
+    }
+    const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, offsetStr] = match;
+    const year = (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr));
+    const month = parseDateValue(monthStr, "month", 1, 12);
+    const day = parseDateValue(dayStr, "day", 1, 31);
+    const date = buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
+    if (offsetStr.toUpperCase() != "Z") {
+        date.setTime(date.getTime() - parseOffsetToMilliseconds(offsetStr));
+    }
+    return date;
+};
+exports.parseRfc3339DateTimeWithOffset = parseRfc3339DateTimeWithOffset;
 const IMF_FIXDATE = new RegExp(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d{2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/);
 const RFC_850_DATE = new RegExp(/^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d{2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/);
 const ASC_TIME = new RegExp(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( [1-9]|\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? (\d{4})$/);
@@ -34351,6 +34450,22 @@ const parseMilliseconds = (value) => {
         return 0;
     }
     return (0, parse_utils_1.strictParseFloat32)("0." + value) * 1000;
+};
+const parseOffsetToMilliseconds = (value) => {
+    const directionStr = value[0];
+    let direction = 1;
+    if (directionStr == "+") {
+        direction = 1;
+    }
+    else if (directionStr == "-") {
+        direction = -1;
+    }
+    else {
+        throw new TypeError(`Offset direction, ${directionStr}, must be "+" or "-"`);
+    }
+    const hour = Number(value.substring(1, 3));
+    const minute = Number(value.substring(4, 6));
+    return direction * (hour * 60 + minute) * 60 * 1000;
 };
 const stripLeadingZeroes = (value) => {
     let idx = 0;
@@ -35302,6 +35417,12 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HttpAuthLocation = void 0;
+var HttpAuthLocation;
+(function (HttpAuthLocation) {
+    HttpAuthLocation["HEADER"] = "header";
+    HttpAuthLocation["QUERY"] = "query";
+})(HttpAuthLocation = exports.HttpAuthLocation || (exports.HttpAuthLocation = {}));
 
 
 /***/ }),
@@ -35347,6 +35468,21 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+
+/***/ 97429:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.HostAddressType = void 0;
+var HostAddressType;
+(function (HostAddressType) {
+    HostAddressType["AAAA"] = "AAAA";
+    HostAddressType["A"] = "A";
+})(HostAddressType = exports.HostAddressType || (exports.HostAddressType = {}));
 
 
 /***/ }),
@@ -35458,6 +35594,7 @@ tslib_1.__exportStar(__nccwpck_require__(44450), exports);
 tslib_1.__exportStar(__nccwpck_require__(19841), exports);
 tslib_1.__exportStar(__nccwpck_require__(72002), exports);
 tslib_1.__exportStar(__nccwpck_require__(51444), exports);
+tslib_1.__exportStar(__nccwpck_require__(97429), exports);
 tslib_1.__exportStar(__nccwpck_require__(5934), exports);
 tslib_1.__exportStar(__nccwpck_require__(80673), exports);
 tslib_1.__exportStar(__nccwpck_require__(63814), exports);
@@ -35466,6 +35603,7 @@ tslib_1.__exportStar(__nccwpck_require__(39830), exports);
 tslib_1.__exportStar(__nccwpck_require__(87547), exports);
 tslib_1.__exportStar(__nccwpck_require__(76928), exports);
 tslib_1.__exportStar(__nccwpck_require__(50989), exports);
+tslib_1.__exportStar(__nccwpck_require__(40383), exports);
 tslib_1.__exportStar(__nccwpck_require__(76690), exports);
 tslib_1.__exportStar(__nccwpck_require__(55332), exports);
 tslib_1.__exportStar(__nccwpck_require__(82415), exports);
@@ -35508,6 +35646,15 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 /***/ }),
 
 /***/ 50989:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+
+
+/***/ }),
+
+/***/ 40383:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -37652,18 +37799,63 @@ exports.toUtf8 = toUtf8;
 
 /***/ }),
 
-/***/ 67385:
+/***/ 9138:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.toUtf8 = exports.fromUtf8 = void 0;
+exports.fromUtf8 = void 0;
 const util_buffer_from_1 = __nccwpck_require__(74132);
 const fromUtf8 = (input) => {
     const buf = (0, util_buffer_from_1.fromString)(input, "utf8");
     return new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
 };
 exports.fromUtf8 = fromUtf8;
+
+
+/***/ }),
+
+/***/ 82166:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __nccwpck_require__(15609);
+tslib_1.__exportStar(__nccwpck_require__(9138), exports);
+tslib_1.__exportStar(__nccwpck_require__(41194), exports);
+tslib_1.__exportStar(__nccwpck_require__(61444), exports);
+
+
+/***/ }),
+
+/***/ 41194:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.toUint8Array = void 0;
+const fromUtf8_1 = __nccwpck_require__(9138);
+const toUint8Array = (data) => {
+    if (typeof data === "string") {
+        return (0, fromUtf8_1.fromUtf8)(data);
+    }
+    if (ArrayBuffer.isView(data)) {
+        return new Uint8Array(data.buffer, data.byteOffset, data.byteLength / Uint8Array.BYTES_PER_ELEMENT);
+    }
+    return new Uint8Array(data);
+};
+exports.toUint8Array = toUint8Array;
+
+
+/***/ }),
+
+/***/ 61444:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.toUtf8 = void 0;
+const util_buffer_from_1 = __nccwpck_require__(74132);
 const toUtf8 = (input) => (0, util_buffer_from_1.fromArrayBuffer)(input.buffer, input.byteOffset, input.byteLength).toString("utf8");
 exports.toUtf8 = toUtf8;
 
@@ -38692,7 +38884,8 @@ const defaultOptions = {
   ],
   processEntities: true,
   stopNodes: [],
-  transformTagName: false,
+  // transformTagName: false,
+  // transformAttributeName: false,
 };
 
 function Builder(options) {
@@ -38719,20 +38912,6 @@ function Builder(options) {
     this.tagEndChar = '>';
     this.newLine = '';
   }
-
-  if (this.options.suppressEmptyNode) {
-    this.buildTextNode = buildEmptyTextNode;
-    this.buildObjNode = buildEmptyObjNode;
-  } else {
-    this.buildTextNode = buildTextValNode;
-    this.buildObjNode = buildObjectNode;
-  }
-
-  this.buildTextValNode = buildTextValNode;
-  this.buildObjectNode = buildObjectNode;
-
-  this.replaceEntitiesValue = replaceEntitiesValue;
-  this.buildAttrPairStr = buildAttrPairStr;
 }
 
 Builder.prototype.build = function(jObj) {
@@ -38759,7 +38938,7 @@ Builder.prototype.j2x = function(jObj, level) {
       else val += this.indentate(level) + '<' + key + '/' + this.tagEndChar;
       // val += this.indentate(level) + '<' + key + '/' + this.tagEndChar;
     } else if (jObj[key] instanceof Date) {
-      val += this.buildTextNode(jObj[key], key, '', level);
+      val += this.buildTextValNode(jObj[key], key, '', level);
     } else if (typeof jObj[key] !== 'object') {
       //premitive type
       const attr = this.isAttribute(key);
@@ -38771,7 +38950,7 @@ Builder.prototype.j2x = function(jObj, level) {
           let newval = this.options.tagValueProcessor(key, '' + jObj[key]);
           val += this.replaceEntitiesValue(newval);
         } else {
-          val += this.buildTextNode(jObj[key], key, '', level);
+          val += this.buildTextValNode(jObj[key], key, '', level);
         }
       }
     } else if (Array.isArray(jObj[key])) {
@@ -38788,7 +38967,7 @@ Builder.prototype.j2x = function(jObj, level) {
         } else if (typeof item === 'object') {
           val += this.processTextOrObjNode(item, key, level)
         } else {
-          val += this.buildTextNode(item, key, '', level);
+          val += this.buildTextValNode(item, key, '', level);
         }
       }
     } else {
@@ -38807,7 +38986,7 @@ Builder.prototype.j2x = function(jObj, level) {
   return {attrStr: attrStr, val: val};
 };
 
-function buildAttrPairStr(attrName, val){
+Builder.prototype.buildAttrPairStr = function(attrName, val){
   val = this.options.attributeValueProcessor(attrName, '' + val);
   val = this.replaceEntitiesValue(val);
   if (this.options.suppressBooleanAttributes && val === "true") {
@@ -38818,31 +38997,51 @@ function buildAttrPairStr(attrName, val){
 function processTextOrObjNode (object, key, level) {
   const result = this.j2x(object, level + 1);
   if (object[this.options.textNodeName] !== undefined && Object.keys(object).length === 1) {
-    return this.buildTextNode(object[this.options.textNodeName], key, result.attrStr, level);
+    return this.buildTextValNode(object[this.options.textNodeName], key, result.attrStr, level);
   } else {
-    return this.buildObjNode(result.val, key, result.attrStr, level);
+    return this.buildObjectNode(result.val, key, result.attrStr, level);
   }
 }
 
-function buildObjectNode(val, key, attrStr, level) {
-  let tagEndExp = '</' + key + this.tagEndChar;
-  let piClosingChar = "";
-  
-  if(key[0] === "?") {
-    piClosingChar = "?";
-    tagEndExp = "";
-  }
+Builder.prototype.buildObjectNode = function(val, key, attrStr, level) {
+  if(val === ""){
+    if(key[0] === "?") return  this.indentate(level) + '<' + key + attrStr+ '?' + this.tagEndChar;
+    else {
+      return this.indentate(level) + '<' + key + attrStr + this.closeTag(key) + this.tagEndChar;
+    }
+  }else{
 
-  if (attrStr && val.indexOf('<') === -1) {
-    return ( this.indentate(level) + '<' +  key + attrStr + piClosingChar + '>' + val + tagEndExp );
-  } else if (this.options.commentPropName !== false && key === this.options.commentPropName && piClosingChar.length === 0) {
-    return this.indentate(level) + `<!--${val}-->` + this.newLine;
-  }else {
-    return (
-      this.indentate(level) + '<' + key + attrStr + piClosingChar + this.tagEndChar +
-      val +
-      this.indentate(level) + tagEndExp    );
+    let tagEndExp = '</' + key + this.tagEndChar;
+    let piClosingChar = "";
+    
+    if(key[0] === "?") {
+      piClosingChar = "?";
+      tagEndExp = "";
+    }
+  
+    if (attrStr && val.indexOf('<') === -1) {
+      return ( this.indentate(level) + '<' +  key + attrStr + piClosingChar + '>' + val + tagEndExp );
+    } else if (this.options.commentPropName !== false && key === this.options.commentPropName && piClosingChar.length === 0) {
+      return this.indentate(level) + `<!--${val}-->` + this.newLine;
+    }else {
+      return (
+        this.indentate(level) + '<' + key + attrStr + piClosingChar + this.tagEndChar +
+        val +
+        this.indentate(level) + tagEndExp    );
+    }
   }
+}
+
+Builder.prototype.closeTag = function(key){
+  let closeTag = "";
+  if(this.options.unpairedTags.indexOf(key) !== -1){ //unpaired
+    if(!this.options.suppressUnpairedNode) closeTag = "/"
+  }else if(this.options.suppressEmptyNode){ //empty
+    closeTag = "/";
+  }else{
+    closeTag = `></${key}`
+  }
+  return closeTag;
 }
 
 function buildEmptyObjNode(val, key, attrStr, level) {
@@ -38850,36 +39049,35 @@ function buildEmptyObjNode(val, key, attrStr, level) {
     return this.buildObjectNode(val, key, attrStr, level);
   } else {
     if(key[0] === "?") return  this.indentate(level) + '<' + key + attrStr+ '?' + this.tagEndChar;
-    else return  this.indentate(level) + '<' + key + attrStr + '/' + this.tagEndChar;
+    else {
+      return  this.indentate(level) + '<' + key + attrStr + '/' + this.tagEndChar;
+      // return this.buildTagStr(level,key, attrStr);
+    }
   }
 }
 
-function buildTextValNode(val, key, attrStr, level) {
+Builder.prototype.buildTextValNode = function(val, key, attrStr, level) {
   if (this.options.cdataPropName !== false && key === this.options.cdataPropName) {
     return this.indentate(level) + `<![CDATA[${val}]]>` +  this.newLine;
   }else if (this.options.commentPropName !== false && key === this.options.commentPropName) {
     return this.indentate(level) + `<!--${val}-->` +  this.newLine;
+  }else if(key[0] === "?") {//PI tag
+    return  this.indentate(level) + '<' + key + attrStr+ '?' + this.tagEndChar; 
   }else{
     let textValue = this.options.tagValueProcessor(key, val);
     textValue = this.replaceEntitiesValue(textValue);
   
-    if( textValue === '' && this.options.unpairedTags.indexOf(key) !== -1){ //unpaired
-      if(this.options.suppressUnpairedNode){
-        return this.indentate(level) + '<' + key + this.tagEndChar;
-      }else{
-        return this.indentate(level) + '<' + key + "/" + this.tagEndChar;
-      }
-    } else{
-      return (
-        this.indentate(level) + '<' + key + attrStr + '>' +
+    if( textValue === ''){
+      return this.indentate(level) + '<' + key + attrStr + this.closeTag(key) + this.tagEndChar;
+    }else{
+      return this.indentate(level) + '<' + key + attrStr + '>' +
          textValue +
-        '</' + key + this.tagEndChar  );
+        '</' + key + this.tagEndChar;
     }
-
   }
 }
 
-function replaceEntitiesValue(textValue){
+Builder.prototype.replaceEntitiesValue = function(textValue){
   if(textValue && textValue.length > 0 && this.options.processEntities){
     for (let i=0; i<this.options.entities.length; i++) {
       const entity = this.options.entities[i];
@@ -38887,21 +39085,6 @@ function replaceEntitiesValue(textValue){
     }
   }
   return textValue;
-}
-
-function buildEmptyTextNode(val, key, attrStr, level) {
-  if( val === '' && this.options.unpairedTags.indexOf(key) !== -1){ //unpaired
-    if(this.options.suppressUnpairedNode){
-      return this.indentate(level) + '<' + key + this.tagEndChar;
-    }else{
-      return this.indentate(level) + '<' + key + "/" + this.tagEndChar;
-    }
-  }else if (val !== '') { //empty
-    return this.buildTextValNode(val, key, attrStr, level);
-  } else {
-    if(key[0] === "?") return  this.indentate(level) + '<' + key + attrStr+ '?' + this.tagEndChar; //PI tag
-    else return  this.indentate(level) + '<' + key + attrStr + '/' + this.tagEndChar; //normal
-  }
 }
 
 function indentate(level) {
@@ -38932,107 +39115,130 @@ const EOL = "\n";
  * @param {any} options 
  * @returns 
  */
-function toXml(jArray, options){
-    return arrToStr( jArray, options, "", 0);
+function toXml(jArray, options) {
+    let indentation = "";
+    if (options.format && options.indentBy.length > 0) {
+        indentation = EOL;
+    }
+    return arrToStr(jArray, options, "", indentation);
 }
 
-function arrToStr(arr, options, jPath, level){
+function arrToStr(arr, options, jPath, indentation) {
     let xmlStr = "";
-
-    let indentation = "";
-    if(options.format && options.indentBy.length > 0){//TODO: this logic can be avoided for each call
-        indentation = EOL + "" + options.indentBy.repeat(level);
-    }
+    let isPreviousElementTag = false;
 
     for (let i = 0; i < arr.length; i++) {
         const tagObj = arr[i];
         const tagName = propName(tagObj);
         let newJPath = "";
-        if(jPath.length === 0) newJPath = tagName
+        if (jPath.length === 0) newJPath = tagName
         else newJPath = `${jPath}.${tagName}`;
 
-        if(tagName === options.textNodeName){
+        if (tagName === options.textNodeName) {
             let tagText = tagObj[tagName];
-            if(!isStopNode(newJPath, options)){
-                tagText = options.tagValueProcessor( tagName, tagText);
+            if (!isStopNode(newJPath, options)) {
+                tagText = options.tagValueProcessor(tagName, tagText);
                 tagText = replaceEntitiesValue(tagText, options);
             }
-            xmlStr += indentation + tagText;
+            if (isPreviousElementTag) {
+                xmlStr += indentation;
+            }
+            xmlStr += tagText;
+            isPreviousElementTag = false;
             continue;
-        }else if( tagName === options.cdataPropName){
-            xmlStr += indentation + `<![CDATA[${tagObj[tagName][0][options.textNodeName]}]]>`;
+        } else if (tagName === options.cdataPropName) {
+            if (isPreviousElementTag) {
+                xmlStr += indentation;
+            }
+            xmlStr += `<![CDATA[${tagObj[tagName][0][options.textNodeName]}]]>`;
+            isPreviousElementTag = false;
             continue;
-        }else if( tagName === options.commentPropName){
+        } else if (tagName === options.commentPropName) {
             xmlStr += indentation + `<!--${tagObj[tagName][0][options.textNodeName]}-->`;
+            isPreviousElementTag = true;
             continue;
-        }else if( tagName[0] === "?"){
+        } else if (tagName[0] === "?") {
             const attStr = attr_to_str(tagObj[":@"], options);
             const tempInd = tagName === "?xml" ? "" : indentation;
             let piTextNodeName = tagObj[tagName][0][options.textNodeName];
             piTextNodeName = piTextNodeName.length !== 0 ? " " + piTextNodeName : ""; //remove extra spacing
             xmlStr += tempInd + `<${tagName}${piTextNodeName}${attStr}?>`;
+            isPreviousElementTag = true;
             continue;
         }
-        const attStr = attr_to_str(tagObj[":@"], options);
-        let tagStart =  indentation + `<${tagName}${attStr}`;
-        let tagValue = arrToStr(tagObj[tagName], options, newJPath, level + 1);
-        if(options.unpairedTags.indexOf(tagName) !== -1){
-            if(options.suppressUnpairedNode)  xmlStr += tagStart + ">"; 
-            else xmlStr += tagStart + "/>"; 
-        }else if( (!tagValue || tagValue.length === 0) && options.suppressEmptyNode){ 
-            xmlStr += tagStart + "/>"; 
-        }else{ 
-            //TODO: node with only text value should not parse the text value in next line
-            xmlStr += tagStart + `>${tagValue}${indentation}</${tagName}>` ;
+        let newIdentation = indentation;
+        if (newIdentation !== "") {
+            newIdentation += options.indentBy;
         }
+        const attStr = attr_to_str(tagObj[":@"], options);
+        const tagStart = indentation + `<${tagName}${attStr}`;
+        const tagValue = arrToStr(tagObj[tagName], options, newJPath, newIdentation);
+        if (options.unpairedTags.indexOf(tagName) !== -1) {
+            if (options.suppressUnpairedNode) xmlStr += tagStart + ">";
+            else xmlStr += tagStart + "/>";
+        } else if ((!tagValue || tagValue.length === 0) && options.suppressEmptyNode) {
+            xmlStr += tagStart + "/>";
+        } else if (tagValue && tagValue.endsWith(">")) {
+            xmlStr += tagStart + `>${tagValue}${indentation}</${tagName}>`;
+        } else {
+            xmlStr += tagStart + ">";
+            if (tagValue && indentation !== "" && (tagValue.includes("/>") || tagValue.includes("</"))) {
+                xmlStr += indentation + options.indentBy + tagValue + indentation;
+            } else {
+                xmlStr += tagValue;
+            }
+            xmlStr += `</${tagName}>`;
+        }
+        isPreviousElementTag = true;
     }
-    
+
     return xmlStr;
 }
 
-function propName(obj){
+function propName(obj) {
     const keys = Object.keys(obj);
     for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
-      if(key !== ":@") return key;
+        const key = keys[i];
+        if (key !== ":@") return key;
     }
-  }
+}
 
-function attr_to_str(attrMap, options){
+function attr_to_str(attrMap, options) {
     let attrStr = "";
-    if(attrMap && !options.ignoreAttributes){
-        for (let attr in attrMap){
+    if (attrMap && !options.ignoreAttributes) {
+        for (let attr in attrMap) {
             let attrVal = options.attributeValueProcessor(attr, attrMap[attr]);
             attrVal = replaceEntitiesValue(attrVal, options);
-            if(attrVal === true && options.suppressBooleanAttributes){
-                attrStr+= ` ${attr.substr(options.attributeNamePrefix.length)}`;
-            }else{
-                attrStr+= ` ${attr.substr(options.attributeNamePrefix.length)}="${attrVal}"`;
+            if (attrVal === true && options.suppressBooleanAttributes) {
+                attrStr += ` ${attr.substr(options.attributeNamePrefix.length)}`;
+            } else {
+                attrStr += ` ${attr.substr(options.attributeNamePrefix.length)}="${attrVal}"`;
             }
         }
     }
     return attrStr;
 }
 
-function isStopNode(jPath, options){
-    jPath = jPath.substr(0,jPath.length - options.textNodeName.length - 1);
+function isStopNode(jPath, options) {
+    jPath = jPath.substr(0, jPath.length - options.textNodeName.length - 1);
     let tagName = jPath.substr(jPath.lastIndexOf(".") + 1);
-    for(let index in options.stopNodes){
-        if(options.stopNodes[index] === jPath || options.stopNodes[index] === "*."+tagName) return true;
+    for (let index in options.stopNodes) {
+        if (options.stopNodes[index] === jPath || options.stopNodes[index] === "*." + tagName) return true;
     }
     return false;
 }
 
-function replaceEntitiesValue(textValue, options){
-    if(textValue && textValue.length > 0 && options.processEntities){
-      for (let i=0; i< options.entities.length; i++) {
-        const entity = options.entities[i];
-        textValue = textValue.replace(entity.regex, entity.val);
-      }
+function replaceEntitiesValue(textValue, options) {
+    if (textValue && textValue.length > 0 && options.processEntities) {
+        for (let i = 0; i < options.entities.length; i++) {
+            const entity = options.entities[i];
+            textValue = textValue.replace(entity.regex, entity.val);
+        }
     }
     return textValue;
-  }
+}
 module.exports = toXml;
+
 
 /***/ }),
 
@@ -39055,7 +39261,7 @@ function readDocType(xmlData, i){
         let hasBody = false, entity = false, comment = false;
         let exp = "";
         for(;i<xmlData.length;i++){
-            if (xmlData[i] === '<') {
+            if (xmlData[i] === '<' && !comment) {
                 if( hasBody && 
                      xmlData[i+1] === '!' &&
                      xmlData[i+2] === 'E' &&
@@ -39119,14 +39325,15 @@ function readDocType(xmlData, i){
                 if(comment){
                     if( xmlData[i - 1] === "-" && xmlData[i - 2] === "-"){
                         comment = false;
-                    }else{
-                        throw new Error(`Invalid XML comment in DOCTYPE`);
+                        angleBracketsCount--;
                     }
-                }else if(entity){
-                    parseEntityExp(exp, entities);
-                    entity = false;
+                }else{
+                    if(entity) {
+                        parseEntityExp(exp, entities);
+                        entity = false;
+                    }
+                    angleBracketsCount--;
                 }
-                angleBracketsCount--;
                 if (angleBracketsCount === 0) {
                   break;
                 }
@@ -39178,7 +39385,8 @@ const defaultOptions = {
     cdataPropName: false,
     numberParseOptions: {
       hex: true,
-      leadingZeros: true
+      leadingZeros: true,
+      eNotation: true
     },
     tagValueProcessor: function(tagName, val) {
       return val;
@@ -39196,6 +39404,7 @@ const defaultOptions = {
     ignoreDeclaration: false,
     ignorePiTags: false,
     transformTagName: false,
+    transformAttributeName: false,
 };
    
 const buildOptions = function(options) {
@@ -39344,8 +39553,12 @@ function buildAttributesMap(attrStr, jPath) {
     for (let i = 0; i < len; i++) {
       const attrName = this.resolveNameSpace(matches[i][1]);
       let oldVal = matches[i][4];
-      const aName = this.options.attributeNamePrefix + attrName;
+      let aName = this.options.attributeNamePrefix + attrName;
       if (attrName.length) {
+        if (this.options.transformAttributeName) {
+          aName = this.options.transformAttributeName(aName);
+        }
+        if(aName === "__proto__") aName  = "#__proto__";
         if (oldVal !== undefined) {
           if (this.options.trimValues) {
             oldVal = oldVal.trim();
@@ -39473,7 +39686,7 @@ const parseXml = function(xmlData) {
         
         i = closeIndex + 2;
       }else {//Opening tag
-        let result = readTagExp(xmlData,i, this. options.removeNSPrefix);
+        let result = readTagExp(xmlData,i, this.options.removeNSPrefix);
         let tagName= result.tagName;
         let tagExp = result.tagExp;
         let attrExpPresent = result.attrExpPresent;
@@ -39960,9 +40173,11 @@ class XmlNode{
   }
   add(key,val){
     // this.child.push( {name : key, val: val, isCdata: isCdata });
+    if(key === "__proto__") key = "#__proto__";
     this.child.push( {[key]: val });
   }
   addChild(node) {
+    if(node.tagname === "__proto__") node.tagname = "#__proto__";
     if(node[":@"] && Object.keys(node[":@"]).length > 0){
       this.child.push( { [node.tagname]: node.child, [":@"]: node[":@"] });
     }else{
@@ -41803,35 +42018,35 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
 /***/ 50677:
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"@aws-sdk/client-s3","description":"AWS SDK for JavaScript S3 Client for Node.js, Browser and React Native","version":"3.252.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","generate:client":"node ../../scripts/generate-clients/single-service --solo s3","test":"yarn test:unit","test:e2e":"ts-mocha test/**/*.ispec.ts && karma start karma.conf.js","test:unit":"ts-mocha test/**/*.spec.ts"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha1-browser":"2.0.0","@aws-crypto/sha256-browser":"2.0.0","@aws-crypto/sha256-js":"2.0.0","@aws-sdk/client-sts":"3.252.0","@aws-sdk/config-resolver":"3.234.0","@aws-sdk/credential-provider-node":"3.252.0","@aws-sdk/eventstream-serde-browser":"3.226.0","@aws-sdk/eventstream-serde-config-resolver":"3.226.0","@aws-sdk/eventstream-serde-node":"3.226.0","@aws-sdk/fetch-http-handler":"3.226.0","@aws-sdk/hash-blob-browser":"3.226.0","@aws-sdk/hash-node":"3.226.0","@aws-sdk/hash-stream-node":"3.226.0","@aws-sdk/invalid-dependency":"3.226.0","@aws-sdk/md5-js":"3.226.0","@aws-sdk/middleware-bucket-endpoint":"3.226.0","@aws-sdk/middleware-content-length":"3.226.0","@aws-sdk/middleware-endpoint":"3.226.0","@aws-sdk/middleware-expect-continue":"3.226.0","@aws-sdk/middleware-flexible-checksums":"3.226.0","@aws-sdk/middleware-host-header":"3.226.0","@aws-sdk/middleware-location-constraint":"3.226.0","@aws-sdk/middleware-logger":"3.226.0","@aws-sdk/middleware-recursion-detection":"3.226.0","@aws-sdk/middleware-retry":"3.235.0","@aws-sdk/middleware-sdk-s3":"3.231.0","@aws-sdk/middleware-serde":"3.226.0","@aws-sdk/middleware-signing":"3.226.0","@aws-sdk/middleware-ssec":"3.226.0","@aws-sdk/middleware-stack":"3.226.0","@aws-sdk/middleware-user-agent":"3.226.0","@aws-sdk/node-config-provider":"3.226.0","@aws-sdk/node-http-handler":"3.226.0","@aws-sdk/protocol-http":"3.226.0","@aws-sdk/signature-v4-multi-region":"3.226.0","@aws-sdk/smithy-client":"3.234.0","@aws-sdk/types":"3.226.0","@aws-sdk/url-parser":"3.226.0","@aws-sdk/util-base64":"3.208.0","@aws-sdk/util-body-length-browser":"3.188.0","@aws-sdk/util-body-length-node":"3.208.0","@aws-sdk/util-defaults-mode-browser":"3.234.0","@aws-sdk/util-defaults-mode-node":"3.234.0","@aws-sdk/util-endpoints":"3.245.0","@aws-sdk/util-retry":"3.229.0","@aws-sdk/util-stream-browser":"3.226.0","@aws-sdk/util-stream-node":"3.226.0","@aws-sdk/util-user-agent-browser":"3.226.0","@aws-sdk/util-user-agent-node":"3.226.0","@aws-sdk/util-utf8-browser":"3.188.0","@aws-sdk/util-utf8-node":"3.208.0","@aws-sdk/util-waiter":"3.226.0","@aws-sdk/xml-builder":"3.201.0","fast-xml-parser":"4.0.11","tslib":"^2.3.1"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.208.0","@tsconfig/node14":"1.0.3","@types/chai":"^4.2.11","@types/mocha":"^8.0.4","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.19.2","typescript":"~4.6.2"},"overrides":{"typedoc":{"typescript":"~4.6.2"}},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-s3","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-s3"}}');
+module.exports = JSON.parse('{"name":"@aws-sdk/client-s3","description":"AWS SDK for JavaScript S3 Client for Node.js, Browser and React Native","version":"3.276.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","generate:client":"node ../../scripts/generate-clients/single-service --solo s3","test":"yarn test:unit","test:e2e":"ts-mocha test/**/*.ispec.ts && karma start karma.conf.js","test:unit":"ts-mocha test/**/*.spec.ts"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha1-browser":"3.0.0","@aws-crypto/sha256-browser":"3.0.0","@aws-crypto/sha256-js":"3.0.0","@aws-sdk/client-sts":"3.276.0","@aws-sdk/config-resolver":"3.272.0","@aws-sdk/credential-provider-node":"3.272.0","@aws-sdk/eventstream-serde-browser":"3.272.0","@aws-sdk/eventstream-serde-config-resolver":"3.272.0","@aws-sdk/eventstream-serde-node":"3.272.0","@aws-sdk/fetch-http-handler":"3.272.0","@aws-sdk/hash-blob-browser":"3.272.0","@aws-sdk/hash-node":"3.272.0","@aws-sdk/hash-stream-node":"3.272.0","@aws-sdk/invalid-dependency":"3.272.0","@aws-sdk/md5-js":"3.272.0","@aws-sdk/middleware-bucket-endpoint":"3.272.0","@aws-sdk/middleware-content-length":"3.272.0","@aws-sdk/middleware-endpoint":"3.272.0","@aws-sdk/middleware-expect-continue":"3.272.0","@aws-sdk/middleware-flexible-checksums":"3.272.0","@aws-sdk/middleware-host-header":"3.272.0","@aws-sdk/middleware-location-constraint":"3.272.0","@aws-sdk/middleware-logger":"3.272.0","@aws-sdk/middleware-recursion-detection":"3.272.0","@aws-sdk/middleware-retry":"3.272.0","@aws-sdk/middleware-sdk-s3":"3.272.0","@aws-sdk/middleware-serde":"3.272.0","@aws-sdk/middleware-signing":"3.272.0","@aws-sdk/middleware-ssec":"3.272.0","@aws-sdk/middleware-stack":"3.272.0","@aws-sdk/middleware-user-agent":"3.272.0","@aws-sdk/node-config-provider":"3.272.0","@aws-sdk/node-http-handler":"3.272.0","@aws-sdk/protocol-http":"3.272.0","@aws-sdk/signature-v4-multi-region":"3.272.0","@aws-sdk/smithy-client":"3.272.0","@aws-sdk/types":"3.272.0","@aws-sdk/url-parser":"3.272.0","@aws-sdk/util-base64":"3.208.0","@aws-sdk/util-body-length-browser":"3.188.0","@aws-sdk/util-body-length-node":"3.208.0","@aws-sdk/util-defaults-mode-browser":"3.272.0","@aws-sdk/util-defaults-mode-node":"3.272.0","@aws-sdk/util-endpoints":"3.272.0","@aws-sdk/util-retry":"3.272.0","@aws-sdk/util-stream-browser":"3.272.0","@aws-sdk/util-stream-node":"3.272.0","@aws-sdk/util-user-agent-browser":"3.272.0","@aws-sdk/util-user-agent-node":"3.272.0","@aws-sdk/util-utf8":"3.254.0","@aws-sdk/util-waiter":"3.272.0","@aws-sdk/xml-builder":"3.201.0","fast-xml-parser":"4.1.2","tslib":"^2.3.1"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.208.0","@tsconfig/node14":"1.0.3","@types/chai":"^4.2.11","@types/mocha":"^8.0.4","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.19.2","typescript":"~4.6.2"},"overrides":{"typedoc":{"typescript":"~4.6.2"}},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-s3","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-s3"}}');
 
 /***/ }),
 
 /***/ 69722:
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"@aws-sdk/client-sso-oidc","description":"AWS SDK for JavaScript Sso Oidc Client for Node.js, Browser and React Native","version":"3.252.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","generate:client":"node ../../scripts/generate-clients/single-service --solo sso-oidc"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"2.0.0","@aws-crypto/sha256-js":"2.0.0","@aws-sdk/config-resolver":"3.234.0","@aws-sdk/fetch-http-handler":"3.226.0","@aws-sdk/hash-node":"3.226.0","@aws-sdk/invalid-dependency":"3.226.0","@aws-sdk/middleware-content-length":"3.226.0","@aws-sdk/middleware-endpoint":"3.226.0","@aws-sdk/middleware-host-header":"3.226.0","@aws-sdk/middleware-logger":"3.226.0","@aws-sdk/middleware-recursion-detection":"3.226.0","@aws-sdk/middleware-retry":"3.235.0","@aws-sdk/middleware-serde":"3.226.0","@aws-sdk/middleware-stack":"3.226.0","@aws-sdk/middleware-user-agent":"3.226.0","@aws-sdk/node-config-provider":"3.226.0","@aws-sdk/node-http-handler":"3.226.0","@aws-sdk/protocol-http":"3.226.0","@aws-sdk/smithy-client":"3.234.0","@aws-sdk/types":"3.226.0","@aws-sdk/url-parser":"3.226.0","@aws-sdk/util-base64":"3.208.0","@aws-sdk/util-body-length-browser":"3.188.0","@aws-sdk/util-body-length-node":"3.208.0","@aws-sdk/util-defaults-mode-browser":"3.234.0","@aws-sdk/util-defaults-mode-node":"3.234.0","@aws-sdk/util-endpoints":"3.245.0","@aws-sdk/util-retry":"3.229.0","@aws-sdk/util-user-agent-browser":"3.226.0","@aws-sdk/util-user-agent-node":"3.226.0","@aws-sdk/util-utf8-browser":"3.188.0","@aws-sdk/util-utf8-node":"3.208.0","tslib":"^2.3.1"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.208.0","@tsconfig/node14":"1.0.3","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.19.2","typescript":"~4.6.2"},"overrides":{"typedoc":{"typescript":"~4.6.2"}},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sso-oidc","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sso-oidc"}}');
+module.exports = JSON.parse('{"name":"@aws-sdk/client-sso-oidc","description":"AWS SDK for JavaScript Sso Oidc Client for Node.js, Browser and React Native","version":"3.272.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","generate:client":"node ../../scripts/generate-clients/single-service --solo sso-oidc"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"3.0.0","@aws-crypto/sha256-js":"3.0.0","@aws-sdk/config-resolver":"3.272.0","@aws-sdk/fetch-http-handler":"3.272.0","@aws-sdk/hash-node":"3.272.0","@aws-sdk/invalid-dependency":"3.272.0","@aws-sdk/middleware-content-length":"3.272.0","@aws-sdk/middleware-endpoint":"3.272.0","@aws-sdk/middleware-host-header":"3.272.0","@aws-sdk/middleware-logger":"3.272.0","@aws-sdk/middleware-recursion-detection":"3.272.0","@aws-sdk/middleware-retry":"3.272.0","@aws-sdk/middleware-serde":"3.272.0","@aws-sdk/middleware-stack":"3.272.0","@aws-sdk/middleware-user-agent":"3.272.0","@aws-sdk/node-config-provider":"3.272.0","@aws-sdk/node-http-handler":"3.272.0","@aws-sdk/protocol-http":"3.272.0","@aws-sdk/smithy-client":"3.272.0","@aws-sdk/types":"3.272.0","@aws-sdk/url-parser":"3.272.0","@aws-sdk/util-base64":"3.208.0","@aws-sdk/util-body-length-browser":"3.188.0","@aws-sdk/util-body-length-node":"3.208.0","@aws-sdk/util-defaults-mode-browser":"3.272.0","@aws-sdk/util-defaults-mode-node":"3.272.0","@aws-sdk/util-endpoints":"3.272.0","@aws-sdk/util-retry":"3.272.0","@aws-sdk/util-user-agent-browser":"3.272.0","@aws-sdk/util-user-agent-node":"3.272.0","@aws-sdk/util-utf8":"3.254.0","tslib":"^2.3.1"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.208.0","@tsconfig/node14":"1.0.3","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.19.2","typescript":"~4.6.2"},"overrides":{"typedoc":{"typescript":"~4.6.2"}},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sso-oidc","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sso-oidc"}}');
 
 /***/ }),
 
 /***/ 91092:
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"@aws-sdk/client-sso","description":"AWS SDK for JavaScript Sso Client for Node.js, Browser and React Native","version":"3.252.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","generate:client":"node ../../scripts/generate-clients/single-service --solo sso"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"2.0.0","@aws-crypto/sha256-js":"2.0.0","@aws-sdk/config-resolver":"3.234.0","@aws-sdk/fetch-http-handler":"3.226.0","@aws-sdk/hash-node":"3.226.0","@aws-sdk/invalid-dependency":"3.226.0","@aws-sdk/middleware-content-length":"3.226.0","@aws-sdk/middleware-endpoint":"3.226.0","@aws-sdk/middleware-host-header":"3.226.0","@aws-sdk/middleware-logger":"3.226.0","@aws-sdk/middleware-recursion-detection":"3.226.0","@aws-sdk/middleware-retry":"3.235.0","@aws-sdk/middleware-serde":"3.226.0","@aws-sdk/middleware-stack":"3.226.0","@aws-sdk/middleware-user-agent":"3.226.0","@aws-sdk/node-config-provider":"3.226.0","@aws-sdk/node-http-handler":"3.226.0","@aws-sdk/protocol-http":"3.226.0","@aws-sdk/smithy-client":"3.234.0","@aws-sdk/types":"3.226.0","@aws-sdk/url-parser":"3.226.0","@aws-sdk/util-base64":"3.208.0","@aws-sdk/util-body-length-browser":"3.188.0","@aws-sdk/util-body-length-node":"3.208.0","@aws-sdk/util-defaults-mode-browser":"3.234.0","@aws-sdk/util-defaults-mode-node":"3.234.0","@aws-sdk/util-endpoints":"3.245.0","@aws-sdk/util-retry":"3.229.0","@aws-sdk/util-user-agent-browser":"3.226.0","@aws-sdk/util-user-agent-node":"3.226.0","@aws-sdk/util-utf8-browser":"3.188.0","@aws-sdk/util-utf8-node":"3.208.0","tslib":"^2.3.1"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.208.0","@tsconfig/node14":"1.0.3","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.19.2","typescript":"~4.6.2"},"overrides":{"typedoc":{"typescript":"~4.6.2"}},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sso","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sso"}}');
+module.exports = JSON.parse('{"name":"@aws-sdk/client-sso","description":"AWS SDK for JavaScript Sso Client for Node.js, Browser and React Native","version":"3.272.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","generate:client":"node ../../scripts/generate-clients/single-service --solo sso"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"3.0.0","@aws-crypto/sha256-js":"3.0.0","@aws-sdk/config-resolver":"3.272.0","@aws-sdk/fetch-http-handler":"3.272.0","@aws-sdk/hash-node":"3.272.0","@aws-sdk/invalid-dependency":"3.272.0","@aws-sdk/middleware-content-length":"3.272.0","@aws-sdk/middleware-endpoint":"3.272.0","@aws-sdk/middleware-host-header":"3.272.0","@aws-sdk/middleware-logger":"3.272.0","@aws-sdk/middleware-recursion-detection":"3.272.0","@aws-sdk/middleware-retry":"3.272.0","@aws-sdk/middleware-serde":"3.272.0","@aws-sdk/middleware-stack":"3.272.0","@aws-sdk/middleware-user-agent":"3.272.0","@aws-sdk/node-config-provider":"3.272.0","@aws-sdk/node-http-handler":"3.272.0","@aws-sdk/protocol-http":"3.272.0","@aws-sdk/smithy-client":"3.272.0","@aws-sdk/types":"3.272.0","@aws-sdk/url-parser":"3.272.0","@aws-sdk/util-base64":"3.208.0","@aws-sdk/util-body-length-browser":"3.188.0","@aws-sdk/util-body-length-node":"3.208.0","@aws-sdk/util-defaults-mode-browser":"3.272.0","@aws-sdk/util-defaults-mode-node":"3.272.0","@aws-sdk/util-endpoints":"3.272.0","@aws-sdk/util-retry":"3.272.0","@aws-sdk/util-user-agent-browser":"3.272.0","@aws-sdk/util-user-agent-node":"3.272.0","@aws-sdk/util-utf8":"3.254.0","tslib":"^2.3.1"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.208.0","@tsconfig/node14":"1.0.3","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.19.2","typescript":"~4.6.2"},"overrides":{"typedoc":{"typescript":"~4.6.2"}},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sso","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sso"}}');
 
 /***/ }),
 
 /***/ 7947:
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"@aws-sdk/client-sts","description":"AWS SDK for JavaScript Sts Client for Node.js, Browser and React Native","version":"3.252.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","generate:client":"node ../../scripts/generate-clients/single-service --solo sts","test":"yarn test:unit","test:unit":"jest"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"2.0.0","@aws-crypto/sha256-js":"2.0.0","@aws-sdk/config-resolver":"3.234.0","@aws-sdk/credential-provider-node":"3.252.0","@aws-sdk/fetch-http-handler":"3.226.0","@aws-sdk/hash-node":"3.226.0","@aws-sdk/invalid-dependency":"3.226.0","@aws-sdk/middleware-content-length":"3.226.0","@aws-sdk/middleware-endpoint":"3.226.0","@aws-sdk/middleware-host-header":"3.226.0","@aws-sdk/middleware-logger":"3.226.0","@aws-sdk/middleware-recursion-detection":"3.226.0","@aws-sdk/middleware-retry":"3.235.0","@aws-sdk/middleware-sdk-sts":"3.226.0","@aws-sdk/middleware-serde":"3.226.0","@aws-sdk/middleware-signing":"3.226.0","@aws-sdk/middleware-stack":"3.226.0","@aws-sdk/middleware-user-agent":"3.226.0","@aws-sdk/node-config-provider":"3.226.0","@aws-sdk/node-http-handler":"3.226.0","@aws-sdk/protocol-http":"3.226.0","@aws-sdk/smithy-client":"3.234.0","@aws-sdk/types":"3.226.0","@aws-sdk/url-parser":"3.226.0","@aws-sdk/util-base64":"3.208.0","@aws-sdk/util-body-length-browser":"3.188.0","@aws-sdk/util-body-length-node":"3.208.0","@aws-sdk/util-defaults-mode-browser":"3.234.0","@aws-sdk/util-defaults-mode-node":"3.234.0","@aws-sdk/util-endpoints":"3.245.0","@aws-sdk/util-retry":"3.229.0","@aws-sdk/util-user-agent-browser":"3.226.0","@aws-sdk/util-user-agent-node":"3.226.0","@aws-sdk/util-utf8-browser":"3.188.0","@aws-sdk/util-utf8-node":"3.208.0","fast-xml-parser":"4.0.11","tslib":"^2.3.1"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.208.0","@tsconfig/node14":"1.0.3","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.19.2","typescript":"~4.6.2"},"overrides":{"typedoc":{"typescript":"~4.6.2"}},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sts","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sts"}}');
+module.exports = JSON.parse('{"name":"@aws-sdk/client-sts","description":"AWS SDK for JavaScript Sts Client for Node.js, Browser and React Native","version":"3.276.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","generate:client":"node ../../scripts/generate-clients/single-service --solo sts","test":"yarn test:unit","test:unit":"jest"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"3.0.0","@aws-crypto/sha256-js":"3.0.0","@aws-sdk/config-resolver":"3.272.0","@aws-sdk/credential-provider-node":"3.272.0","@aws-sdk/fetch-http-handler":"3.272.0","@aws-sdk/hash-node":"3.272.0","@aws-sdk/invalid-dependency":"3.272.0","@aws-sdk/middleware-content-length":"3.272.0","@aws-sdk/middleware-endpoint":"3.272.0","@aws-sdk/middleware-host-header":"3.272.0","@aws-sdk/middleware-logger":"3.272.0","@aws-sdk/middleware-recursion-detection":"3.272.0","@aws-sdk/middleware-retry":"3.272.0","@aws-sdk/middleware-sdk-sts":"3.272.0","@aws-sdk/middleware-serde":"3.272.0","@aws-sdk/middleware-signing":"3.272.0","@aws-sdk/middleware-stack":"3.272.0","@aws-sdk/middleware-user-agent":"3.272.0","@aws-sdk/node-config-provider":"3.272.0","@aws-sdk/node-http-handler":"3.272.0","@aws-sdk/protocol-http":"3.272.0","@aws-sdk/smithy-client":"3.272.0","@aws-sdk/types":"3.272.0","@aws-sdk/url-parser":"3.272.0","@aws-sdk/util-base64":"3.208.0","@aws-sdk/util-body-length-browser":"3.188.0","@aws-sdk/util-body-length-node":"3.208.0","@aws-sdk/util-defaults-mode-browser":"3.272.0","@aws-sdk/util-defaults-mode-node":"3.272.0","@aws-sdk/util-endpoints":"3.272.0","@aws-sdk/util-retry":"3.272.0","@aws-sdk/util-user-agent-browser":"3.272.0","@aws-sdk/util-user-agent-node":"3.272.0","@aws-sdk/util-utf8":"3.254.0","fast-xml-parser":"4.1.2","tslib":"^2.3.1"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.208.0","@tsconfig/node14":"1.0.3","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.19.2","typescript":"~4.6.2"},"overrides":{"typedoc":{"typescript":"~4.6.2"}},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sts","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sts"}}');
 
 /***/ }),
 
 /***/ 95367:
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"partitions":[{"id":"aws","outputs":{"dnsSuffix":"amazonaws.com","dualStackDnsSuffix":"api.aws","name":"aws","supportsDualStack":true,"supportsFIPS":true},"regionRegex":"^(us|eu|ap|sa|ca|me|af)\\\\-\\\\w+\\\\-\\\\d+$","regions":{"af-south-1":{"description":"Africa (Cape Town)"},"ap-east-1":{"description":"Asia Pacific (Hong Kong)"},"ap-northeast-1":{"description":"Asia Pacific (Tokyo)"},"ap-northeast-2":{"description":"Asia Pacific (Seoul)"},"ap-northeast-3":{"description":"Asia Pacific (Osaka)"},"ap-south-1":{"description":"Asia Pacific (Mumbai)"},"ap-south-2":{"description":"Asia Pacific (Hyderabad)"},"ap-southeast-1":{"description":"Asia Pacific (Singapore)"},"ap-southeast-2":{"description":"Asia Pacific (Sydney)"},"ap-southeast-3":{"description":"Asia Pacific (Jakarta)"},"aws-global":{"description":"AWS Standard global region"},"ca-central-1":{"description":"Canada (Central)"},"eu-central-1":{"description":"Europe (Frankfurt)"},"eu-central-2":{"description":"Europe (Zurich)"},"eu-north-1":{"description":"Europe (Stockholm)"},"eu-south-1":{"description":"Europe (Milan)"},"eu-south-2":{"description":"Europe (Spain)"},"eu-west-1":{"description":"Europe (Ireland)"},"eu-west-2":{"description":"Europe (London)"},"eu-west-3":{"description":"Europe (Paris)"},"me-central-1":{"description":"Middle East (UAE)"},"me-south-1":{"description":"Middle East (Bahrain)"},"sa-east-1":{"description":"South America (Sao Paulo)"},"us-east-1":{"description":"US East (N. Virginia)"},"us-east-2":{"description":"US East (Ohio)"},"us-west-1":{"description":"US West (N. California)"},"us-west-2":{"description":"US West (Oregon)"}}},{"id":"aws-cn","outputs":{"dnsSuffix":"amazonaws.com.cn","dualStackDnsSuffix":"api.amazonwebservices.com.cn","name":"aws-cn","supportsDualStack":true,"supportsFIPS":true},"regionRegex":"^cn\\\\-\\\\w+\\\\-\\\\d+$","regions":{"aws-cn-global":{"description":"AWS China global region"},"cn-north-1":{"description":"China (Beijing)"},"cn-northwest-1":{"description":"China (Ningxia)"}}},{"id":"aws-us-gov","outputs":{"dnsSuffix":"amazonaws.com","dualStackDnsSuffix":"api.aws","name":"aws-us-gov","supportsDualStack":true,"supportsFIPS":true},"regionRegex":"^us\\\\-gov\\\\-\\\\w+\\\\-\\\\d+$","regions":{"aws-us-gov-global":{"description":"AWS GovCloud (US) global region"},"us-gov-east-1":{"description":"AWS GovCloud (US-East)"},"us-gov-west-1":{"description":"AWS GovCloud (US-West)"}}},{"id":"aws-iso","outputs":{"dnsSuffix":"c2s.ic.gov","dualStackDnsSuffix":"c2s.ic.gov","name":"aws-iso","supportsDualStack":false,"supportsFIPS":true},"regionRegex":"^us\\\\-iso\\\\-\\\\w+\\\\-\\\\d+$","regions":{"aws-iso-global":{"description":"AWS ISO (US) global region"},"us-iso-east-1":{"description":"US ISO East"},"us-iso-west-1":{"description":"US ISO WEST"}}},{"id":"aws-iso-b","outputs":{"dnsSuffix":"sc2s.sgov.gov","dualStackDnsSuffix":"sc2s.sgov.gov","name":"aws-iso-b","supportsDualStack":false,"supportsFIPS":true},"regionRegex":"^us\\\\-isob\\\\-\\\\w+\\\\-\\\\d+$","regions":{"aws-iso-b-global":{"description":"AWS ISOB (US) global region"},"us-isob-east-1":{"description":"US ISOB East (Ohio)"}}}],"version":"1.1"}');
+module.exports = JSON.parse('{"partitions":[{"id":"aws","outputs":{"dnsSuffix":"amazonaws.com","dualStackDnsSuffix":"api.aws","name":"aws","supportsDualStack":true,"supportsFIPS":true},"regionRegex":"^(us|eu|ap|sa|ca|me|af)\\\\-\\\\w+\\\\-\\\\d+$","regions":{"af-south-1":{"description":"Africa (Cape Town)"},"ap-east-1":{"description":"Asia Pacific (Hong Kong)"},"ap-northeast-1":{"description":"Asia Pacific (Tokyo)"},"ap-northeast-2":{"description":"Asia Pacific (Seoul)"},"ap-northeast-3":{"description":"Asia Pacific (Osaka)"},"ap-south-1":{"description":"Asia Pacific (Mumbai)"},"ap-south-2":{"description":"Asia Pacific (Hyderabad)"},"ap-southeast-1":{"description":"Asia Pacific (Singapore)"},"ap-southeast-2":{"description":"Asia Pacific (Sydney)"},"ap-southeast-3":{"description":"Asia Pacific (Jakarta)"},"ap-southeast-4":{"description":"Asia Pacific (Melbourne)"},"aws-global":{"description":"AWS Standard global region"},"ca-central-1":{"description":"Canada (Central)"},"eu-central-1":{"description":"Europe (Frankfurt)"},"eu-central-2":{"description":"Europe (Zurich)"},"eu-north-1":{"description":"Europe (Stockholm)"},"eu-south-1":{"description":"Europe (Milan)"},"eu-south-2":{"description":"Europe (Spain)"},"eu-west-1":{"description":"Europe (Ireland)"},"eu-west-2":{"description":"Europe (London)"},"eu-west-3":{"description":"Europe (Paris)"},"me-central-1":{"description":"Middle East (UAE)"},"me-south-1":{"description":"Middle East (Bahrain)"},"sa-east-1":{"description":"South America (Sao Paulo)"},"us-east-1":{"description":"US East (N. Virginia)"},"us-east-2":{"description":"US East (Ohio)"},"us-west-1":{"description":"US West (N. California)"},"us-west-2":{"description":"US West (Oregon)"}}},{"id":"aws-cn","outputs":{"dnsSuffix":"amazonaws.com.cn","dualStackDnsSuffix":"api.amazonwebservices.com.cn","name":"aws-cn","supportsDualStack":true,"supportsFIPS":true},"regionRegex":"^cn\\\\-\\\\w+\\\\-\\\\d+$","regions":{"aws-cn-global":{"description":"AWS China global region"},"cn-north-1":{"description":"China (Beijing)"},"cn-northwest-1":{"description":"China (Ningxia)"}}},{"id":"aws-us-gov","outputs":{"dnsSuffix":"amazonaws.com","dualStackDnsSuffix":"api.aws","name":"aws-us-gov","supportsDualStack":true,"supportsFIPS":true},"regionRegex":"^us\\\\-gov\\\\-\\\\w+\\\\-\\\\d+$","regions":{"aws-us-gov-global":{"description":"AWS GovCloud (US) global region"},"us-gov-east-1":{"description":"AWS GovCloud (US-East)"},"us-gov-west-1":{"description":"AWS GovCloud (US-West)"}}},{"id":"aws-iso","outputs":{"dnsSuffix":"c2s.ic.gov","dualStackDnsSuffix":"c2s.ic.gov","name":"aws-iso","supportsDualStack":false,"supportsFIPS":true},"regionRegex":"^us\\\\-iso\\\\-\\\\w+\\\\-\\\\d+$","regions":{"aws-iso-global":{"description":"AWS ISO (US) global region"},"us-iso-east-1":{"description":"US ISO East"},"us-iso-west-1":{"description":"US ISO WEST"}}},{"id":"aws-iso-b","outputs":{"dnsSuffix":"sc2s.sgov.gov","dualStackDnsSuffix":"sc2s.sgov.gov","name":"aws-iso-b","supportsDualStack":false,"supportsFIPS":true},"regionRegex":"^us\\\\-isob\\\\-\\\\w+\\\\-\\\\d+$","regions":{"aws-iso-b-global":{"description":"AWS ISOB (US) global region"},"us-isob-east-1":{"description":"US ISOB East (Ohio)"}}}],"version":"1.1"}');
 
 /***/ })
 
