@@ -2728,6 +2728,7 @@ exports.uint32ArrayFrom = uint32ArrayFrom;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.S3 = void 0;
+const smithy_client_1 = __nccwpck_require__(48);
 const AbortMultipartUploadCommand_1 = __nccwpck_require__(96917);
 const CompleteMultipartUploadCommand_1 = __nccwpck_require__(64479);
 const CopyObjectCommand_1 = __nccwpck_require__(5814);
@@ -2822,1311 +2823,105 @@ const UploadPartCommand_1 = __nccwpck_require__(62334);
 const UploadPartCopyCommand_1 = __nccwpck_require__(79891);
 const WriteGetObjectResponseCommand_1 = __nccwpck_require__(56586);
 const S3Client_1 = __nccwpck_require__(45206);
+const commands = {
+    AbortMultipartUploadCommand: AbortMultipartUploadCommand_1.AbortMultipartUploadCommand,
+    CompleteMultipartUploadCommand: CompleteMultipartUploadCommand_1.CompleteMultipartUploadCommand,
+    CopyObjectCommand: CopyObjectCommand_1.CopyObjectCommand,
+    CreateBucketCommand: CreateBucketCommand_1.CreateBucketCommand,
+    CreateMultipartUploadCommand: CreateMultipartUploadCommand_1.CreateMultipartUploadCommand,
+    DeleteBucketCommand: DeleteBucketCommand_1.DeleteBucketCommand,
+    DeleteBucketAnalyticsConfigurationCommand: DeleteBucketAnalyticsConfigurationCommand_1.DeleteBucketAnalyticsConfigurationCommand,
+    DeleteBucketCorsCommand: DeleteBucketCorsCommand_1.DeleteBucketCorsCommand,
+    DeleteBucketEncryptionCommand: DeleteBucketEncryptionCommand_1.DeleteBucketEncryptionCommand,
+    DeleteBucketIntelligentTieringConfigurationCommand: DeleteBucketIntelligentTieringConfigurationCommand_1.DeleteBucketIntelligentTieringConfigurationCommand,
+    DeleteBucketInventoryConfigurationCommand: DeleteBucketInventoryConfigurationCommand_1.DeleteBucketInventoryConfigurationCommand,
+    DeleteBucketLifecycleCommand: DeleteBucketLifecycleCommand_1.DeleteBucketLifecycleCommand,
+    DeleteBucketMetricsConfigurationCommand: DeleteBucketMetricsConfigurationCommand_1.DeleteBucketMetricsConfigurationCommand,
+    DeleteBucketOwnershipControlsCommand: DeleteBucketOwnershipControlsCommand_1.DeleteBucketOwnershipControlsCommand,
+    DeleteBucketPolicyCommand: DeleteBucketPolicyCommand_1.DeleteBucketPolicyCommand,
+    DeleteBucketReplicationCommand: DeleteBucketReplicationCommand_1.DeleteBucketReplicationCommand,
+    DeleteBucketTaggingCommand: DeleteBucketTaggingCommand_1.DeleteBucketTaggingCommand,
+    DeleteBucketWebsiteCommand: DeleteBucketWebsiteCommand_1.DeleteBucketWebsiteCommand,
+    DeleteObjectCommand: DeleteObjectCommand_1.DeleteObjectCommand,
+    DeleteObjectsCommand: DeleteObjectsCommand_1.DeleteObjectsCommand,
+    DeleteObjectTaggingCommand: DeleteObjectTaggingCommand_1.DeleteObjectTaggingCommand,
+    DeletePublicAccessBlockCommand: DeletePublicAccessBlockCommand_1.DeletePublicAccessBlockCommand,
+    GetBucketAccelerateConfigurationCommand: GetBucketAccelerateConfigurationCommand_1.GetBucketAccelerateConfigurationCommand,
+    GetBucketAclCommand: GetBucketAclCommand_1.GetBucketAclCommand,
+    GetBucketAnalyticsConfigurationCommand: GetBucketAnalyticsConfigurationCommand_1.GetBucketAnalyticsConfigurationCommand,
+    GetBucketCorsCommand: GetBucketCorsCommand_1.GetBucketCorsCommand,
+    GetBucketEncryptionCommand: GetBucketEncryptionCommand_1.GetBucketEncryptionCommand,
+    GetBucketIntelligentTieringConfigurationCommand: GetBucketIntelligentTieringConfigurationCommand_1.GetBucketIntelligentTieringConfigurationCommand,
+    GetBucketInventoryConfigurationCommand: GetBucketInventoryConfigurationCommand_1.GetBucketInventoryConfigurationCommand,
+    GetBucketLifecycleConfigurationCommand: GetBucketLifecycleConfigurationCommand_1.GetBucketLifecycleConfigurationCommand,
+    GetBucketLocationCommand: GetBucketLocationCommand_1.GetBucketLocationCommand,
+    GetBucketLoggingCommand: GetBucketLoggingCommand_1.GetBucketLoggingCommand,
+    GetBucketMetricsConfigurationCommand: GetBucketMetricsConfigurationCommand_1.GetBucketMetricsConfigurationCommand,
+    GetBucketNotificationConfigurationCommand: GetBucketNotificationConfigurationCommand_1.GetBucketNotificationConfigurationCommand,
+    GetBucketOwnershipControlsCommand: GetBucketOwnershipControlsCommand_1.GetBucketOwnershipControlsCommand,
+    GetBucketPolicyCommand: GetBucketPolicyCommand_1.GetBucketPolicyCommand,
+    GetBucketPolicyStatusCommand: GetBucketPolicyStatusCommand_1.GetBucketPolicyStatusCommand,
+    GetBucketReplicationCommand: GetBucketReplicationCommand_1.GetBucketReplicationCommand,
+    GetBucketRequestPaymentCommand: GetBucketRequestPaymentCommand_1.GetBucketRequestPaymentCommand,
+    GetBucketTaggingCommand: GetBucketTaggingCommand_1.GetBucketTaggingCommand,
+    GetBucketVersioningCommand: GetBucketVersioningCommand_1.GetBucketVersioningCommand,
+    GetBucketWebsiteCommand: GetBucketWebsiteCommand_1.GetBucketWebsiteCommand,
+    GetObjectCommand: GetObjectCommand_1.GetObjectCommand,
+    GetObjectAclCommand: GetObjectAclCommand_1.GetObjectAclCommand,
+    GetObjectAttributesCommand: GetObjectAttributesCommand_1.GetObjectAttributesCommand,
+    GetObjectLegalHoldCommand: GetObjectLegalHoldCommand_1.GetObjectLegalHoldCommand,
+    GetObjectLockConfigurationCommand: GetObjectLockConfigurationCommand_1.GetObjectLockConfigurationCommand,
+    GetObjectRetentionCommand: GetObjectRetentionCommand_1.GetObjectRetentionCommand,
+    GetObjectTaggingCommand: GetObjectTaggingCommand_1.GetObjectTaggingCommand,
+    GetObjectTorrentCommand: GetObjectTorrentCommand_1.GetObjectTorrentCommand,
+    GetPublicAccessBlockCommand: GetPublicAccessBlockCommand_1.GetPublicAccessBlockCommand,
+    HeadBucketCommand: HeadBucketCommand_1.HeadBucketCommand,
+    HeadObjectCommand: HeadObjectCommand_1.HeadObjectCommand,
+    ListBucketAnalyticsConfigurationsCommand: ListBucketAnalyticsConfigurationsCommand_1.ListBucketAnalyticsConfigurationsCommand,
+    ListBucketIntelligentTieringConfigurationsCommand: ListBucketIntelligentTieringConfigurationsCommand_1.ListBucketIntelligentTieringConfigurationsCommand,
+    ListBucketInventoryConfigurationsCommand: ListBucketInventoryConfigurationsCommand_1.ListBucketInventoryConfigurationsCommand,
+    ListBucketMetricsConfigurationsCommand: ListBucketMetricsConfigurationsCommand_1.ListBucketMetricsConfigurationsCommand,
+    ListBucketsCommand: ListBucketsCommand_1.ListBucketsCommand,
+    ListMultipartUploadsCommand: ListMultipartUploadsCommand_1.ListMultipartUploadsCommand,
+    ListObjectsCommand: ListObjectsCommand_1.ListObjectsCommand,
+    ListObjectsV2Command: ListObjectsV2Command_1.ListObjectsV2Command,
+    ListObjectVersionsCommand: ListObjectVersionsCommand_1.ListObjectVersionsCommand,
+    ListPartsCommand: ListPartsCommand_1.ListPartsCommand,
+    PutBucketAccelerateConfigurationCommand: PutBucketAccelerateConfigurationCommand_1.PutBucketAccelerateConfigurationCommand,
+    PutBucketAclCommand: PutBucketAclCommand_1.PutBucketAclCommand,
+    PutBucketAnalyticsConfigurationCommand: PutBucketAnalyticsConfigurationCommand_1.PutBucketAnalyticsConfigurationCommand,
+    PutBucketCorsCommand: PutBucketCorsCommand_1.PutBucketCorsCommand,
+    PutBucketEncryptionCommand: PutBucketEncryptionCommand_1.PutBucketEncryptionCommand,
+    PutBucketIntelligentTieringConfigurationCommand: PutBucketIntelligentTieringConfigurationCommand_1.PutBucketIntelligentTieringConfigurationCommand,
+    PutBucketInventoryConfigurationCommand: PutBucketInventoryConfigurationCommand_1.PutBucketInventoryConfigurationCommand,
+    PutBucketLifecycleConfigurationCommand: PutBucketLifecycleConfigurationCommand_1.PutBucketLifecycleConfigurationCommand,
+    PutBucketLoggingCommand: PutBucketLoggingCommand_1.PutBucketLoggingCommand,
+    PutBucketMetricsConfigurationCommand: PutBucketMetricsConfigurationCommand_1.PutBucketMetricsConfigurationCommand,
+    PutBucketNotificationConfigurationCommand: PutBucketNotificationConfigurationCommand_1.PutBucketNotificationConfigurationCommand,
+    PutBucketOwnershipControlsCommand: PutBucketOwnershipControlsCommand_1.PutBucketOwnershipControlsCommand,
+    PutBucketPolicyCommand: PutBucketPolicyCommand_1.PutBucketPolicyCommand,
+    PutBucketReplicationCommand: PutBucketReplicationCommand_1.PutBucketReplicationCommand,
+    PutBucketRequestPaymentCommand: PutBucketRequestPaymentCommand_1.PutBucketRequestPaymentCommand,
+    PutBucketTaggingCommand: PutBucketTaggingCommand_1.PutBucketTaggingCommand,
+    PutBucketVersioningCommand: PutBucketVersioningCommand_1.PutBucketVersioningCommand,
+    PutBucketWebsiteCommand: PutBucketWebsiteCommand_1.PutBucketWebsiteCommand,
+    PutObjectCommand: PutObjectCommand_1.PutObjectCommand,
+    PutObjectAclCommand: PutObjectAclCommand_1.PutObjectAclCommand,
+    PutObjectLegalHoldCommand: PutObjectLegalHoldCommand_1.PutObjectLegalHoldCommand,
+    PutObjectLockConfigurationCommand: PutObjectLockConfigurationCommand_1.PutObjectLockConfigurationCommand,
+    PutObjectRetentionCommand: PutObjectRetentionCommand_1.PutObjectRetentionCommand,
+    PutObjectTaggingCommand: PutObjectTaggingCommand_1.PutObjectTaggingCommand,
+    PutPublicAccessBlockCommand: PutPublicAccessBlockCommand_1.PutPublicAccessBlockCommand,
+    RestoreObjectCommand: RestoreObjectCommand_1.RestoreObjectCommand,
+    SelectObjectContentCommand: SelectObjectContentCommand_1.SelectObjectContentCommand,
+    UploadPartCommand: UploadPartCommand_1.UploadPartCommand,
+    UploadPartCopyCommand: UploadPartCopyCommand_1.UploadPartCopyCommand,
+    WriteGetObjectResponseCommand: WriteGetObjectResponseCommand_1.WriteGetObjectResponseCommand,
+};
 class S3 extends S3Client_1.S3Client {
-    abortMultipartUpload(args, optionsOrCb, cb) {
-        const command = new AbortMultipartUploadCommand_1.AbortMultipartUploadCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    completeMultipartUpload(args, optionsOrCb, cb) {
-        const command = new CompleteMultipartUploadCommand_1.CompleteMultipartUploadCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    copyObject(args, optionsOrCb, cb) {
-        const command = new CopyObjectCommand_1.CopyObjectCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    createBucket(args, optionsOrCb, cb) {
-        const command = new CreateBucketCommand_1.CreateBucketCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    createMultipartUpload(args, optionsOrCb, cb) {
-        const command = new CreateMultipartUploadCommand_1.CreateMultipartUploadCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucket(args, optionsOrCb, cb) {
-        const command = new DeleteBucketCommand_1.DeleteBucketCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucketAnalyticsConfiguration(args, optionsOrCb, cb) {
-        const command = new DeleteBucketAnalyticsConfigurationCommand_1.DeleteBucketAnalyticsConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucketCors(args, optionsOrCb, cb) {
-        const command = new DeleteBucketCorsCommand_1.DeleteBucketCorsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucketEncryption(args, optionsOrCb, cb) {
-        const command = new DeleteBucketEncryptionCommand_1.DeleteBucketEncryptionCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucketIntelligentTieringConfiguration(args, optionsOrCb, cb) {
-        const command = new DeleteBucketIntelligentTieringConfigurationCommand_1.DeleteBucketIntelligentTieringConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucketInventoryConfiguration(args, optionsOrCb, cb) {
-        const command = new DeleteBucketInventoryConfigurationCommand_1.DeleteBucketInventoryConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucketLifecycle(args, optionsOrCb, cb) {
-        const command = new DeleteBucketLifecycleCommand_1.DeleteBucketLifecycleCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucketMetricsConfiguration(args, optionsOrCb, cb) {
-        const command = new DeleteBucketMetricsConfigurationCommand_1.DeleteBucketMetricsConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucketOwnershipControls(args, optionsOrCb, cb) {
-        const command = new DeleteBucketOwnershipControlsCommand_1.DeleteBucketOwnershipControlsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucketPolicy(args, optionsOrCb, cb) {
-        const command = new DeleteBucketPolicyCommand_1.DeleteBucketPolicyCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucketReplication(args, optionsOrCb, cb) {
-        const command = new DeleteBucketReplicationCommand_1.DeleteBucketReplicationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucketTagging(args, optionsOrCb, cb) {
-        const command = new DeleteBucketTaggingCommand_1.DeleteBucketTaggingCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteBucketWebsite(args, optionsOrCb, cb) {
-        const command = new DeleteBucketWebsiteCommand_1.DeleteBucketWebsiteCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteObject(args, optionsOrCb, cb) {
-        const command = new DeleteObjectCommand_1.DeleteObjectCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteObjects(args, optionsOrCb, cb) {
-        const command = new DeleteObjectsCommand_1.DeleteObjectsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deleteObjectTagging(args, optionsOrCb, cb) {
-        const command = new DeleteObjectTaggingCommand_1.DeleteObjectTaggingCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    deletePublicAccessBlock(args, optionsOrCb, cb) {
-        const command = new DeletePublicAccessBlockCommand_1.DeletePublicAccessBlockCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketAccelerateConfiguration(args, optionsOrCb, cb) {
-        const command = new GetBucketAccelerateConfigurationCommand_1.GetBucketAccelerateConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketAcl(args, optionsOrCb, cb) {
-        const command = new GetBucketAclCommand_1.GetBucketAclCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketAnalyticsConfiguration(args, optionsOrCb, cb) {
-        const command = new GetBucketAnalyticsConfigurationCommand_1.GetBucketAnalyticsConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketCors(args, optionsOrCb, cb) {
-        const command = new GetBucketCorsCommand_1.GetBucketCorsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketEncryption(args, optionsOrCb, cb) {
-        const command = new GetBucketEncryptionCommand_1.GetBucketEncryptionCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketIntelligentTieringConfiguration(args, optionsOrCb, cb) {
-        const command = new GetBucketIntelligentTieringConfigurationCommand_1.GetBucketIntelligentTieringConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketInventoryConfiguration(args, optionsOrCb, cb) {
-        const command = new GetBucketInventoryConfigurationCommand_1.GetBucketInventoryConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketLifecycleConfiguration(args, optionsOrCb, cb) {
-        const command = new GetBucketLifecycleConfigurationCommand_1.GetBucketLifecycleConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketLocation(args, optionsOrCb, cb) {
-        const command = new GetBucketLocationCommand_1.GetBucketLocationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketLogging(args, optionsOrCb, cb) {
-        const command = new GetBucketLoggingCommand_1.GetBucketLoggingCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketMetricsConfiguration(args, optionsOrCb, cb) {
-        const command = new GetBucketMetricsConfigurationCommand_1.GetBucketMetricsConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketNotificationConfiguration(args, optionsOrCb, cb) {
-        const command = new GetBucketNotificationConfigurationCommand_1.GetBucketNotificationConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketOwnershipControls(args, optionsOrCb, cb) {
-        const command = new GetBucketOwnershipControlsCommand_1.GetBucketOwnershipControlsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketPolicy(args, optionsOrCb, cb) {
-        const command = new GetBucketPolicyCommand_1.GetBucketPolicyCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketPolicyStatus(args, optionsOrCb, cb) {
-        const command = new GetBucketPolicyStatusCommand_1.GetBucketPolicyStatusCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketReplication(args, optionsOrCb, cb) {
-        const command = new GetBucketReplicationCommand_1.GetBucketReplicationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketRequestPayment(args, optionsOrCb, cb) {
-        const command = new GetBucketRequestPaymentCommand_1.GetBucketRequestPaymentCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketTagging(args, optionsOrCb, cb) {
-        const command = new GetBucketTaggingCommand_1.GetBucketTaggingCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketVersioning(args, optionsOrCb, cb) {
-        const command = new GetBucketVersioningCommand_1.GetBucketVersioningCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getBucketWebsite(args, optionsOrCb, cb) {
-        const command = new GetBucketWebsiteCommand_1.GetBucketWebsiteCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getObject(args, optionsOrCb, cb) {
-        const command = new GetObjectCommand_1.GetObjectCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getObjectAcl(args, optionsOrCb, cb) {
-        const command = new GetObjectAclCommand_1.GetObjectAclCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getObjectAttributes(args, optionsOrCb, cb) {
-        const command = new GetObjectAttributesCommand_1.GetObjectAttributesCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getObjectLegalHold(args, optionsOrCb, cb) {
-        const command = new GetObjectLegalHoldCommand_1.GetObjectLegalHoldCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getObjectLockConfiguration(args, optionsOrCb, cb) {
-        const command = new GetObjectLockConfigurationCommand_1.GetObjectLockConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getObjectRetention(args, optionsOrCb, cb) {
-        const command = new GetObjectRetentionCommand_1.GetObjectRetentionCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getObjectTagging(args, optionsOrCb, cb) {
-        const command = new GetObjectTaggingCommand_1.GetObjectTaggingCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getObjectTorrent(args, optionsOrCb, cb) {
-        const command = new GetObjectTorrentCommand_1.GetObjectTorrentCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getPublicAccessBlock(args, optionsOrCb, cb) {
-        const command = new GetPublicAccessBlockCommand_1.GetPublicAccessBlockCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    headBucket(args, optionsOrCb, cb) {
-        const command = new HeadBucketCommand_1.HeadBucketCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    headObject(args, optionsOrCb, cb) {
-        const command = new HeadObjectCommand_1.HeadObjectCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    listBucketAnalyticsConfigurations(args, optionsOrCb, cb) {
-        const command = new ListBucketAnalyticsConfigurationsCommand_1.ListBucketAnalyticsConfigurationsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    listBucketIntelligentTieringConfigurations(args, optionsOrCb, cb) {
-        const command = new ListBucketIntelligentTieringConfigurationsCommand_1.ListBucketIntelligentTieringConfigurationsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    listBucketInventoryConfigurations(args, optionsOrCb, cb) {
-        const command = new ListBucketInventoryConfigurationsCommand_1.ListBucketInventoryConfigurationsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    listBucketMetricsConfigurations(args, optionsOrCb, cb) {
-        const command = new ListBucketMetricsConfigurationsCommand_1.ListBucketMetricsConfigurationsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    listBuckets(args, optionsOrCb, cb) {
-        const command = new ListBucketsCommand_1.ListBucketsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    listMultipartUploads(args, optionsOrCb, cb) {
-        const command = new ListMultipartUploadsCommand_1.ListMultipartUploadsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    listObjects(args, optionsOrCb, cb) {
-        const command = new ListObjectsCommand_1.ListObjectsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    listObjectsV2(args, optionsOrCb, cb) {
-        const command = new ListObjectsV2Command_1.ListObjectsV2Command(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    listObjectVersions(args, optionsOrCb, cb) {
-        const command = new ListObjectVersionsCommand_1.ListObjectVersionsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    listParts(args, optionsOrCb, cb) {
-        const command = new ListPartsCommand_1.ListPartsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketAccelerateConfiguration(args, optionsOrCb, cb) {
-        const command = new PutBucketAccelerateConfigurationCommand_1.PutBucketAccelerateConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketAcl(args, optionsOrCb, cb) {
-        const command = new PutBucketAclCommand_1.PutBucketAclCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketAnalyticsConfiguration(args, optionsOrCb, cb) {
-        const command = new PutBucketAnalyticsConfigurationCommand_1.PutBucketAnalyticsConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketCors(args, optionsOrCb, cb) {
-        const command = new PutBucketCorsCommand_1.PutBucketCorsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketEncryption(args, optionsOrCb, cb) {
-        const command = new PutBucketEncryptionCommand_1.PutBucketEncryptionCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketIntelligentTieringConfiguration(args, optionsOrCb, cb) {
-        const command = new PutBucketIntelligentTieringConfigurationCommand_1.PutBucketIntelligentTieringConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketInventoryConfiguration(args, optionsOrCb, cb) {
-        const command = new PutBucketInventoryConfigurationCommand_1.PutBucketInventoryConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketLifecycleConfiguration(args, optionsOrCb, cb) {
-        const command = new PutBucketLifecycleConfigurationCommand_1.PutBucketLifecycleConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketLogging(args, optionsOrCb, cb) {
-        const command = new PutBucketLoggingCommand_1.PutBucketLoggingCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketMetricsConfiguration(args, optionsOrCb, cb) {
-        const command = new PutBucketMetricsConfigurationCommand_1.PutBucketMetricsConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketNotificationConfiguration(args, optionsOrCb, cb) {
-        const command = new PutBucketNotificationConfigurationCommand_1.PutBucketNotificationConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketOwnershipControls(args, optionsOrCb, cb) {
-        const command = new PutBucketOwnershipControlsCommand_1.PutBucketOwnershipControlsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketPolicy(args, optionsOrCb, cb) {
-        const command = new PutBucketPolicyCommand_1.PutBucketPolicyCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketReplication(args, optionsOrCb, cb) {
-        const command = new PutBucketReplicationCommand_1.PutBucketReplicationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketRequestPayment(args, optionsOrCb, cb) {
-        const command = new PutBucketRequestPaymentCommand_1.PutBucketRequestPaymentCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketTagging(args, optionsOrCb, cb) {
-        const command = new PutBucketTaggingCommand_1.PutBucketTaggingCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketVersioning(args, optionsOrCb, cb) {
-        const command = new PutBucketVersioningCommand_1.PutBucketVersioningCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putBucketWebsite(args, optionsOrCb, cb) {
-        const command = new PutBucketWebsiteCommand_1.PutBucketWebsiteCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putObject(args, optionsOrCb, cb) {
-        const command = new PutObjectCommand_1.PutObjectCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putObjectAcl(args, optionsOrCb, cb) {
-        const command = new PutObjectAclCommand_1.PutObjectAclCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putObjectLegalHold(args, optionsOrCb, cb) {
-        const command = new PutObjectLegalHoldCommand_1.PutObjectLegalHoldCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putObjectLockConfiguration(args, optionsOrCb, cb) {
-        const command = new PutObjectLockConfigurationCommand_1.PutObjectLockConfigurationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putObjectRetention(args, optionsOrCb, cb) {
-        const command = new PutObjectRetentionCommand_1.PutObjectRetentionCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putObjectTagging(args, optionsOrCb, cb) {
-        const command = new PutObjectTaggingCommand_1.PutObjectTaggingCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    putPublicAccessBlock(args, optionsOrCb, cb) {
-        const command = new PutPublicAccessBlockCommand_1.PutPublicAccessBlockCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    restoreObject(args, optionsOrCb, cb) {
-        const command = new RestoreObjectCommand_1.RestoreObjectCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    selectObjectContent(args, optionsOrCb, cb) {
-        const command = new SelectObjectContentCommand_1.SelectObjectContentCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    uploadPart(args, optionsOrCb, cb) {
-        const command = new UploadPartCommand_1.UploadPartCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    uploadPartCopy(args, optionsOrCb, cb) {
-        const command = new UploadPartCopyCommand_1.UploadPartCopyCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    writeGetObjectResponse(args, optionsOrCb, cb) {
-        const command = new WriteGetObjectResponseCommand_1.WriteGetObjectResponseCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
 }
 exports.S3 = S3;
+(0, smithy_client_1.createAggregatedClient)(commands, S3);
 
 
 /***/ }),
@@ -4149,7 +2944,7 @@ const middleware_retry_1 = __nccwpck_require__(12236);
 const middleware_sdk_s3_1 = __nccwpck_require__(19373);
 const middleware_signing_1 = __nccwpck_require__(15585);
 const middleware_user_agent_1 = __nccwpck_require__(21768);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const EndpointParameters_1 = __nccwpck_require__(32137);
 const runtimeConfig_1 = __nccwpck_require__(39905);
 class S3Client extends smithy_client_1.Client {
@@ -4193,7 +2988,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AbortMultipartUploadCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class AbortMultipartUploadCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -4253,7 +3048,7 @@ const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_sdk_s3_1 = __nccwpck_require__(19373);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class CompleteMultipartUploadCommand extends smithy_client_1.Command {
@@ -4316,7 +3111,7 @@ const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_sdk_s3_1 = __nccwpck_require__(19373);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class CopyObjectCommand extends smithy_client_1.Command {
@@ -4378,7 +3173,7 @@ exports.CreateBucketCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_location_constraint_1 = __nccwpck_require__(30791);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class CreateBucketCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -4439,7 +3234,7 @@ exports.CreateMultipartUploadCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class CreateMultipartUploadCommand extends smithy_client_1.Command {
@@ -4499,7 +3294,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketAnalyticsConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketAnalyticsConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -4557,7 +3352,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -4615,7 +3410,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketCorsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketCorsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -4673,7 +3468,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketEncryptionCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketEncryptionCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -4731,7 +3526,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketIntelligentTieringConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketIntelligentTieringConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -4789,7 +3584,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketInventoryConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketInventoryConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -4847,7 +3642,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketLifecycleCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketLifecycleCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -4905,7 +3700,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketMetricsConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketMetricsConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -4963,7 +3758,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketOwnershipControlsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketOwnershipControlsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5021,7 +3816,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketPolicyCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketPolicyCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5079,7 +3874,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketReplicationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketReplicationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5137,7 +3932,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketTaggingCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketTaggingCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5195,7 +3990,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteBucketWebsiteCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteBucketWebsiteCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5253,7 +4048,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteObjectCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteObjectCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5311,7 +4106,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeleteObjectTaggingCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteObjectTaggingCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5370,7 +4165,7 @@ exports.DeleteObjectsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeleteObjectsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5433,7 +4228,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DeletePublicAccessBlockCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class DeletePublicAccessBlockCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5491,7 +4286,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketAccelerateConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketAccelerateConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5549,7 +4344,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketAclCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketAclCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5607,7 +4402,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketAnalyticsConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketAnalyticsConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5665,7 +4460,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketCorsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketCorsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5723,7 +4518,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketEncryptionCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketEncryptionCommand extends smithy_client_1.Command {
@@ -5782,7 +4577,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketIntelligentTieringConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketIntelligentTieringConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5840,7 +4635,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketInventoryConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketInventoryConfigurationCommand extends smithy_client_1.Command {
@@ -5899,7 +4694,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketLifecycleConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketLifecycleConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -5957,7 +4752,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketLocationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketLocationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6015,7 +4810,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketLoggingCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketLoggingCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6073,7 +4868,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketMetricsConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketMetricsConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6131,7 +4926,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketNotificationConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketNotificationConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6189,7 +4984,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketOwnershipControlsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketOwnershipControlsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6247,7 +5042,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketPolicyCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketPolicyCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6305,7 +5100,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketPolicyStatusCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketPolicyStatusCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6363,7 +5158,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketReplicationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketReplicationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6421,7 +5216,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketRequestPaymentCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketRequestPaymentCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6479,7 +5274,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketTaggingCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketTaggingCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6537,7 +5332,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketVersioningCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketVersioningCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6595,7 +5390,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetBucketWebsiteCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetBucketWebsiteCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6653,7 +5448,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetObjectAclCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetObjectAclCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6712,7 +5507,7 @@ exports.GetObjectAttributesCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetObjectAttributesCommand extends smithy_client_1.Command {
@@ -6774,7 +5569,7 @@ const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetObjectCommand extends smithy_client_1.Command {
@@ -6840,7 +5635,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetObjectLegalHoldCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetObjectLegalHoldCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6898,7 +5693,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetObjectLockConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetObjectLockConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -6956,7 +5751,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetObjectRetentionCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetObjectRetentionCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7014,7 +5809,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetObjectTaggingCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetObjectTaggingCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7072,7 +5867,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetObjectTorrentCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetObjectTorrentCommand extends smithy_client_1.Command {
@@ -7131,7 +5926,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetPublicAccessBlockCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class GetPublicAccessBlockCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7189,7 +5984,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.HeadBucketCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class HeadBucketCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7248,7 +6043,7 @@ exports.HeadObjectCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class HeadObjectCommand extends smithy_client_1.Command {
@@ -7308,7 +6103,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ListBucketAnalyticsConfigurationsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class ListBucketAnalyticsConfigurationsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7366,7 +6161,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ListBucketIntelligentTieringConfigurationsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class ListBucketIntelligentTieringConfigurationsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7424,7 +6219,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ListBucketInventoryConfigurationsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class ListBucketInventoryConfigurationsCommand extends smithy_client_1.Command {
@@ -7483,7 +6278,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ListBucketMetricsConfigurationsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class ListBucketMetricsConfigurationsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7541,7 +6336,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ListBucketsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class ListBucketsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7598,7 +6393,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ListMultipartUploadsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class ListMultipartUploadsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7656,7 +6451,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ListObjectVersionsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class ListObjectVersionsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7714,7 +6509,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ListObjectsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class ListObjectsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7772,7 +6567,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ListObjectsV2Command = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class ListObjectsV2Command extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7831,7 +6626,7 @@ exports.ListPartsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class ListPartsCommand extends smithy_client_1.Command {
@@ -7892,7 +6687,7 @@ exports.PutBucketAccelerateConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketAccelerateConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -7956,7 +6751,7 @@ exports.PutBucketAclCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketAclCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8019,7 +6814,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PutBucketAnalyticsConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketAnalyticsConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8078,7 +6873,7 @@ exports.PutBucketCorsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketCorsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8142,7 +6937,7 @@ exports.PutBucketEncryptionCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketEncryptionCommand extends smithy_client_1.Command {
@@ -8206,7 +7001,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PutBucketIntelligentTieringConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketIntelligentTieringConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8264,7 +7059,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PutBucketInventoryConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketInventoryConfigurationCommand extends smithy_client_1.Command {
@@ -8324,7 +7119,7 @@ exports.PutBucketLifecycleConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketLifecycleConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8388,7 +7183,7 @@ exports.PutBucketLoggingCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketLoggingCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8451,7 +7246,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PutBucketMetricsConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketMetricsConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8509,7 +7304,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PutBucketNotificationConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketNotificationConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8568,7 +7363,7 @@ exports.PutBucketOwnershipControlsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketOwnershipControlsCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8628,7 +7423,7 @@ exports.PutBucketPolicyCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketPolicyCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8692,7 +7487,7 @@ exports.PutBucketReplicationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketReplicationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8756,7 +7551,7 @@ exports.PutBucketRequestPaymentCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketRequestPaymentCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8820,7 +7615,7 @@ exports.PutBucketTaggingCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketTaggingCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8884,7 +7679,7 @@ exports.PutBucketVersioningCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketVersioningCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -8948,7 +7743,7 @@ exports.PutBucketWebsiteCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutBucketWebsiteCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -9012,7 +7807,7 @@ exports.PutObjectAclCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutObjectAclCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -9078,7 +7873,7 @@ const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_sdk_s3_1 = __nccwpck_require__(19373);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(74695);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutObjectCommand extends smithy_client_1.Command {
@@ -9145,7 +7940,7 @@ exports.PutObjectLegalHoldCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutObjectLegalHoldCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -9209,7 +8004,7 @@ exports.PutObjectLockConfigurationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutObjectLockConfigurationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -9273,7 +8068,7 @@ exports.PutObjectRetentionCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutObjectRetentionCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -9337,7 +8132,7 @@ exports.PutObjectTaggingCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutObjectTaggingCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -9401,7 +8196,7 @@ exports.PutPublicAccessBlockCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class PutPublicAccessBlockCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -9465,7 +8260,7 @@ exports.RestoreObjectCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_1_1 = __nccwpck_require__(63471);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class RestoreObjectCommand extends smithy_client_1.Command {
@@ -9530,7 +8325,7 @@ exports.SelectObjectContentCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_1_1 = __nccwpck_require__(63471);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class SelectObjectContentCommand extends smithy_client_1.Command {
@@ -9592,7 +8387,7 @@ const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_flexible_checksums_1 = __nccwpck_require__(20914);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_1_1 = __nccwpck_require__(63471);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class UploadPartCommand extends smithy_client_1.Command {
@@ -9659,7 +8454,7 @@ const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_sdk_s3_1 = __nccwpck_require__(19373);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_ssec_1 = __nccwpck_require__(99687);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_1_1 = __nccwpck_require__(63471);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class UploadPartCopyCommand extends smithy_client_1.Command {
@@ -9720,7 +8515,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.WriteGetObjectResponseCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_1_1 = __nccwpck_require__(63471);
 const Aws_restXml_1 = __nccwpck_require__(13172);
 class WriteGetObjectResponseCommand extends smithy_client_1.Command {
@@ -9954,7 +8749,7 @@ Object.defineProperty(exports, "S3ServiceException", ({ enumerable: true, get: f
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.S3ServiceException = void 0;
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 class S3ServiceException extends smithy_client_1.ServiceException {
     constructor(options) {
         super(options);
@@ -9985,7 +8780,7 @@ tslib_1.__exportStar(__nccwpck_require__(63471), exports);
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ReplicationStatus = exports.Protocol = exports.BucketVersioningStatus = exports.MFADeleteStatus = exports.Payer = exports.ReplicationRuleStatus = exports.SseKmsEncryptedObjectsStatus = exports.ReplicaModificationsStatus = exports.ReplicationRuleFilter = exports.ExistingObjectReplicationStatus = exports.ReplicationTimeStatus = exports.MetricsStatus = exports.DeleteMarkerReplicationStatus = exports.FilterRuleName = exports.Event = exports.MetricsFilter = exports.BucketLogsPermission = exports.ExpirationStatus = exports.TransitionStorageClass = exports.LifecycleRuleFilter = exports.InventoryFrequency = exports.InventoryOptionalField = exports.InventoryIncludedObjectVersions = exports.InventoryFormat = exports.IntelligentTieringAccessTier = exports.IntelligentTieringStatus = exports.StorageClassAnalysisSchemaVersion = exports.AnalyticsS3ExportFileFormat = exports.AnalyticsFilter = exports.ObjectOwnership = exports.BucketLocationConstraint = exports.BucketCannedACL = exports.BucketAlreadyOwnedByYou = exports.BucketAlreadyExists = exports.ObjectNotInActiveTierError = exports.TaggingDirective = exports.StorageClass = exports.ObjectLockMode = exports.ObjectLockLegalHoldStatus = exports.MetadataDirective = exports.ChecksumAlgorithm = exports.ObjectCannedACL = exports.ServerSideEncryption = exports.OwnerOverride = exports.Permission = exports.Type = exports.BucketAccelerateStatus = exports.NoSuchUpload = exports.RequestPayer = exports.RequestCharged = void 0;
 exports.PutObjectRequestFilterSensitiveLog = exports.PutObjectOutputFilterSensitiveLog = exports.PutBucketInventoryConfigurationRequestFilterSensitiveLog = exports.PutBucketEncryptionRequestFilterSensitiveLog = exports.ListPartsRequestFilterSensitiveLog = exports.ListBucketInventoryConfigurationsOutputFilterSensitiveLog = exports.HeadObjectRequestFilterSensitiveLog = exports.HeadObjectOutputFilterSensitiveLog = exports.GetObjectTorrentOutputFilterSensitiveLog = exports.GetObjectAttributesRequestFilterSensitiveLog = exports.GetObjectRequestFilterSensitiveLog = exports.GetObjectOutputFilterSensitiveLog = exports.GetBucketInventoryConfigurationOutputFilterSensitiveLog = exports.InventoryConfigurationFilterSensitiveLog = exports.InventoryDestinationFilterSensitiveLog = exports.InventoryS3BucketDestinationFilterSensitiveLog = exports.InventoryEncryptionFilterSensitiveLog = exports.SSEKMSFilterSensitiveLog = exports.GetBucketEncryptionOutputFilterSensitiveLog = exports.ServerSideEncryptionConfigurationFilterSensitiveLog = exports.ServerSideEncryptionRuleFilterSensitiveLog = exports.ServerSideEncryptionByDefaultFilterSensitiveLog = exports.CreateMultipartUploadRequestFilterSensitiveLog = exports.CreateMultipartUploadOutputFilterSensitiveLog = exports.CopyObjectRequestFilterSensitiveLog = exports.CopyObjectOutputFilterSensitiveLog = exports.CompleteMultipartUploadRequestFilterSensitiveLog = exports.CompleteMultipartUploadOutputFilterSensitiveLog = exports.MFADelete = exports.ObjectVersionStorageClass = exports.NoSuchBucket = exports.ObjectStorageClass = exports.EncodingType = exports.ArchiveStatus = exports.NotFound = exports.ObjectLockRetentionMode = exports.ObjectLockEnabled = exports.ObjectAttributes = exports.NoSuchKey = exports.InvalidObjectState = exports.ChecksumMode = void 0;
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const S3ServiceException_1 = __nccwpck_require__(49422);
 exports.RequestCharged = {
     requester: "requester",
@@ -10064,6 +8859,7 @@ exports.StorageClass = {
     ONEZONE_IA: "ONEZONE_IA",
     OUTPOSTS: "OUTPOSTS",
     REDUCED_REDUNDANCY: "REDUCED_REDUNDANCY",
+    SNOW: "SNOW",
     STANDARD: "STANDARD",
     STANDARD_IA: "STANDARD_IA",
 };
@@ -10418,6 +9214,7 @@ exports.ObjectStorageClass = {
     ONEZONE_IA: "ONEZONE_IA",
     OUTPOSTS: "OUTPOSTS",
     REDUCED_REDUNDANCY: "REDUCED_REDUNDANCY",
+    SNOW: "SNOW",
     STANDARD: "STANDARD",
     STANDARD_IA: "STANDARD_IA",
 };
@@ -10614,7 +9411,7 @@ exports.PutObjectRequestFilterSensitiveLog = PutObjectRequestFilterSensitiveLog;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.WriteGetObjectResponseRequestFilterSensitiveLog = exports.UploadPartCopyRequestFilterSensitiveLog = exports.UploadPartCopyOutputFilterSensitiveLog = exports.UploadPartRequestFilterSensitiveLog = exports.UploadPartOutputFilterSensitiveLog = exports.SelectObjectContentRequestFilterSensitiveLog = exports.SelectObjectContentOutputFilterSensitiveLog = exports.SelectObjectContentEventStreamFilterSensitiveLog = exports.RestoreObjectRequestFilterSensitiveLog = exports.RestoreRequestFilterSensitiveLog = exports.OutputLocationFilterSensitiveLog = exports.S3LocationFilterSensitiveLog = exports.EncryptionFilterSensitiveLog = exports.SelectObjectContentEventStream = exports.RestoreRequestType = exports.QuoteFields = exports.JSONType = exports.FileHeaderInfo = exports.CompressionType = exports.ExpressionType = exports.Tier = exports.ObjectAlreadyInActiveTierError = void 0;
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const S3ServiceException_1 = __nccwpck_require__(49422);
 class ObjectAlreadyInActiveTierError extends S3ServiceException_1.S3ServiceException {
     constructor(opts) {
@@ -10858,7 +9655,7 @@ exports.de_DeleteBucketAnalyticsConfigurationCommand = exports.de_DeleteBucketCo
 exports.de_ListBucketMetricsConfigurationsCommand = exports.de_ListBucketInventoryConfigurationsCommand = exports.de_ListBucketIntelligentTieringConfigurationsCommand = exports.de_ListBucketAnalyticsConfigurationsCommand = exports.de_HeadObjectCommand = exports.de_HeadBucketCommand = exports.de_GetPublicAccessBlockCommand = exports.de_GetObjectTorrentCommand = exports.de_GetObjectTaggingCommand = exports.de_GetObjectRetentionCommand = exports.de_GetObjectLockConfigurationCommand = exports.de_GetObjectLegalHoldCommand = exports.de_GetObjectAttributesCommand = exports.de_GetObjectAclCommand = exports.de_GetObjectCommand = exports.de_GetBucketWebsiteCommand = exports.de_GetBucketVersioningCommand = exports.de_GetBucketTaggingCommand = exports.de_GetBucketRequestPaymentCommand = exports.de_GetBucketReplicationCommand = exports.de_GetBucketPolicyStatusCommand = exports.de_GetBucketPolicyCommand = exports.de_GetBucketOwnershipControlsCommand = exports.de_GetBucketNotificationConfigurationCommand = exports.de_GetBucketMetricsConfigurationCommand = exports.de_GetBucketLoggingCommand = exports.de_GetBucketLocationCommand = exports.de_GetBucketLifecycleConfigurationCommand = exports.de_GetBucketInventoryConfigurationCommand = exports.de_GetBucketIntelligentTieringConfigurationCommand = exports.de_GetBucketEncryptionCommand = exports.de_GetBucketCorsCommand = exports.de_GetBucketAnalyticsConfigurationCommand = exports.de_GetBucketAclCommand = exports.de_GetBucketAccelerateConfigurationCommand = exports.de_DeletePublicAccessBlockCommand = exports.de_DeleteObjectTaggingCommand = exports.de_DeleteObjectsCommand = exports.de_DeleteObjectCommand = exports.de_DeleteBucketWebsiteCommand = exports.de_DeleteBucketTaggingCommand = exports.de_DeleteBucketReplicationCommand = exports.de_DeleteBucketPolicyCommand = exports.de_DeleteBucketOwnershipControlsCommand = exports.de_DeleteBucketMetricsConfigurationCommand = exports.de_DeleteBucketLifecycleCommand = exports.de_DeleteBucketInventoryConfigurationCommand = exports.de_DeleteBucketIntelligentTieringConfigurationCommand = exports.de_DeleteBucketEncryptionCommand = exports.de_DeleteBucketCorsCommand = void 0;
 exports.de_WriteGetObjectResponseCommand = exports.de_UploadPartCopyCommand = exports.de_UploadPartCommand = exports.de_SelectObjectContentCommand = exports.de_RestoreObjectCommand = exports.de_PutPublicAccessBlockCommand = exports.de_PutObjectTaggingCommand = exports.de_PutObjectRetentionCommand = exports.de_PutObjectLockConfigurationCommand = exports.de_PutObjectLegalHoldCommand = exports.de_PutObjectAclCommand = exports.de_PutObjectCommand = exports.de_PutBucketWebsiteCommand = exports.de_PutBucketVersioningCommand = exports.de_PutBucketTaggingCommand = exports.de_PutBucketRequestPaymentCommand = exports.de_PutBucketReplicationCommand = exports.de_PutBucketPolicyCommand = exports.de_PutBucketOwnershipControlsCommand = exports.de_PutBucketNotificationConfigurationCommand = exports.de_PutBucketMetricsConfigurationCommand = exports.de_PutBucketLoggingCommand = exports.de_PutBucketLifecycleConfigurationCommand = exports.de_PutBucketInventoryConfigurationCommand = exports.de_PutBucketIntelligentTieringConfigurationCommand = exports.de_PutBucketEncryptionCommand = exports.de_PutBucketCorsCommand = exports.de_PutBucketAnalyticsConfigurationCommand = exports.de_PutBucketAclCommand = exports.de_PutBucketAccelerateConfigurationCommand = exports.de_ListPartsCommand = exports.de_ListObjectVersionsCommand = exports.de_ListObjectsV2Command = exports.de_ListObjectsCommand = exports.de_ListMultipartUploadsCommand = exports.de_ListBucketsCommand = void 0;
 const protocol_http_1 = __nccwpck_require__(73632);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const xml_builder_1 = __nccwpck_require__(59044);
 const fast_xml_parser_1 = __nccwpck_require__(20064);
 const models_0_1 = __nccwpck_require__(74695);
@@ -20539,9 +19336,9 @@ const util_retry_1 = __nccwpck_require__(63687);
 const util_stream_node_1 = __nccwpck_require__(97040);
 const util_user_agent_node_1 = __nccwpck_require__(7306);
 const runtimeConfig_shared_1 = __nccwpck_require__(97373);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const util_defaults_mode_node_1 = __nccwpck_require__(61984);
-const smithy_client_2 = __nccwpck_require__(10843);
+const smithy_client_2 = __nccwpck_require__(48);
 const getRuntimeConfig = (config) => {
     (0, smithy_client_2.emitWarningIfUnsupportedVersion)(process.version);
     const defaultsMode = (0, util_defaults_mode_node_1.resolveDefaultsModeConfig)(config);
@@ -20589,7 +19386,7 @@ exports.getRuntimeConfig = getRuntimeConfig;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getRuntimeConfig = void 0;
 const signature_v4_multi_region_1 = __nccwpck_require__(87688);
-const smithy_client_1 = __nccwpck_require__(10843);
+const smithy_client_1 = __nccwpck_require__(48);
 const url_parser_1 = __nccwpck_require__(92942);
 const util_base64_1 = __nccwpck_require__(46669);
 const util_utf8_1 = __nccwpck_require__(82166);
@@ -20943,1026 +19740,6 @@ exports.getValidateBucketNamePlugin = getValidateBucketNamePlugin;
 
 /***/ }),
 
-/***/ 63182:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NoOpLogger = void 0;
-class NoOpLogger {
-    trace() { }
-    debug() { }
-    info() { }
-    warn() { }
-    error() { }
-}
-exports.NoOpLogger = NoOpLogger;
-
-
-/***/ }),
-
-/***/ 55057:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Client = void 0;
-const middleware_stack_1 = __nccwpck_require__(75457);
-class Client {
-    constructor(config) {
-        this.middlewareStack = (0, middleware_stack_1.constructStack)();
-        this.config = config;
-    }
-    send(command, optionsOrCb, cb) {
-        const options = typeof optionsOrCb !== "function" ? optionsOrCb : undefined;
-        const callback = typeof optionsOrCb === "function" ? optionsOrCb : cb;
-        const handler = command.resolveMiddleware(this.middlewareStack, this.config, options);
-        if (callback) {
-            handler(command)
-                .then((result) => callback(null, result.output), (err) => callback(err))
-                .catch(() => { });
-        }
-        else {
-            return handler(command).then((result) => result.output);
-        }
-    }
-    destroy() {
-        if (this.config.requestHandler.destroy)
-            this.config.requestHandler.destroy();
-    }
-}
-exports.Client = Client;
-
-
-/***/ }),
-
-/***/ 29019:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Command = void 0;
-const middleware_stack_1 = __nccwpck_require__(75457);
-class Command {
-    constructor() {
-        this.middlewareStack = (0, middleware_stack_1.constructStack)();
-    }
-}
-exports.Command = Command;
-
-
-/***/ }),
-
-/***/ 91492:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SENSITIVE_STRING = void 0;
-exports.SENSITIVE_STRING = "***SensitiveInformation***";
-
-
-/***/ }),
-
-/***/ 58618:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parseEpochTimestamp = exports.parseRfc7231DateTime = exports.parseRfc3339DateTimeWithOffset = exports.parseRfc3339DateTime = exports.dateToUtcString = void 0;
-const parse_utils_1 = __nccwpck_require__(91088);
-const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-function dateToUtcString(date) {
-    const year = date.getUTCFullYear();
-    const month = date.getUTCMonth();
-    const dayOfWeek = date.getUTCDay();
-    const dayOfMonthInt = date.getUTCDate();
-    const hoursInt = date.getUTCHours();
-    const minutesInt = date.getUTCMinutes();
-    const secondsInt = date.getUTCSeconds();
-    const dayOfMonthString = dayOfMonthInt < 10 ? `0${dayOfMonthInt}` : `${dayOfMonthInt}`;
-    const hoursString = hoursInt < 10 ? `0${hoursInt}` : `${hoursInt}`;
-    const minutesString = minutesInt < 10 ? `0${minutesInt}` : `${minutesInt}`;
-    const secondsString = secondsInt < 10 ? `0${secondsInt}` : `${secondsInt}`;
-    return `${DAYS[dayOfWeek]}, ${dayOfMonthString} ${MONTHS[month]} ${year} ${hoursString}:${minutesString}:${secondsString} GMT`;
-}
-exports.dateToUtcString = dateToUtcString;
-const RFC3339 = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?[zZ]$/);
-const parseRfc3339DateTime = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value !== "string") {
-        throw new TypeError("RFC-3339 date-times must be expressed as strings");
-    }
-    const match = RFC3339.exec(value);
-    if (!match) {
-        throw new TypeError("Invalid RFC-3339 date-time value");
-    }
-    const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-    const year = (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr));
-    const month = parseDateValue(monthStr, "month", 1, 12);
-    const day = parseDateValue(dayStr, "day", 1, 31);
-    return buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
-};
-exports.parseRfc3339DateTime = parseRfc3339DateTime;
-const RFC3339_WITH_OFFSET = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(([-+]\d{2}\:\d{2})|[zZ])$/);
-const parseRfc3339DateTimeWithOffset = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value !== "string") {
-        throw new TypeError("RFC-3339 date-times must be expressed as strings");
-    }
-    const match = RFC3339_WITH_OFFSET.exec(value);
-    if (!match) {
-        throw new TypeError("Invalid RFC-3339 date-time value");
-    }
-    const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, offsetStr] = match;
-    const year = (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr));
-    const month = parseDateValue(monthStr, "month", 1, 12);
-    const day = parseDateValue(dayStr, "day", 1, 31);
-    const date = buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
-    if (offsetStr.toUpperCase() != "Z") {
-        date.setTime(date.getTime() - parseOffsetToMilliseconds(offsetStr));
-    }
-    return date;
-};
-exports.parseRfc3339DateTimeWithOffset = parseRfc3339DateTimeWithOffset;
-const IMF_FIXDATE = new RegExp(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d{2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/);
-const RFC_850_DATE = new RegExp(/^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d{2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/);
-const ASC_TIME = new RegExp(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( [1-9]|\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? (\d{4})$/);
-const parseRfc7231DateTime = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value !== "string") {
-        throw new TypeError("RFC-7231 date-times must be expressed as strings");
-    }
-    let match = IMF_FIXDATE.exec(value);
-    if (match) {
-        const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-        return buildDate((0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr)), parseMonthByShortName(monthStr), parseDateValue(dayStr, "day", 1, 31), { hours, minutes, seconds, fractionalMilliseconds });
-    }
-    match = RFC_850_DATE.exec(value);
-    if (match) {
-        const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-        return adjustRfc850Year(buildDate(parseTwoDigitYear(yearStr), parseMonthByShortName(monthStr), parseDateValue(dayStr, "day", 1, 31), {
-            hours,
-            minutes,
-            seconds,
-            fractionalMilliseconds,
-        }));
-    }
-    match = ASC_TIME.exec(value);
-    if (match) {
-        const [_, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, yearStr] = match;
-        return buildDate((0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr)), parseMonthByShortName(monthStr), parseDateValue(dayStr.trimLeft(), "day", 1, 31), { hours, minutes, seconds, fractionalMilliseconds });
-    }
-    throw new TypeError("Invalid RFC-7231 date-time value");
-};
-exports.parseRfc7231DateTime = parseRfc7231DateTime;
-const parseEpochTimestamp = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    let valueAsDouble;
-    if (typeof value === "number") {
-        valueAsDouble = value;
-    }
-    else if (typeof value === "string") {
-        valueAsDouble = (0, parse_utils_1.strictParseDouble)(value);
-    }
-    else {
-        throw new TypeError("Epoch timestamps must be expressed as floating point numbers or their string representation");
-    }
-    if (Number.isNaN(valueAsDouble) || valueAsDouble === Infinity || valueAsDouble === -Infinity) {
-        throw new TypeError("Epoch timestamps must be valid, non-Infinite, non-NaN numerics");
-    }
-    return new Date(Math.round(valueAsDouble * 1000));
-};
-exports.parseEpochTimestamp = parseEpochTimestamp;
-const buildDate = (year, month, day, time) => {
-    const adjustedMonth = month - 1;
-    validateDayOfMonth(year, adjustedMonth, day);
-    return new Date(Date.UTC(year, adjustedMonth, day, parseDateValue(time.hours, "hour", 0, 23), parseDateValue(time.minutes, "minute", 0, 59), parseDateValue(time.seconds, "seconds", 0, 60), parseMilliseconds(time.fractionalMilliseconds)));
-};
-const parseTwoDigitYear = (value) => {
-    const thisYear = new Date().getUTCFullYear();
-    const valueInThisCentury = Math.floor(thisYear / 100) * 100 + (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(value));
-    if (valueInThisCentury < thisYear) {
-        return valueInThisCentury + 100;
-    }
-    return valueInThisCentury;
-};
-const FIFTY_YEARS_IN_MILLIS = 50 * 365 * 24 * 60 * 60 * 1000;
-const adjustRfc850Year = (input) => {
-    if (input.getTime() - new Date().getTime() > FIFTY_YEARS_IN_MILLIS) {
-        return new Date(Date.UTC(input.getUTCFullYear() - 100, input.getUTCMonth(), input.getUTCDate(), input.getUTCHours(), input.getUTCMinutes(), input.getUTCSeconds(), input.getUTCMilliseconds()));
-    }
-    return input;
-};
-const parseMonthByShortName = (value) => {
-    const monthIdx = MONTHS.indexOf(value);
-    if (monthIdx < 0) {
-        throw new TypeError(`Invalid month: ${value}`);
-    }
-    return monthIdx + 1;
-};
-const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-const validateDayOfMonth = (year, month, day) => {
-    let maxDays = DAYS_IN_MONTH[month];
-    if (month === 1 && isLeapYear(year)) {
-        maxDays = 29;
-    }
-    if (day > maxDays) {
-        throw new TypeError(`Invalid day for ${MONTHS[month]} in ${year}: ${day}`);
-    }
-};
-const isLeapYear = (year) => {
-    return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
-};
-const parseDateValue = (value, type, lower, upper) => {
-    const dateVal = (0, parse_utils_1.strictParseByte)(stripLeadingZeroes(value));
-    if (dateVal < lower || dateVal > upper) {
-        throw new TypeError(`${type} must be between ${lower} and ${upper}, inclusive`);
-    }
-    return dateVal;
-};
-const parseMilliseconds = (value) => {
-    if (value === null || value === undefined) {
-        return 0;
-    }
-    return (0, parse_utils_1.strictParseFloat32)("0." + value) * 1000;
-};
-const parseOffsetToMilliseconds = (value) => {
-    const directionStr = value[0];
-    let direction = 1;
-    if (directionStr == "+") {
-        direction = 1;
-    }
-    else if (directionStr == "-") {
-        direction = -1;
-    }
-    else {
-        throw new TypeError(`Offset direction, ${directionStr}, must be "+" or "-"`);
-    }
-    const hour = Number(value.substring(1, 3));
-    const minute = Number(value.substring(4, 6));
-    return direction * (hour * 60 + minute) * 60 * 1000;
-};
-const stripLeadingZeroes = (value) => {
-    let idx = 0;
-    while (idx < value.length - 1 && value.charAt(idx) === "0") {
-        idx++;
-    }
-    if (idx === 0) {
-        return value;
-    }
-    return value.slice(idx);
-};
-
-
-/***/ }),
-
-/***/ 3270:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.withBaseException = exports.throwDefaultError = void 0;
-const exceptions_1 = __nccwpck_require__(91107);
-const throwDefaultError = ({ output, parsedBody, exceptionCtor, errorCode }) => {
-    const $metadata = deserializeMetadata(output);
-    const statusCode = $metadata.httpStatusCode ? $metadata.httpStatusCode + "" : undefined;
-    const response = new exceptionCtor({
-        name: (parsedBody === null || parsedBody === void 0 ? void 0 : parsedBody.code) || (parsedBody === null || parsedBody === void 0 ? void 0 : parsedBody.Code) || errorCode || statusCode || "UnknownError",
-        $fault: "client",
-        $metadata,
-    });
-    throw (0, exceptions_1.decorateServiceException)(response, parsedBody);
-};
-exports.throwDefaultError = throwDefaultError;
-const withBaseException = (ExceptionCtor) => {
-    return ({ output, parsedBody, errorCode }) => {
-        (0, exports.throwDefaultError)({ output, parsedBody, exceptionCtor: ExceptionCtor, errorCode });
-    };
-};
-exports.withBaseException = withBaseException;
-const deserializeMetadata = (output) => {
-    var _a, _b;
-    return ({
-        httpStatusCode: output.statusCode,
-        requestId: (_b = (_a = output.headers["x-amzn-requestid"]) !== null && _a !== void 0 ? _a : output.headers["x-amzn-request-id"]) !== null && _b !== void 0 ? _b : output.headers["x-amz-request-id"],
-        extendedRequestId: output.headers["x-amz-id-2"],
-        cfId: output.headers["x-amz-cf-id"],
-    });
-};
-
-
-/***/ }),
-
-/***/ 21165:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.loadConfigsForDefaultMode = void 0;
-const loadConfigsForDefaultMode = (mode) => {
-    switch (mode) {
-        case "standard":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 3100,
-            };
-        case "in-region":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 1100,
-            };
-        case "cross-region":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 3100,
-            };
-        case "mobile":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 30000,
-            };
-        default:
-            return {};
-    }
-};
-exports.loadConfigsForDefaultMode = loadConfigsForDefaultMode;
-
-
-/***/ }),
-
-/***/ 66112:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.emitWarningIfUnsupportedVersion = void 0;
-let warningEmitted = false;
-const emitWarningIfUnsupportedVersion = (version) => {
-    if (version && !warningEmitted && parseInt(version.substring(1, version.indexOf("."))) < 14) {
-        warningEmitted = true;
-    }
-};
-exports.emitWarningIfUnsupportedVersion = emitWarningIfUnsupportedVersion;
-
-
-/***/ }),
-
-/***/ 91107:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.decorateServiceException = exports.ServiceException = void 0;
-class ServiceException extends Error {
-    constructor(options) {
-        super(options.message);
-        Object.setPrototypeOf(this, ServiceException.prototype);
-        this.name = options.name;
-        this.$fault = options.$fault;
-        this.$metadata = options.$metadata;
-    }
-}
-exports.ServiceException = ServiceException;
-const decorateServiceException = (exception, additions = {}) => {
-    Object.entries(additions)
-        .filter(([, v]) => v !== undefined)
-        .forEach(([k, v]) => {
-        if (exception[k] == undefined || exception[k] === "") {
-            exception[k] = v;
-        }
-    });
-    const message = exception.message || exception.Message || "UnknownError";
-    exception.message = message;
-    delete exception.Message;
-    return exception;
-};
-exports.decorateServiceException = decorateServiceException;
-
-
-/***/ }),
-
-/***/ 92085:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.extendedEncodeURIComponent = void 0;
-function extendedEncodeURIComponent(str) {
-    return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
-        return "%" + c.charCodeAt(0).toString(16).toUpperCase();
-    });
-}
-exports.extendedEncodeURIComponent = extendedEncodeURIComponent;
-
-
-/***/ }),
-
-/***/ 51246:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getArrayIfSingleItem = void 0;
-const getArrayIfSingleItem = (mayBeArray) => Array.isArray(mayBeArray) ? mayBeArray : [mayBeArray];
-exports.getArrayIfSingleItem = getArrayIfSingleItem;
-
-
-/***/ }),
-
-/***/ 5978:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getValueFromTextNode = void 0;
-const getValueFromTextNode = (obj) => {
-    const textNodeName = "#text";
-    for (const key in obj) {
-        if (obj.hasOwnProperty(key) && obj[key][textNodeName] !== undefined) {
-            obj[key] = obj[key][textNodeName];
-        }
-        else if (typeof obj[key] === "object" && obj[key] !== null) {
-            obj[key] = (0, exports.getValueFromTextNode)(obj[key]);
-        }
-    }
-    return obj;
-};
-exports.getValueFromTextNode = getValueFromTextNode;
-
-
-/***/ }),
-
-/***/ 10843:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __nccwpck_require__(15609);
-tslib_1.__exportStar(__nccwpck_require__(63182), exports);
-tslib_1.__exportStar(__nccwpck_require__(55057), exports);
-tslib_1.__exportStar(__nccwpck_require__(29019), exports);
-tslib_1.__exportStar(__nccwpck_require__(91492), exports);
-tslib_1.__exportStar(__nccwpck_require__(58618), exports);
-tslib_1.__exportStar(__nccwpck_require__(3270), exports);
-tslib_1.__exportStar(__nccwpck_require__(21165), exports);
-tslib_1.__exportStar(__nccwpck_require__(66112), exports);
-tslib_1.__exportStar(__nccwpck_require__(91107), exports);
-tslib_1.__exportStar(__nccwpck_require__(92085), exports);
-tslib_1.__exportStar(__nccwpck_require__(51246), exports);
-tslib_1.__exportStar(__nccwpck_require__(5978), exports);
-tslib_1.__exportStar(__nccwpck_require__(75283), exports);
-tslib_1.__exportStar(__nccwpck_require__(27012), exports);
-tslib_1.__exportStar(__nccwpck_require__(91088), exports);
-tslib_1.__exportStar(__nccwpck_require__(95211), exports);
-tslib_1.__exportStar(__nccwpck_require__(15967), exports);
-tslib_1.__exportStar(__nccwpck_require__(25436), exports);
-tslib_1.__exportStar(__nccwpck_require__(28262), exports);
-
-
-/***/ }),
-
-/***/ 75283:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.LazyJsonString = exports.StringWrapper = void 0;
-const StringWrapper = function () {
-    const Class = Object.getPrototypeOf(this).constructor;
-    const Constructor = Function.bind.apply(String, [null, ...arguments]);
-    const instance = new Constructor();
-    Object.setPrototypeOf(instance, Class.prototype);
-    return instance;
-};
-exports.StringWrapper = StringWrapper;
-exports.StringWrapper.prototype = Object.create(String.prototype, {
-    constructor: {
-        value: exports.StringWrapper,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-    },
-});
-Object.setPrototypeOf(exports.StringWrapper, String);
-class LazyJsonString extends exports.StringWrapper {
-    deserializeJSON() {
-        return JSON.parse(super.toString());
-    }
-    toJSON() {
-        return super.toString();
-    }
-    static fromObject(object) {
-        if (object instanceof LazyJsonString) {
-            return object;
-        }
-        else if (object instanceof String || typeof object === "string") {
-            return new LazyJsonString(object);
-        }
-        return new LazyJsonString(JSON.stringify(object));
-    }
-}
-exports.LazyJsonString = LazyJsonString;
-
-
-/***/ }),
-
-/***/ 27012:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.take = exports.convertMap = exports.map = void 0;
-function map(arg0, arg1, arg2) {
-    let target;
-    let filter;
-    let instructions;
-    if (typeof arg1 === "undefined" && typeof arg2 === "undefined") {
-        target = {};
-        instructions = arg0;
-    }
-    else {
-        target = arg0;
-        if (typeof arg1 === "function") {
-            filter = arg1;
-            instructions = arg2;
-            return mapWithFilter(target, filter, instructions);
-        }
-        else {
-            instructions = arg1;
-        }
-    }
-    for (const key of Object.keys(instructions)) {
-        if (!Array.isArray(instructions[key])) {
-            target[key] = instructions[key];
-            continue;
-        }
-        applyInstruction(target, null, instructions, key);
-    }
-    return target;
-}
-exports.map = map;
-const convertMap = (target) => {
-    const output = {};
-    for (const [k, v] of Object.entries(target || {})) {
-        output[k] = [, v];
-    }
-    return output;
-};
-exports.convertMap = convertMap;
-const take = (source, instructions) => {
-    const out = {};
-    for (const key in instructions) {
-        applyInstruction(out, source, instructions, key);
-    }
-    return out;
-};
-exports.take = take;
-const mapWithFilter = (target, filter, instructions) => {
-    return map(target, Object.entries(instructions).reduce((_instructions, [key, value]) => {
-        if (Array.isArray(value)) {
-            _instructions[key] = value;
-        }
-        else {
-            if (typeof value === "function") {
-                _instructions[key] = [filter, value()];
-            }
-            else {
-                _instructions[key] = [filter, value];
-            }
-        }
-        return _instructions;
-    }, {}));
-};
-const applyInstruction = (target, source, instructions, targetKey) => {
-    if (source !== null) {
-        let instruction = instructions[targetKey];
-        if (typeof instruction === "function") {
-            instruction = [, instruction];
-        }
-        const [filter = nonNullish, valueFn = pass, sourceKey = targetKey] = instruction;
-        if ((typeof filter === "function" && filter(source[sourceKey])) || (typeof filter !== "function" && !!filter)) {
-            target[targetKey] = valueFn(source[sourceKey]);
-        }
-        return;
-    }
-    let [filter, value] = instructions[targetKey];
-    if (typeof value === "function") {
-        let _value;
-        const defaultFilterPassed = filter === undefined && (_value = value()) != null;
-        const customFilterPassed = (typeof filter === "function" && !!filter(void 0)) || (typeof filter !== "function" && !!filter);
-        if (defaultFilterPassed) {
-            target[targetKey] = _value;
-        }
-        else if (customFilterPassed) {
-            target[targetKey] = value();
-        }
-    }
-    else {
-        const defaultFilterPassed = filter === undefined && value != null;
-        const customFilterPassed = (typeof filter === "function" && !!filter(value)) || (typeof filter !== "function" && !!filter);
-        if (defaultFilterPassed || customFilterPassed) {
-            target[targetKey] = value;
-        }
-    }
-};
-const nonNullish = (_) => _ != null;
-const pass = (_) => _;
-
-
-/***/ }),
-
-/***/ 91088:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.logger = exports.strictParseByte = exports.strictParseShort = exports.strictParseInt32 = exports.strictParseInt = exports.strictParseLong = exports.limitedParseFloat32 = exports.limitedParseFloat = exports.handleFloat = exports.limitedParseDouble = exports.strictParseFloat32 = exports.strictParseFloat = exports.strictParseDouble = exports.expectUnion = exports.expectString = exports.expectObject = exports.expectNonNull = exports.expectByte = exports.expectShort = exports.expectInt32 = exports.expectInt = exports.expectLong = exports.expectFloat32 = exports.expectNumber = exports.expectBoolean = exports.parseBoolean = void 0;
-const parseBoolean = (value) => {
-    switch (value) {
-        case "true":
-            return true;
-        case "false":
-            return false;
-        default:
-            throw new Error(`Unable to parse boolean value "${value}"`);
-    }
-};
-exports.parseBoolean = parseBoolean;
-const expectBoolean = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "number") {
-        if (value === 0 || value === 1) {
-            exports.logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
-        }
-        if (value === 0) {
-            return false;
-        }
-        if (value === 1) {
-            return true;
-        }
-    }
-    if (typeof value === "string") {
-        const lower = value.toLowerCase();
-        if (lower === "false" || lower === "true") {
-            exports.logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
-        }
-        if (lower === "false") {
-            return false;
-        }
-        if (lower === "true") {
-            return true;
-        }
-    }
-    if (typeof value === "boolean") {
-        return value;
-    }
-    throw new TypeError(`Expected boolean, got ${typeof value}: ${value}`);
-};
-exports.expectBoolean = expectBoolean;
-const expectNumber = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "string") {
-        const parsed = parseFloat(value);
-        if (!Number.isNaN(parsed)) {
-            if (String(parsed) !== String(value)) {
-                exports.logger.warn(stackTraceWarning(`Expected number but observed string: ${value}`));
-            }
-            return parsed;
-        }
-    }
-    if (typeof value === "number") {
-        return value;
-    }
-    throw new TypeError(`Expected number, got ${typeof value}: ${value}`);
-};
-exports.expectNumber = expectNumber;
-const MAX_FLOAT = Math.ceil(2 ** 127 * (2 - 2 ** -23));
-const expectFloat32 = (value) => {
-    const expected = (0, exports.expectNumber)(value);
-    if (expected !== undefined && !Number.isNaN(expected) && expected !== Infinity && expected !== -Infinity) {
-        if (Math.abs(expected) > MAX_FLOAT) {
-            throw new TypeError(`Expected 32-bit float, got ${value}`);
-        }
-    }
-    return expected;
-};
-exports.expectFloat32 = expectFloat32;
-const expectLong = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (Number.isInteger(value) && !Number.isNaN(value)) {
-        return value;
-    }
-    throw new TypeError(`Expected integer, got ${typeof value}: ${value}`);
-};
-exports.expectLong = expectLong;
-exports.expectInt = exports.expectLong;
-const expectInt32 = (value) => expectSizedInt(value, 32);
-exports.expectInt32 = expectInt32;
-const expectShort = (value) => expectSizedInt(value, 16);
-exports.expectShort = expectShort;
-const expectByte = (value) => expectSizedInt(value, 8);
-exports.expectByte = expectByte;
-const expectSizedInt = (value, size) => {
-    const expected = (0, exports.expectLong)(value);
-    if (expected !== undefined && castInt(expected, size) !== expected) {
-        throw new TypeError(`Expected ${size}-bit integer, got ${value}`);
-    }
-    return expected;
-};
-const castInt = (value, size) => {
-    switch (size) {
-        case 32:
-            return Int32Array.of(value)[0];
-        case 16:
-            return Int16Array.of(value)[0];
-        case 8:
-            return Int8Array.of(value)[0];
-    }
-};
-const expectNonNull = (value, location) => {
-    if (value === null || value === undefined) {
-        if (location) {
-            throw new TypeError(`Expected a non-null value for ${location}`);
-        }
-        throw new TypeError("Expected a non-null value");
-    }
-    return value;
-};
-exports.expectNonNull = expectNonNull;
-const expectObject = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "object" && !Array.isArray(value)) {
-        return value;
-    }
-    const receivedType = Array.isArray(value) ? "array" : typeof value;
-    throw new TypeError(`Expected object, got ${receivedType}: ${value}`);
-};
-exports.expectObject = expectObject;
-const expectString = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "string") {
-        return value;
-    }
-    if (["boolean", "number", "bigint"].includes(typeof value)) {
-        exports.logger.warn(stackTraceWarning(`Expected string, got ${typeof value}: ${value}`));
-        return String(value);
-    }
-    throw new TypeError(`Expected string, got ${typeof value}: ${value}`);
-};
-exports.expectString = expectString;
-const expectUnion = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    const asObject = (0, exports.expectObject)(value);
-    const setKeys = Object.entries(asObject)
-        .filter(([, v]) => v != null)
-        .map(([k]) => k);
-    if (setKeys.length === 0) {
-        throw new TypeError(`Unions must have exactly one non-null member. None were found.`);
-    }
-    if (setKeys.length > 1) {
-        throw new TypeError(`Unions must have exactly one non-null member. Keys ${setKeys} were not null.`);
-    }
-    return asObject;
-};
-exports.expectUnion = expectUnion;
-const strictParseDouble = (value) => {
-    if (typeof value == "string") {
-        return (0, exports.expectNumber)(parseNumber(value));
-    }
-    return (0, exports.expectNumber)(value);
-};
-exports.strictParseDouble = strictParseDouble;
-exports.strictParseFloat = exports.strictParseDouble;
-const strictParseFloat32 = (value) => {
-    if (typeof value == "string") {
-        return (0, exports.expectFloat32)(parseNumber(value));
-    }
-    return (0, exports.expectFloat32)(value);
-};
-exports.strictParseFloat32 = strictParseFloat32;
-const NUMBER_REGEX = /(-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?)|(-?Infinity)|(NaN)/g;
-const parseNumber = (value) => {
-    const matches = value.match(NUMBER_REGEX);
-    if (matches === null || matches[0].length !== value.length) {
-        throw new TypeError(`Expected real number, got implicit NaN`);
-    }
-    return parseFloat(value);
-};
-const limitedParseDouble = (value) => {
-    if (typeof value == "string") {
-        return parseFloatString(value);
-    }
-    return (0, exports.expectNumber)(value);
-};
-exports.limitedParseDouble = limitedParseDouble;
-exports.handleFloat = exports.limitedParseDouble;
-exports.limitedParseFloat = exports.limitedParseDouble;
-const limitedParseFloat32 = (value) => {
-    if (typeof value == "string") {
-        return parseFloatString(value);
-    }
-    return (0, exports.expectFloat32)(value);
-};
-exports.limitedParseFloat32 = limitedParseFloat32;
-const parseFloatString = (value) => {
-    switch (value) {
-        case "NaN":
-            return NaN;
-        case "Infinity":
-            return Infinity;
-        case "-Infinity":
-            return -Infinity;
-        default:
-            throw new Error(`Unable to parse float value: ${value}`);
-    }
-};
-const strictParseLong = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectLong)(parseNumber(value));
-    }
-    return (0, exports.expectLong)(value);
-};
-exports.strictParseLong = strictParseLong;
-exports.strictParseInt = exports.strictParseLong;
-const strictParseInt32 = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectInt32)(parseNumber(value));
-    }
-    return (0, exports.expectInt32)(value);
-};
-exports.strictParseInt32 = strictParseInt32;
-const strictParseShort = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectShort)(parseNumber(value));
-    }
-    return (0, exports.expectShort)(value);
-};
-exports.strictParseShort = strictParseShort;
-const strictParseByte = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectByte)(parseNumber(value));
-    }
-    return (0, exports.expectByte)(value);
-};
-exports.strictParseByte = strictParseByte;
-const stackTraceWarning = (message) => {
-    return String(new TypeError(message).stack || message)
-        .split("\n")
-        .slice(0, 5)
-        .filter((s) => !s.includes("stackTraceWarning"))
-        .join("\n");
-};
-exports.logger = {
-    warn: console.warn,
-};
-
-
-/***/ }),
-
-/***/ 95211:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.resolvedPath = void 0;
-const extended_encode_uri_component_1 = __nccwpck_require__(92085);
-const resolvedPath = (resolvedPath, input, memberName, labelValueProvider, uriLabel, isGreedyLabel) => {
-    if (input != null && input[memberName] !== undefined) {
-        const labelValue = labelValueProvider();
-        if (labelValue.length <= 0) {
-            throw new Error("Empty value provided for input HTTP label: " + memberName + ".");
-        }
-        resolvedPath = resolvedPath.replace(uriLabel, isGreedyLabel
-            ? labelValue
-                .split("/")
-                .map((segment) => (0, extended_encode_uri_component_1.extendedEncodeURIComponent)(segment))
-                .join("/")
-            : (0, extended_encode_uri_component_1.extendedEncodeURIComponent)(labelValue));
-    }
-    else {
-        throw new Error("No value provided for input HTTP label: " + memberName + ".");
-    }
-    return resolvedPath;
-};
-exports.resolvedPath = resolvedPath;
-
-
-/***/ }),
-
-/***/ 15967:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.serializeFloat = void 0;
-const serializeFloat = (value) => {
-    if (value !== value) {
-        return "NaN";
-    }
-    switch (value) {
-        case Infinity:
-            return "Infinity";
-        case -Infinity:
-            return "-Infinity";
-        default:
-            return value;
-    }
-};
-exports.serializeFloat = serializeFloat;
-
-
-/***/ }),
-
-/***/ 25436:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports._json = void 0;
-const _json = (obj) => {
-    if (obj == null) {
-        return {};
-    }
-    if (Array.isArray(obj)) {
-        return obj.filter((_) => _ != null);
-    }
-    if (typeof obj === "object") {
-        const target = {};
-        for (const key of Object.keys(obj)) {
-            if (obj[key] == null) {
-                continue;
-            }
-            target[key] = (0, exports._json)(obj[key]);
-        }
-        return target;
-    }
-    return obj;
-};
-exports._json = _json;
-
-
-/***/ }),
-
-/***/ 28262:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.splitEvery = void 0;
-function splitEvery(value, delimiter, numDelimiters) {
-    if (numDelimiters <= 0 || !Number.isInteger(numDelimiters)) {
-        throw new Error("Invalid number of delimiters (" + numDelimiters + ") for splitEvery.");
-    }
-    const segments = value.split(delimiter);
-    if (numDelimiters === 1) {
-        return segments;
-    }
-    const compoundSegments = [];
-    let currentSegment = "";
-    for (let i = 0; i < segments.length; i++) {
-        if (currentSegment === "") {
-            currentSegment = segments[i];
-        }
-        else {
-            currentSegment += delimiter + segments[i];
-        }
-        if ((i + 1) % numDelimiters === 0) {
-            compoundSegments.push(currentSegment);
-            currentSegment = "";
-        }
-    }
-    if (currentSegment !== "") {
-        compoundSegments.push(currentSegment);
-    }
-    return compoundSegments;
-}
-exports.splitEvery = splitEvery;
-
-
-/***/ }),
-
 /***/ 27378:
 /***/ ((__unused_webpack_module, exports) => {
 
@@ -22003,55 +19780,20 @@ exports.build = build;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SSOOIDC = void 0;
+const smithy_client_1 = __nccwpck_require__(48);
 const CreateTokenCommand_1 = __nccwpck_require__(37623);
 const RegisterClientCommand_1 = __nccwpck_require__(6122);
 const StartDeviceAuthorizationCommand_1 = __nccwpck_require__(58945);
 const SSOOIDCClient_1 = __nccwpck_require__(19603);
+const commands = {
+    CreateTokenCommand: CreateTokenCommand_1.CreateTokenCommand,
+    RegisterClientCommand: RegisterClientCommand_1.RegisterClientCommand,
+    StartDeviceAuthorizationCommand: StartDeviceAuthorizationCommand_1.StartDeviceAuthorizationCommand,
+};
 class SSOOIDC extends SSOOIDCClient_1.SSOOIDCClient {
-    createToken(args, optionsOrCb, cb) {
-        const command = new CreateTokenCommand_1.CreateTokenCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    registerClient(args, optionsOrCb, cb) {
-        const command = new RegisterClientCommand_1.RegisterClientCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    startDeviceAuthorization(args, optionsOrCb, cb) {
-        const command = new StartDeviceAuthorizationCommand_1.StartDeviceAuthorizationCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
 }
 exports.SSOOIDC = SSOOIDC;
+(0, smithy_client_1.createAggregatedClient)(commands, SSOOIDC);
 
 
 /***/ }),
@@ -22070,7 +19812,7 @@ const middleware_logger_1 = __nccwpck_require__(28378);
 const middleware_recursion_detection_1 = __nccwpck_require__(46077);
 const middleware_retry_1 = __nccwpck_require__(12236);
 const middleware_user_agent_1 = __nccwpck_require__(21768);
-const smithy_client_1 = __nccwpck_require__(8634);
+const smithy_client_1 = __nccwpck_require__(48);
 const EndpointParameters_1 = __nccwpck_require__(67826);
 const runtimeConfig_1 = __nccwpck_require__(1359);
 class SSOOIDCClient extends smithy_client_1.Client {
@@ -22108,7 +19850,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.CreateTokenCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(8634);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restJson1_1 = __nccwpck_require__(86854);
 class CreateTokenCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -22160,7 +19902,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RegisterClientCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(8634);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restJson1_1 = __nccwpck_require__(86854);
 class RegisterClientCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -22212,7 +19954,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.StartDeviceAuthorizationCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(8634);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_restJson1_1 = __nccwpck_require__(86854);
 class StartDeviceAuthorizationCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -22344,7 +20086,7 @@ Object.defineProperty(exports, "SSOOIDCServiceException", ({ enumerable: true, g
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SSOOIDCServiceException = void 0;
-const smithy_client_1 = __nccwpck_require__(8634);
+const smithy_client_1 = __nccwpck_require__(48);
 class SSOOIDCServiceException extends smithy_client_1.ServiceException {
     constructor(options) {
         super(options);
@@ -22565,7 +20307,7 @@ exports.InvalidClientMetadataException = InvalidClientMetadataException;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.de_StartDeviceAuthorizationCommand = exports.de_RegisterClientCommand = exports.de_CreateTokenCommand = exports.se_StartDeviceAuthorizationCommand = exports.se_RegisterClientCommand = exports.se_CreateTokenCommand = void 0;
 const protocol_http_1 = __nccwpck_require__(73632);
-const smithy_client_1 = __nccwpck_require__(8634);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(68365);
 const SSOOIDCServiceException_1 = __nccwpck_require__(13773);
 const se_CreateTokenCommand = async (input, context) => {
@@ -23057,9 +20799,9 @@ const util_body_length_node_1 = __nccwpck_require__(64379);
 const util_retry_1 = __nccwpck_require__(63687);
 const util_user_agent_node_1 = __nccwpck_require__(7306);
 const runtimeConfig_shared_1 = __nccwpck_require__(56100);
-const smithy_client_1 = __nccwpck_require__(8634);
+const smithy_client_1 = __nccwpck_require__(48);
 const util_defaults_mode_node_1 = __nccwpck_require__(61984);
-const smithy_client_2 = __nccwpck_require__(8634);
+const smithy_client_2 = __nccwpck_require__(48);
 const getRuntimeConfig = (config) => {
     (0, smithy_client_2.emitWarningIfUnsupportedVersion)(process.version);
     const defaultsMode = (0, util_defaults_mode_node_1.resolveDefaultsModeConfig)(config);
@@ -23098,7 +20840,7 @@ exports.getRuntimeConfig = getRuntimeConfig;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getRuntimeConfig = void 0;
-const smithy_client_1 = __nccwpck_require__(8634);
+const smithy_client_1 = __nccwpck_require__(48);
 const url_parser_1 = __nccwpck_require__(92942);
 const util_base64_1 = __nccwpck_require__(46669);
 const util_utf8_1 = __nccwpck_require__(82166);
@@ -23120,1096 +20862,28 @@ exports.getRuntimeConfig = getRuntimeConfig;
 
 /***/ }),
 
-/***/ 6926:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NoOpLogger = void 0;
-class NoOpLogger {
-    trace() { }
-    debug() { }
-    info() { }
-    warn() { }
-    error() { }
-}
-exports.NoOpLogger = NoOpLogger;
-
-
-/***/ }),
-
-/***/ 7296:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Client = void 0;
-const middleware_stack_1 = __nccwpck_require__(75457);
-class Client {
-    constructor(config) {
-        this.middlewareStack = (0, middleware_stack_1.constructStack)();
-        this.config = config;
-    }
-    send(command, optionsOrCb, cb) {
-        const options = typeof optionsOrCb !== "function" ? optionsOrCb : undefined;
-        const callback = typeof optionsOrCb === "function" ? optionsOrCb : cb;
-        const handler = command.resolveMiddleware(this.middlewareStack, this.config, options);
-        if (callback) {
-            handler(command)
-                .then((result) => callback(null, result.output), (err) => callback(err))
-                .catch(() => { });
-        }
-        else {
-            return handler(command).then((result) => result.output);
-        }
-    }
-    destroy() {
-        if (this.config.requestHandler.destroy)
-            this.config.requestHandler.destroy();
-    }
-}
-exports.Client = Client;
-
-
-/***/ }),
-
-/***/ 13565:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Command = void 0;
-const middleware_stack_1 = __nccwpck_require__(75457);
-class Command {
-    constructor() {
-        this.middlewareStack = (0, middleware_stack_1.constructStack)();
-    }
-}
-exports.Command = Command;
-
-
-/***/ }),
-
-/***/ 61649:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SENSITIVE_STRING = void 0;
-exports.SENSITIVE_STRING = "***SensitiveInformation***";
-
-
-/***/ }),
-
-/***/ 40777:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parseEpochTimestamp = exports.parseRfc7231DateTime = exports.parseRfc3339DateTimeWithOffset = exports.parseRfc3339DateTime = exports.dateToUtcString = void 0;
-const parse_utils_1 = __nccwpck_require__(13760);
-const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-function dateToUtcString(date) {
-    const year = date.getUTCFullYear();
-    const month = date.getUTCMonth();
-    const dayOfWeek = date.getUTCDay();
-    const dayOfMonthInt = date.getUTCDate();
-    const hoursInt = date.getUTCHours();
-    const minutesInt = date.getUTCMinutes();
-    const secondsInt = date.getUTCSeconds();
-    const dayOfMonthString = dayOfMonthInt < 10 ? `0${dayOfMonthInt}` : `${dayOfMonthInt}`;
-    const hoursString = hoursInt < 10 ? `0${hoursInt}` : `${hoursInt}`;
-    const minutesString = minutesInt < 10 ? `0${minutesInt}` : `${minutesInt}`;
-    const secondsString = secondsInt < 10 ? `0${secondsInt}` : `${secondsInt}`;
-    return `${DAYS[dayOfWeek]}, ${dayOfMonthString} ${MONTHS[month]} ${year} ${hoursString}:${minutesString}:${secondsString} GMT`;
-}
-exports.dateToUtcString = dateToUtcString;
-const RFC3339 = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?[zZ]$/);
-const parseRfc3339DateTime = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value !== "string") {
-        throw new TypeError("RFC-3339 date-times must be expressed as strings");
-    }
-    const match = RFC3339.exec(value);
-    if (!match) {
-        throw new TypeError("Invalid RFC-3339 date-time value");
-    }
-    const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-    const year = (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr));
-    const month = parseDateValue(monthStr, "month", 1, 12);
-    const day = parseDateValue(dayStr, "day", 1, 31);
-    return buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
-};
-exports.parseRfc3339DateTime = parseRfc3339DateTime;
-const RFC3339_WITH_OFFSET = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(([-+]\d{2}\:\d{2})|[zZ])$/);
-const parseRfc3339DateTimeWithOffset = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value !== "string") {
-        throw new TypeError("RFC-3339 date-times must be expressed as strings");
-    }
-    const match = RFC3339_WITH_OFFSET.exec(value);
-    if (!match) {
-        throw new TypeError("Invalid RFC-3339 date-time value");
-    }
-    const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, offsetStr] = match;
-    const year = (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr));
-    const month = parseDateValue(monthStr, "month", 1, 12);
-    const day = parseDateValue(dayStr, "day", 1, 31);
-    const date = buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
-    if (offsetStr.toUpperCase() != "Z") {
-        date.setTime(date.getTime() - parseOffsetToMilliseconds(offsetStr));
-    }
-    return date;
-};
-exports.parseRfc3339DateTimeWithOffset = parseRfc3339DateTimeWithOffset;
-const IMF_FIXDATE = new RegExp(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d{2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/);
-const RFC_850_DATE = new RegExp(/^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d{2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/);
-const ASC_TIME = new RegExp(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( [1-9]|\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? (\d{4})$/);
-const parseRfc7231DateTime = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value !== "string") {
-        throw new TypeError("RFC-7231 date-times must be expressed as strings");
-    }
-    let match = IMF_FIXDATE.exec(value);
-    if (match) {
-        const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-        return buildDate((0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr)), parseMonthByShortName(monthStr), parseDateValue(dayStr, "day", 1, 31), { hours, minutes, seconds, fractionalMilliseconds });
-    }
-    match = RFC_850_DATE.exec(value);
-    if (match) {
-        const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-        return adjustRfc850Year(buildDate(parseTwoDigitYear(yearStr), parseMonthByShortName(monthStr), parseDateValue(dayStr, "day", 1, 31), {
-            hours,
-            minutes,
-            seconds,
-            fractionalMilliseconds,
-        }));
-    }
-    match = ASC_TIME.exec(value);
-    if (match) {
-        const [_, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, yearStr] = match;
-        return buildDate((0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr)), parseMonthByShortName(monthStr), parseDateValue(dayStr.trimLeft(), "day", 1, 31), { hours, minutes, seconds, fractionalMilliseconds });
-    }
-    throw new TypeError("Invalid RFC-7231 date-time value");
-};
-exports.parseRfc7231DateTime = parseRfc7231DateTime;
-const parseEpochTimestamp = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    let valueAsDouble;
-    if (typeof value === "number") {
-        valueAsDouble = value;
-    }
-    else if (typeof value === "string") {
-        valueAsDouble = (0, parse_utils_1.strictParseDouble)(value);
-    }
-    else {
-        throw new TypeError("Epoch timestamps must be expressed as floating point numbers or their string representation");
-    }
-    if (Number.isNaN(valueAsDouble) || valueAsDouble === Infinity || valueAsDouble === -Infinity) {
-        throw new TypeError("Epoch timestamps must be valid, non-Infinite, non-NaN numerics");
-    }
-    return new Date(Math.round(valueAsDouble * 1000));
-};
-exports.parseEpochTimestamp = parseEpochTimestamp;
-const buildDate = (year, month, day, time) => {
-    const adjustedMonth = month - 1;
-    validateDayOfMonth(year, adjustedMonth, day);
-    return new Date(Date.UTC(year, adjustedMonth, day, parseDateValue(time.hours, "hour", 0, 23), parseDateValue(time.minutes, "minute", 0, 59), parseDateValue(time.seconds, "seconds", 0, 60), parseMilliseconds(time.fractionalMilliseconds)));
-};
-const parseTwoDigitYear = (value) => {
-    const thisYear = new Date().getUTCFullYear();
-    const valueInThisCentury = Math.floor(thisYear / 100) * 100 + (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(value));
-    if (valueInThisCentury < thisYear) {
-        return valueInThisCentury + 100;
-    }
-    return valueInThisCentury;
-};
-const FIFTY_YEARS_IN_MILLIS = 50 * 365 * 24 * 60 * 60 * 1000;
-const adjustRfc850Year = (input) => {
-    if (input.getTime() - new Date().getTime() > FIFTY_YEARS_IN_MILLIS) {
-        return new Date(Date.UTC(input.getUTCFullYear() - 100, input.getUTCMonth(), input.getUTCDate(), input.getUTCHours(), input.getUTCMinutes(), input.getUTCSeconds(), input.getUTCMilliseconds()));
-    }
-    return input;
-};
-const parseMonthByShortName = (value) => {
-    const monthIdx = MONTHS.indexOf(value);
-    if (monthIdx < 0) {
-        throw new TypeError(`Invalid month: ${value}`);
-    }
-    return monthIdx + 1;
-};
-const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-const validateDayOfMonth = (year, month, day) => {
-    let maxDays = DAYS_IN_MONTH[month];
-    if (month === 1 && isLeapYear(year)) {
-        maxDays = 29;
-    }
-    if (day > maxDays) {
-        throw new TypeError(`Invalid day for ${MONTHS[month]} in ${year}: ${day}`);
-    }
-};
-const isLeapYear = (year) => {
-    return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
-};
-const parseDateValue = (value, type, lower, upper) => {
-    const dateVal = (0, parse_utils_1.strictParseByte)(stripLeadingZeroes(value));
-    if (dateVal < lower || dateVal > upper) {
-        throw new TypeError(`${type} must be between ${lower} and ${upper}, inclusive`);
-    }
-    return dateVal;
-};
-const parseMilliseconds = (value) => {
-    if (value === null || value === undefined) {
-        return 0;
-    }
-    return (0, parse_utils_1.strictParseFloat32)("0." + value) * 1000;
-};
-const parseOffsetToMilliseconds = (value) => {
-    const directionStr = value[0];
-    let direction = 1;
-    if (directionStr == "+") {
-        direction = 1;
-    }
-    else if (directionStr == "-") {
-        direction = -1;
-    }
-    else {
-        throw new TypeError(`Offset direction, ${directionStr}, must be "+" or "-"`);
-    }
-    const hour = Number(value.substring(1, 3));
-    const minute = Number(value.substring(4, 6));
-    return direction * (hour * 60 + minute) * 60 * 1000;
-};
-const stripLeadingZeroes = (value) => {
-    let idx = 0;
-    while (idx < value.length - 1 && value.charAt(idx) === "0") {
-        idx++;
-    }
-    if (idx === 0) {
-        return value;
-    }
-    return value.slice(idx);
-};
-
-
-/***/ }),
-
-/***/ 83391:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.withBaseException = exports.throwDefaultError = void 0;
-const exceptions_1 = __nccwpck_require__(76458);
-const throwDefaultError = ({ output, parsedBody, exceptionCtor, errorCode }) => {
-    const $metadata = deserializeMetadata(output);
-    const statusCode = $metadata.httpStatusCode ? $metadata.httpStatusCode + "" : undefined;
-    const response = new exceptionCtor({
-        name: (parsedBody === null || parsedBody === void 0 ? void 0 : parsedBody.code) || (parsedBody === null || parsedBody === void 0 ? void 0 : parsedBody.Code) || errorCode || statusCode || "UnknownError",
-        $fault: "client",
-        $metadata,
-    });
-    throw (0, exceptions_1.decorateServiceException)(response, parsedBody);
-};
-exports.throwDefaultError = throwDefaultError;
-const withBaseException = (ExceptionCtor) => {
-    return ({ output, parsedBody, errorCode }) => {
-        (0, exports.throwDefaultError)({ output, parsedBody, exceptionCtor: ExceptionCtor, errorCode });
-    };
-};
-exports.withBaseException = withBaseException;
-const deserializeMetadata = (output) => {
-    var _a, _b;
-    return ({
-        httpStatusCode: output.statusCode,
-        requestId: (_b = (_a = output.headers["x-amzn-requestid"]) !== null && _a !== void 0 ? _a : output.headers["x-amzn-request-id"]) !== null && _b !== void 0 ? _b : output.headers["x-amz-request-id"],
-        extendedRequestId: output.headers["x-amz-id-2"],
-        cfId: output.headers["x-amz-cf-id"],
-    });
-};
-
-
-/***/ }),
-
-/***/ 45373:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.loadConfigsForDefaultMode = void 0;
-const loadConfigsForDefaultMode = (mode) => {
-    switch (mode) {
-        case "standard":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 3100,
-            };
-        case "in-region":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 1100,
-            };
-        case "cross-region":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 3100,
-            };
-        case "mobile":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 30000,
-            };
-        default:
-            return {};
-    }
-};
-exports.loadConfigsForDefaultMode = loadConfigsForDefaultMode;
-
-
-/***/ }),
-
-/***/ 2165:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.emitWarningIfUnsupportedVersion = void 0;
-let warningEmitted = false;
-const emitWarningIfUnsupportedVersion = (version) => {
-    if (version && !warningEmitted && parseInt(version.substring(1, version.indexOf("."))) < 14) {
-        warningEmitted = true;
-    }
-};
-exports.emitWarningIfUnsupportedVersion = emitWarningIfUnsupportedVersion;
-
-
-/***/ }),
-
-/***/ 76458:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.decorateServiceException = exports.ServiceException = void 0;
-class ServiceException extends Error {
-    constructor(options) {
-        super(options.message);
-        Object.setPrototypeOf(this, ServiceException.prototype);
-        this.name = options.name;
-        this.$fault = options.$fault;
-        this.$metadata = options.$metadata;
-    }
-}
-exports.ServiceException = ServiceException;
-const decorateServiceException = (exception, additions = {}) => {
-    Object.entries(additions)
-        .filter(([, v]) => v !== undefined)
-        .forEach(([k, v]) => {
-        if (exception[k] == undefined || exception[k] === "") {
-            exception[k] = v;
-        }
-    });
-    const message = exception.message || exception.Message || "UnknownError";
-    exception.message = message;
-    delete exception.Message;
-    return exception;
-};
-exports.decorateServiceException = decorateServiceException;
-
-
-/***/ }),
-
-/***/ 33807:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.extendedEncodeURIComponent = void 0;
-function extendedEncodeURIComponent(str) {
-    return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
-        return "%" + c.charCodeAt(0).toString(16).toUpperCase();
-    });
-}
-exports.extendedEncodeURIComponent = extendedEncodeURIComponent;
-
-
-/***/ }),
-
-/***/ 97512:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getArrayIfSingleItem = void 0;
-const getArrayIfSingleItem = (mayBeArray) => Array.isArray(mayBeArray) ? mayBeArray : [mayBeArray];
-exports.getArrayIfSingleItem = getArrayIfSingleItem;
-
-
-/***/ }),
-
-/***/ 53735:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getValueFromTextNode = void 0;
-const getValueFromTextNode = (obj) => {
-    const textNodeName = "#text";
-    for (const key in obj) {
-        if (obj.hasOwnProperty(key) && obj[key][textNodeName] !== undefined) {
-            obj[key] = obj[key][textNodeName];
-        }
-        else if (typeof obj[key] === "object" && obj[key] !== null) {
-            obj[key] = (0, exports.getValueFromTextNode)(obj[key]);
-        }
-    }
-    return obj;
-};
-exports.getValueFromTextNode = getValueFromTextNode;
-
-
-/***/ }),
-
-/***/ 8634:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __nccwpck_require__(15609);
-tslib_1.__exportStar(__nccwpck_require__(6926), exports);
-tslib_1.__exportStar(__nccwpck_require__(7296), exports);
-tslib_1.__exportStar(__nccwpck_require__(13565), exports);
-tslib_1.__exportStar(__nccwpck_require__(61649), exports);
-tslib_1.__exportStar(__nccwpck_require__(40777), exports);
-tslib_1.__exportStar(__nccwpck_require__(83391), exports);
-tslib_1.__exportStar(__nccwpck_require__(45373), exports);
-tslib_1.__exportStar(__nccwpck_require__(2165), exports);
-tslib_1.__exportStar(__nccwpck_require__(76458), exports);
-tslib_1.__exportStar(__nccwpck_require__(33807), exports);
-tslib_1.__exportStar(__nccwpck_require__(97512), exports);
-tslib_1.__exportStar(__nccwpck_require__(53735), exports);
-tslib_1.__exportStar(__nccwpck_require__(38866), exports);
-tslib_1.__exportStar(__nccwpck_require__(63844), exports);
-tslib_1.__exportStar(__nccwpck_require__(13760), exports);
-tslib_1.__exportStar(__nccwpck_require__(23205), exports);
-tslib_1.__exportStar(__nccwpck_require__(4338), exports);
-tslib_1.__exportStar(__nccwpck_require__(59968), exports);
-tslib_1.__exportStar(__nccwpck_require__(73549), exports);
-
-
-/***/ }),
-
-/***/ 38866:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.LazyJsonString = exports.StringWrapper = void 0;
-const StringWrapper = function () {
-    const Class = Object.getPrototypeOf(this).constructor;
-    const Constructor = Function.bind.apply(String, [null, ...arguments]);
-    const instance = new Constructor();
-    Object.setPrototypeOf(instance, Class.prototype);
-    return instance;
-};
-exports.StringWrapper = StringWrapper;
-exports.StringWrapper.prototype = Object.create(String.prototype, {
-    constructor: {
-        value: exports.StringWrapper,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-    },
-});
-Object.setPrototypeOf(exports.StringWrapper, String);
-class LazyJsonString extends exports.StringWrapper {
-    deserializeJSON() {
-        return JSON.parse(super.toString());
-    }
-    toJSON() {
-        return super.toString();
-    }
-    static fromObject(object) {
-        if (object instanceof LazyJsonString) {
-            return object;
-        }
-        else if (object instanceof String || typeof object === "string") {
-            return new LazyJsonString(object);
-        }
-        return new LazyJsonString(JSON.stringify(object));
-    }
-}
-exports.LazyJsonString = LazyJsonString;
-
-
-/***/ }),
-
-/***/ 63844:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.take = exports.convertMap = exports.map = void 0;
-function map(arg0, arg1, arg2) {
-    let target;
-    let filter;
-    let instructions;
-    if (typeof arg1 === "undefined" && typeof arg2 === "undefined") {
-        target = {};
-        instructions = arg0;
-    }
-    else {
-        target = arg0;
-        if (typeof arg1 === "function") {
-            filter = arg1;
-            instructions = arg2;
-            return mapWithFilter(target, filter, instructions);
-        }
-        else {
-            instructions = arg1;
-        }
-    }
-    for (const key of Object.keys(instructions)) {
-        if (!Array.isArray(instructions[key])) {
-            target[key] = instructions[key];
-            continue;
-        }
-        applyInstruction(target, null, instructions, key);
-    }
-    return target;
-}
-exports.map = map;
-const convertMap = (target) => {
-    const output = {};
-    for (const [k, v] of Object.entries(target || {})) {
-        output[k] = [, v];
-    }
-    return output;
-};
-exports.convertMap = convertMap;
-const take = (source, instructions) => {
-    const out = {};
-    for (const key in instructions) {
-        applyInstruction(out, source, instructions, key);
-    }
-    return out;
-};
-exports.take = take;
-const mapWithFilter = (target, filter, instructions) => {
-    return map(target, Object.entries(instructions).reduce((_instructions, [key, value]) => {
-        if (Array.isArray(value)) {
-            _instructions[key] = value;
-        }
-        else {
-            if (typeof value === "function") {
-                _instructions[key] = [filter, value()];
-            }
-            else {
-                _instructions[key] = [filter, value];
-            }
-        }
-        return _instructions;
-    }, {}));
-};
-const applyInstruction = (target, source, instructions, targetKey) => {
-    if (source !== null) {
-        let instruction = instructions[targetKey];
-        if (typeof instruction === "function") {
-            instruction = [, instruction];
-        }
-        const [filter = nonNullish, valueFn = pass, sourceKey = targetKey] = instruction;
-        if ((typeof filter === "function" && filter(source[sourceKey])) || (typeof filter !== "function" && !!filter)) {
-            target[targetKey] = valueFn(source[sourceKey]);
-        }
-        return;
-    }
-    let [filter, value] = instructions[targetKey];
-    if (typeof value === "function") {
-        let _value;
-        const defaultFilterPassed = filter === undefined && (_value = value()) != null;
-        const customFilterPassed = (typeof filter === "function" && !!filter(void 0)) || (typeof filter !== "function" && !!filter);
-        if (defaultFilterPassed) {
-            target[targetKey] = _value;
-        }
-        else if (customFilterPassed) {
-            target[targetKey] = value();
-        }
-    }
-    else {
-        const defaultFilterPassed = filter === undefined && value != null;
-        const customFilterPassed = (typeof filter === "function" && !!filter(value)) || (typeof filter !== "function" && !!filter);
-        if (defaultFilterPassed || customFilterPassed) {
-            target[targetKey] = value;
-        }
-    }
-};
-const nonNullish = (_) => _ != null;
-const pass = (_) => _;
-
-
-/***/ }),
-
-/***/ 13760:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.logger = exports.strictParseByte = exports.strictParseShort = exports.strictParseInt32 = exports.strictParseInt = exports.strictParseLong = exports.limitedParseFloat32 = exports.limitedParseFloat = exports.handleFloat = exports.limitedParseDouble = exports.strictParseFloat32 = exports.strictParseFloat = exports.strictParseDouble = exports.expectUnion = exports.expectString = exports.expectObject = exports.expectNonNull = exports.expectByte = exports.expectShort = exports.expectInt32 = exports.expectInt = exports.expectLong = exports.expectFloat32 = exports.expectNumber = exports.expectBoolean = exports.parseBoolean = void 0;
-const parseBoolean = (value) => {
-    switch (value) {
-        case "true":
-            return true;
-        case "false":
-            return false;
-        default:
-            throw new Error(`Unable to parse boolean value "${value}"`);
-    }
-};
-exports.parseBoolean = parseBoolean;
-const expectBoolean = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "number") {
-        if (value === 0 || value === 1) {
-            exports.logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
-        }
-        if (value === 0) {
-            return false;
-        }
-        if (value === 1) {
-            return true;
-        }
-    }
-    if (typeof value === "string") {
-        const lower = value.toLowerCase();
-        if (lower === "false" || lower === "true") {
-            exports.logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
-        }
-        if (lower === "false") {
-            return false;
-        }
-        if (lower === "true") {
-            return true;
-        }
-    }
-    if (typeof value === "boolean") {
-        return value;
-    }
-    throw new TypeError(`Expected boolean, got ${typeof value}: ${value}`);
-};
-exports.expectBoolean = expectBoolean;
-const expectNumber = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "string") {
-        const parsed = parseFloat(value);
-        if (!Number.isNaN(parsed)) {
-            if (String(parsed) !== String(value)) {
-                exports.logger.warn(stackTraceWarning(`Expected number but observed string: ${value}`));
-            }
-            return parsed;
-        }
-    }
-    if (typeof value === "number") {
-        return value;
-    }
-    throw new TypeError(`Expected number, got ${typeof value}: ${value}`);
-};
-exports.expectNumber = expectNumber;
-const MAX_FLOAT = Math.ceil(2 ** 127 * (2 - 2 ** -23));
-const expectFloat32 = (value) => {
-    const expected = (0, exports.expectNumber)(value);
-    if (expected !== undefined && !Number.isNaN(expected) && expected !== Infinity && expected !== -Infinity) {
-        if (Math.abs(expected) > MAX_FLOAT) {
-            throw new TypeError(`Expected 32-bit float, got ${value}`);
-        }
-    }
-    return expected;
-};
-exports.expectFloat32 = expectFloat32;
-const expectLong = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (Number.isInteger(value) && !Number.isNaN(value)) {
-        return value;
-    }
-    throw new TypeError(`Expected integer, got ${typeof value}: ${value}`);
-};
-exports.expectLong = expectLong;
-exports.expectInt = exports.expectLong;
-const expectInt32 = (value) => expectSizedInt(value, 32);
-exports.expectInt32 = expectInt32;
-const expectShort = (value) => expectSizedInt(value, 16);
-exports.expectShort = expectShort;
-const expectByte = (value) => expectSizedInt(value, 8);
-exports.expectByte = expectByte;
-const expectSizedInt = (value, size) => {
-    const expected = (0, exports.expectLong)(value);
-    if (expected !== undefined && castInt(expected, size) !== expected) {
-        throw new TypeError(`Expected ${size}-bit integer, got ${value}`);
-    }
-    return expected;
-};
-const castInt = (value, size) => {
-    switch (size) {
-        case 32:
-            return Int32Array.of(value)[0];
-        case 16:
-            return Int16Array.of(value)[0];
-        case 8:
-            return Int8Array.of(value)[0];
-    }
-};
-const expectNonNull = (value, location) => {
-    if (value === null || value === undefined) {
-        if (location) {
-            throw new TypeError(`Expected a non-null value for ${location}`);
-        }
-        throw new TypeError("Expected a non-null value");
-    }
-    return value;
-};
-exports.expectNonNull = expectNonNull;
-const expectObject = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "object" && !Array.isArray(value)) {
-        return value;
-    }
-    const receivedType = Array.isArray(value) ? "array" : typeof value;
-    throw new TypeError(`Expected object, got ${receivedType}: ${value}`);
-};
-exports.expectObject = expectObject;
-const expectString = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "string") {
-        return value;
-    }
-    if (["boolean", "number", "bigint"].includes(typeof value)) {
-        exports.logger.warn(stackTraceWarning(`Expected string, got ${typeof value}: ${value}`));
-        return String(value);
-    }
-    throw new TypeError(`Expected string, got ${typeof value}: ${value}`);
-};
-exports.expectString = expectString;
-const expectUnion = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    const asObject = (0, exports.expectObject)(value);
-    const setKeys = Object.entries(asObject)
-        .filter(([, v]) => v != null)
-        .map(([k]) => k);
-    if (setKeys.length === 0) {
-        throw new TypeError(`Unions must have exactly one non-null member. None were found.`);
-    }
-    if (setKeys.length > 1) {
-        throw new TypeError(`Unions must have exactly one non-null member. Keys ${setKeys} were not null.`);
-    }
-    return asObject;
-};
-exports.expectUnion = expectUnion;
-const strictParseDouble = (value) => {
-    if (typeof value == "string") {
-        return (0, exports.expectNumber)(parseNumber(value));
-    }
-    return (0, exports.expectNumber)(value);
-};
-exports.strictParseDouble = strictParseDouble;
-exports.strictParseFloat = exports.strictParseDouble;
-const strictParseFloat32 = (value) => {
-    if (typeof value == "string") {
-        return (0, exports.expectFloat32)(parseNumber(value));
-    }
-    return (0, exports.expectFloat32)(value);
-};
-exports.strictParseFloat32 = strictParseFloat32;
-const NUMBER_REGEX = /(-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?)|(-?Infinity)|(NaN)/g;
-const parseNumber = (value) => {
-    const matches = value.match(NUMBER_REGEX);
-    if (matches === null || matches[0].length !== value.length) {
-        throw new TypeError(`Expected real number, got implicit NaN`);
-    }
-    return parseFloat(value);
-};
-const limitedParseDouble = (value) => {
-    if (typeof value == "string") {
-        return parseFloatString(value);
-    }
-    return (0, exports.expectNumber)(value);
-};
-exports.limitedParseDouble = limitedParseDouble;
-exports.handleFloat = exports.limitedParseDouble;
-exports.limitedParseFloat = exports.limitedParseDouble;
-const limitedParseFloat32 = (value) => {
-    if (typeof value == "string") {
-        return parseFloatString(value);
-    }
-    return (0, exports.expectFloat32)(value);
-};
-exports.limitedParseFloat32 = limitedParseFloat32;
-const parseFloatString = (value) => {
-    switch (value) {
-        case "NaN":
-            return NaN;
-        case "Infinity":
-            return Infinity;
-        case "-Infinity":
-            return -Infinity;
-        default:
-            throw new Error(`Unable to parse float value: ${value}`);
-    }
-};
-const strictParseLong = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectLong)(parseNumber(value));
-    }
-    return (0, exports.expectLong)(value);
-};
-exports.strictParseLong = strictParseLong;
-exports.strictParseInt = exports.strictParseLong;
-const strictParseInt32 = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectInt32)(parseNumber(value));
-    }
-    return (0, exports.expectInt32)(value);
-};
-exports.strictParseInt32 = strictParseInt32;
-const strictParseShort = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectShort)(parseNumber(value));
-    }
-    return (0, exports.expectShort)(value);
-};
-exports.strictParseShort = strictParseShort;
-const strictParseByte = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectByte)(parseNumber(value));
-    }
-    return (0, exports.expectByte)(value);
-};
-exports.strictParseByte = strictParseByte;
-const stackTraceWarning = (message) => {
-    return String(new TypeError(message).stack || message)
-        .split("\n")
-        .slice(0, 5)
-        .filter((s) => !s.includes("stackTraceWarning"))
-        .join("\n");
-};
-exports.logger = {
-    warn: console.warn,
-};
-
-
-/***/ }),
-
-/***/ 23205:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.resolvedPath = void 0;
-const extended_encode_uri_component_1 = __nccwpck_require__(33807);
-const resolvedPath = (resolvedPath, input, memberName, labelValueProvider, uriLabel, isGreedyLabel) => {
-    if (input != null && input[memberName] !== undefined) {
-        const labelValue = labelValueProvider();
-        if (labelValue.length <= 0) {
-            throw new Error("Empty value provided for input HTTP label: " + memberName + ".");
-        }
-        resolvedPath = resolvedPath.replace(uriLabel, isGreedyLabel
-            ? labelValue
-                .split("/")
-                .map((segment) => (0, extended_encode_uri_component_1.extendedEncodeURIComponent)(segment))
-                .join("/")
-            : (0, extended_encode_uri_component_1.extendedEncodeURIComponent)(labelValue));
-    }
-    else {
-        throw new Error("No value provided for input HTTP label: " + memberName + ".");
-    }
-    return resolvedPath;
-};
-exports.resolvedPath = resolvedPath;
-
-
-/***/ }),
-
-/***/ 4338:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.serializeFloat = void 0;
-const serializeFloat = (value) => {
-    if (value !== value) {
-        return "NaN";
-    }
-    switch (value) {
-        case Infinity:
-            return "Infinity";
-        case -Infinity:
-            return "-Infinity";
-        default:
-            return value;
-    }
-};
-exports.serializeFloat = serializeFloat;
-
-
-/***/ }),
-
-/***/ 59968:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports._json = void 0;
-const _json = (obj) => {
-    if (obj == null) {
-        return {};
-    }
-    if (Array.isArray(obj)) {
-        return obj.filter((_) => _ != null);
-    }
-    if (typeof obj === "object") {
-        const target = {};
-        for (const key of Object.keys(obj)) {
-            if (obj[key] == null) {
-                continue;
-            }
-            target[key] = (0, exports._json)(obj[key]);
-        }
-        return target;
-    }
-    return obj;
-};
-exports._json = _json;
-
-
-/***/ }),
-
-/***/ 73549:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.splitEvery = void 0;
-function splitEvery(value, delimiter, numDelimiters) {
-    if (numDelimiters <= 0 || !Number.isInteger(numDelimiters)) {
-        throw new Error("Invalid number of delimiters (" + numDelimiters + ") for splitEvery.");
-    }
-    const segments = value.split(delimiter);
-    if (numDelimiters === 1) {
-        return segments;
-    }
-    const compoundSegments = [];
-    let currentSegment = "";
-    for (let i = 0; i < segments.length; i++) {
-        if (currentSegment === "") {
-            currentSegment = segments[i];
-        }
-        else {
-            currentSegment += delimiter + segments[i];
-        }
-        if ((i + 1) % numDelimiters === 0) {
-            compoundSegments.push(currentSegment);
-            currentSegment = "";
-        }
-    }
-    if (currentSegment !== "") {
-        compoundSegments.push(currentSegment);
-    }
-    return compoundSegments;
-}
-exports.splitEvery = splitEvery;
-
-
-/***/ }),
-
 /***/ 37709:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SSO = void 0;
+const smithy_client_1 = __nccwpck_require__(48);
 const GetRoleCredentialsCommand_1 = __nccwpck_require__(79414);
 const ListAccountRolesCommand_1 = __nccwpck_require__(87969);
 const ListAccountsCommand_1 = __nccwpck_require__(55059);
 const LogoutCommand_1 = __nccwpck_require__(21028);
 const SSOClient_1 = __nccwpck_require__(32875);
+const commands = {
+    GetRoleCredentialsCommand: GetRoleCredentialsCommand_1.GetRoleCredentialsCommand,
+    ListAccountRolesCommand: ListAccountRolesCommand_1.ListAccountRolesCommand,
+    ListAccountsCommand: ListAccountsCommand_1.ListAccountsCommand,
+    LogoutCommand: LogoutCommand_1.LogoutCommand,
+};
 class SSO extends SSOClient_1.SSOClient {
-    getRoleCredentials(args, optionsOrCb, cb) {
-        const command = new GetRoleCredentialsCommand_1.GetRoleCredentialsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    listAccountRoles(args, optionsOrCb, cb) {
-        const command = new ListAccountRolesCommand_1.ListAccountRolesCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    listAccounts(args, optionsOrCb, cb) {
-        const command = new ListAccountsCommand_1.ListAccountsCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    logout(args, optionsOrCb, cb) {
-        const command = new LogoutCommand_1.LogoutCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
 }
 exports.SSO = SSO;
+(0, smithy_client_1.createAggregatedClient)(commands, SSO);
 
 
 /***/ }),
@@ -24228,7 +20902,7 @@ const middleware_logger_1 = __nccwpck_require__(28378);
 const middleware_recursion_detection_1 = __nccwpck_require__(46077);
 const middleware_retry_1 = __nccwpck_require__(12236);
 const middleware_user_agent_1 = __nccwpck_require__(21768);
-const smithy_client_1 = __nccwpck_require__(70255);
+const smithy_client_1 = __nccwpck_require__(48);
 const EndpointParameters_1 = __nccwpck_require__(67746);
 const runtimeConfig_1 = __nccwpck_require__(34753);
 class SSOClient extends smithy_client_1.Client {
@@ -24266,7 +20940,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.GetRoleCredentialsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(70255);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(98714);
 const Aws_restJson1_1 = __nccwpck_require__(17143);
 class GetRoleCredentialsCommand extends smithy_client_1.Command {
@@ -24319,7 +20993,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ListAccountRolesCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(70255);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(98714);
 const Aws_restJson1_1 = __nccwpck_require__(17143);
 class ListAccountRolesCommand extends smithy_client_1.Command {
@@ -24372,7 +21046,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ListAccountsCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(70255);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(98714);
 const Aws_restJson1_1 = __nccwpck_require__(17143);
 class ListAccountsCommand extends smithy_client_1.Command {
@@ -24425,7 +21099,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LogoutCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(70255);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(98714);
 const Aws_restJson1_1 = __nccwpck_require__(17143);
 class LogoutCommand extends smithy_client_1.Command {
@@ -24560,7 +21234,7 @@ Object.defineProperty(exports, "SSOServiceException", ({ enumerable: true, get: 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.SSOServiceException = void 0;
-const smithy_client_1 = __nccwpck_require__(70255);
+const smithy_client_1 = __nccwpck_require__(48);
 class SSOServiceException extends smithy_client_1.ServiceException {
     constructor(options) {
         super(options);
@@ -24589,7 +21263,7 @@ tslib_1.__exportStar(__nccwpck_require__(98714), exports);
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LogoutRequestFilterSensitiveLog = exports.ListAccountsRequestFilterSensitiveLog = exports.ListAccountRolesRequestFilterSensitiveLog = exports.GetRoleCredentialsResponseFilterSensitiveLog = exports.RoleCredentialsFilterSensitiveLog = exports.GetRoleCredentialsRequestFilterSensitiveLog = exports.UnauthorizedException = exports.TooManyRequestsException = exports.ResourceNotFoundException = exports.InvalidRequestException = void 0;
-const smithy_client_1 = __nccwpck_require__(70255);
+const smithy_client_1 = __nccwpck_require__(48);
 const SSOServiceException_1 = __nccwpck_require__(98452);
 class InvalidRequestException extends SSOServiceException_1.SSOServiceException {
     constructor(opts) {
@@ -24779,7 +21453,7 @@ tslib_1.__exportStar(__nccwpck_require__(65419), exports);
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.de_LogoutCommand = exports.de_ListAccountsCommand = exports.de_ListAccountRolesCommand = exports.de_GetRoleCredentialsCommand = exports.se_LogoutCommand = exports.se_ListAccountsCommand = exports.se_ListAccountRolesCommand = exports.se_GetRoleCredentialsCommand = void 0;
 const protocol_http_1 = __nccwpck_require__(73632);
-const smithy_client_1 = __nccwpck_require__(70255);
+const smithy_client_1 = __nccwpck_require__(48);
 const models_0_1 = __nccwpck_require__(98714);
 const SSOServiceException_1 = __nccwpck_require__(98452);
 const se_GetRoleCredentialsCommand = async (input, context) => {
@@ -25169,9 +21843,9 @@ const util_body_length_node_1 = __nccwpck_require__(64379);
 const util_retry_1 = __nccwpck_require__(63687);
 const util_user_agent_node_1 = __nccwpck_require__(7306);
 const runtimeConfig_shared_1 = __nccwpck_require__(32338);
-const smithy_client_1 = __nccwpck_require__(70255);
+const smithy_client_1 = __nccwpck_require__(48);
 const util_defaults_mode_node_1 = __nccwpck_require__(61984);
-const smithy_client_2 = __nccwpck_require__(70255);
+const smithy_client_2 = __nccwpck_require__(48);
 const getRuntimeConfig = (config) => {
     (0, smithy_client_2.emitWarningIfUnsupportedVersion)(process.version);
     const defaultsMode = (0, util_defaults_mode_node_1.resolveDefaultsModeConfig)(config);
@@ -25210,7 +21884,7 @@ exports.getRuntimeConfig = getRuntimeConfig;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getRuntimeConfig = void 0;
-const smithy_client_1 = __nccwpck_require__(70255);
+const smithy_client_1 = __nccwpck_require__(48);
 const url_parser_1 = __nccwpck_require__(92942);
 const util_base64_1 = __nccwpck_require__(46669);
 const util_utf8_1 = __nccwpck_require__(82166);
@@ -25232,1032 +21906,13 @@ exports.getRuntimeConfig = getRuntimeConfig;
 
 /***/ }),
 
-/***/ 72081:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NoOpLogger = void 0;
-class NoOpLogger {
-    trace() { }
-    debug() { }
-    info() { }
-    warn() { }
-    error() { }
-}
-exports.NoOpLogger = NoOpLogger;
-
-
-/***/ }),
-
-/***/ 95201:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Client = void 0;
-const middleware_stack_1 = __nccwpck_require__(75457);
-class Client {
-    constructor(config) {
-        this.middlewareStack = (0, middleware_stack_1.constructStack)();
-        this.config = config;
-    }
-    send(command, optionsOrCb, cb) {
-        const options = typeof optionsOrCb !== "function" ? optionsOrCb : undefined;
-        const callback = typeof optionsOrCb === "function" ? optionsOrCb : cb;
-        const handler = command.resolveMiddleware(this.middlewareStack, this.config, options);
-        if (callback) {
-            handler(command)
-                .then((result) => callback(null, result.output), (err) => callback(err))
-                .catch(() => { });
-        }
-        else {
-            return handler(command).then((result) => result.output);
-        }
-    }
-    destroy() {
-        if (this.config.requestHandler.destroy)
-            this.config.requestHandler.destroy();
-    }
-}
-exports.Client = Client;
-
-
-/***/ }),
-
-/***/ 95953:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Command = void 0;
-const middleware_stack_1 = __nccwpck_require__(75457);
-class Command {
-    constructor() {
-        this.middlewareStack = (0, middleware_stack_1.constructStack)();
-    }
-}
-exports.Command = Command;
-
-
-/***/ }),
-
-/***/ 20460:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SENSITIVE_STRING = void 0;
-exports.SENSITIVE_STRING = "***SensitiveInformation***";
-
-
-/***/ }),
-
-/***/ 28931:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parseEpochTimestamp = exports.parseRfc7231DateTime = exports.parseRfc3339DateTimeWithOffset = exports.parseRfc3339DateTime = exports.dateToUtcString = void 0;
-const parse_utils_1 = __nccwpck_require__(63860);
-const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-function dateToUtcString(date) {
-    const year = date.getUTCFullYear();
-    const month = date.getUTCMonth();
-    const dayOfWeek = date.getUTCDay();
-    const dayOfMonthInt = date.getUTCDate();
-    const hoursInt = date.getUTCHours();
-    const minutesInt = date.getUTCMinutes();
-    const secondsInt = date.getUTCSeconds();
-    const dayOfMonthString = dayOfMonthInt < 10 ? `0${dayOfMonthInt}` : `${dayOfMonthInt}`;
-    const hoursString = hoursInt < 10 ? `0${hoursInt}` : `${hoursInt}`;
-    const minutesString = minutesInt < 10 ? `0${minutesInt}` : `${minutesInt}`;
-    const secondsString = secondsInt < 10 ? `0${secondsInt}` : `${secondsInt}`;
-    return `${DAYS[dayOfWeek]}, ${dayOfMonthString} ${MONTHS[month]} ${year} ${hoursString}:${minutesString}:${secondsString} GMT`;
-}
-exports.dateToUtcString = dateToUtcString;
-const RFC3339 = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?[zZ]$/);
-const parseRfc3339DateTime = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value !== "string") {
-        throw new TypeError("RFC-3339 date-times must be expressed as strings");
-    }
-    const match = RFC3339.exec(value);
-    if (!match) {
-        throw new TypeError("Invalid RFC-3339 date-time value");
-    }
-    const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-    const year = (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr));
-    const month = parseDateValue(monthStr, "month", 1, 12);
-    const day = parseDateValue(dayStr, "day", 1, 31);
-    return buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
-};
-exports.parseRfc3339DateTime = parseRfc3339DateTime;
-const RFC3339_WITH_OFFSET = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(([-+]\d{2}\:\d{2})|[zZ])$/);
-const parseRfc3339DateTimeWithOffset = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value !== "string") {
-        throw new TypeError("RFC-3339 date-times must be expressed as strings");
-    }
-    const match = RFC3339_WITH_OFFSET.exec(value);
-    if (!match) {
-        throw new TypeError("Invalid RFC-3339 date-time value");
-    }
-    const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, offsetStr] = match;
-    const year = (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr));
-    const month = parseDateValue(monthStr, "month", 1, 12);
-    const day = parseDateValue(dayStr, "day", 1, 31);
-    const date = buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
-    if (offsetStr.toUpperCase() != "Z") {
-        date.setTime(date.getTime() - parseOffsetToMilliseconds(offsetStr));
-    }
-    return date;
-};
-exports.parseRfc3339DateTimeWithOffset = parseRfc3339DateTimeWithOffset;
-const IMF_FIXDATE = new RegExp(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d{2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/);
-const RFC_850_DATE = new RegExp(/^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d{2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/);
-const ASC_TIME = new RegExp(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( [1-9]|\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? (\d{4})$/);
-const parseRfc7231DateTime = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value !== "string") {
-        throw new TypeError("RFC-7231 date-times must be expressed as strings");
-    }
-    let match = IMF_FIXDATE.exec(value);
-    if (match) {
-        const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-        return buildDate((0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr)), parseMonthByShortName(monthStr), parseDateValue(dayStr, "day", 1, 31), { hours, minutes, seconds, fractionalMilliseconds });
-    }
-    match = RFC_850_DATE.exec(value);
-    if (match) {
-        const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-        return adjustRfc850Year(buildDate(parseTwoDigitYear(yearStr), parseMonthByShortName(monthStr), parseDateValue(dayStr, "day", 1, 31), {
-            hours,
-            minutes,
-            seconds,
-            fractionalMilliseconds,
-        }));
-    }
-    match = ASC_TIME.exec(value);
-    if (match) {
-        const [_, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, yearStr] = match;
-        return buildDate((0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr)), parseMonthByShortName(monthStr), parseDateValue(dayStr.trimLeft(), "day", 1, 31), { hours, minutes, seconds, fractionalMilliseconds });
-    }
-    throw new TypeError("Invalid RFC-7231 date-time value");
-};
-exports.parseRfc7231DateTime = parseRfc7231DateTime;
-const parseEpochTimestamp = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    let valueAsDouble;
-    if (typeof value === "number") {
-        valueAsDouble = value;
-    }
-    else if (typeof value === "string") {
-        valueAsDouble = (0, parse_utils_1.strictParseDouble)(value);
-    }
-    else {
-        throw new TypeError("Epoch timestamps must be expressed as floating point numbers or their string representation");
-    }
-    if (Number.isNaN(valueAsDouble) || valueAsDouble === Infinity || valueAsDouble === -Infinity) {
-        throw new TypeError("Epoch timestamps must be valid, non-Infinite, non-NaN numerics");
-    }
-    return new Date(Math.round(valueAsDouble * 1000));
-};
-exports.parseEpochTimestamp = parseEpochTimestamp;
-const buildDate = (year, month, day, time) => {
-    const adjustedMonth = month - 1;
-    validateDayOfMonth(year, adjustedMonth, day);
-    return new Date(Date.UTC(year, adjustedMonth, day, parseDateValue(time.hours, "hour", 0, 23), parseDateValue(time.minutes, "minute", 0, 59), parseDateValue(time.seconds, "seconds", 0, 60), parseMilliseconds(time.fractionalMilliseconds)));
-};
-const parseTwoDigitYear = (value) => {
-    const thisYear = new Date().getUTCFullYear();
-    const valueInThisCentury = Math.floor(thisYear / 100) * 100 + (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(value));
-    if (valueInThisCentury < thisYear) {
-        return valueInThisCentury + 100;
-    }
-    return valueInThisCentury;
-};
-const FIFTY_YEARS_IN_MILLIS = 50 * 365 * 24 * 60 * 60 * 1000;
-const adjustRfc850Year = (input) => {
-    if (input.getTime() - new Date().getTime() > FIFTY_YEARS_IN_MILLIS) {
-        return new Date(Date.UTC(input.getUTCFullYear() - 100, input.getUTCMonth(), input.getUTCDate(), input.getUTCHours(), input.getUTCMinutes(), input.getUTCSeconds(), input.getUTCMilliseconds()));
-    }
-    return input;
-};
-const parseMonthByShortName = (value) => {
-    const monthIdx = MONTHS.indexOf(value);
-    if (monthIdx < 0) {
-        throw new TypeError(`Invalid month: ${value}`);
-    }
-    return monthIdx + 1;
-};
-const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-const validateDayOfMonth = (year, month, day) => {
-    let maxDays = DAYS_IN_MONTH[month];
-    if (month === 1 && isLeapYear(year)) {
-        maxDays = 29;
-    }
-    if (day > maxDays) {
-        throw new TypeError(`Invalid day for ${MONTHS[month]} in ${year}: ${day}`);
-    }
-};
-const isLeapYear = (year) => {
-    return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
-};
-const parseDateValue = (value, type, lower, upper) => {
-    const dateVal = (0, parse_utils_1.strictParseByte)(stripLeadingZeroes(value));
-    if (dateVal < lower || dateVal > upper) {
-        throw new TypeError(`${type} must be between ${lower} and ${upper}, inclusive`);
-    }
-    return dateVal;
-};
-const parseMilliseconds = (value) => {
-    if (value === null || value === undefined) {
-        return 0;
-    }
-    return (0, parse_utils_1.strictParseFloat32)("0." + value) * 1000;
-};
-const parseOffsetToMilliseconds = (value) => {
-    const directionStr = value[0];
-    let direction = 1;
-    if (directionStr == "+") {
-        direction = 1;
-    }
-    else if (directionStr == "-") {
-        direction = -1;
-    }
-    else {
-        throw new TypeError(`Offset direction, ${directionStr}, must be "+" or "-"`);
-    }
-    const hour = Number(value.substring(1, 3));
-    const minute = Number(value.substring(4, 6));
-    return direction * (hour * 60 + minute) * 60 * 1000;
-};
-const stripLeadingZeroes = (value) => {
-    let idx = 0;
-    while (idx < value.length - 1 && value.charAt(idx) === "0") {
-        idx++;
-    }
-    if (idx === 0) {
-        return value;
-    }
-    return value.slice(idx);
-};
-
-
-/***/ }),
-
-/***/ 3692:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.withBaseException = exports.throwDefaultError = void 0;
-const exceptions_1 = __nccwpck_require__(77887);
-const throwDefaultError = ({ output, parsedBody, exceptionCtor, errorCode }) => {
-    const $metadata = deserializeMetadata(output);
-    const statusCode = $metadata.httpStatusCode ? $metadata.httpStatusCode + "" : undefined;
-    const response = new exceptionCtor({
-        name: (parsedBody === null || parsedBody === void 0 ? void 0 : parsedBody.code) || (parsedBody === null || parsedBody === void 0 ? void 0 : parsedBody.Code) || errorCode || statusCode || "UnknownError",
-        $fault: "client",
-        $metadata,
-    });
-    throw (0, exceptions_1.decorateServiceException)(response, parsedBody);
-};
-exports.throwDefaultError = throwDefaultError;
-const withBaseException = (ExceptionCtor) => {
-    return ({ output, parsedBody, errorCode }) => {
-        (0, exports.throwDefaultError)({ output, parsedBody, exceptionCtor: ExceptionCtor, errorCode });
-    };
-};
-exports.withBaseException = withBaseException;
-const deserializeMetadata = (output) => {
-    var _a, _b;
-    return ({
-        httpStatusCode: output.statusCode,
-        requestId: (_b = (_a = output.headers["x-amzn-requestid"]) !== null && _a !== void 0 ? _a : output.headers["x-amzn-request-id"]) !== null && _b !== void 0 ? _b : output.headers["x-amz-request-id"],
-        extendedRequestId: output.headers["x-amz-id-2"],
-        cfId: output.headers["x-amz-cf-id"],
-    });
-};
-
-
-/***/ }),
-
-/***/ 59395:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.loadConfigsForDefaultMode = void 0;
-const loadConfigsForDefaultMode = (mode) => {
-    switch (mode) {
-        case "standard":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 3100,
-            };
-        case "in-region":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 1100,
-            };
-        case "cross-region":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 3100,
-            };
-        case "mobile":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 30000,
-            };
-        default:
-            return {};
-    }
-};
-exports.loadConfigsForDefaultMode = loadConfigsForDefaultMode;
-
-
-/***/ }),
-
-/***/ 10972:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.emitWarningIfUnsupportedVersion = void 0;
-let warningEmitted = false;
-const emitWarningIfUnsupportedVersion = (version) => {
-    if (version && !warningEmitted && parseInt(version.substring(1, version.indexOf("."))) < 14) {
-        warningEmitted = true;
-    }
-};
-exports.emitWarningIfUnsupportedVersion = emitWarningIfUnsupportedVersion;
-
-
-/***/ }),
-
-/***/ 77887:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.decorateServiceException = exports.ServiceException = void 0;
-class ServiceException extends Error {
-    constructor(options) {
-        super(options.message);
-        Object.setPrototypeOf(this, ServiceException.prototype);
-        this.name = options.name;
-        this.$fault = options.$fault;
-        this.$metadata = options.$metadata;
-    }
-}
-exports.ServiceException = ServiceException;
-const decorateServiceException = (exception, additions = {}) => {
-    Object.entries(additions)
-        .filter(([, v]) => v !== undefined)
-        .forEach(([k, v]) => {
-        if (exception[k] == undefined || exception[k] === "") {
-            exception[k] = v;
-        }
-    });
-    const message = exception.message || exception.Message || "UnknownError";
-    exception.message = message;
-    delete exception.Message;
-    return exception;
-};
-exports.decorateServiceException = decorateServiceException;
-
-
-/***/ }),
-
-/***/ 22177:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.extendedEncodeURIComponent = void 0;
-function extendedEncodeURIComponent(str) {
-    return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
-        return "%" + c.charCodeAt(0).toString(16).toUpperCase();
-    });
-}
-exports.extendedEncodeURIComponent = extendedEncodeURIComponent;
-
-
-/***/ }),
-
-/***/ 7692:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getArrayIfSingleItem = void 0;
-const getArrayIfSingleItem = (mayBeArray) => Array.isArray(mayBeArray) ? mayBeArray : [mayBeArray];
-exports.getArrayIfSingleItem = getArrayIfSingleItem;
-
-
-/***/ }),
-
-/***/ 22691:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getValueFromTextNode = void 0;
-const getValueFromTextNode = (obj) => {
-    const textNodeName = "#text";
-    for (const key in obj) {
-        if (obj.hasOwnProperty(key) && obj[key][textNodeName] !== undefined) {
-            obj[key] = obj[key][textNodeName];
-        }
-        else if (typeof obj[key] === "object" && obj[key] !== null) {
-            obj[key] = (0, exports.getValueFromTextNode)(obj[key]);
-        }
-    }
-    return obj;
-};
-exports.getValueFromTextNode = getValueFromTextNode;
-
-
-/***/ }),
-
-/***/ 70255:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __nccwpck_require__(15609);
-tslib_1.__exportStar(__nccwpck_require__(72081), exports);
-tslib_1.__exportStar(__nccwpck_require__(95201), exports);
-tslib_1.__exportStar(__nccwpck_require__(95953), exports);
-tslib_1.__exportStar(__nccwpck_require__(20460), exports);
-tslib_1.__exportStar(__nccwpck_require__(28931), exports);
-tslib_1.__exportStar(__nccwpck_require__(3692), exports);
-tslib_1.__exportStar(__nccwpck_require__(59395), exports);
-tslib_1.__exportStar(__nccwpck_require__(10972), exports);
-tslib_1.__exportStar(__nccwpck_require__(77887), exports);
-tslib_1.__exportStar(__nccwpck_require__(22177), exports);
-tslib_1.__exportStar(__nccwpck_require__(7692), exports);
-tslib_1.__exportStar(__nccwpck_require__(22691), exports);
-tslib_1.__exportStar(__nccwpck_require__(6455), exports);
-tslib_1.__exportStar(__nccwpck_require__(40768), exports);
-tslib_1.__exportStar(__nccwpck_require__(63860), exports);
-tslib_1.__exportStar(__nccwpck_require__(76688), exports);
-tslib_1.__exportStar(__nccwpck_require__(40527), exports);
-tslib_1.__exportStar(__nccwpck_require__(99848), exports);
-tslib_1.__exportStar(__nccwpck_require__(49799), exports);
-
-
-/***/ }),
-
-/***/ 6455:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.LazyJsonString = exports.StringWrapper = void 0;
-const StringWrapper = function () {
-    const Class = Object.getPrototypeOf(this).constructor;
-    const Constructor = Function.bind.apply(String, [null, ...arguments]);
-    const instance = new Constructor();
-    Object.setPrototypeOf(instance, Class.prototype);
-    return instance;
-};
-exports.StringWrapper = StringWrapper;
-exports.StringWrapper.prototype = Object.create(String.prototype, {
-    constructor: {
-        value: exports.StringWrapper,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-    },
-});
-Object.setPrototypeOf(exports.StringWrapper, String);
-class LazyJsonString extends exports.StringWrapper {
-    deserializeJSON() {
-        return JSON.parse(super.toString());
-    }
-    toJSON() {
-        return super.toString();
-    }
-    static fromObject(object) {
-        if (object instanceof LazyJsonString) {
-            return object;
-        }
-        else if (object instanceof String || typeof object === "string") {
-            return new LazyJsonString(object);
-        }
-        return new LazyJsonString(JSON.stringify(object));
-    }
-}
-exports.LazyJsonString = LazyJsonString;
-
-
-/***/ }),
-
-/***/ 40768:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.take = exports.convertMap = exports.map = void 0;
-function map(arg0, arg1, arg2) {
-    let target;
-    let filter;
-    let instructions;
-    if (typeof arg1 === "undefined" && typeof arg2 === "undefined") {
-        target = {};
-        instructions = arg0;
-    }
-    else {
-        target = arg0;
-        if (typeof arg1 === "function") {
-            filter = arg1;
-            instructions = arg2;
-            return mapWithFilter(target, filter, instructions);
-        }
-        else {
-            instructions = arg1;
-        }
-    }
-    for (const key of Object.keys(instructions)) {
-        if (!Array.isArray(instructions[key])) {
-            target[key] = instructions[key];
-            continue;
-        }
-        applyInstruction(target, null, instructions, key);
-    }
-    return target;
-}
-exports.map = map;
-const convertMap = (target) => {
-    const output = {};
-    for (const [k, v] of Object.entries(target || {})) {
-        output[k] = [, v];
-    }
-    return output;
-};
-exports.convertMap = convertMap;
-const take = (source, instructions) => {
-    const out = {};
-    for (const key in instructions) {
-        applyInstruction(out, source, instructions, key);
-    }
-    return out;
-};
-exports.take = take;
-const mapWithFilter = (target, filter, instructions) => {
-    return map(target, Object.entries(instructions).reduce((_instructions, [key, value]) => {
-        if (Array.isArray(value)) {
-            _instructions[key] = value;
-        }
-        else {
-            if (typeof value === "function") {
-                _instructions[key] = [filter, value()];
-            }
-            else {
-                _instructions[key] = [filter, value];
-            }
-        }
-        return _instructions;
-    }, {}));
-};
-const applyInstruction = (target, source, instructions, targetKey) => {
-    if (source !== null) {
-        let instruction = instructions[targetKey];
-        if (typeof instruction === "function") {
-            instruction = [, instruction];
-        }
-        const [filter = nonNullish, valueFn = pass, sourceKey = targetKey] = instruction;
-        if ((typeof filter === "function" && filter(source[sourceKey])) || (typeof filter !== "function" && !!filter)) {
-            target[targetKey] = valueFn(source[sourceKey]);
-        }
-        return;
-    }
-    let [filter, value] = instructions[targetKey];
-    if (typeof value === "function") {
-        let _value;
-        const defaultFilterPassed = filter === undefined && (_value = value()) != null;
-        const customFilterPassed = (typeof filter === "function" && !!filter(void 0)) || (typeof filter !== "function" && !!filter);
-        if (defaultFilterPassed) {
-            target[targetKey] = _value;
-        }
-        else if (customFilterPassed) {
-            target[targetKey] = value();
-        }
-    }
-    else {
-        const defaultFilterPassed = filter === undefined && value != null;
-        const customFilterPassed = (typeof filter === "function" && !!filter(value)) || (typeof filter !== "function" && !!filter);
-        if (defaultFilterPassed || customFilterPassed) {
-            target[targetKey] = value;
-        }
-    }
-};
-const nonNullish = (_) => _ != null;
-const pass = (_) => _;
-
-
-/***/ }),
-
-/***/ 63860:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.logger = exports.strictParseByte = exports.strictParseShort = exports.strictParseInt32 = exports.strictParseInt = exports.strictParseLong = exports.limitedParseFloat32 = exports.limitedParseFloat = exports.handleFloat = exports.limitedParseDouble = exports.strictParseFloat32 = exports.strictParseFloat = exports.strictParseDouble = exports.expectUnion = exports.expectString = exports.expectObject = exports.expectNonNull = exports.expectByte = exports.expectShort = exports.expectInt32 = exports.expectInt = exports.expectLong = exports.expectFloat32 = exports.expectNumber = exports.expectBoolean = exports.parseBoolean = void 0;
-const parseBoolean = (value) => {
-    switch (value) {
-        case "true":
-            return true;
-        case "false":
-            return false;
-        default:
-            throw new Error(`Unable to parse boolean value "${value}"`);
-    }
-};
-exports.parseBoolean = parseBoolean;
-const expectBoolean = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "number") {
-        if (value === 0 || value === 1) {
-            exports.logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
-        }
-        if (value === 0) {
-            return false;
-        }
-        if (value === 1) {
-            return true;
-        }
-    }
-    if (typeof value === "string") {
-        const lower = value.toLowerCase();
-        if (lower === "false" || lower === "true") {
-            exports.logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
-        }
-        if (lower === "false") {
-            return false;
-        }
-        if (lower === "true") {
-            return true;
-        }
-    }
-    if (typeof value === "boolean") {
-        return value;
-    }
-    throw new TypeError(`Expected boolean, got ${typeof value}: ${value}`);
-};
-exports.expectBoolean = expectBoolean;
-const expectNumber = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "string") {
-        const parsed = parseFloat(value);
-        if (!Number.isNaN(parsed)) {
-            if (String(parsed) !== String(value)) {
-                exports.logger.warn(stackTraceWarning(`Expected number but observed string: ${value}`));
-            }
-            return parsed;
-        }
-    }
-    if (typeof value === "number") {
-        return value;
-    }
-    throw new TypeError(`Expected number, got ${typeof value}: ${value}`);
-};
-exports.expectNumber = expectNumber;
-const MAX_FLOAT = Math.ceil(2 ** 127 * (2 - 2 ** -23));
-const expectFloat32 = (value) => {
-    const expected = (0, exports.expectNumber)(value);
-    if (expected !== undefined && !Number.isNaN(expected) && expected !== Infinity && expected !== -Infinity) {
-        if (Math.abs(expected) > MAX_FLOAT) {
-            throw new TypeError(`Expected 32-bit float, got ${value}`);
-        }
-    }
-    return expected;
-};
-exports.expectFloat32 = expectFloat32;
-const expectLong = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (Number.isInteger(value) && !Number.isNaN(value)) {
-        return value;
-    }
-    throw new TypeError(`Expected integer, got ${typeof value}: ${value}`);
-};
-exports.expectLong = expectLong;
-exports.expectInt = exports.expectLong;
-const expectInt32 = (value) => expectSizedInt(value, 32);
-exports.expectInt32 = expectInt32;
-const expectShort = (value) => expectSizedInt(value, 16);
-exports.expectShort = expectShort;
-const expectByte = (value) => expectSizedInt(value, 8);
-exports.expectByte = expectByte;
-const expectSizedInt = (value, size) => {
-    const expected = (0, exports.expectLong)(value);
-    if (expected !== undefined && castInt(expected, size) !== expected) {
-        throw new TypeError(`Expected ${size}-bit integer, got ${value}`);
-    }
-    return expected;
-};
-const castInt = (value, size) => {
-    switch (size) {
-        case 32:
-            return Int32Array.of(value)[0];
-        case 16:
-            return Int16Array.of(value)[0];
-        case 8:
-            return Int8Array.of(value)[0];
-    }
-};
-const expectNonNull = (value, location) => {
-    if (value === null || value === undefined) {
-        if (location) {
-            throw new TypeError(`Expected a non-null value for ${location}`);
-        }
-        throw new TypeError("Expected a non-null value");
-    }
-    return value;
-};
-exports.expectNonNull = expectNonNull;
-const expectObject = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "object" && !Array.isArray(value)) {
-        return value;
-    }
-    const receivedType = Array.isArray(value) ? "array" : typeof value;
-    throw new TypeError(`Expected object, got ${receivedType}: ${value}`);
-};
-exports.expectObject = expectObject;
-const expectString = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "string") {
-        return value;
-    }
-    if (["boolean", "number", "bigint"].includes(typeof value)) {
-        exports.logger.warn(stackTraceWarning(`Expected string, got ${typeof value}: ${value}`));
-        return String(value);
-    }
-    throw new TypeError(`Expected string, got ${typeof value}: ${value}`);
-};
-exports.expectString = expectString;
-const expectUnion = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    const asObject = (0, exports.expectObject)(value);
-    const setKeys = Object.entries(asObject)
-        .filter(([, v]) => v != null)
-        .map(([k]) => k);
-    if (setKeys.length === 0) {
-        throw new TypeError(`Unions must have exactly one non-null member. None were found.`);
-    }
-    if (setKeys.length > 1) {
-        throw new TypeError(`Unions must have exactly one non-null member. Keys ${setKeys} were not null.`);
-    }
-    return asObject;
-};
-exports.expectUnion = expectUnion;
-const strictParseDouble = (value) => {
-    if (typeof value == "string") {
-        return (0, exports.expectNumber)(parseNumber(value));
-    }
-    return (0, exports.expectNumber)(value);
-};
-exports.strictParseDouble = strictParseDouble;
-exports.strictParseFloat = exports.strictParseDouble;
-const strictParseFloat32 = (value) => {
-    if (typeof value == "string") {
-        return (0, exports.expectFloat32)(parseNumber(value));
-    }
-    return (0, exports.expectFloat32)(value);
-};
-exports.strictParseFloat32 = strictParseFloat32;
-const NUMBER_REGEX = /(-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?)|(-?Infinity)|(NaN)/g;
-const parseNumber = (value) => {
-    const matches = value.match(NUMBER_REGEX);
-    if (matches === null || matches[0].length !== value.length) {
-        throw new TypeError(`Expected real number, got implicit NaN`);
-    }
-    return parseFloat(value);
-};
-const limitedParseDouble = (value) => {
-    if (typeof value == "string") {
-        return parseFloatString(value);
-    }
-    return (0, exports.expectNumber)(value);
-};
-exports.limitedParseDouble = limitedParseDouble;
-exports.handleFloat = exports.limitedParseDouble;
-exports.limitedParseFloat = exports.limitedParseDouble;
-const limitedParseFloat32 = (value) => {
-    if (typeof value == "string") {
-        return parseFloatString(value);
-    }
-    return (0, exports.expectFloat32)(value);
-};
-exports.limitedParseFloat32 = limitedParseFloat32;
-const parseFloatString = (value) => {
-    switch (value) {
-        case "NaN":
-            return NaN;
-        case "Infinity":
-            return Infinity;
-        case "-Infinity":
-            return -Infinity;
-        default:
-            throw new Error(`Unable to parse float value: ${value}`);
-    }
-};
-const strictParseLong = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectLong)(parseNumber(value));
-    }
-    return (0, exports.expectLong)(value);
-};
-exports.strictParseLong = strictParseLong;
-exports.strictParseInt = exports.strictParseLong;
-const strictParseInt32 = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectInt32)(parseNumber(value));
-    }
-    return (0, exports.expectInt32)(value);
-};
-exports.strictParseInt32 = strictParseInt32;
-const strictParseShort = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectShort)(parseNumber(value));
-    }
-    return (0, exports.expectShort)(value);
-};
-exports.strictParseShort = strictParseShort;
-const strictParseByte = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectByte)(parseNumber(value));
-    }
-    return (0, exports.expectByte)(value);
-};
-exports.strictParseByte = strictParseByte;
-const stackTraceWarning = (message) => {
-    return String(new TypeError(message).stack || message)
-        .split("\n")
-        .slice(0, 5)
-        .filter((s) => !s.includes("stackTraceWarning"))
-        .join("\n");
-};
-exports.logger = {
-    warn: console.warn,
-};
-
-
-/***/ }),
-
-/***/ 76688:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.resolvedPath = void 0;
-const extended_encode_uri_component_1 = __nccwpck_require__(22177);
-const resolvedPath = (resolvedPath, input, memberName, labelValueProvider, uriLabel, isGreedyLabel) => {
-    if (input != null && input[memberName] !== undefined) {
-        const labelValue = labelValueProvider();
-        if (labelValue.length <= 0) {
-            throw new Error("Empty value provided for input HTTP label: " + memberName + ".");
-        }
-        resolvedPath = resolvedPath.replace(uriLabel, isGreedyLabel
-            ? labelValue
-                .split("/")
-                .map((segment) => (0, extended_encode_uri_component_1.extendedEncodeURIComponent)(segment))
-                .join("/")
-            : (0, extended_encode_uri_component_1.extendedEncodeURIComponent)(labelValue));
-    }
-    else {
-        throw new Error("No value provided for input HTTP label: " + memberName + ".");
-    }
-    return resolvedPath;
-};
-exports.resolvedPath = resolvedPath;
-
-
-/***/ }),
-
-/***/ 40527:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.serializeFloat = void 0;
-const serializeFloat = (value) => {
-    if (value !== value) {
-        return "NaN";
-    }
-    switch (value) {
-        case Infinity:
-            return "Infinity";
-        case -Infinity:
-            return "-Infinity";
-        default:
-            return value;
-    }
-};
-exports.serializeFloat = serializeFloat;
-
-
-/***/ }),
-
-/***/ 99848:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports._json = void 0;
-const _json = (obj) => {
-    if (obj == null) {
-        return {};
-    }
-    if (Array.isArray(obj)) {
-        return obj.filter((_) => _ != null);
-    }
-    if (typeof obj === "object") {
-        const target = {};
-        for (const key of Object.keys(obj)) {
-            if (obj[key] == null) {
-                continue;
-            }
-            target[key] = (0, exports._json)(obj[key]);
-        }
-        return target;
-    }
-    return obj;
-};
-exports._json = _json;
-
-
-/***/ }),
-
-/***/ 49799:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.splitEvery = void 0;
-function splitEvery(value, delimiter, numDelimiters) {
-    if (numDelimiters <= 0 || !Number.isInteger(numDelimiters)) {
-        throw new Error("Invalid number of delimiters (" + numDelimiters + ") for splitEvery.");
-    }
-    const segments = value.split(delimiter);
-    if (numDelimiters === 1) {
-        return segments;
-    }
-    const compoundSegments = [];
-    let currentSegment = "";
-    for (let i = 0; i < segments.length; i++) {
-        if (currentSegment === "") {
-            currentSegment = segments[i];
-        }
-        else {
-            currentSegment += delimiter + segments[i];
-        }
-        if ((i + 1) % numDelimiters === 0) {
-            compoundSegments.push(currentSegment);
-            currentSegment = "";
-        }
-    }
-    if (currentSegment !== "") {
-        compoundSegments.push(currentSegment);
-    }
-    return compoundSegments;
-}
-exports.splitEvery = splitEvery;
-
-
-/***/ }),
-
 /***/ 65820:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.STS = void 0;
+const smithy_client_1 = __nccwpck_require__(48);
 const AssumeRoleCommand_1 = __nccwpck_require__(47134);
 const AssumeRoleWithSAMLCommand_1 = __nccwpck_require__(24041);
 const AssumeRoleWithWebIdentityCommand_1 = __nccwpck_require__(82511);
@@ -26267,121 +21922,20 @@ const GetCallerIdentityCommand_1 = __nccwpck_require__(73751);
 const GetFederationTokenCommand_1 = __nccwpck_require__(81133);
 const GetSessionTokenCommand_1 = __nccwpck_require__(64921);
 const STSClient_1 = __nccwpck_require__(81205);
+const commands = {
+    AssumeRoleCommand: AssumeRoleCommand_1.AssumeRoleCommand,
+    AssumeRoleWithSAMLCommand: AssumeRoleWithSAMLCommand_1.AssumeRoleWithSAMLCommand,
+    AssumeRoleWithWebIdentityCommand: AssumeRoleWithWebIdentityCommand_1.AssumeRoleWithWebIdentityCommand,
+    DecodeAuthorizationMessageCommand: DecodeAuthorizationMessageCommand_1.DecodeAuthorizationMessageCommand,
+    GetAccessKeyInfoCommand: GetAccessKeyInfoCommand_1.GetAccessKeyInfoCommand,
+    GetCallerIdentityCommand: GetCallerIdentityCommand_1.GetCallerIdentityCommand,
+    GetFederationTokenCommand: GetFederationTokenCommand_1.GetFederationTokenCommand,
+    GetSessionTokenCommand: GetSessionTokenCommand_1.GetSessionTokenCommand,
+};
 class STS extends STSClient_1.STSClient {
-    assumeRole(args, optionsOrCb, cb) {
-        const command = new AssumeRoleCommand_1.AssumeRoleCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    assumeRoleWithSAML(args, optionsOrCb, cb) {
-        const command = new AssumeRoleWithSAMLCommand_1.AssumeRoleWithSAMLCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    assumeRoleWithWebIdentity(args, optionsOrCb, cb) {
-        const command = new AssumeRoleWithWebIdentityCommand_1.AssumeRoleWithWebIdentityCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    decodeAuthorizationMessage(args, optionsOrCb, cb) {
-        const command = new DecodeAuthorizationMessageCommand_1.DecodeAuthorizationMessageCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getAccessKeyInfo(args, optionsOrCb, cb) {
-        const command = new GetAccessKeyInfoCommand_1.GetAccessKeyInfoCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getCallerIdentity(args, optionsOrCb, cb) {
-        const command = new GetCallerIdentityCommand_1.GetCallerIdentityCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getFederationToken(args, optionsOrCb, cb) {
-        const command = new GetFederationTokenCommand_1.GetFederationTokenCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
-    getSessionToken(args, optionsOrCb, cb) {
-        const command = new GetSessionTokenCommand_1.GetSessionTokenCommand(args);
-        if (typeof optionsOrCb === "function") {
-            this.send(command, optionsOrCb);
-        }
-        else if (typeof cb === "function") {
-            if (typeof optionsOrCb !== "object")
-                throw new Error(`Expect http options but get ${typeof optionsOrCb}`);
-            this.send(command, optionsOrCb || {}, cb);
-        }
-        else {
-            return this.send(command, optionsOrCb);
-        }
-    }
 }
 exports.STS = STS;
+(0, smithy_client_1.createAggregatedClient)(commands, STS);
 
 
 /***/ }),
@@ -26401,7 +21955,7 @@ const middleware_recursion_detection_1 = __nccwpck_require__(46077);
 const middleware_retry_1 = __nccwpck_require__(12236);
 const middleware_sdk_sts_1 = __nccwpck_require__(66870);
 const middleware_user_agent_1 = __nccwpck_require__(21768);
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 const EndpointParameters_1 = __nccwpck_require__(61903);
 const runtimeConfig_1 = __nccwpck_require__(81777);
 class STSClient extends smithy_client_1.Client {
@@ -26441,7 +21995,7 @@ exports.AssumeRoleCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_signing_1 = __nccwpck_require__(15585);
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_query_1 = __nccwpck_require__(32120);
 class AssumeRoleCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -26495,7 +22049,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AssumeRoleWithSAMLCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_query_1 = __nccwpck_require__(32120);
 class AssumeRoleWithSAMLCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -26548,7 +22102,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.AssumeRoleWithWebIdentityCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_query_1 = __nccwpck_require__(32120);
 class AssumeRoleWithWebIdentityCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -26602,7 +22156,7 @@ exports.DecodeAuthorizationMessageCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_signing_1 = __nccwpck_require__(15585);
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_query_1 = __nccwpck_require__(32120);
 class DecodeAuthorizationMessageCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -26657,7 +22211,7 @@ exports.GetAccessKeyInfoCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_signing_1 = __nccwpck_require__(15585);
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_query_1 = __nccwpck_require__(32120);
 class GetAccessKeyInfoCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -26712,7 +22266,7 @@ exports.GetCallerIdentityCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_signing_1 = __nccwpck_require__(15585);
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_query_1 = __nccwpck_require__(32120);
 class GetCallerIdentityCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -26767,7 +22321,7 @@ exports.GetFederationTokenCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_signing_1 = __nccwpck_require__(15585);
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_query_1 = __nccwpck_require__(32120);
 class GetFederationTokenCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -26822,7 +22376,7 @@ exports.GetSessionTokenCommand = void 0;
 const middleware_endpoint_1 = __nccwpck_require__(31411);
 const middleware_serde_1 = __nccwpck_require__(51455);
 const middleware_signing_1 = __nccwpck_require__(15585);
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 const Aws_query_1 = __nccwpck_require__(32120);
 class GetSessionTokenCommand extends smithy_client_1.Command {
     static getEndpointParameterInstructions() {
@@ -27081,7 +22635,7 @@ Object.defineProperty(exports, "STSServiceException", ({ enumerable: true, get: 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.STSServiceException = void 0;
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 class STSServiceException extends smithy_client_1.ServiceException {
     constructor(options) {
         super(options);
@@ -27226,7 +22780,7 @@ exports.InvalidAuthorizationMessageException = InvalidAuthorizationMessageExcept
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.de_GetSessionTokenCommand = exports.de_GetFederationTokenCommand = exports.de_GetCallerIdentityCommand = exports.de_GetAccessKeyInfoCommand = exports.de_DecodeAuthorizationMessageCommand = exports.de_AssumeRoleWithWebIdentityCommand = exports.de_AssumeRoleWithSAMLCommand = exports.de_AssumeRoleCommand = exports.se_GetSessionTokenCommand = exports.se_GetFederationTokenCommand = exports.se_GetCallerIdentityCommand = exports.se_GetAccessKeyInfoCommand = exports.se_DecodeAuthorizationMessageCommand = exports.se_AssumeRoleWithWebIdentityCommand = exports.se_AssumeRoleWithSAMLCommand = exports.se_AssumeRoleCommand = void 0;
 const protocol_http_1 = __nccwpck_require__(73632);
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 const fast_xml_parser_1 = __nccwpck_require__(20064);
 const models_0_1 = __nccwpck_require__(7831);
 const STSServiceException_1 = __nccwpck_require__(86527);
@@ -28244,9 +23798,9 @@ const util_body_length_node_1 = __nccwpck_require__(64379);
 const util_retry_1 = __nccwpck_require__(63687);
 const util_user_agent_node_1 = __nccwpck_require__(7306);
 const runtimeConfig_shared_1 = __nccwpck_require__(3821);
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 const util_defaults_mode_node_1 = __nccwpck_require__(61984);
-const smithy_client_2 = __nccwpck_require__(23246);
+const smithy_client_2 = __nccwpck_require__(48);
 const getRuntimeConfig = (config) => {
     (0, smithy_client_2.emitWarningIfUnsupportedVersion)(process.version);
     const defaultsMode = (0, util_defaults_mode_node_1.resolveDefaultsModeConfig)(config);
@@ -28286,7 +23840,7 @@ exports.getRuntimeConfig = getRuntimeConfig;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getRuntimeConfig = void 0;
-const smithy_client_1 = __nccwpck_require__(23246);
+const smithy_client_1 = __nccwpck_require__(48);
 const url_parser_1 = __nccwpck_require__(92942);
 const util_base64_1 = __nccwpck_require__(46669);
 const util_utf8_1 = __nccwpck_require__(82166);
@@ -28308,1033 +23862,13 @@ exports.getRuntimeConfig = getRuntimeConfig;
 
 /***/ }),
 
-/***/ 1258:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NoOpLogger = void 0;
-class NoOpLogger {
-    trace() { }
-    debug() { }
-    info() { }
-    warn() { }
-    error() { }
-}
-exports.NoOpLogger = NoOpLogger;
-
-
-/***/ }),
-
-/***/ 45969:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Client = void 0;
-const middleware_stack_1 = __nccwpck_require__(75457);
-class Client {
-    constructor(config) {
-        this.middlewareStack = (0, middleware_stack_1.constructStack)();
-        this.config = config;
-    }
-    send(command, optionsOrCb, cb) {
-        const options = typeof optionsOrCb !== "function" ? optionsOrCb : undefined;
-        const callback = typeof optionsOrCb === "function" ? optionsOrCb : cb;
-        const handler = command.resolveMiddleware(this.middlewareStack, this.config, options);
-        if (callback) {
-            handler(command)
-                .then((result) => callback(null, result.output), (err) => callback(err))
-                .catch(() => { });
-        }
-        else {
-            return handler(command).then((result) => result.output);
-        }
-    }
-    destroy() {
-        if (this.config.requestHandler.destroy)
-            this.config.requestHandler.destroy();
-    }
-}
-exports.Client = Client;
-
-
-/***/ }),
-
-/***/ 28645:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Command = void 0;
-const middleware_stack_1 = __nccwpck_require__(75457);
-class Command {
-    constructor() {
-        this.middlewareStack = (0, middleware_stack_1.constructStack)();
-    }
-}
-exports.Command = Command;
-
-
-/***/ }),
-
-/***/ 68997:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SENSITIVE_STRING = void 0;
-exports.SENSITIVE_STRING = "***SensitiveInformation***";
-
-
-/***/ }),
-
-/***/ 21449:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parseEpochTimestamp = exports.parseRfc7231DateTime = exports.parseRfc3339DateTimeWithOffset = exports.parseRfc3339DateTime = exports.dateToUtcString = void 0;
-const parse_utils_1 = __nccwpck_require__(77501);
-const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-function dateToUtcString(date) {
-    const year = date.getUTCFullYear();
-    const month = date.getUTCMonth();
-    const dayOfWeek = date.getUTCDay();
-    const dayOfMonthInt = date.getUTCDate();
-    const hoursInt = date.getUTCHours();
-    const minutesInt = date.getUTCMinutes();
-    const secondsInt = date.getUTCSeconds();
-    const dayOfMonthString = dayOfMonthInt < 10 ? `0${dayOfMonthInt}` : `${dayOfMonthInt}`;
-    const hoursString = hoursInt < 10 ? `0${hoursInt}` : `${hoursInt}`;
-    const minutesString = minutesInt < 10 ? `0${minutesInt}` : `${minutesInt}`;
-    const secondsString = secondsInt < 10 ? `0${secondsInt}` : `${secondsInt}`;
-    return `${DAYS[dayOfWeek]}, ${dayOfMonthString} ${MONTHS[month]} ${year} ${hoursString}:${minutesString}:${secondsString} GMT`;
-}
-exports.dateToUtcString = dateToUtcString;
-const RFC3339 = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?[zZ]$/);
-const parseRfc3339DateTime = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value !== "string") {
-        throw new TypeError("RFC-3339 date-times must be expressed as strings");
-    }
-    const match = RFC3339.exec(value);
-    if (!match) {
-        throw new TypeError("Invalid RFC-3339 date-time value");
-    }
-    const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-    const year = (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr));
-    const month = parseDateValue(monthStr, "month", 1, 12);
-    const day = parseDateValue(dayStr, "day", 1, 31);
-    return buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
-};
-exports.parseRfc3339DateTime = parseRfc3339DateTime;
-const RFC3339_WITH_OFFSET = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(([-+]\d{2}\:\d{2})|[zZ])$/);
-const parseRfc3339DateTimeWithOffset = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value !== "string") {
-        throw new TypeError("RFC-3339 date-times must be expressed as strings");
-    }
-    const match = RFC3339_WITH_OFFSET.exec(value);
-    if (!match) {
-        throw new TypeError("Invalid RFC-3339 date-time value");
-    }
-    const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, offsetStr] = match;
-    const year = (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr));
-    const month = parseDateValue(monthStr, "month", 1, 12);
-    const day = parseDateValue(dayStr, "day", 1, 31);
-    const date = buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
-    if (offsetStr.toUpperCase() != "Z") {
-        date.setTime(date.getTime() - parseOffsetToMilliseconds(offsetStr));
-    }
-    return date;
-};
-exports.parseRfc3339DateTimeWithOffset = parseRfc3339DateTimeWithOffset;
-const IMF_FIXDATE = new RegExp(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d{2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/);
-const RFC_850_DATE = new RegExp(/^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d{2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/);
-const ASC_TIME = new RegExp(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( [1-9]|\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? (\d{4})$/);
-const parseRfc7231DateTime = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value !== "string") {
-        throw new TypeError("RFC-7231 date-times must be expressed as strings");
-    }
-    let match = IMF_FIXDATE.exec(value);
-    if (match) {
-        const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-        return buildDate((0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr)), parseMonthByShortName(monthStr), parseDateValue(dayStr, "day", 1, 31), { hours, minutes, seconds, fractionalMilliseconds });
-    }
-    match = RFC_850_DATE.exec(value);
-    if (match) {
-        const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
-        return adjustRfc850Year(buildDate(parseTwoDigitYear(yearStr), parseMonthByShortName(monthStr), parseDateValue(dayStr, "day", 1, 31), {
-            hours,
-            minutes,
-            seconds,
-            fractionalMilliseconds,
-        }));
-    }
-    match = ASC_TIME.exec(value);
-    if (match) {
-        const [_, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, yearStr] = match;
-        return buildDate((0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr)), parseMonthByShortName(monthStr), parseDateValue(dayStr.trimLeft(), "day", 1, 31), { hours, minutes, seconds, fractionalMilliseconds });
-    }
-    throw new TypeError("Invalid RFC-7231 date-time value");
-};
-exports.parseRfc7231DateTime = parseRfc7231DateTime;
-const parseEpochTimestamp = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    let valueAsDouble;
-    if (typeof value === "number") {
-        valueAsDouble = value;
-    }
-    else if (typeof value === "string") {
-        valueAsDouble = (0, parse_utils_1.strictParseDouble)(value);
-    }
-    else {
-        throw new TypeError("Epoch timestamps must be expressed as floating point numbers or their string representation");
-    }
-    if (Number.isNaN(valueAsDouble) || valueAsDouble === Infinity || valueAsDouble === -Infinity) {
-        throw new TypeError("Epoch timestamps must be valid, non-Infinite, non-NaN numerics");
-    }
-    return new Date(Math.round(valueAsDouble * 1000));
-};
-exports.parseEpochTimestamp = parseEpochTimestamp;
-const buildDate = (year, month, day, time) => {
-    const adjustedMonth = month - 1;
-    validateDayOfMonth(year, adjustedMonth, day);
-    return new Date(Date.UTC(year, adjustedMonth, day, parseDateValue(time.hours, "hour", 0, 23), parseDateValue(time.minutes, "minute", 0, 59), parseDateValue(time.seconds, "seconds", 0, 60), parseMilliseconds(time.fractionalMilliseconds)));
-};
-const parseTwoDigitYear = (value) => {
-    const thisYear = new Date().getUTCFullYear();
-    const valueInThisCentury = Math.floor(thisYear / 100) * 100 + (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(value));
-    if (valueInThisCentury < thisYear) {
-        return valueInThisCentury + 100;
-    }
-    return valueInThisCentury;
-};
-const FIFTY_YEARS_IN_MILLIS = 50 * 365 * 24 * 60 * 60 * 1000;
-const adjustRfc850Year = (input) => {
-    if (input.getTime() - new Date().getTime() > FIFTY_YEARS_IN_MILLIS) {
-        return new Date(Date.UTC(input.getUTCFullYear() - 100, input.getUTCMonth(), input.getUTCDate(), input.getUTCHours(), input.getUTCMinutes(), input.getUTCSeconds(), input.getUTCMilliseconds()));
-    }
-    return input;
-};
-const parseMonthByShortName = (value) => {
-    const monthIdx = MONTHS.indexOf(value);
-    if (monthIdx < 0) {
-        throw new TypeError(`Invalid month: ${value}`);
-    }
-    return monthIdx + 1;
-};
-const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-const validateDayOfMonth = (year, month, day) => {
-    let maxDays = DAYS_IN_MONTH[month];
-    if (month === 1 && isLeapYear(year)) {
-        maxDays = 29;
-    }
-    if (day > maxDays) {
-        throw new TypeError(`Invalid day for ${MONTHS[month]} in ${year}: ${day}`);
-    }
-};
-const isLeapYear = (year) => {
-    return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
-};
-const parseDateValue = (value, type, lower, upper) => {
-    const dateVal = (0, parse_utils_1.strictParseByte)(stripLeadingZeroes(value));
-    if (dateVal < lower || dateVal > upper) {
-        throw new TypeError(`${type} must be between ${lower} and ${upper}, inclusive`);
-    }
-    return dateVal;
-};
-const parseMilliseconds = (value) => {
-    if (value === null || value === undefined) {
-        return 0;
-    }
-    return (0, parse_utils_1.strictParseFloat32)("0." + value) * 1000;
-};
-const parseOffsetToMilliseconds = (value) => {
-    const directionStr = value[0];
-    let direction = 1;
-    if (directionStr == "+") {
-        direction = 1;
-    }
-    else if (directionStr == "-") {
-        direction = -1;
-    }
-    else {
-        throw new TypeError(`Offset direction, ${directionStr}, must be "+" or "-"`);
-    }
-    const hour = Number(value.substring(1, 3));
-    const minute = Number(value.substring(4, 6));
-    return direction * (hour * 60 + minute) * 60 * 1000;
-};
-const stripLeadingZeroes = (value) => {
-    let idx = 0;
-    while (idx < value.length - 1 && value.charAt(idx) === "0") {
-        idx++;
-    }
-    if (idx === 0) {
-        return value;
-    }
-    return value.slice(idx);
-};
-
-
-/***/ }),
-
-/***/ 40074:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.withBaseException = exports.throwDefaultError = void 0;
-const exceptions_1 = __nccwpck_require__(60950);
-const throwDefaultError = ({ output, parsedBody, exceptionCtor, errorCode }) => {
-    const $metadata = deserializeMetadata(output);
-    const statusCode = $metadata.httpStatusCode ? $metadata.httpStatusCode + "" : undefined;
-    const response = new exceptionCtor({
-        name: (parsedBody === null || parsedBody === void 0 ? void 0 : parsedBody.code) || (parsedBody === null || parsedBody === void 0 ? void 0 : parsedBody.Code) || errorCode || statusCode || "UnknownError",
-        $fault: "client",
-        $metadata,
-    });
-    throw (0, exceptions_1.decorateServiceException)(response, parsedBody);
-};
-exports.throwDefaultError = throwDefaultError;
-const withBaseException = (ExceptionCtor) => {
-    return ({ output, parsedBody, errorCode }) => {
-        (0, exports.throwDefaultError)({ output, parsedBody, exceptionCtor: ExceptionCtor, errorCode });
-    };
-};
-exports.withBaseException = withBaseException;
-const deserializeMetadata = (output) => {
-    var _a, _b;
-    return ({
-        httpStatusCode: output.statusCode,
-        requestId: (_b = (_a = output.headers["x-amzn-requestid"]) !== null && _a !== void 0 ? _a : output.headers["x-amzn-request-id"]) !== null && _b !== void 0 ? _b : output.headers["x-amz-request-id"],
-        extendedRequestId: output.headers["x-amz-id-2"],
-        cfId: output.headers["x-amz-cf-id"],
-    });
-};
-
-
-/***/ }),
-
-/***/ 40245:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.loadConfigsForDefaultMode = void 0;
-const loadConfigsForDefaultMode = (mode) => {
-    switch (mode) {
-        case "standard":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 3100,
-            };
-        case "in-region":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 1100,
-            };
-        case "cross-region":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 3100,
-            };
-        case "mobile":
-            return {
-                retryMode: "standard",
-                connectionTimeout: 30000,
-            };
-        default:
-            return {};
-    }
-};
-exports.loadConfigsForDefaultMode = loadConfigsForDefaultMode;
-
-
-/***/ }),
-
-/***/ 84471:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.emitWarningIfUnsupportedVersion = void 0;
-let warningEmitted = false;
-const emitWarningIfUnsupportedVersion = (version) => {
-    if (version && !warningEmitted && parseInt(version.substring(1, version.indexOf("."))) < 14) {
-        warningEmitted = true;
-    }
-};
-exports.emitWarningIfUnsupportedVersion = emitWarningIfUnsupportedVersion;
-
-
-/***/ }),
-
-/***/ 60950:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.decorateServiceException = exports.ServiceException = void 0;
-class ServiceException extends Error {
-    constructor(options) {
-        super(options.message);
-        Object.setPrototypeOf(this, ServiceException.prototype);
-        this.name = options.name;
-        this.$fault = options.$fault;
-        this.$metadata = options.$metadata;
-    }
-}
-exports.ServiceException = ServiceException;
-const decorateServiceException = (exception, additions = {}) => {
-    Object.entries(additions)
-        .filter(([, v]) => v !== undefined)
-        .forEach(([k, v]) => {
-        if (exception[k] == undefined || exception[k] === "") {
-            exception[k] = v;
-        }
-    });
-    const message = exception.message || exception.Message || "UnknownError";
-    exception.message = message;
-    delete exception.Message;
-    return exception;
-};
-exports.decorateServiceException = decorateServiceException;
-
-
-/***/ }),
-
-/***/ 5954:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.extendedEncodeURIComponent = void 0;
-function extendedEncodeURIComponent(str) {
-    return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
-        return "%" + c.charCodeAt(0).toString(16).toUpperCase();
-    });
-}
-exports.extendedEncodeURIComponent = extendedEncodeURIComponent;
-
-
-/***/ }),
-
-/***/ 90873:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getArrayIfSingleItem = void 0;
-const getArrayIfSingleItem = (mayBeArray) => Array.isArray(mayBeArray) ? mayBeArray : [mayBeArray];
-exports.getArrayIfSingleItem = getArrayIfSingleItem;
-
-
-/***/ }),
-
-/***/ 555:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getValueFromTextNode = void 0;
-const getValueFromTextNode = (obj) => {
-    const textNodeName = "#text";
-    for (const key in obj) {
-        if (obj.hasOwnProperty(key) && obj[key][textNodeName] !== undefined) {
-            obj[key] = obj[key][textNodeName];
-        }
-        else if (typeof obj[key] === "object" && obj[key] !== null) {
-            obj[key] = (0, exports.getValueFromTextNode)(obj[key]);
-        }
-    }
-    return obj;
-};
-exports.getValueFromTextNode = getValueFromTextNode;
-
-
-/***/ }),
-
-/***/ 23246:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __nccwpck_require__(15609);
-tslib_1.__exportStar(__nccwpck_require__(1258), exports);
-tslib_1.__exportStar(__nccwpck_require__(45969), exports);
-tslib_1.__exportStar(__nccwpck_require__(28645), exports);
-tslib_1.__exportStar(__nccwpck_require__(68997), exports);
-tslib_1.__exportStar(__nccwpck_require__(21449), exports);
-tslib_1.__exportStar(__nccwpck_require__(40074), exports);
-tslib_1.__exportStar(__nccwpck_require__(40245), exports);
-tslib_1.__exportStar(__nccwpck_require__(84471), exports);
-tslib_1.__exportStar(__nccwpck_require__(60950), exports);
-tslib_1.__exportStar(__nccwpck_require__(5954), exports);
-tslib_1.__exportStar(__nccwpck_require__(90873), exports);
-tslib_1.__exportStar(__nccwpck_require__(555), exports);
-tslib_1.__exportStar(__nccwpck_require__(95254), exports);
-tslib_1.__exportStar(__nccwpck_require__(31475), exports);
-tslib_1.__exportStar(__nccwpck_require__(77501), exports);
-tslib_1.__exportStar(__nccwpck_require__(87819), exports);
-tslib_1.__exportStar(__nccwpck_require__(86662), exports);
-tslib_1.__exportStar(__nccwpck_require__(50499), exports);
-tslib_1.__exportStar(__nccwpck_require__(79444), exports);
-
-
-/***/ }),
-
-/***/ 95254:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.LazyJsonString = exports.StringWrapper = void 0;
-const StringWrapper = function () {
-    const Class = Object.getPrototypeOf(this).constructor;
-    const Constructor = Function.bind.apply(String, [null, ...arguments]);
-    const instance = new Constructor();
-    Object.setPrototypeOf(instance, Class.prototype);
-    return instance;
-};
-exports.StringWrapper = StringWrapper;
-exports.StringWrapper.prototype = Object.create(String.prototype, {
-    constructor: {
-        value: exports.StringWrapper,
-        enumerable: false,
-        writable: true,
-        configurable: true,
-    },
-});
-Object.setPrototypeOf(exports.StringWrapper, String);
-class LazyJsonString extends exports.StringWrapper {
-    deserializeJSON() {
-        return JSON.parse(super.toString());
-    }
-    toJSON() {
-        return super.toString();
-    }
-    static fromObject(object) {
-        if (object instanceof LazyJsonString) {
-            return object;
-        }
-        else if (object instanceof String || typeof object === "string") {
-            return new LazyJsonString(object);
-        }
-        return new LazyJsonString(JSON.stringify(object));
-    }
-}
-exports.LazyJsonString = LazyJsonString;
-
-
-/***/ }),
-
-/***/ 31475:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.take = exports.convertMap = exports.map = void 0;
-function map(arg0, arg1, arg2) {
-    let target;
-    let filter;
-    let instructions;
-    if (typeof arg1 === "undefined" && typeof arg2 === "undefined") {
-        target = {};
-        instructions = arg0;
-    }
-    else {
-        target = arg0;
-        if (typeof arg1 === "function") {
-            filter = arg1;
-            instructions = arg2;
-            return mapWithFilter(target, filter, instructions);
-        }
-        else {
-            instructions = arg1;
-        }
-    }
-    for (const key of Object.keys(instructions)) {
-        if (!Array.isArray(instructions[key])) {
-            target[key] = instructions[key];
-            continue;
-        }
-        applyInstruction(target, null, instructions, key);
-    }
-    return target;
-}
-exports.map = map;
-const convertMap = (target) => {
-    const output = {};
-    for (const [k, v] of Object.entries(target || {})) {
-        output[k] = [, v];
-    }
-    return output;
-};
-exports.convertMap = convertMap;
-const take = (source, instructions) => {
-    const out = {};
-    for (const key in instructions) {
-        applyInstruction(out, source, instructions, key);
-    }
-    return out;
-};
-exports.take = take;
-const mapWithFilter = (target, filter, instructions) => {
-    return map(target, Object.entries(instructions).reduce((_instructions, [key, value]) => {
-        if (Array.isArray(value)) {
-            _instructions[key] = value;
-        }
-        else {
-            if (typeof value === "function") {
-                _instructions[key] = [filter, value()];
-            }
-            else {
-                _instructions[key] = [filter, value];
-            }
-        }
-        return _instructions;
-    }, {}));
-};
-const applyInstruction = (target, source, instructions, targetKey) => {
-    if (source !== null) {
-        let instruction = instructions[targetKey];
-        if (typeof instruction === "function") {
-            instruction = [, instruction];
-        }
-        const [filter = nonNullish, valueFn = pass, sourceKey = targetKey] = instruction;
-        if ((typeof filter === "function" && filter(source[sourceKey])) || (typeof filter !== "function" && !!filter)) {
-            target[targetKey] = valueFn(source[sourceKey]);
-        }
-        return;
-    }
-    let [filter, value] = instructions[targetKey];
-    if (typeof value === "function") {
-        let _value;
-        const defaultFilterPassed = filter === undefined && (_value = value()) != null;
-        const customFilterPassed = (typeof filter === "function" && !!filter(void 0)) || (typeof filter !== "function" && !!filter);
-        if (defaultFilterPassed) {
-            target[targetKey] = _value;
-        }
-        else if (customFilterPassed) {
-            target[targetKey] = value();
-        }
-    }
-    else {
-        const defaultFilterPassed = filter === undefined && value != null;
-        const customFilterPassed = (typeof filter === "function" && !!filter(value)) || (typeof filter !== "function" && !!filter);
-        if (defaultFilterPassed || customFilterPassed) {
-            target[targetKey] = value;
-        }
-    }
-};
-const nonNullish = (_) => _ != null;
-const pass = (_) => _;
-
-
-/***/ }),
-
-/***/ 77501:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.logger = exports.strictParseByte = exports.strictParseShort = exports.strictParseInt32 = exports.strictParseInt = exports.strictParseLong = exports.limitedParseFloat32 = exports.limitedParseFloat = exports.handleFloat = exports.limitedParseDouble = exports.strictParseFloat32 = exports.strictParseFloat = exports.strictParseDouble = exports.expectUnion = exports.expectString = exports.expectObject = exports.expectNonNull = exports.expectByte = exports.expectShort = exports.expectInt32 = exports.expectInt = exports.expectLong = exports.expectFloat32 = exports.expectNumber = exports.expectBoolean = exports.parseBoolean = void 0;
-const parseBoolean = (value) => {
-    switch (value) {
-        case "true":
-            return true;
-        case "false":
-            return false;
-        default:
-            throw new Error(`Unable to parse boolean value "${value}"`);
-    }
-};
-exports.parseBoolean = parseBoolean;
-const expectBoolean = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "number") {
-        if (value === 0 || value === 1) {
-            exports.logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
-        }
-        if (value === 0) {
-            return false;
-        }
-        if (value === 1) {
-            return true;
-        }
-    }
-    if (typeof value === "string") {
-        const lower = value.toLowerCase();
-        if (lower === "false" || lower === "true") {
-            exports.logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
-        }
-        if (lower === "false") {
-            return false;
-        }
-        if (lower === "true") {
-            return true;
-        }
-    }
-    if (typeof value === "boolean") {
-        return value;
-    }
-    throw new TypeError(`Expected boolean, got ${typeof value}: ${value}`);
-};
-exports.expectBoolean = expectBoolean;
-const expectNumber = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "string") {
-        const parsed = parseFloat(value);
-        if (!Number.isNaN(parsed)) {
-            if (String(parsed) !== String(value)) {
-                exports.logger.warn(stackTraceWarning(`Expected number but observed string: ${value}`));
-            }
-            return parsed;
-        }
-    }
-    if (typeof value === "number") {
-        return value;
-    }
-    throw new TypeError(`Expected number, got ${typeof value}: ${value}`);
-};
-exports.expectNumber = expectNumber;
-const MAX_FLOAT = Math.ceil(2 ** 127 * (2 - 2 ** -23));
-const expectFloat32 = (value) => {
-    const expected = (0, exports.expectNumber)(value);
-    if (expected !== undefined && !Number.isNaN(expected) && expected !== Infinity && expected !== -Infinity) {
-        if (Math.abs(expected) > MAX_FLOAT) {
-            throw new TypeError(`Expected 32-bit float, got ${value}`);
-        }
-    }
-    return expected;
-};
-exports.expectFloat32 = expectFloat32;
-const expectLong = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (Number.isInteger(value) && !Number.isNaN(value)) {
-        return value;
-    }
-    throw new TypeError(`Expected integer, got ${typeof value}: ${value}`);
-};
-exports.expectLong = expectLong;
-exports.expectInt = exports.expectLong;
-const expectInt32 = (value) => expectSizedInt(value, 32);
-exports.expectInt32 = expectInt32;
-const expectShort = (value) => expectSizedInt(value, 16);
-exports.expectShort = expectShort;
-const expectByte = (value) => expectSizedInt(value, 8);
-exports.expectByte = expectByte;
-const expectSizedInt = (value, size) => {
-    const expected = (0, exports.expectLong)(value);
-    if (expected !== undefined && castInt(expected, size) !== expected) {
-        throw new TypeError(`Expected ${size}-bit integer, got ${value}`);
-    }
-    return expected;
-};
-const castInt = (value, size) => {
-    switch (size) {
-        case 32:
-            return Int32Array.of(value)[0];
-        case 16:
-            return Int16Array.of(value)[0];
-        case 8:
-            return Int8Array.of(value)[0];
-    }
-};
-const expectNonNull = (value, location) => {
-    if (value === null || value === undefined) {
-        if (location) {
-            throw new TypeError(`Expected a non-null value for ${location}`);
-        }
-        throw new TypeError("Expected a non-null value");
-    }
-    return value;
-};
-exports.expectNonNull = expectNonNull;
-const expectObject = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "object" && !Array.isArray(value)) {
-        return value;
-    }
-    const receivedType = Array.isArray(value) ? "array" : typeof value;
-    throw new TypeError(`Expected object, got ${receivedType}: ${value}`);
-};
-exports.expectObject = expectObject;
-const expectString = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    if (typeof value === "string") {
-        return value;
-    }
-    if (["boolean", "number", "bigint"].includes(typeof value)) {
-        exports.logger.warn(stackTraceWarning(`Expected string, got ${typeof value}: ${value}`));
-        return String(value);
-    }
-    throw new TypeError(`Expected string, got ${typeof value}: ${value}`);
-};
-exports.expectString = expectString;
-const expectUnion = (value) => {
-    if (value === null || value === undefined) {
-        return undefined;
-    }
-    const asObject = (0, exports.expectObject)(value);
-    const setKeys = Object.entries(asObject)
-        .filter(([, v]) => v != null)
-        .map(([k]) => k);
-    if (setKeys.length === 0) {
-        throw new TypeError(`Unions must have exactly one non-null member. None were found.`);
-    }
-    if (setKeys.length > 1) {
-        throw new TypeError(`Unions must have exactly one non-null member. Keys ${setKeys} were not null.`);
-    }
-    return asObject;
-};
-exports.expectUnion = expectUnion;
-const strictParseDouble = (value) => {
-    if (typeof value == "string") {
-        return (0, exports.expectNumber)(parseNumber(value));
-    }
-    return (0, exports.expectNumber)(value);
-};
-exports.strictParseDouble = strictParseDouble;
-exports.strictParseFloat = exports.strictParseDouble;
-const strictParseFloat32 = (value) => {
-    if (typeof value == "string") {
-        return (0, exports.expectFloat32)(parseNumber(value));
-    }
-    return (0, exports.expectFloat32)(value);
-};
-exports.strictParseFloat32 = strictParseFloat32;
-const NUMBER_REGEX = /(-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?)|(-?Infinity)|(NaN)/g;
-const parseNumber = (value) => {
-    const matches = value.match(NUMBER_REGEX);
-    if (matches === null || matches[0].length !== value.length) {
-        throw new TypeError(`Expected real number, got implicit NaN`);
-    }
-    return parseFloat(value);
-};
-const limitedParseDouble = (value) => {
-    if (typeof value == "string") {
-        return parseFloatString(value);
-    }
-    return (0, exports.expectNumber)(value);
-};
-exports.limitedParseDouble = limitedParseDouble;
-exports.handleFloat = exports.limitedParseDouble;
-exports.limitedParseFloat = exports.limitedParseDouble;
-const limitedParseFloat32 = (value) => {
-    if (typeof value == "string") {
-        return parseFloatString(value);
-    }
-    return (0, exports.expectFloat32)(value);
-};
-exports.limitedParseFloat32 = limitedParseFloat32;
-const parseFloatString = (value) => {
-    switch (value) {
-        case "NaN":
-            return NaN;
-        case "Infinity":
-            return Infinity;
-        case "-Infinity":
-            return -Infinity;
-        default:
-            throw new Error(`Unable to parse float value: ${value}`);
-    }
-};
-const strictParseLong = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectLong)(parseNumber(value));
-    }
-    return (0, exports.expectLong)(value);
-};
-exports.strictParseLong = strictParseLong;
-exports.strictParseInt = exports.strictParseLong;
-const strictParseInt32 = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectInt32)(parseNumber(value));
-    }
-    return (0, exports.expectInt32)(value);
-};
-exports.strictParseInt32 = strictParseInt32;
-const strictParseShort = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectShort)(parseNumber(value));
-    }
-    return (0, exports.expectShort)(value);
-};
-exports.strictParseShort = strictParseShort;
-const strictParseByte = (value) => {
-    if (typeof value === "string") {
-        return (0, exports.expectByte)(parseNumber(value));
-    }
-    return (0, exports.expectByte)(value);
-};
-exports.strictParseByte = strictParseByte;
-const stackTraceWarning = (message) => {
-    return String(new TypeError(message).stack || message)
-        .split("\n")
-        .slice(0, 5)
-        .filter((s) => !s.includes("stackTraceWarning"))
-        .join("\n");
-};
-exports.logger = {
-    warn: console.warn,
-};
-
-
-/***/ }),
-
-/***/ 87819:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.resolvedPath = void 0;
-const extended_encode_uri_component_1 = __nccwpck_require__(5954);
-const resolvedPath = (resolvedPath, input, memberName, labelValueProvider, uriLabel, isGreedyLabel) => {
-    if (input != null && input[memberName] !== undefined) {
-        const labelValue = labelValueProvider();
-        if (labelValue.length <= 0) {
-            throw new Error("Empty value provided for input HTTP label: " + memberName + ".");
-        }
-        resolvedPath = resolvedPath.replace(uriLabel, isGreedyLabel
-            ? labelValue
-                .split("/")
-                .map((segment) => (0, extended_encode_uri_component_1.extendedEncodeURIComponent)(segment))
-                .join("/")
-            : (0, extended_encode_uri_component_1.extendedEncodeURIComponent)(labelValue));
-    }
-    else {
-        throw new Error("No value provided for input HTTP label: " + memberName + ".");
-    }
-    return resolvedPath;
-};
-exports.resolvedPath = resolvedPath;
-
-
-/***/ }),
-
-/***/ 86662:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.serializeFloat = void 0;
-const serializeFloat = (value) => {
-    if (value !== value) {
-        return "NaN";
-    }
-    switch (value) {
-        case Infinity:
-            return "Infinity";
-        case -Infinity:
-            return "-Infinity";
-        default:
-            return value;
-    }
-};
-exports.serializeFloat = serializeFloat;
-
-
-/***/ }),
-
-/***/ 50499:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports._json = void 0;
-const _json = (obj) => {
-    if (obj == null) {
-        return {};
-    }
-    if (Array.isArray(obj)) {
-        return obj.filter((_) => _ != null);
-    }
-    if (typeof obj === "object") {
-        const target = {};
-        for (const key of Object.keys(obj)) {
-            if (obj[key] == null) {
-                continue;
-            }
-            target[key] = (0, exports._json)(obj[key]);
-        }
-        return target;
-    }
-    return obj;
-};
-exports._json = _json;
-
-
-/***/ }),
-
-/***/ 79444:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.splitEvery = void 0;
-function splitEvery(value, delimiter, numDelimiters) {
-    if (numDelimiters <= 0 || !Number.isInteger(numDelimiters)) {
-        throw new Error("Invalid number of delimiters (" + numDelimiters + ") for splitEvery.");
-    }
-    const segments = value.split(delimiter);
-    if (numDelimiters === 1) {
-        return segments;
-    }
-    const compoundSegments = [];
-    let currentSegment = "";
-    for (let i = 0; i < segments.length; i++) {
-        if (currentSegment === "") {
-            currentSegment = segments[i];
-        }
-        else {
-            currentSegment += delimiter + segments[i];
-        }
-        if ((i + 1) % numDelimiters === 0) {
-            compoundSegments.push(currentSegment);
-            currentSegment = "";
-        }
-    }
-    if (currentSegment !== "") {
-        compoundSegments.push(currentSegment);
-    }
-    return compoundSegments;
-}
-exports.splitEvery = splitEvery;
-
-
-/***/ }),
-
 /***/ 86898:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS = exports.DEFAULT_USE_DUALSTACK_ENDPOINT = exports.CONFIG_USE_DUALSTACK_ENDPOINT = exports.ENV_USE_DUALSTACK_ENDPOINT = void 0;
-const util_config_provider_1 = __nccwpck_require__(65447);
+const util_config_provider_1 = __nccwpck_require__(64342);
 exports.ENV_USE_DUALSTACK_ENDPOINT = "AWS_USE_DUALSTACK_ENDPOINT";
 exports.CONFIG_USE_DUALSTACK_ENDPOINT = "use_dualstack_endpoint";
 exports.DEFAULT_USE_DUALSTACK_ENDPOINT = false;
@@ -29353,7 +23887,7 @@ exports.NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS = {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS = exports.DEFAULT_USE_FIPS_ENDPOINT = exports.CONFIG_USE_FIPS_ENDPOINT = exports.ENV_USE_FIPS_ENDPOINT = void 0;
-const util_config_provider_1 = __nccwpck_require__(65447);
+const util_config_provider_1 = __nccwpck_require__(64342);
 exports.ENV_USE_FIPS_ENDPOINT = "AWS_USE_FIPS_ENDPOINT";
 exports.CONFIG_USE_FIPS_ENDPOINT = "use_fips_endpoint";
 exports.DEFAULT_USE_FIPS_ENDPOINT = false;
@@ -29703,42 +24237,6 @@ const tslib_1 = __nccwpck_require__(15609);
 tslib_1.__exportStar(__nccwpck_require__(24322), exports);
 tslib_1.__exportStar(__nccwpck_require__(8808), exports);
 tslib_1.__exportStar(__nccwpck_require__(64426), exports);
-
-
-/***/ }),
-
-/***/ 54718:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.booleanSelector = exports.SelectorType = void 0;
-var SelectorType;
-(function (SelectorType) {
-    SelectorType["ENV"] = "env";
-    SelectorType["CONFIG"] = "shared config entry";
-})(SelectorType = exports.SelectorType || (exports.SelectorType = {}));
-const booleanSelector = (obj, key, type) => {
-    if (!(key in obj))
-        return undefined;
-    if (obj[key] === "true")
-        return true;
-    if (obj[key] === "false")
-        return false;
-    throw new Error(`Cannot load ${type} "${key}". Expected "true" or "false", got ${obj[key]}.`);
-};
-exports.booleanSelector = booleanSelector;
-
-
-/***/ }),
-
-/***/ 65447:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __nccwpck_require__(15609);
-tslib_1.__exportStar(__nccwpck_require__(54718), exports);
 
 
 /***/ }),
@@ -31753,7 +26251,7 @@ exports.isArrayBuffer = isArrayBuffer;
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NODE_DISABLE_MULTIREGION_ACCESS_POINT_CONFIG_OPTIONS = exports.NODE_DISABLE_MULTIREGION_ACCESS_POINT_INI_NAME = exports.NODE_DISABLE_MULTIREGION_ACCESS_POINT_ENV_NAME = void 0;
-const util_config_provider_1 = __nccwpck_require__(88932);
+const util_config_provider_1 = __nccwpck_require__(64342);
 exports.NODE_DISABLE_MULTIREGION_ACCESS_POINT_ENV_NAME = "AWS_S3_DISABLE_MULTIREGION_ACCESS_POINTS";
 exports.NODE_DISABLE_MULTIREGION_ACCESS_POINT_INI_NAME = "s3_disable_multiregion_access_points";
 exports.NODE_DISABLE_MULTIREGION_ACCESS_POINT_CONFIG_OPTIONS = {
@@ -31771,7 +26269,7 @@ exports.NODE_DISABLE_MULTIREGION_ACCESS_POINT_CONFIG_OPTIONS = {
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NODE_USE_ARN_REGION_CONFIG_OPTIONS = exports.NODE_USE_ARN_REGION_INI_NAME = exports.NODE_USE_ARN_REGION_ENV_NAME = void 0;
-const util_config_provider_1 = __nccwpck_require__(88932);
+const util_config_provider_1 = __nccwpck_require__(64342);
 exports.NODE_USE_ARN_REGION_ENV_NAME = "AWS_S3_USE_ARN_REGION";
 exports.NODE_USE_ARN_REGION_INI_NAME = "s3_use_arn_region";
 exports.NODE_USE_ARN_REGION_CONFIG_OPTIONS = {
@@ -32251,42 +26749,6 @@ const build = (arnObject) => {
     return `arn:${partition}:${service}:${region}:${accountId}:${resource}`;
 };
 exports.build = build;
-
-
-/***/ }),
-
-/***/ 10432:
-/***/ ((__unused_webpack_module, exports) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.booleanSelector = exports.SelectorType = void 0;
-var SelectorType;
-(function (SelectorType) {
-    SelectorType["ENV"] = "env";
-    SelectorType["CONFIG"] = "shared config entry";
-})(SelectorType = exports.SelectorType || (exports.SelectorType = {}));
-const booleanSelector = (obj, key, type) => {
-    if (!(key in obj))
-        return undefined;
-    if (obj[key] === "true")
-        return true;
-    if (obj[key] === "false")
-        return false;
-    throw new Error(`Cannot load ${type} "${key}". Expected "true" or "false", got ${obj[key]}.`);
-};
-exports.booleanSelector = booleanSelector;
-
-
-/***/ }),
-
-/***/ 88932:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __nccwpck_require__(15609);
-tslib_1.__exportStar(__nccwpck_require__(10432), exports);
 
 
 /***/ }),
@@ -36638,6 +31100,1059 @@ exports.toDate = toDate;
 
 /***/ }),
 
+/***/ 6231:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NoOpLogger = void 0;
+class NoOpLogger {
+    trace() { }
+    debug() { }
+    info() { }
+    warn() { }
+    error() { }
+}
+exports.NoOpLogger = NoOpLogger;
+
+
+/***/ }),
+
+/***/ 80335:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Client = void 0;
+const middleware_stack_1 = __nccwpck_require__(75457);
+class Client {
+    constructor(config) {
+        this.middlewareStack = (0, middleware_stack_1.constructStack)();
+        this.config = config;
+    }
+    send(command, optionsOrCb, cb) {
+        const options = typeof optionsOrCb !== "function" ? optionsOrCb : undefined;
+        const callback = typeof optionsOrCb === "function" ? optionsOrCb : cb;
+        const handler = command.resolveMiddleware(this.middlewareStack, this.config, options);
+        if (callback) {
+            handler(command)
+                .then((result) => callback(null, result.output), (err) => callback(err))
+                .catch(() => { });
+        }
+        else {
+            return handler(command).then((result) => result.output);
+        }
+    }
+    destroy() {
+        if (this.config.requestHandler.destroy)
+            this.config.requestHandler.destroy();
+    }
+}
+exports.Client = Client;
+
+
+/***/ }),
+
+/***/ 68550:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Command = void 0;
+const middleware_stack_1 = __nccwpck_require__(75457);
+class Command {
+    constructor() {
+        this.middlewareStack = (0, middleware_stack_1.constructStack)();
+    }
+}
+exports.Command = Command;
+
+
+/***/ }),
+
+/***/ 90932:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.SENSITIVE_STRING = void 0;
+exports.SENSITIVE_STRING = "***SensitiveInformation***";
+
+
+/***/ }),
+
+/***/ 88113:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createAggregatedClient = void 0;
+const createAggregatedClient = (commands, Client) => {
+    for (const command of Object.keys(commands)) {
+        const CommandCtor = commands[command];
+        const methodImpl = async function (args, optionsOrCb, cb) {
+            const command = new CommandCtor(args);
+            if (typeof optionsOrCb === "function") {
+                this.send(command, optionsOrCb);
+            }
+            else if (typeof cb === "function") {
+                if (typeof optionsOrCb !== "object")
+                    throw new Error(`Expected http options but got ${typeof optionsOrCb}`);
+                this.send(command, optionsOrCb || {}, cb);
+            }
+            else {
+                return this.send(command, optionsOrCb);
+            }
+        };
+        const methodName = (command[0].toLowerCase() + command.slice(1)).replace(/Command$/, "");
+        Client.prototype[methodName] = methodImpl;
+    }
+};
+exports.createAggregatedClient = createAggregatedClient;
+
+
+/***/ }),
+
+/***/ 3977:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.parseEpochTimestamp = exports.parseRfc7231DateTime = exports.parseRfc3339DateTimeWithOffset = exports.parseRfc3339DateTime = exports.dateToUtcString = void 0;
+const parse_utils_1 = __nccwpck_require__(62725);
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+function dateToUtcString(date) {
+    const year = date.getUTCFullYear();
+    const month = date.getUTCMonth();
+    const dayOfWeek = date.getUTCDay();
+    const dayOfMonthInt = date.getUTCDate();
+    const hoursInt = date.getUTCHours();
+    const minutesInt = date.getUTCMinutes();
+    const secondsInt = date.getUTCSeconds();
+    const dayOfMonthString = dayOfMonthInt < 10 ? `0${dayOfMonthInt}` : `${dayOfMonthInt}`;
+    const hoursString = hoursInt < 10 ? `0${hoursInt}` : `${hoursInt}`;
+    const minutesString = minutesInt < 10 ? `0${minutesInt}` : `${minutesInt}`;
+    const secondsString = secondsInt < 10 ? `0${secondsInt}` : `${secondsInt}`;
+    return `${DAYS[dayOfWeek]}, ${dayOfMonthString} ${MONTHS[month]} ${year} ${hoursString}:${minutesString}:${secondsString} GMT`;
+}
+exports.dateToUtcString = dateToUtcString;
+const RFC3339 = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?[zZ]$/);
+const parseRfc3339DateTime = (value) => {
+    if (value === null || value === undefined) {
+        return undefined;
+    }
+    if (typeof value !== "string") {
+        throw new TypeError("RFC-3339 date-times must be expressed as strings");
+    }
+    const match = RFC3339.exec(value);
+    if (!match) {
+        throw new TypeError("Invalid RFC-3339 date-time value");
+    }
+    const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds] = match;
+    const year = (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr));
+    const month = parseDateValue(monthStr, "month", 1, 12);
+    const day = parseDateValue(dayStr, "day", 1, 31);
+    return buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
+};
+exports.parseRfc3339DateTime = parseRfc3339DateTime;
+const RFC3339_WITH_OFFSET = new RegExp(/^(\d{4})-(\d{2})-(\d{2})[tT](\d{2}):(\d{2}):(\d{2})(?:\.(\d+))?(([-+]\d{2}\:\d{2})|[zZ])$/);
+const parseRfc3339DateTimeWithOffset = (value) => {
+    if (value === null || value === undefined) {
+        return undefined;
+    }
+    if (typeof value !== "string") {
+        throw new TypeError("RFC-3339 date-times must be expressed as strings");
+    }
+    const match = RFC3339_WITH_OFFSET.exec(value);
+    if (!match) {
+        throw new TypeError("Invalid RFC-3339 date-time value");
+    }
+    const [_, yearStr, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, offsetStr] = match;
+    const year = (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr));
+    const month = parseDateValue(monthStr, "month", 1, 12);
+    const day = parseDateValue(dayStr, "day", 1, 31);
+    const date = buildDate(year, month, day, { hours, minutes, seconds, fractionalMilliseconds });
+    if (offsetStr.toUpperCase() != "Z") {
+        date.setTime(date.getTime() - parseOffsetToMilliseconds(offsetStr));
+    }
+    return date;
+};
+exports.parseRfc3339DateTimeWithOffset = parseRfc3339DateTimeWithOffset;
+const IMF_FIXDATE = new RegExp(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun), (\d{2}) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/);
+const RFC_850_DATE = new RegExp(/^(?:Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), (\d{2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? GMT$/);
+const ASC_TIME = new RegExp(/^(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun) (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) ( [1-9]|\d{2}) (\d{1,2}):(\d{2}):(\d{2})(?:\.(\d+))? (\d{4})$/);
+const parseRfc7231DateTime = (value) => {
+    if (value === null || value === undefined) {
+        return undefined;
+    }
+    if (typeof value !== "string") {
+        throw new TypeError("RFC-7231 date-times must be expressed as strings");
+    }
+    let match = IMF_FIXDATE.exec(value);
+    if (match) {
+        const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
+        return buildDate((0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr)), parseMonthByShortName(monthStr), parseDateValue(dayStr, "day", 1, 31), { hours, minutes, seconds, fractionalMilliseconds });
+    }
+    match = RFC_850_DATE.exec(value);
+    if (match) {
+        const [_, dayStr, monthStr, yearStr, hours, minutes, seconds, fractionalMilliseconds] = match;
+        return adjustRfc850Year(buildDate(parseTwoDigitYear(yearStr), parseMonthByShortName(monthStr), parseDateValue(dayStr, "day", 1, 31), {
+            hours,
+            minutes,
+            seconds,
+            fractionalMilliseconds,
+        }));
+    }
+    match = ASC_TIME.exec(value);
+    if (match) {
+        const [_, monthStr, dayStr, hours, minutes, seconds, fractionalMilliseconds, yearStr] = match;
+        return buildDate((0, parse_utils_1.strictParseShort)(stripLeadingZeroes(yearStr)), parseMonthByShortName(monthStr), parseDateValue(dayStr.trimLeft(), "day", 1, 31), { hours, minutes, seconds, fractionalMilliseconds });
+    }
+    throw new TypeError("Invalid RFC-7231 date-time value");
+};
+exports.parseRfc7231DateTime = parseRfc7231DateTime;
+const parseEpochTimestamp = (value) => {
+    if (value === null || value === undefined) {
+        return undefined;
+    }
+    let valueAsDouble;
+    if (typeof value === "number") {
+        valueAsDouble = value;
+    }
+    else if (typeof value === "string") {
+        valueAsDouble = (0, parse_utils_1.strictParseDouble)(value);
+    }
+    else {
+        throw new TypeError("Epoch timestamps must be expressed as floating point numbers or their string representation");
+    }
+    if (Number.isNaN(valueAsDouble) || valueAsDouble === Infinity || valueAsDouble === -Infinity) {
+        throw new TypeError("Epoch timestamps must be valid, non-Infinite, non-NaN numerics");
+    }
+    return new Date(Math.round(valueAsDouble * 1000));
+};
+exports.parseEpochTimestamp = parseEpochTimestamp;
+const buildDate = (year, month, day, time) => {
+    const adjustedMonth = month - 1;
+    validateDayOfMonth(year, adjustedMonth, day);
+    return new Date(Date.UTC(year, adjustedMonth, day, parseDateValue(time.hours, "hour", 0, 23), parseDateValue(time.minutes, "minute", 0, 59), parseDateValue(time.seconds, "seconds", 0, 60), parseMilliseconds(time.fractionalMilliseconds)));
+};
+const parseTwoDigitYear = (value) => {
+    const thisYear = new Date().getUTCFullYear();
+    const valueInThisCentury = Math.floor(thisYear / 100) * 100 + (0, parse_utils_1.strictParseShort)(stripLeadingZeroes(value));
+    if (valueInThisCentury < thisYear) {
+        return valueInThisCentury + 100;
+    }
+    return valueInThisCentury;
+};
+const FIFTY_YEARS_IN_MILLIS = 50 * 365 * 24 * 60 * 60 * 1000;
+const adjustRfc850Year = (input) => {
+    if (input.getTime() - new Date().getTime() > FIFTY_YEARS_IN_MILLIS) {
+        return new Date(Date.UTC(input.getUTCFullYear() - 100, input.getUTCMonth(), input.getUTCDate(), input.getUTCHours(), input.getUTCMinutes(), input.getUTCSeconds(), input.getUTCMilliseconds()));
+    }
+    return input;
+};
+const parseMonthByShortName = (value) => {
+    const monthIdx = MONTHS.indexOf(value);
+    if (monthIdx < 0) {
+        throw new TypeError(`Invalid month: ${value}`);
+    }
+    return monthIdx + 1;
+};
+const DAYS_IN_MONTH = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+const validateDayOfMonth = (year, month, day) => {
+    let maxDays = DAYS_IN_MONTH[month];
+    if (month === 1 && isLeapYear(year)) {
+        maxDays = 29;
+    }
+    if (day > maxDays) {
+        throw new TypeError(`Invalid day for ${MONTHS[month]} in ${year}: ${day}`);
+    }
+};
+const isLeapYear = (year) => {
+    return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+};
+const parseDateValue = (value, type, lower, upper) => {
+    const dateVal = (0, parse_utils_1.strictParseByte)(stripLeadingZeroes(value));
+    if (dateVal < lower || dateVal > upper) {
+        throw new TypeError(`${type} must be between ${lower} and ${upper}, inclusive`);
+    }
+    return dateVal;
+};
+const parseMilliseconds = (value) => {
+    if (value === null || value === undefined) {
+        return 0;
+    }
+    return (0, parse_utils_1.strictParseFloat32)("0." + value) * 1000;
+};
+const parseOffsetToMilliseconds = (value) => {
+    const directionStr = value[0];
+    let direction = 1;
+    if (directionStr == "+") {
+        direction = 1;
+    }
+    else if (directionStr == "-") {
+        direction = -1;
+    }
+    else {
+        throw new TypeError(`Offset direction, ${directionStr}, must be "+" or "-"`);
+    }
+    const hour = Number(value.substring(1, 3));
+    const minute = Number(value.substring(4, 6));
+    return direction * (hour * 60 + minute) * 60 * 1000;
+};
+const stripLeadingZeroes = (value) => {
+    let idx = 0;
+    while (idx < value.length - 1 && value.charAt(idx) === "0") {
+        idx++;
+    }
+    if (idx === 0) {
+        return value;
+    }
+    return value.slice(idx);
+};
+
+
+/***/ }),
+
+/***/ 63658:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.withBaseException = exports.throwDefaultError = void 0;
+const exceptions_1 = __nccwpck_require__(95968);
+const throwDefaultError = ({ output, parsedBody, exceptionCtor, errorCode }) => {
+    const $metadata = deserializeMetadata(output);
+    const statusCode = $metadata.httpStatusCode ? $metadata.httpStatusCode + "" : undefined;
+    const response = new exceptionCtor({
+        name: (parsedBody === null || parsedBody === void 0 ? void 0 : parsedBody.code) || (parsedBody === null || parsedBody === void 0 ? void 0 : parsedBody.Code) || errorCode || statusCode || "UnknownError",
+        $fault: "client",
+        $metadata,
+    });
+    throw (0, exceptions_1.decorateServiceException)(response, parsedBody);
+};
+exports.throwDefaultError = throwDefaultError;
+const withBaseException = (ExceptionCtor) => {
+    return ({ output, parsedBody, errorCode }) => {
+        (0, exports.throwDefaultError)({ output, parsedBody, exceptionCtor: ExceptionCtor, errorCode });
+    };
+};
+exports.withBaseException = withBaseException;
+const deserializeMetadata = (output) => {
+    var _a, _b;
+    return ({
+        httpStatusCode: output.statusCode,
+        requestId: (_b = (_a = output.headers["x-amzn-requestid"]) !== null && _a !== void 0 ? _a : output.headers["x-amzn-request-id"]) !== null && _b !== void 0 ? _b : output.headers["x-amz-request-id"],
+        extendedRequestId: output.headers["x-amz-id-2"],
+        cfId: output.headers["x-amz-cf-id"],
+    });
+};
+
+
+/***/ }),
+
+/***/ 13501:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.loadConfigsForDefaultMode = void 0;
+const loadConfigsForDefaultMode = (mode) => {
+    switch (mode) {
+        case "standard":
+            return {
+                retryMode: "standard",
+                connectionTimeout: 3100,
+            };
+        case "in-region":
+            return {
+                retryMode: "standard",
+                connectionTimeout: 1100,
+            };
+        case "cross-region":
+            return {
+                retryMode: "standard",
+                connectionTimeout: 3100,
+            };
+        case "mobile":
+            return {
+                retryMode: "standard",
+                connectionTimeout: 30000,
+            };
+        default:
+            return {};
+    }
+};
+exports.loadConfigsForDefaultMode = loadConfigsForDefaultMode;
+
+
+/***/ }),
+
+/***/ 65497:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.emitWarningIfUnsupportedVersion = void 0;
+let warningEmitted = false;
+const emitWarningIfUnsupportedVersion = (version) => {
+    if (version && !warningEmitted && parseInt(version.substring(1, version.indexOf("."))) < 14) {
+        warningEmitted = true;
+    }
+};
+exports.emitWarningIfUnsupportedVersion = emitWarningIfUnsupportedVersion;
+
+
+/***/ }),
+
+/***/ 95968:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.decorateServiceException = exports.ServiceException = void 0;
+class ServiceException extends Error {
+    constructor(options) {
+        super(options.message);
+        Object.setPrototypeOf(this, ServiceException.prototype);
+        this.name = options.name;
+        this.$fault = options.$fault;
+        this.$metadata = options.$metadata;
+    }
+}
+exports.ServiceException = ServiceException;
+const decorateServiceException = (exception, additions = {}) => {
+    Object.entries(additions)
+        .filter(([, v]) => v !== undefined)
+        .forEach(([k, v]) => {
+        if (exception[k] == undefined || exception[k] === "") {
+            exception[k] = v;
+        }
+    });
+    const message = exception.message || exception.Message || "UnknownError";
+    exception.message = message;
+    delete exception.Message;
+    return exception;
+};
+exports.decorateServiceException = decorateServiceException;
+
+
+/***/ }),
+
+/***/ 84413:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.extendedEncodeURIComponent = void 0;
+function extendedEncodeURIComponent(str) {
+    return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
+        return "%" + c.charCodeAt(0).toString(16).toUpperCase();
+    });
+}
+exports.extendedEncodeURIComponent = extendedEncodeURIComponent;
+
+
+/***/ }),
+
+/***/ 29922:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getArrayIfSingleItem = void 0;
+const getArrayIfSingleItem = (mayBeArray) => Array.isArray(mayBeArray) ? mayBeArray : [mayBeArray];
+exports.getArrayIfSingleItem = getArrayIfSingleItem;
+
+
+/***/ }),
+
+/***/ 51045:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getValueFromTextNode = void 0;
+const getValueFromTextNode = (obj) => {
+    const textNodeName = "#text";
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key) && obj[key][textNodeName] !== undefined) {
+            obj[key] = obj[key][textNodeName];
+        }
+        else if (typeof obj[key] === "object" && obj[key] !== null) {
+            obj[key] = (0, exports.getValueFromTextNode)(obj[key]);
+        }
+    }
+    return obj;
+};
+exports.getValueFromTextNode = getValueFromTextNode;
+
+
+/***/ }),
+
+/***/ 48:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __nccwpck_require__(15609);
+tslib_1.__exportStar(__nccwpck_require__(6231), exports);
+tslib_1.__exportStar(__nccwpck_require__(80335), exports);
+tslib_1.__exportStar(__nccwpck_require__(68550), exports);
+tslib_1.__exportStar(__nccwpck_require__(90932), exports);
+tslib_1.__exportStar(__nccwpck_require__(88113), exports);
+tslib_1.__exportStar(__nccwpck_require__(3977), exports);
+tslib_1.__exportStar(__nccwpck_require__(63658), exports);
+tslib_1.__exportStar(__nccwpck_require__(13501), exports);
+tslib_1.__exportStar(__nccwpck_require__(65497), exports);
+tslib_1.__exportStar(__nccwpck_require__(95968), exports);
+tslib_1.__exportStar(__nccwpck_require__(84413), exports);
+tslib_1.__exportStar(__nccwpck_require__(29922), exports);
+tslib_1.__exportStar(__nccwpck_require__(51045), exports);
+tslib_1.__exportStar(__nccwpck_require__(25), exports);
+tslib_1.__exportStar(__nccwpck_require__(5523), exports);
+tslib_1.__exportStar(__nccwpck_require__(62725), exports);
+tslib_1.__exportStar(__nccwpck_require__(55836), exports);
+tslib_1.__exportStar(__nccwpck_require__(57806), exports);
+tslib_1.__exportStar(__nccwpck_require__(50813), exports);
+tslib_1.__exportStar(__nccwpck_require__(50285), exports);
+
+
+/***/ }),
+
+/***/ 25:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.LazyJsonString = exports.StringWrapper = void 0;
+const StringWrapper = function () {
+    const Class = Object.getPrototypeOf(this).constructor;
+    const Constructor = Function.bind.apply(String, [null, ...arguments]);
+    const instance = new Constructor();
+    Object.setPrototypeOf(instance, Class.prototype);
+    return instance;
+};
+exports.StringWrapper = StringWrapper;
+exports.StringWrapper.prototype = Object.create(String.prototype, {
+    constructor: {
+        value: exports.StringWrapper,
+        enumerable: false,
+        writable: true,
+        configurable: true,
+    },
+});
+Object.setPrototypeOf(exports.StringWrapper, String);
+class LazyJsonString extends exports.StringWrapper {
+    deserializeJSON() {
+        return JSON.parse(super.toString());
+    }
+    toJSON() {
+        return super.toString();
+    }
+    static fromObject(object) {
+        if (object instanceof LazyJsonString) {
+            return object;
+        }
+        else if (object instanceof String || typeof object === "string") {
+            return new LazyJsonString(object);
+        }
+        return new LazyJsonString(JSON.stringify(object));
+    }
+}
+exports.LazyJsonString = LazyJsonString;
+
+
+/***/ }),
+
+/***/ 5523:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.take = exports.convertMap = exports.map = void 0;
+function map(arg0, arg1, arg2) {
+    let target;
+    let filter;
+    let instructions;
+    if (typeof arg1 === "undefined" && typeof arg2 === "undefined") {
+        target = {};
+        instructions = arg0;
+    }
+    else {
+        target = arg0;
+        if (typeof arg1 === "function") {
+            filter = arg1;
+            instructions = arg2;
+            return mapWithFilter(target, filter, instructions);
+        }
+        else {
+            instructions = arg1;
+        }
+    }
+    for (const key of Object.keys(instructions)) {
+        if (!Array.isArray(instructions[key])) {
+            target[key] = instructions[key];
+            continue;
+        }
+        applyInstruction(target, null, instructions, key);
+    }
+    return target;
+}
+exports.map = map;
+const convertMap = (target) => {
+    const output = {};
+    for (const [k, v] of Object.entries(target || {})) {
+        output[k] = [, v];
+    }
+    return output;
+};
+exports.convertMap = convertMap;
+const take = (source, instructions) => {
+    const out = {};
+    for (const key in instructions) {
+        applyInstruction(out, source, instructions, key);
+    }
+    return out;
+};
+exports.take = take;
+const mapWithFilter = (target, filter, instructions) => {
+    return map(target, Object.entries(instructions).reduce((_instructions, [key, value]) => {
+        if (Array.isArray(value)) {
+            _instructions[key] = value;
+        }
+        else {
+            if (typeof value === "function") {
+                _instructions[key] = [filter, value()];
+            }
+            else {
+                _instructions[key] = [filter, value];
+            }
+        }
+        return _instructions;
+    }, {}));
+};
+const applyInstruction = (target, source, instructions, targetKey) => {
+    if (source !== null) {
+        let instruction = instructions[targetKey];
+        if (typeof instruction === "function") {
+            instruction = [, instruction];
+        }
+        const [filter = nonNullish, valueFn = pass, sourceKey = targetKey] = instruction;
+        if ((typeof filter === "function" && filter(source[sourceKey])) || (typeof filter !== "function" && !!filter)) {
+            target[targetKey] = valueFn(source[sourceKey]);
+        }
+        return;
+    }
+    let [filter, value] = instructions[targetKey];
+    if (typeof value === "function") {
+        let _value;
+        const defaultFilterPassed = filter === undefined && (_value = value()) != null;
+        const customFilterPassed = (typeof filter === "function" && !!filter(void 0)) || (typeof filter !== "function" && !!filter);
+        if (defaultFilterPassed) {
+            target[targetKey] = _value;
+        }
+        else if (customFilterPassed) {
+            target[targetKey] = value();
+        }
+    }
+    else {
+        const defaultFilterPassed = filter === undefined && value != null;
+        const customFilterPassed = (typeof filter === "function" && !!filter(value)) || (typeof filter !== "function" && !!filter);
+        if (defaultFilterPassed || customFilterPassed) {
+            target[targetKey] = value;
+        }
+    }
+};
+const nonNullish = (_) => _ != null;
+const pass = (_) => _;
+
+
+/***/ }),
+
+/***/ 62725:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.logger = exports.strictParseByte = exports.strictParseShort = exports.strictParseInt32 = exports.strictParseInt = exports.strictParseLong = exports.limitedParseFloat32 = exports.limitedParseFloat = exports.handleFloat = exports.limitedParseDouble = exports.strictParseFloat32 = exports.strictParseFloat = exports.strictParseDouble = exports.expectUnion = exports.expectString = exports.expectObject = exports.expectNonNull = exports.expectByte = exports.expectShort = exports.expectInt32 = exports.expectInt = exports.expectLong = exports.expectFloat32 = exports.expectNumber = exports.expectBoolean = exports.parseBoolean = void 0;
+const parseBoolean = (value) => {
+    switch (value) {
+        case "true":
+            return true;
+        case "false":
+            return false;
+        default:
+            throw new Error(`Unable to parse boolean value "${value}"`);
+    }
+};
+exports.parseBoolean = parseBoolean;
+const expectBoolean = (value) => {
+    if (value === null || value === undefined) {
+        return undefined;
+    }
+    if (typeof value === "number") {
+        if (value === 0 || value === 1) {
+            exports.logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
+        }
+        if (value === 0) {
+            return false;
+        }
+        if (value === 1) {
+            return true;
+        }
+    }
+    if (typeof value === "string") {
+        const lower = value.toLowerCase();
+        if (lower === "false" || lower === "true") {
+            exports.logger.warn(stackTraceWarning(`Expected boolean, got ${typeof value}: ${value}`));
+        }
+        if (lower === "false") {
+            return false;
+        }
+        if (lower === "true") {
+            return true;
+        }
+    }
+    if (typeof value === "boolean") {
+        return value;
+    }
+    throw new TypeError(`Expected boolean, got ${typeof value}: ${value}`);
+};
+exports.expectBoolean = expectBoolean;
+const expectNumber = (value) => {
+    if (value === null || value === undefined) {
+        return undefined;
+    }
+    if (typeof value === "string") {
+        const parsed = parseFloat(value);
+        if (!Number.isNaN(parsed)) {
+            if (String(parsed) !== String(value)) {
+                exports.logger.warn(stackTraceWarning(`Expected number but observed string: ${value}`));
+            }
+            return parsed;
+        }
+    }
+    if (typeof value === "number") {
+        return value;
+    }
+    throw new TypeError(`Expected number, got ${typeof value}: ${value}`);
+};
+exports.expectNumber = expectNumber;
+const MAX_FLOAT = Math.ceil(2 ** 127 * (2 - 2 ** -23));
+const expectFloat32 = (value) => {
+    const expected = (0, exports.expectNumber)(value);
+    if (expected !== undefined && !Number.isNaN(expected) && expected !== Infinity && expected !== -Infinity) {
+        if (Math.abs(expected) > MAX_FLOAT) {
+            throw new TypeError(`Expected 32-bit float, got ${value}`);
+        }
+    }
+    return expected;
+};
+exports.expectFloat32 = expectFloat32;
+const expectLong = (value) => {
+    if (value === null || value === undefined) {
+        return undefined;
+    }
+    if (Number.isInteger(value) && !Number.isNaN(value)) {
+        return value;
+    }
+    throw new TypeError(`Expected integer, got ${typeof value}: ${value}`);
+};
+exports.expectLong = expectLong;
+exports.expectInt = exports.expectLong;
+const expectInt32 = (value) => expectSizedInt(value, 32);
+exports.expectInt32 = expectInt32;
+const expectShort = (value) => expectSizedInt(value, 16);
+exports.expectShort = expectShort;
+const expectByte = (value) => expectSizedInt(value, 8);
+exports.expectByte = expectByte;
+const expectSizedInt = (value, size) => {
+    const expected = (0, exports.expectLong)(value);
+    if (expected !== undefined && castInt(expected, size) !== expected) {
+        throw new TypeError(`Expected ${size}-bit integer, got ${value}`);
+    }
+    return expected;
+};
+const castInt = (value, size) => {
+    switch (size) {
+        case 32:
+            return Int32Array.of(value)[0];
+        case 16:
+            return Int16Array.of(value)[0];
+        case 8:
+            return Int8Array.of(value)[0];
+    }
+};
+const expectNonNull = (value, location) => {
+    if (value === null || value === undefined) {
+        if (location) {
+            throw new TypeError(`Expected a non-null value for ${location}`);
+        }
+        throw new TypeError("Expected a non-null value");
+    }
+    return value;
+};
+exports.expectNonNull = expectNonNull;
+const expectObject = (value) => {
+    if (value === null || value === undefined) {
+        return undefined;
+    }
+    if (typeof value === "object" && !Array.isArray(value)) {
+        return value;
+    }
+    const receivedType = Array.isArray(value) ? "array" : typeof value;
+    throw new TypeError(`Expected object, got ${receivedType}: ${value}`);
+};
+exports.expectObject = expectObject;
+const expectString = (value) => {
+    if (value === null || value === undefined) {
+        return undefined;
+    }
+    if (typeof value === "string") {
+        return value;
+    }
+    if (["boolean", "number", "bigint"].includes(typeof value)) {
+        exports.logger.warn(stackTraceWarning(`Expected string, got ${typeof value}: ${value}`));
+        return String(value);
+    }
+    throw new TypeError(`Expected string, got ${typeof value}: ${value}`);
+};
+exports.expectString = expectString;
+const expectUnion = (value) => {
+    if (value === null || value === undefined) {
+        return undefined;
+    }
+    const asObject = (0, exports.expectObject)(value);
+    const setKeys = Object.entries(asObject)
+        .filter(([, v]) => v != null)
+        .map(([k]) => k);
+    if (setKeys.length === 0) {
+        throw new TypeError(`Unions must have exactly one non-null member. None were found.`);
+    }
+    if (setKeys.length > 1) {
+        throw new TypeError(`Unions must have exactly one non-null member. Keys ${setKeys} were not null.`);
+    }
+    return asObject;
+};
+exports.expectUnion = expectUnion;
+const strictParseDouble = (value) => {
+    if (typeof value == "string") {
+        return (0, exports.expectNumber)(parseNumber(value));
+    }
+    return (0, exports.expectNumber)(value);
+};
+exports.strictParseDouble = strictParseDouble;
+exports.strictParseFloat = exports.strictParseDouble;
+const strictParseFloat32 = (value) => {
+    if (typeof value == "string") {
+        return (0, exports.expectFloat32)(parseNumber(value));
+    }
+    return (0, exports.expectFloat32)(value);
+};
+exports.strictParseFloat32 = strictParseFloat32;
+const NUMBER_REGEX = /(-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?)|(-?Infinity)|(NaN)/g;
+const parseNumber = (value) => {
+    const matches = value.match(NUMBER_REGEX);
+    if (matches === null || matches[0].length !== value.length) {
+        throw new TypeError(`Expected real number, got implicit NaN`);
+    }
+    return parseFloat(value);
+};
+const limitedParseDouble = (value) => {
+    if (typeof value == "string") {
+        return parseFloatString(value);
+    }
+    return (0, exports.expectNumber)(value);
+};
+exports.limitedParseDouble = limitedParseDouble;
+exports.handleFloat = exports.limitedParseDouble;
+exports.limitedParseFloat = exports.limitedParseDouble;
+const limitedParseFloat32 = (value) => {
+    if (typeof value == "string") {
+        return parseFloatString(value);
+    }
+    return (0, exports.expectFloat32)(value);
+};
+exports.limitedParseFloat32 = limitedParseFloat32;
+const parseFloatString = (value) => {
+    switch (value) {
+        case "NaN":
+            return NaN;
+        case "Infinity":
+            return Infinity;
+        case "-Infinity":
+            return -Infinity;
+        default:
+            throw new Error(`Unable to parse float value: ${value}`);
+    }
+};
+const strictParseLong = (value) => {
+    if (typeof value === "string") {
+        return (0, exports.expectLong)(parseNumber(value));
+    }
+    return (0, exports.expectLong)(value);
+};
+exports.strictParseLong = strictParseLong;
+exports.strictParseInt = exports.strictParseLong;
+const strictParseInt32 = (value) => {
+    if (typeof value === "string") {
+        return (0, exports.expectInt32)(parseNumber(value));
+    }
+    return (0, exports.expectInt32)(value);
+};
+exports.strictParseInt32 = strictParseInt32;
+const strictParseShort = (value) => {
+    if (typeof value === "string") {
+        return (0, exports.expectShort)(parseNumber(value));
+    }
+    return (0, exports.expectShort)(value);
+};
+exports.strictParseShort = strictParseShort;
+const strictParseByte = (value) => {
+    if (typeof value === "string") {
+        return (0, exports.expectByte)(parseNumber(value));
+    }
+    return (0, exports.expectByte)(value);
+};
+exports.strictParseByte = strictParseByte;
+const stackTraceWarning = (message) => {
+    return String(new TypeError(message).stack || message)
+        .split("\n")
+        .slice(0, 5)
+        .filter((s) => !s.includes("stackTraceWarning"))
+        .join("\n");
+};
+exports.logger = {
+    warn: console.warn,
+};
+
+
+/***/ }),
+
+/***/ 55836:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.resolvedPath = void 0;
+const extended_encode_uri_component_1 = __nccwpck_require__(84413);
+const resolvedPath = (resolvedPath, input, memberName, labelValueProvider, uriLabel, isGreedyLabel) => {
+    if (input != null && input[memberName] !== undefined) {
+        const labelValue = labelValueProvider();
+        if (labelValue.length <= 0) {
+            throw new Error("Empty value provided for input HTTP label: " + memberName + ".");
+        }
+        resolvedPath = resolvedPath.replace(uriLabel, isGreedyLabel
+            ? labelValue
+                .split("/")
+                .map((segment) => (0, extended_encode_uri_component_1.extendedEncodeURIComponent)(segment))
+                .join("/")
+            : (0, extended_encode_uri_component_1.extendedEncodeURIComponent)(labelValue));
+    }
+    else {
+        throw new Error("No value provided for input HTTP label: " + memberName + ".");
+    }
+    return resolvedPath;
+};
+exports.resolvedPath = resolvedPath;
+
+
+/***/ }),
+
+/***/ 57806:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.serializeFloat = void 0;
+const serializeFloat = (value) => {
+    if (value !== value) {
+        return "NaN";
+    }
+    switch (value) {
+        case Infinity:
+            return "Infinity";
+        case -Infinity:
+            return "-Infinity";
+        default:
+            return value;
+    }
+};
+exports.serializeFloat = serializeFloat;
+
+
+/***/ }),
+
+/***/ 50813:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports._json = void 0;
+const _json = (obj) => {
+    if (obj == null) {
+        return {};
+    }
+    if (Array.isArray(obj)) {
+        return obj.filter((_) => _ != null);
+    }
+    if (typeof obj === "object") {
+        const target = {};
+        for (const key of Object.keys(obj)) {
+            if (obj[key] == null) {
+                continue;
+            }
+            target[key] = (0, exports._json)(obj[key]);
+        }
+        return target;
+    }
+    return obj;
+};
+exports._json = _json;
+
+
+/***/ }),
+
+/***/ 50285:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.splitEvery = void 0;
+function splitEvery(value, delimiter, numDelimiters) {
+    if (numDelimiters <= 0 || !Number.isInteger(numDelimiters)) {
+        throw new Error("Invalid number of delimiters (" + numDelimiters + ") for splitEvery.");
+    }
+    const segments = value.split(delimiter);
+    if (numDelimiters === 1) {
+        return segments;
+    }
+    const compoundSegments = [];
+    let currentSegment = "";
+    for (let i = 0; i < segments.length; i++) {
+        if (currentSegment === "") {
+            currentSegment = segments[i];
+        }
+        else {
+            currentSegment += delimiter + segments[i];
+        }
+        if ((i + 1) % numDelimiters === 0) {
+            compoundSegments.push(currentSegment);
+            currentSegment = "";
+        }
+    }
+    if (currentSegment !== "") {
+        compoundSegments.push(currentSegment);
+    }
+    return compoundSegments;
+}
+exports.splitEvery = splitEvery;
+
+
+/***/ }),
+
 /***/ 16221:
 /***/ ((__unused_webpack_module, exports) => {
 
@@ -37424,6 +32939,42 @@ const fromString = (input, encoding) => {
     return encoding ? buffer_1.Buffer.from(input, encoding) : buffer_1.Buffer.from(input);
 };
 exports.fromString = fromString;
+
+
+/***/ }),
+
+/***/ 50021:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.booleanSelector = exports.SelectorType = void 0;
+var SelectorType;
+(function (SelectorType) {
+    SelectorType["ENV"] = "env";
+    SelectorType["CONFIG"] = "shared config entry";
+})(SelectorType = exports.SelectorType || (exports.SelectorType = {}));
+const booleanSelector = (obj, key, type) => {
+    if (!(key in obj))
+        return undefined;
+    if (obj[key] === "true")
+        return true;
+    if (obj[key] === "false")
+        return false;
+    throw new Error(`Cannot load ${type} "${key}". Expected "true" or "false", got ${obj[key]}.`);
+};
+exports.booleanSelector = booleanSelector;
+
+
+/***/ }),
+
+/***/ 64342:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const tslib_1 = __nccwpck_require__(15609);
+tslib_1.__exportStar(__nccwpck_require__(50021), exports);
 
 
 /***/ }),
@@ -43542,28 +39093,28 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
 /***/ 50677:
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"@aws-sdk/client-s3","description":"AWS SDK for JavaScript S3 Client for Node.js, Browser and React Native","version":"3.315.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo s3","test":"yarn test:unit","test:e2e":"ts-mocha test/**/*.ispec.ts && karma start karma.conf.js","test:unit":"ts-mocha test/**/*.spec.ts"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha1-browser":"3.0.0","@aws-crypto/sha256-browser":"3.0.0","@aws-crypto/sha256-js":"3.0.0","@aws-sdk/client-sts":"3.315.0","@aws-sdk/config-resolver":"3.310.0","@aws-sdk/credential-provider-node":"3.315.0","@aws-sdk/eventstream-serde-browser":"3.310.0","@aws-sdk/eventstream-serde-config-resolver":"3.310.0","@aws-sdk/eventstream-serde-node":"3.310.0","@aws-sdk/fetch-http-handler":"3.310.0","@aws-sdk/hash-blob-browser":"3.310.0","@aws-sdk/hash-node":"3.310.0","@aws-sdk/hash-stream-node":"3.310.0","@aws-sdk/invalid-dependency":"3.310.0","@aws-sdk/md5-js":"3.310.0","@aws-sdk/middleware-bucket-endpoint":"3.310.0","@aws-sdk/middleware-content-length":"3.310.0","@aws-sdk/middleware-endpoint":"3.310.0","@aws-sdk/middleware-expect-continue":"3.310.0","@aws-sdk/middleware-flexible-checksums":"3.310.0","@aws-sdk/middleware-host-header":"3.310.0","@aws-sdk/middleware-location-constraint":"3.310.0","@aws-sdk/middleware-logger":"3.310.0","@aws-sdk/middleware-recursion-detection":"3.310.0","@aws-sdk/middleware-retry":"3.310.0","@aws-sdk/middleware-sdk-s3":"3.310.0","@aws-sdk/middleware-serde":"3.310.0","@aws-sdk/middleware-signing":"3.310.0","@aws-sdk/middleware-ssec":"3.310.0","@aws-sdk/middleware-stack":"3.310.0","@aws-sdk/middleware-user-agent":"3.310.0","@aws-sdk/node-config-provider":"3.310.0","@aws-sdk/node-http-handler":"3.310.0","@aws-sdk/protocol-http":"3.310.0","@aws-sdk/signature-v4-multi-region":"3.310.0","@aws-sdk/smithy-client":"3.315.0","@aws-sdk/types":"3.310.0","@aws-sdk/url-parser":"3.310.0","@aws-sdk/util-base64":"3.310.0","@aws-sdk/util-body-length-browser":"3.310.0","@aws-sdk/util-body-length-node":"3.310.0","@aws-sdk/util-defaults-mode-browser":"3.315.0","@aws-sdk/util-defaults-mode-node":"3.315.0","@aws-sdk/util-endpoints":"3.310.0","@aws-sdk/util-retry":"3.310.0","@aws-sdk/util-stream-browser":"3.310.0","@aws-sdk/util-stream-node":"3.310.0","@aws-sdk/util-user-agent-browser":"3.310.0","@aws-sdk/util-user-agent-node":"3.310.0","@aws-sdk/util-utf8":"3.310.0","@aws-sdk/util-waiter":"3.310.0","@aws-sdk/xml-builder":"3.310.0","fast-xml-parser":"4.1.2","tslib":"^2.5.0"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.310.0","@tsconfig/node14":"1.0.3","@types/chai":"^4.2.11","@types/mocha":"^8.0.4","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.23.23","typescript":"~4.9.5"},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-s3","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-s3"}}');
+module.exports = JSON.parse('{"name":"@aws-sdk/client-s3","description":"AWS SDK for JavaScript S3 Client for Node.js, Browser and React Native","version":"3.316.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo s3","test":"yarn test:unit","test:e2e":"ts-mocha test/**/*.ispec.ts && karma start karma.conf.js","test:unit":"ts-mocha test/**/*.spec.ts"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha1-browser":"3.0.0","@aws-crypto/sha256-browser":"3.0.0","@aws-crypto/sha256-js":"3.0.0","@aws-sdk/client-sts":"3.316.0","@aws-sdk/config-resolver":"3.310.0","@aws-sdk/credential-provider-node":"3.316.0","@aws-sdk/eventstream-serde-browser":"3.310.0","@aws-sdk/eventstream-serde-config-resolver":"3.310.0","@aws-sdk/eventstream-serde-node":"3.310.0","@aws-sdk/fetch-http-handler":"3.310.0","@aws-sdk/hash-blob-browser":"3.310.0","@aws-sdk/hash-node":"3.310.0","@aws-sdk/hash-stream-node":"3.310.0","@aws-sdk/invalid-dependency":"3.310.0","@aws-sdk/md5-js":"3.310.0","@aws-sdk/middleware-bucket-endpoint":"3.310.0","@aws-sdk/middleware-content-length":"3.310.0","@aws-sdk/middleware-endpoint":"3.310.0","@aws-sdk/middleware-expect-continue":"3.310.0","@aws-sdk/middleware-flexible-checksums":"3.310.0","@aws-sdk/middleware-host-header":"3.310.0","@aws-sdk/middleware-location-constraint":"3.310.0","@aws-sdk/middleware-logger":"3.310.0","@aws-sdk/middleware-recursion-detection":"3.310.0","@aws-sdk/middleware-retry":"3.310.0","@aws-sdk/middleware-sdk-s3":"3.310.0","@aws-sdk/middleware-serde":"3.310.0","@aws-sdk/middleware-signing":"3.310.0","@aws-sdk/middleware-ssec":"3.310.0","@aws-sdk/middleware-stack":"3.310.0","@aws-sdk/middleware-user-agent":"3.310.0","@aws-sdk/node-config-provider":"3.310.0","@aws-sdk/node-http-handler":"3.310.0","@aws-sdk/protocol-http":"3.310.0","@aws-sdk/signature-v4-multi-region":"3.310.0","@aws-sdk/smithy-client":"3.316.0","@aws-sdk/types":"3.310.0","@aws-sdk/url-parser":"3.310.0","@aws-sdk/util-base64":"3.310.0","@aws-sdk/util-body-length-browser":"3.310.0","@aws-sdk/util-body-length-node":"3.310.0","@aws-sdk/util-defaults-mode-browser":"3.316.0","@aws-sdk/util-defaults-mode-node":"3.316.0","@aws-sdk/util-endpoints":"3.310.0","@aws-sdk/util-retry":"3.310.0","@aws-sdk/util-stream-browser":"3.310.0","@aws-sdk/util-stream-node":"3.310.0","@aws-sdk/util-user-agent-browser":"3.310.0","@aws-sdk/util-user-agent-node":"3.310.0","@aws-sdk/util-utf8":"3.310.0","@aws-sdk/util-waiter":"3.310.0","@aws-sdk/xml-builder":"3.310.0","fast-xml-parser":"4.1.2","tslib":"^2.5.0"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.310.0","@tsconfig/node14":"1.0.3","@types/chai":"^4.2.11","@types/mocha":"^8.0.4","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.23.23","typescript":"~4.9.5"},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-s3","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-s3"}}');
 
 /***/ }),
 
 /***/ 69722:
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"@aws-sdk/client-sso-oidc","description":"AWS SDK for JavaScript Sso Oidc Client for Node.js, Browser and React Native","version":"3.315.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo sso-oidc"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"3.0.0","@aws-crypto/sha256-js":"3.0.0","@aws-sdk/config-resolver":"3.310.0","@aws-sdk/fetch-http-handler":"3.310.0","@aws-sdk/hash-node":"3.310.0","@aws-sdk/invalid-dependency":"3.310.0","@aws-sdk/middleware-content-length":"3.310.0","@aws-sdk/middleware-endpoint":"3.310.0","@aws-sdk/middleware-host-header":"3.310.0","@aws-sdk/middleware-logger":"3.310.0","@aws-sdk/middleware-recursion-detection":"3.310.0","@aws-sdk/middleware-retry":"3.310.0","@aws-sdk/middleware-serde":"3.310.0","@aws-sdk/middleware-stack":"3.310.0","@aws-sdk/middleware-user-agent":"3.310.0","@aws-sdk/node-config-provider":"3.310.0","@aws-sdk/node-http-handler":"3.310.0","@aws-sdk/protocol-http":"3.310.0","@aws-sdk/smithy-client":"3.315.0","@aws-sdk/types":"3.310.0","@aws-sdk/url-parser":"3.310.0","@aws-sdk/util-base64":"3.310.0","@aws-sdk/util-body-length-browser":"3.310.0","@aws-sdk/util-body-length-node":"3.310.0","@aws-sdk/util-defaults-mode-browser":"3.315.0","@aws-sdk/util-defaults-mode-node":"3.315.0","@aws-sdk/util-endpoints":"3.310.0","@aws-sdk/util-retry":"3.310.0","@aws-sdk/util-user-agent-browser":"3.310.0","@aws-sdk/util-user-agent-node":"3.310.0","@aws-sdk/util-utf8":"3.310.0","tslib":"^2.5.0"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.310.0","@tsconfig/node14":"1.0.3","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.23.23","typescript":"~4.9.5"},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sso-oidc","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sso-oidc"}}');
+module.exports = JSON.parse('{"name":"@aws-sdk/client-sso-oidc","description":"AWS SDK for JavaScript Sso Oidc Client for Node.js, Browser and React Native","version":"3.316.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo sso-oidc"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"3.0.0","@aws-crypto/sha256-js":"3.0.0","@aws-sdk/config-resolver":"3.310.0","@aws-sdk/fetch-http-handler":"3.310.0","@aws-sdk/hash-node":"3.310.0","@aws-sdk/invalid-dependency":"3.310.0","@aws-sdk/middleware-content-length":"3.310.0","@aws-sdk/middleware-endpoint":"3.310.0","@aws-sdk/middleware-host-header":"3.310.0","@aws-sdk/middleware-logger":"3.310.0","@aws-sdk/middleware-recursion-detection":"3.310.0","@aws-sdk/middleware-retry":"3.310.0","@aws-sdk/middleware-serde":"3.310.0","@aws-sdk/middleware-stack":"3.310.0","@aws-sdk/middleware-user-agent":"3.310.0","@aws-sdk/node-config-provider":"3.310.0","@aws-sdk/node-http-handler":"3.310.0","@aws-sdk/protocol-http":"3.310.0","@aws-sdk/smithy-client":"3.316.0","@aws-sdk/types":"3.310.0","@aws-sdk/url-parser":"3.310.0","@aws-sdk/util-base64":"3.310.0","@aws-sdk/util-body-length-browser":"3.310.0","@aws-sdk/util-body-length-node":"3.310.0","@aws-sdk/util-defaults-mode-browser":"3.316.0","@aws-sdk/util-defaults-mode-node":"3.316.0","@aws-sdk/util-endpoints":"3.310.0","@aws-sdk/util-retry":"3.310.0","@aws-sdk/util-user-agent-browser":"3.310.0","@aws-sdk/util-user-agent-node":"3.310.0","@aws-sdk/util-utf8":"3.310.0","tslib":"^2.5.0"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.310.0","@tsconfig/node14":"1.0.3","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.23.23","typescript":"~4.9.5"},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sso-oidc","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sso-oidc"}}');
 
 /***/ }),
 
 /***/ 91092:
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"@aws-sdk/client-sso","description":"AWS SDK for JavaScript Sso Client for Node.js, Browser and React Native","version":"3.315.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo sso"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"3.0.0","@aws-crypto/sha256-js":"3.0.0","@aws-sdk/config-resolver":"3.310.0","@aws-sdk/fetch-http-handler":"3.310.0","@aws-sdk/hash-node":"3.310.0","@aws-sdk/invalid-dependency":"3.310.0","@aws-sdk/middleware-content-length":"3.310.0","@aws-sdk/middleware-endpoint":"3.310.0","@aws-sdk/middleware-host-header":"3.310.0","@aws-sdk/middleware-logger":"3.310.0","@aws-sdk/middleware-recursion-detection":"3.310.0","@aws-sdk/middleware-retry":"3.310.0","@aws-sdk/middleware-serde":"3.310.0","@aws-sdk/middleware-stack":"3.310.0","@aws-sdk/middleware-user-agent":"3.310.0","@aws-sdk/node-config-provider":"3.310.0","@aws-sdk/node-http-handler":"3.310.0","@aws-sdk/protocol-http":"3.310.0","@aws-sdk/smithy-client":"3.315.0","@aws-sdk/types":"3.310.0","@aws-sdk/url-parser":"3.310.0","@aws-sdk/util-base64":"3.310.0","@aws-sdk/util-body-length-browser":"3.310.0","@aws-sdk/util-body-length-node":"3.310.0","@aws-sdk/util-defaults-mode-browser":"3.315.0","@aws-sdk/util-defaults-mode-node":"3.315.0","@aws-sdk/util-endpoints":"3.310.0","@aws-sdk/util-retry":"3.310.0","@aws-sdk/util-user-agent-browser":"3.310.0","@aws-sdk/util-user-agent-node":"3.310.0","@aws-sdk/util-utf8":"3.310.0","tslib":"^2.5.0"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.310.0","@tsconfig/node14":"1.0.3","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.23.23","typescript":"~4.9.5"},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sso","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sso"}}');
+module.exports = JSON.parse('{"name":"@aws-sdk/client-sso","description":"AWS SDK for JavaScript Sso Client for Node.js, Browser and React Native","version":"3.316.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo sso"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"3.0.0","@aws-crypto/sha256-js":"3.0.0","@aws-sdk/config-resolver":"3.310.0","@aws-sdk/fetch-http-handler":"3.310.0","@aws-sdk/hash-node":"3.310.0","@aws-sdk/invalid-dependency":"3.310.0","@aws-sdk/middleware-content-length":"3.310.0","@aws-sdk/middleware-endpoint":"3.310.0","@aws-sdk/middleware-host-header":"3.310.0","@aws-sdk/middleware-logger":"3.310.0","@aws-sdk/middleware-recursion-detection":"3.310.0","@aws-sdk/middleware-retry":"3.310.0","@aws-sdk/middleware-serde":"3.310.0","@aws-sdk/middleware-stack":"3.310.0","@aws-sdk/middleware-user-agent":"3.310.0","@aws-sdk/node-config-provider":"3.310.0","@aws-sdk/node-http-handler":"3.310.0","@aws-sdk/protocol-http":"3.310.0","@aws-sdk/smithy-client":"3.316.0","@aws-sdk/types":"3.310.0","@aws-sdk/url-parser":"3.310.0","@aws-sdk/util-base64":"3.310.0","@aws-sdk/util-body-length-browser":"3.310.0","@aws-sdk/util-body-length-node":"3.310.0","@aws-sdk/util-defaults-mode-browser":"3.316.0","@aws-sdk/util-defaults-mode-node":"3.316.0","@aws-sdk/util-endpoints":"3.310.0","@aws-sdk/util-retry":"3.310.0","@aws-sdk/util-user-agent-browser":"3.310.0","@aws-sdk/util-user-agent-node":"3.310.0","@aws-sdk/util-utf8":"3.310.0","tslib":"^2.5.0"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.310.0","@tsconfig/node14":"1.0.3","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.23.23","typescript":"~4.9.5"},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sso","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sso"}}');
 
 /***/ }),
 
 /***/ 7947:
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"name":"@aws-sdk/client-sts","description":"AWS SDK for JavaScript Sts Client for Node.js, Browser and React Native","version":"3.315.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo sts","test":"yarn test:unit","test:unit":"jest"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"3.0.0","@aws-crypto/sha256-js":"3.0.0","@aws-sdk/config-resolver":"3.310.0","@aws-sdk/credential-provider-node":"3.315.0","@aws-sdk/fetch-http-handler":"3.310.0","@aws-sdk/hash-node":"3.310.0","@aws-sdk/invalid-dependency":"3.310.0","@aws-sdk/middleware-content-length":"3.310.0","@aws-sdk/middleware-endpoint":"3.310.0","@aws-sdk/middleware-host-header":"3.310.0","@aws-sdk/middleware-logger":"3.310.0","@aws-sdk/middleware-recursion-detection":"3.310.0","@aws-sdk/middleware-retry":"3.310.0","@aws-sdk/middleware-sdk-sts":"3.310.0","@aws-sdk/middleware-serde":"3.310.0","@aws-sdk/middleware-signing":"3.310.0","@aws-sdk/middleware-stack":"3.310.0","@aws-sdk/middleware-user-agent":"3.310.0","@aws-sdk/node-config-provider":"3.310.0","@aws-sdk/node-http-handler":"3.310.0","@aws-sdk/protocol-http":"3.310.0","@aws-sdk/smithy-client":"3.315.0","@aws-sdk/types":"3.310.0","@aws-sdk/url-parser":"3.310.0","@aws-sdk/util-base64":"3.310.0","@aws-sdk/util-body-length-browser":"3.310.0","@aws-sdk/util-body-length-node":"3.310.0","@aws-sdk/util-defaults-mode-browser":"3.315.0","@aws-sdk/util-defaults-mode-node":"3.315.0","@aws-sdk/util-endpoints":"3.310.0","@aws-sdk/util-retry":"3.310.0","@aws-sdk/util-user-agent-browser":"3.310.0","@aws-sdk/util-user-agent-node":"3.310.0","@aws-sdk/util-utf8":"3.310.0","fast-xml-parser":"4.1.2","tslib":"^2.5.0"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.310.0","@tsconfig/node14":"1.0.3","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.23.23","typescript":"~4.9.5"},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sts","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sts"}}');
+module.exports = JSON.parse('{"name":"@aws-sdk/client-sts","description":"AWS SDK for JavaScript Sts Client for Node.js, Browser and React Native","version":"3.316.0","scripts":{"build":"concurrently \'yarn:build:cjs\' \'yarn:build:es\' \'yarn:build:types\'","build:cjs":"tsc -p tsconfig.cjs.json","build:docs":"typedoc","build:es":"tsc -p tsconfig.es.json","build:include:deps":"lerna run --scope $npm_package_name --include-dependencies build","build:types":"tsc -p tsconfig.types.json","build:types:downlevel":"downlevel-dts dist-types dist-types/ts3.4","clean":"rimraf ./dist-* && rimraf *.tsbuildinfo","extract:docs":"api-extractor run --local","generate:client":"node ../../scripts/generate-clients/single-service --solo sts","test":"yarn test:unit","test:unit":"jest"},"main":"./dist-cjs/index.js","types":"./dist-types/index.d.ts","module":"./dist-es/index.js","sideEffects":false,"dependencies":{"@aws-crypto/sha256-browser":"3.0.0","@aws-crypto/sha256-js":"3.0.0","@aws-sdk/config-resolver":"3.310.0","@aws-sdk/credential-provider-node":"3.316.0","@aws-sdk/fetch-http-handler":"3.310.0","@aws-sdk/hash-node":"3.310.0","@aws-sdk/invalid-dependency":"3.310.0","@aws-sdk/middleware-content-length":"3.310.0","@aws-sdk/middleware-endpoint":"3.310.0","@aws-sdk/middleware-host-header":"3.310.0","@aws-sdk/middleware-logger":"3.310.0","@aws-sdk/middleware-recursion-detection":"3.310.0","@aws-sdk/middleware-retry":"3.310.0","@aws-sdk/middleware-sdk-sts":"3.310.0","@aws-sdk/middleware-serde":"3.310.0","@aws-sdk/middleware-signing":"3.310.0","@aws-sdk/middleware-stack":"3.310.0","@aws-sdk/middleware-user-agent":"3.310.0","@aws-sdk/node-config-provider":"3.310.0","@aws-sdk/node-http-handler":"3.310.0","@aws-sdk/protocol-http":"3.310.0","@aws-sdk/smithy-client":"3.316.0","@aws-sdk/types":"3.310.0","@aws-sdk/url-parser":"3.310.0","@aws-sdk/util-base64":"3.310.0","@aws-sdk/util-body-length-browser":"3.310.0","@aws-sdk/util-body-length-node":"3.310.0","@aws-sdk/util-defaults-mode-browser":"3.316.0","@aws-sdk/util-defaults-mode-node":"3.316.0","@aws-sdk/util-endpoints":"3.310.0","@aws-sdk/util-retry":"3.310.0","@aws-sdk/util-user-agent-browser":"3.310.0","@aws-sdk/util-user-agent-node":"3.310.0","@aws-sdk/util-utf8":"3.310.0","fast-xml-parser":"4.1.2","tslib":"^2.5.0"},"devDependencies":{"@aws-sdk/service-client-documentation-generator":"3.310.0","@tsconfig/node14":"1.0.3","@types/node":"^14.14.31","concurrently":"7.0.0","downlevel-dts":"0.10.1","rimraf":"3.0.2","typedoc":"0.23.23","typescript":"~4.9.5"},"engines":{"node":">=14.0.0"},"typesVersions":{"<4.0":{"dist-types/*":["dist-types/ts3.4/*"]}},"files":["dist-*/**"],"author":{"name":"AWS SDK for JavaScript Team","url":"https://aws.amazon.com/javascript/"},"license":"Apache-2.0","browser":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.browser"},"react-native":{"./dist-es/runtimeConfig":"./dist-es/runtimeConfig.native"},"homepage":"https://github.com/aws/aws-sdk-js-v3/tree/main/clients/client-sts","repository":{"type":"git","url":"https://github.com/aws/aws-sdk-js-v3.git","directory":"clients/client-sts"}}');
 
 /***/ }),
 
