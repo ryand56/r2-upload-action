@@ -9,7 +9,7 @@ Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-u
 <!-- BASIC USAGE -->
 ### Basic Usage
 ```yaml
-- uses: elementemerald/r2-upload-action@v1.1.2
+- uses: ryand56/r2-upload-action@v1.1.2
   with:
     r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
     r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
@@ -25,7 +25,7 @@ Specify `destination-dir` input to change the location of where the directory wi
 <!-- CUSTOM USAGE -->
 ### Custom Usage
 ```yaml
-- uses: elementemerald/r2-upload-action@v1.1.2
+- uses: ryand56/r2-upload-action@v1.1.2
   with:
     r2-account-id: ${{ secrets.R2_ACCOUNT_ID }}
     r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
@@ -35,7 +35,7 @@ Specify `destination-dir` input to change the location of where the directory wi
     destination-dir: artifacts # Can be anything as long as it is an actual path
     output-file-url: 'true' # defaults to true
 ```
-See the latest [action.yml](https://github.com/elementemerald/r2-upload-action/blob/master/action.yml) for every input and output or take a look below.
+See the latest [action.yml](https://github.com/ryand56/r2-upload-action/blob/master/action.yml) for every input and output or take a look below.
 <!-- -->
 
 <!-- ACTION INPUTS -->
@@ -61,4 +61,4 @@ See the latest [action.yml](https://github.com/elementemerald/r2-upload-action/b
 <!-- CONTRIBUTING -->
 ## Contributing
 
-See the [contributing guide](https://github.com/elementemerald/r2-upload-action/blob/master/CONTRIBUTING.md) for more detail on how to implement something into the project.
+See the [contributing guide](https://github.com/ryand56/r2-upload-action/blob/master/CONTRIBUTING.md) for more detail on how to implement something into the project.
