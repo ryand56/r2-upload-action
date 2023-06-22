@@ -1,6 +1,6 @@
 name: 'R2 Upload Action'
 description: 'GitHub Action to upload files to a Cloudflare R2 bucket'
-author: 'elementemerald'
+author: 'ryand56'
 branding:
   icon: 'upload-cloud'
   color: 'white'
