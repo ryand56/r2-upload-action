@@ -4,7 +4,8 @@ import {
     S3Client,
     PutObjectCommandInput,
     PutObjectCommand,
-    PutObjectCommandOutput
+    PutObjectCommandOutput,
+    S3ServiceException
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import * as fs from "fs";
@@ -89,12 +90,20 @@ const run = async (config: R2Config) => {
             name: 'addETag'
         });
 
-        const data = await S3.send(cmd);
-        console.log(`R2 Success - ${data.$metadata.httpStatusCode} - ${file}`);
-        map.set(file, data);
+        try {
+            const data = await S3.send(cmd);
+            console.log(`R2 Success - ${data.$metadata.httpStatusCode} - ${file}`);
+            map.set(file, data);
 
-        const fileUrl = await getSignedUrl(S3, cmd);
-        urls[file] = fileUrl;
+            const fileUrl = await getSignedUrl(S3, cmd);
+            urls[file] = fileUrl;
+        } catch (err: unknown) {
+            const error = err as S3ServiceException;
+            if (error.hasOwnProperty("$metadata")) {
+                if (error.$metadata.httpStatusCode !== 412) // If-None-Match
+                    throw error;
+            }
+        }
     }
 
     if (config.outputFileUrl) setOutput('file-urls', urls);
