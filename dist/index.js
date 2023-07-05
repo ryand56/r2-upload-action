@@ -39795,11 +39795,20 @@ const run = async (config) => {
             step: 'build',
             name: 'addETag'
         });
-        const data = await S3.send(cmd);
-        console.log(`R2 Success - ${data.$metadata.httpStatusCode} - ${file}`);
-        map.set(file, data);
-        const fileUrl = await (0,_aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1__.getSignedUrl)(S3, cmd);
-        urls[file] = fileUrl;
+        try {
+            const data = await S3.send(cmd);
+            console.log(`R2 Success - ${data.$metadata.httpStatusCode} - ${file}`);
+            map.set(file, data);
+            const fileUrl = await (0,_aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1__.getSignedUrl)(S3, cmd);
+            urls[file] = fileUrl;
+        }
+        catch (err) {
+            const error = err;
+            if (error.hasOwnProperty("$metadata")) {
+                if (error.$metadata.httpStatusCode !== 412) // If-None-Match
+                    throw error;
+            }
+        }
     }
     if (config.outputFileUrl)
         (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)('file-urls', urls);
