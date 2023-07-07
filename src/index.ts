@@ -92,7 +92,7 @@ const run = async (config: R2Config) => {
 
         try {
             const data = await S3.send(cmd);
-            console.log(`R2 Success - ${data.$metadata.httpStatusCode} - ${file}`);
+            console.log(`R2 Success - ${file}`);
             map.set(file, data);
 
             const fileUrl = await getSignedUrl(S3, cmd);
