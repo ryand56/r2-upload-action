@@ -25758,7 +25758,7 @@ exports.getUserAgentPlugin = getUserAgentPlugin;
 
 /***/ }),
 
-/***/ 76833:
+/***/ 99508:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -25777,16 +25777,16 @@ exports.ALGORITHM_IDENTIFIER = "AWS4-HMAC-SHA256";
 
 /***/ }),
 
-/***/ 68126:
+/***/ 55110:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getSignedUrl = void 0;
-const util_format_url_1 = __nccwpck_require__(86065);
+const util_format_url_1 = __nccwpck_require__(36996);
 const middleware_endpoint_1 = __nccwpck_require__(11222);
 const protocol_http_1 = __nccwpck_require__(51602);
-const presigner_1 = __nccwpck_require__(34432);
+const presigner_1 = __nccwpck_require__(60369);
 const getSignedUrl = async (client, command, options = {}) => {
     var _a, _b;
     let s3Presigner;
@@ -25842,26 +25842,26 @@ exports.getSignedUrl = getSignedUrl;
 
 /***/ }),
 
-/***/ 659:
+/***/ 58848:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __nccwpck_require__(55960);
-tslib_1.__exportStar(__nccwpck_require__(68126), exports);
-tslib_1.__exportStar(__nccwpck_require__(34432), exports);
+tslib_1.__exportStar(__nccwpck_require__(55110), exports);
+tslib_1.__exportStar(__nccwpck_require__(60369), exports);
 
 
 /***/ }),
 
-/***/ 34432:
+/***/ 60369:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.S3RequestPresigner = void 0;
-const signature_v4_multi_region_1 = __nccwpck_require__(43631);
-const constants_1 = __nccwpck_require__(76833);
+const signature_v4_multi_region_1 = __nccwpck_require__(96061);
+const constants_1 = __nccwpck_require__(99508);
 class S3RequestPresigner {
     constructor(options) {
         const resolvedOptions = {
@@ -25896,73 +25896,6 @@ class S3RequestPresigner {
     }
 }
 exports.S3RequestPresigner = S3RequestPresigner;
-
-
-/***/ }),
-
-/***/ 64411:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SignatureV4MultiRegion = void 0;
-const signature_v4_1 = __nccwpck_require__(95638);
-class SignatureV4MultiRegion {
-    constructor(options) {
-        this.sigv4Signer = new signature_v4_1.SignatureV4(options);
-        this.signerOptions = options;
-    }
-    async sign(requestToSign, options = {}) {
-        if (options.signingRegion === "*") {
-            if (this.signerOptions.runtime !== "node")
-                throw new Error("This request requires signing with SigV4Asymmetric algorithm. It's only available in Node.js");
-            return this.getSigv4aSigner().sign(requestToSign, options);
-        }
-        return this.sigv4Signer.sign(requestToSign, options);
-    }
-    async presign(originalRequest, options = {}) {
-        if (options.signingRegion === "*") {
-            if (this.signerOptions.runtime !== "node")
-                throw new Error("This request requires signing with SigV4Asymmetric algorithm. It's only available in Node.js");
-            return this.getSigv4aSigner().presign(originalRequest, options);
-        }
-        return this.sigv4Signer.presign(originalRequest, options);
-    }
-    getSigv4aSigner() {
-        if (!this.sigv4aSigner) {
-            let CrtSignerV4;
-            try {
-                CrtSignerV4 =  true && (__nccwpck_require__(19212).CrtSignerV4);
-                if (typeof CrtSignerV4 !== "function")
-                    throw new Error();
-            }
-            catch (e) {
-                e.message =
-                    `${e.message}\nPlease check if you have installed "@aws-sdk/signature-v4-crt" package explicitly. \n` +
-                        "For more information please go to " +
-                        "https://github.com/aws/aws-sdk-js-v3#functionality-requiring-aws-common-runtime-crt";
-                throw e;
-            }
-            this.sigv4aSigner = new CrtSignerV4({
-                ...this.signerOptions,
-                signingAlgorithm: 1,
-            });
-        }
-        return this.sigv4aSigner;
-    }
-}
-exports.SignatureV4MultiRegion = SignatureV4MultiRegion;
-
-
-/***/ }),
-
-/***/ 43631:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const tslib_1 = __nccwpck_require__(55960);
-tslib_1.__exportStar(__nccwpck_require__(64411), exports);
 
 
 /***/ }),
@@ -27706,7 +27639,7 @@ tslib_1.__exportStar(__nccwpck_require__(83378), exports);
 
 /***/ }),
 
-/***/ 86065:
+/***/ 36996:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
@@ -40192,7 +40125,7 @@ var __webpack_exports__ = {};
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(7869);
 /* harmony import */ var _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__nccwpck_require__.n(_aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(659);
+/* harmony import */ var _aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(58848);
 /* harmony import */ var _aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(57147);
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(fs__WEBPACK_IMPORTED_MODULE_2__);
