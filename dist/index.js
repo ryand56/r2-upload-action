@@ -25758,7 +25758,7 @@ exports.getUserAgentPlugin = getUserAgentPlugin;
 
 /***/ }),
 
-/***/ 99508:
+/***/ 40554:
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -25777,7 +25777,7 @@ exports.ALGORITHM_IDENTIFIER = "AWS4-HMAC-SHA256";
 
 /***/ }),
 
-/***/ 55110:
+/***/ 35036:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
@@ -25786,7 +25786,7 @@ exports.getSignedUrl = void 0;
 const util_format_url_1 = __nccwpck_require__(36996);
 const middleware_endpoint_1 = __nccwpck_require__(11222);
 const protocol_http_1 = __nccwpck_require__(51602);
-const presigner_1 = __nccwpck_require__(60369);
+const presigner_1 = __nccwpck_require__(57728);
 const getSignedUrl = async (client, command, options = {}) => {
     var _a, _b;
     let s3Presigner;
@@ -25842,26 +25842,26 @@ exports.getSignedUrl = getSignedUrl;
 
 /***/ }),
 
-/***/ 58848:
+/***/ 85752:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const tslib_1 = __nccwpck_require__(55960);
-tslib_1.__exportStar(__nccwpck_require__(55110), exports);
-tslib_1.__exportStar(__nccwpck_require__(60369), exports);
+tslib_1.__exportStar(__nccwpck_require__(35036), exports);
+tslib_1.__exportStar(__nccwpck_require__(57728), exports);
 
 
 /***/ }),
 
-/***/ 60369:
+/***/ 57728:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.S3RequestPresigner = void 0;
 const signature_v4_multi_region_1 = __nccwpck_require__(96061);
-const constants_1 = __nccwpck_require__(99508);
+const constants_1 = __nccwpck_require__(40554);
 class S3RequestPresigner {
     constructor(options) {
         const resolvedOptions = {
@@ -40125,7 +40125,7 @@ var __webpack_exports__ = {};
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(13603);
 /* harmony import */ var _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__nccwpck_require__.n(_aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(58848);
+/* harmony import */ var _aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(85752);
 /* harmony import */ var _aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__nccwpck_require__.n(_aws_sdk_s3_request_presigner__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(57147);
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__nccwpck_require__.n(fs__WEBPACK_IMPORTED_MODULE_2__);
