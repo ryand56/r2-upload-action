@@ -9,8 +9,8 @@ dependencies:
     specifier: ^1.10.0
     version: 1.10.0
   '@aws-sdk/client-s3':
-    specifier: ^3.373.0
-    version: 3.373.0
+    specifier: ^3.374.0
+    version: 3.374.0
   '@aws-sdk/s3-request-presigner':
     specifier: ^3.373.0
     version: 3.373.0
@@ -122,8 +122,8 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@aws-sdk/client-s3@3.373.0:
-    resolution: {integrity: sha512-cdgxK/C6CqmVXNYFTzaRDviV5MBiUx/Z6ghQhPJYxl0/FlOQ82x8yhCzhf1E6/LI6IHFKA7ypz0qf+I7nGp8+A==}
+  /@aws-sdk/client-s3@3.374.0:
+    resolution: {integrity: sha512-1qhzOHN48DPAvHi/G2FQfx1DXpbiOfOUqJvnSCRKKo7UaPPN1426Ufw2qizTRiLo/suK2ABCb7spbTxqEFjvLw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha1-browser': 3.0.0
@@ -131,10 +131,10 @@ packages:
       '@aws-crypto/sha256-js': 3.0.0
       '@aws-sdk/client-sts': 3.370.0
       '@aws-sdk/credential-provider-node': 3.370.0
-      '@aws-sdk/hash-stream-node': 3.370.0
+      '@aws-sdk/hash-stream-node': 3.374.0
       '@aws-sdk/middleware-bucket-endpoint': 3.370.0
       '@aws-sdk/middleware-expect-continue': 3.370.0
-      '@aws-sdk/middleware-flexible-checksums': 3.370.0
+      '@aws-sdk/middleware-flexible-checksums': 3.374.0
       '@aws-sdk/middleware-host-header': 3.370.0
       '@aws-sdk/middleware-location-constraint': 3.370.0
       '@aws-sdk/middleware-logger': 3.370.0
@@ -395,19 +395,11 @@ packages:
       tslib: 2.6.0
     dev: false
 
-  /@aws-sdk/hash-stream-node@3.370.0:
-    resolution: {integrity: sha512-ExsbBiIMiL9AN1VpWlD8+xaO5s0cXUZJC2UONiQbgMb1jz7Wq9fa1GmKUDyaGXOuQTT7DDhAmalb9fIpauZKuA==}
+  /@aws-sdk/hash-stream-node@3.374.0:
+    resolution: {integrity: sha512-Ta7YEFcgc+d4Rt7foV/fbgnXP8IgMAb+JVzZVYcHTwQf836+PdjGfKbamYkh8cM2xE47hzZqPe+BacCjePqH7g==}
     engines: {node: '>=14.0.0'}
     dependencies:
-      '@aws-sdk/types': 3.370.0
-      '@aws-sdk/util-utf8': 3.310.0
-      tslib: 2.6.0
-    dev: false
-
-  /@aws-sdk/is-array-buffer@3.310.0:
-    resolution: {integrity: sha512-urnbcCR+h9NWUnmOtet/s4ghvzsidFmspfhYaHAmSRdy9yDjdjBJMFjjsn85A1ODUktztm+cVncXjQ38WCMjMQ==}
-    engines: {node: '>=14.0.0'}
-    dependencies:
+      '@smithy/hash-stream-node': 1.0.2
       tslib: 2.6.0
     dev: false
 
@@ -433,8 +425,8 @@ packages:
       tslib: 2.6.0
     dev: false
 
-  /@aws-sdk/middleware-flexible-checksums@3.370.0:
-    resolution: {integrity: sha512-62fyW4hZxppvkQKSXdkzjHQ95dXyVCuL18Sfnlciy9pr9f/t5w6LhZIxsNIW+Ge9mbgc661SVRKTwxlZj6FuLQ==}
+  /@aws-sdk/middleware-flexible-checksums@3.374.0:
+    resolution: {integrity: sha512-NVXqMiYrEvpbAK0jTOy791dkJAz+JQkIX8lgl/BgnNXvXFDP2wOW5JT830LX27bMhs/yzt1nJSLvgnSCuhOKtg==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/crc32': 3.0.0
@@ -600,14 +592,6 @@ packages:
       tslib: 2.6.0
     dev: false
 
-  /@aws-sdk/util-buffer-from@3.310.0:
-    resolution: {integrity: sha512-i6LVeXFtGih5Zs8enLrt+ExXY92QV25jtEnTKHsmlFqFAuL3VBeod6boeMXkN2p9lbSVVQ1sAOOYZOHYbYkntw==}
-    engines: {node: '>=14.0.0'}
-    dependencies:
-      '@aws-sdk/is-array-buffer': 3.310.0
-      tslib: 2.6.0
-    dev: false
-
   /@aws-sdk/util-endpoints@3.370.0:
     resolution: {integrity: sha512-5ltVAnM79nRlywwzZN5i8Jp4tk245OCGkKwwXbnDU+gq7zT3CIOsct1wNZvmpfZEPGt/bv7/NyRcjP+7XNsX/g==}
     engines: {node: '>=14.0.0'}
@@ -660,14 +644,6 @@ packages:
   /@aws-sdk/util-utf8-browser@3.259.0:
     resolution: {integrity: sha512-UvFa/vR+e19XookZF8RzFZBrw2EUkQWxiBW0yYQAhvk3C+QVGl0H3ouca8LDBlBfQKXwmW3huo/59H8rwb1wJw==}
     dependencies:
-      tslib: 2.6.0
-    dev: false
-
-  /@aws-sdk/util-utf8@3.310.0:
-    resolution: {integrity: sha512-DnLfFT8uCO22uOJc0pt0DsSNau1GTisngBCDw8jQuWT5CqogMJu4b/uXmwEqfj8B3GX6Xsz8zOd6JpRlPftQoA==}
-    engines: {node: '>=14.0.0'}
-    dependencies:
-      '@aws-sdk/util-buffer-from': 3.310.0
       tslib: 2.6.0
     dev: false
 
@@ -789,6 +765,15 @@ packages:
     dependencies:
       '@smithy/types': 1.1.1
       '@smithy/util-buffer-from': 1.0.2
+      '@smithy/util-utf8': 1.0.2
+      tslib: 2.6.0
+    dev: false
+
+  /@smithy/hash-stream-node@1.0.2:
+    resolution: {integrity: sha512-XH3h6f+pChVFzYVWJa/TGME/NWk/r+AuXSBIhLvQjYcZbeoKy1LhVH2yVFVouN9EASkgLj0KvOVGjMS3c5pG6Q==}
+    engines: {node: '>=14.0.0'}
+    dependencies:
+      '@smithy/types': 1.1.1
       '@smithy/util-utf8': 1.0.2
       tslib: 2.6.0
     dev: false
