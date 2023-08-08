@@ -39,7 +39,7 @@ const getFileList = (dir: string) => {
 
     for (const item of items) {
         const isDir = item.isDirectory();
-        const absolutePath = path.join(dir, item.name);
+        const absolutePath = `${dir}/${item.name}`;
         if (isDir) {
             files = [...files, ...getFileList(absolutePath)];
         } else {
@@ -62,7 +62,7 @@ const run = async (config: R2Config) => {
         console.log(config.sourceDir);
         console.log(config.destinationDir);
         const fileName = file.replace(config.sourceDir, "");
-        const fileKey = (path.join(config.destinationDir, fileName)).replace(/\\/g, "/");
+        const fileKey = path.join(config.destinationDir, fileName).replace(/\\/g, config.destinationDir !== "" ? "/" : "");
 
         if (fileKey.includes('.gitkeep'))
             continue;
