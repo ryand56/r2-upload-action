@@ -40166,7 +40166,7 @@ const getFileList = (dir) => {
     });
     for (const item of items) {
         const isDir = item.isDirectory();
-        const absolutePath = path__WEBPACK_IMPORTED_MODULE_5___default().join(dir, item.name);
+        const absolutePath = `${dir}/${item.name}`;
         if (isDir) {
             files = [...files, ...getFileList(absolutePath)];
         }
@@ -40186,7 +40186,7 @@ const run = async (config) => {
         console.log(config.sourceDir);
         console.log(config.destinationDir);
         const fileName = file.replace(config.sourceDir, "");
-        const fileKey = (path__WEBPACK_IMPORTED_MODULE_5___default().join(config.destinationDir, fileName)).replace(/\\/g, "/");
+        const fileKey = path__WEBPACK_IMPORTED_MODULE_5___default().join(config.destinationDir, fileName).replace(/\\/g, config.destinationDir !== "" ? "/" : "");
         if (fileKey.includes('.gitkeep'))
             continue;
         console.log(fileKey);
