@@ -16,10 +16,11 @@ Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-u
     r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
     r2-bucket: ${{ secrets.R2_BUCKET }}
     source-dir: src
+    destination-dir: ./
 ```
 
 In this example, `source-dir` is stored in the root of the bucket.
-Specify `destination-dir` input to change the location of where the directory will be uploaded.
+Change `destination-dir` input to specify the location of where the directory will be uploaded.
 <!-- -->
 
 <!-- CUSTOM USAGE -->
