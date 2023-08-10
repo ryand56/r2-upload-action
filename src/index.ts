@@ -61,7 +61,8 @@ const run = async (config: R2Config) => {
         const fileStream = fs.readFileSync(file);
         console.log(config.sourceDir);
         console.log(config.destinationDir);
-        const fileName = file.replace(/^.*[\\\/]/, "");
+        //const fileName = file.replace(/^.*[\\\/]/, "");
+        const fileName = file.replace(config.sourceDir, "");
         const fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
 
         if (fileKey.includes('.gitkeep'))
