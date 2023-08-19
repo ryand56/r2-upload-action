@@ -12,8 +12,8 @@ dependencies:
     specifier: ^3.395.0
     version: 3.395.0
   '@aws-sdk/s3-request-presigner':
-    specifier: ^3.391.0
-    version: 3.391.0
+    specifier: ^3.395.0
+    version: 3.395.0
   md5:
     specifier: ^2.3.0
     version: 2.3.0
@@ -518,8 +518,8 @@ packages:
       tslib: 2.6.0
     dev: false
 
-  /@aws-sdk/s3-request-presigner@3.391.0:
-    resolution: {integrity: sha512-2cV6utjfV/8EvJjyBSowoYpmCy4HWb7b7PhkdJB5a3hItxi2NdWX2AZhSBit6xYhUdHvOuXcfG4TMGyH5S2NVQ==}
+  /@aws-sdk/s3-request-presigner@3.395.0:
+    resolution: {integrity: sha512-SLjka5OY33gXS40CKhde/t8HZp6lMEv9oQzKrtDekXQp5t/iC6SrXincfA69Q34CZe7LFeeBEHsM9mrA1GgRoA==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/signature-v4-multi-region': 3.391.0
