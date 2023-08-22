@@ -9,8 +9,8 @@ dependencies:
     specifier: ^1.10.0
     version: 1.10.0
   '@aws-sdk/client-s3':
-    specifier: ^3.395.0
-    version: 3.395.0
+    specifier: ^3.397.0
+    version: 3.397.0
   '@aws-sdk/s3-request-presigner':
     specifier: ^3.395.0
     version: 3.395.0
@@ -158,8 +158,8 @@ packages:
       tslib: 1.14.1
     dev: false
 
-  /@aws-sdk/client-s3@3.395.0:
-    resolution: {integrity: sha512-mKEDt/1oS9Cjd+5kS88XPO26hvbIvx6Dzcyih26qz1Gb2BVIZm9y1KopFHtpyCLuOVIhsrXFkfEMoFwggM/swQ==}
+  /@aws-sdk/client-s3@3.397.0:
+    resolution: {integrity: sha512-fowHUInFQPFBSjhOy5+A0J+tmgwADuOcW4X8JfNtlaEXdMROir2JnRFAN8zkzXYD0iylHbYVBnnjH5pLBCY3Ig==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha1-browser': 3.0.0
