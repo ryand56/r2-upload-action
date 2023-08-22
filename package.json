@@ -21,7 +21,7 @@
   "homepage": "https://github.com/elementemerald/r2-upload-action#readme",
   "devDependencies": {
     "@types/dedent": "^0.7.0",
-    "@types/jest": "^29.5.3",
+    "@types/jest": "^29.5.4",
     "@types/md5": "^2.3.2",
     "@types/mime": "^3.0.1",
     "@types/node": "^20.5.1",
