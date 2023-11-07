@@ -32,8 +32,8 @@ devDependencies:
     specifier: ^2.3.2
     version: 2.3.2
   '@types/mime':
-    specifier: ^3.0.1
-    version: 3.0.1
+    specifier: ^3.0.4
+    version: 3.0.4
   '@types/node':
     specifier: ^20.6.2
     version: 20.6.2
@@ -1903,8 +1903,8 @@ packages:
     resolution: {integrity: sha512-v+JFDu96+UYJ3/UWzB0mEglIS//MZXgRaJ4ubUPwOM0gvLc/kcQ3TWNYwENEK7/EcXGQVrW8h/XqednSjBd/Og==}
     dev: true
 
-  /@types/mime@3.0.1:
-    resolution: {integrity: sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==}
+  /@types/mime@3.0.4:
+    resolution: {integrity: sha512-iJt33IQnVRkqeqC7PzBHPTC6fDlRNRW8vjrgqtScAhrmMwe8c4Eo7+fUGTa+XdWrpEgpyKWMYmi2dIwMAYRzPw==}
     dev: true
 
   /@types/node@20.6.2:
