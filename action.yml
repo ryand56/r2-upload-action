@@ -27,6 +27,14 @@ inputs:
     description: ''
     default: 'true'
     required: false
+  multipart-size:
+    description: 'use multipart upload when file size is greater than this value (MB)'
+    default: '100'
+    required: false
+  max-retries:
+    description: 'maximum number of retries'
+    default: '5'
+    required: false
 outputs:
   result:
     description: '`success` or `failure`'
