@@ -33,6 +33,7 @@ let config: R2Config = {
     outputFileUrl: getInput("output-file-url") === 'true',
     multiPartSize: parseInt(getInput("multipart-size")) || 100,
     maxTries: parseInt(getInput("max-retries")) || 5,
+    multiPartConcurrent: getInput("multipart-concurrent") === 'true'
 };
 
 const S3 = new S3Client({
@@ -60,7 +61,7 @@ const run = async (config: R2Config) => {
 
         if (fileKey.includes('.gitkeep'))
             continue;
-        
+
         console.log(fileKey);
 
         try {
@@ -113,6 +114,8 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
     const totalSize = formatFileSize(file);
     let bytesRead = 0;
     let partNumber = 0;
+    let interrupted = false;
+    const uploads = [];
     for await (const chunk of readFixedChunkSize(file, chunkSize)) {
 
         const uploadPartParams: UploadPartCommandInput = {
@@ -123,32 +126,49 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
             Body: chunk,
         }
 
-        const cmd = new UploadPartCommand(uploadPartParams);
-        let retries = 0
-        while (retries < config.maxTries) {
-            try {
-                const result = await S3.send(cmd);
-                multiPartMap.Parts.push({ PartNumber: partNumber, ETag: result.ETag });
-                break;
-            } catch (err: any) {
-                retries++;
-                console.error(`R2 Error - ${err.message}, retrying: ${retries}/${config.maxTries}`, err);
-                await sleep(300);
+        const uploadPart = async (partNumber: number) => {
+            const cmd = new UploadPartCommand(uploadPartParams);
+            let retries = 0
+            while (retries < config.maxTries) {
+                if (interrupted) {
+                    console.info(`R2 Info - Aborting upload part ${partNumber} of ${file} due to previous error`)
+                    return;
+                }
+                try {
+                    const result = await S3.send(cmd);
+                    multiPartMap.Parts.push({ PartNumber: partNumber, ETag: result.ETag });
+                    break;
+                } catch (err: any) {
+                    retries++;
+                    console.error(`R2 Error - ${err.message}, retrying: ${retries}/${config.maxTries}`, err);
+                    await sleep(300);
+                }
             }
-        }
-        if (retries >= config.maxTries) {
-            console.info(`Retries exhausted, aborting upload`)
-            const abortParams: AbortMultipartUploadCommandInput = {
-                Bucket: config.bucket,
-                Key: fileKey,
-                UploadId: created.UploadId
+            if (retries >= config.maxTries) {
+                console.info(`Retries exhausted, aborting upload`)
+                interrupted = true;
+                const abortParams: AbortMultipartUploadCommandInput = {
+                    Bucket: config.bucket,
+                    Key: fileKey,
+                    UploadId: created.UploadId
+                }
+                const cmd = new AbortMultipartUploadCommand(abortParams);
+                await S3.send(cmd);
+                throw new Error(`R2 Error - Failed to upload part ${partNumber} of ${file}`);
             }
-            const cmd = new AbortMultipartUploadCommand(abortParams);
-            await S3.send(cmd);
-            throw new Error(`R2 Error - Failed to upload part ${partNumber} of ${file}`);
+            bytesRead += chunk.byteLength;
+            console.info(`R2 Success - Uploaded part ${formatBytes(bytesRead)}/${totalSize} of ${file} (${partNumber})`)
         }
-        bytesRead += chunk.byteLength;
-        console.info(`R2 Success - Uploaded part ${formatBytes(bytesRead)}/${totalSize} of ${file} (${partNumber})`)
+
+        if (config.multiPartConcurrent) {
+            uploads.push(uploadPart(partNumber));
+        } else {
+            await uploadPart(partNumber);
+        }
+    }
+
+    if (config.multiPartConcurrent) {
+        await Promise.all(uploads);
     }
 
     console.info(`R2 Info - Completing upload of ${file} to ${fileKey}`)

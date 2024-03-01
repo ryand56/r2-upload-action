@@ -8,6 +8,7 @@ export interface R2Config {
     outputFileUrl: boolean
     multiPartSize: number
     maxTries: number
+    multiPartConcurrent: boolean
 }
 
 export interface FileMap {
