@@ -35,6 +35,9 @@ Change `destination-dir` input to specify the location of where the directory wi
     source-dir: src
     destination-dir: artifacts # Can be anything as long as it is an actual path
     output-file-url: 'true' # defaults to true
+    multipart-size: 100 # If the file size is greater than the value provided here, then use multipart upload
+    max-retries: 5 # The maximum number of retries it takes to upload a multipart chunk until it moves on to the next part
+    multipart-concurrent: true # Whether to concurrently upload a multipart chunk
 ```
 See the latest [action.yml](https://github.com/ryand56/r2-upload-action/blob/master/action.yml) for every input and output or take a look below.
 <!-- -->
