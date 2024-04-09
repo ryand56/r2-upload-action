@@ -35,6 +35,7 @@ Change `destination-dir` input to specify the location of where the directory wi
     source-dir: src
     destination-dir: artifacts # Can be anything as long as it is an actual path
     output-file-url: 'true' # defaults to true
+    custom-charset: 'charset=utf-8' # Not Required, Used to custom charset
 ```
 See the latest [action.yml](https://github.com/ryand56/r2-upload-action/blob/master/action.yml) for every input and output or take a look below.
 <!-- -->
@@ -42,14 +43,15 @@ See the latest [action.yml](https://github.com/ryand56/r2-upload-action/blob/mas
 <!-- ACTION INPUTS -->
 ## Inputs
 
-| Name | Description | Default |
-| --- | --- | --- |
-| `r2-account-id` | **(Required)** Your Cloudflare account ID. | *N/A* |
-| `r2-access-key-id` | **(Required)** Your Cloudflare R2 bucket access key ID. | *N/A* |
-| `r2-secret-access-key` | **(Required)** Your Cloudflare R2 bucket secret access key. | *N/A* |
-| `r2-bucket` | **(Required)** Your Cloudflare R2 bucket name. | *N/A* |
-| `source-dir` | **(Required)** The directory to upload to the Cloudflare R2 bucket. | *N/A* |
+| Name | Description                                                                        | Default |
+| --- |------------------------------------------------------------------------------------| --- |
+| `r2-account-id` | **(Required)** Your Cloudflare account ID.                                         | *N/A* |
+| `r2-access-key-id` | **(Required)** Your Cloudflare R2 bucket access key ID.                            | *N/A* |
+| `r2-secret-access-key` | **(Required)** Your Cloudflare R2 bucket secret access key.                        | *N/A* |
+| `r2-bucket` | **(Required)** Your Cloudflare R2 bucket name.                                     | *N/A* |
+| `source-dir` | **(Required)** The directory to upload to the Cloudflare R2 bucket.                | *N/A* |
 | `destination-dir` | (Optional) The destination to upload the directory to in the Cloudflare R2 bucket. | Empty string |
+| `custom-charset` | (Optional) Used to custom charset, avoid garbled characters.                       | Empty string |
 
 <!-- ACTION OUTPUTS -->
 ## Outputs

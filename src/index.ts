@@ -19,7 +19,8 @@ let config: R2Config = {
     bucket: getInput("r2-bucket", { required: true }),
     sourceDir: getInput("source-dir", { required: true }),
     destinationDir: getInput("destination-dir"),
-    outputFileUrl: getInput("output-file-url") === 'true'
+    outputFileUrl: getInput("output-file-url") === 'true',
+    customCharset: getInput("custom-charset"),
 };
 
 const S3 = new S3Client({
@@ -70,13 +71,17 @@ const run = async (config: R2Config) => {
         
         console.log(fileKey);
         const mimeType = mime.getType(file);
+        let contentType: string = mimeType ?? 'application/octet-stream';
+        if (config.customCharset) {
+          contentType += `; charset=${config.customCharset}`;
+        }
 
         const uploadParams: PutObjectCommandInput = {
             Bucket: config.bucket,
             Key: fileKey,
             Body: fileStream,
             ContentLength: fs.statSync(file).size,
-            ContentType: mimeType ?? 'application/octet-stream'
+            ContentType: contentType
         };
         
         const cmd = new PutObjectCommand(uploadParams);

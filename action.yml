@@ -27,6 +27,9 @@ inputs:
     description: ''
     default: 'true'
     required: false
+  custom-charset:
+    description: ''
+    required: false
 outputs:
   result:
     description: '`success` or `failure`'
