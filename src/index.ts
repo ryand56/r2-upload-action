@@ -56,7 +56,7 @@ const run = async (config: R2Config) => {
 
     const files: string[] = getFileList(config.sourceDir);
 
-    for (const file of files) {
+    await Promise.all(files.map(async file => {
         console.log(file);
         const fileStream = fs.readFileSync(file);
         console.log(config.sourceDir);
@@ -66,7 +66,7 @@ const run = async (config: R2Config) => {
         const fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
 
         if (fileKey.includes('.gitkeep'))
-            continue;
+            return;
         
         console.log(fileKey);
         const mimeType = mime.getType(file);
@@ -105,7 +105,8 @@ const run = async (config: R2Config) => {
                     throw error;
             }
         }
-    }
+        return;
+    }))
 
     if (config.outputFileUrl) setOutput('file-urls', urls);
     return map;
