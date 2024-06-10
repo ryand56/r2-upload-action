@@ -18,6 +18,12 @@ export const formatBytes = function (bytes: number): string {
 
 export const getFileList = (dir: string) => {
     let files: string[] = [];
+
+    if (fs.statSync(dir).isFile()) {
+        files.push(fs.realpathSync(dir));
+        return files;
+    }
+
     const items = fs.readdirSync(dir, {
         withFileTypes: true,
     });
