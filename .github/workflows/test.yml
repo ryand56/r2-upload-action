@@ -33,4 +33,4 @@ jobs:
       - name: Install Dependencies
         run: pnpm i --frozen-lockfile
       - name: Build
-        run: ncc build src/index.ts -s -o dist
+        run: pnpm run build
