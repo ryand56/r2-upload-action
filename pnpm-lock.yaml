@@ -24,7 +24,7 @@ dependencies:
 devDependencies:
   '@types/dedent':
     specifier: ^0.7.0
-    version: 0.7.0
+    version: 0.7.2
   '@types/jest':
     specifier: ^29.5.3
     version: 29.5.3
@@ -1866,8 +1866,8 @@ packages:
       '@babel/types': 7.22.10
     dev: true
 
-  /@types/dedent@0.7.0:
-    resolution: {integrity: sha512-EGlKlgMhnLt/cM4DbUSafFdrkeJoC9Mvnj0PUCU7tFmTjMjNRT957kXCx0wYm3JuEq4o4ZsS5vG+NlkM2DMd2A==}
+  /@types/dedent@0.7.2:
+    resolution: {integrity: sha512-kRiitIeUg1mPV9yH4VUJ/1uk2XjyANfeL8/7rH1tsjvHeO9PJLBHJIYsFWmAvmGj5u8rj+1TZx7PZzW2qLw3Lw==}
     dev: true
 
   /@types/graceful-fs@4.1.6:
