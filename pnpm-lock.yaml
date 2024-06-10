@@ -37,6 +37,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.6.2
     version: 20.6.2
+  '@vercel/ncc':
+    specifier: ^0.38.1
+    version: 0.38.1
   dotenv:
     specifier: ^16.3.1
     version: 16.3.1
@@ -1923,6 +1926,11 @@ packages:
     resolution: {integrity: sha512-6i0aC7jV6QzQB8ne1joVZ0eSFIstHsCrobmOtghM11yGlH0j43FKL2UhWdELkyps0zuf7qVTUVCCR+tgSlyLLw==}
     dependencies:
       '@types/yargs-parser': 21.0.0
+    dev: true
+
+  /@vercel/ncc@0.38.1:
+    resolution: {integrity: sha512-IBBb+iI2NLu4VQn3Vwldyi2QwaXt5+hTyh58ggAMoCGE6DJmPvwL3KPBWcJl1m9LYPChBLE980Jw+CS4Wokqxw==}
+    hasBin: true
     dev: true
 
   /acorn-walk@8.2.0:
