@@ -27,6 +27,10 @@ inputs:
     description: ''
     default: 'true'
     required: false
+  keep-file-fresh:
+    description: ''
+    default: 'false'
+    required: false
 outputs:
   result:
     description: '`success` or `failure`'
