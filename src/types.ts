@@ -9,6 +9,7 @@ export interface R2Config {
     multiPartSize: number
     maxTries: number
     multiPartConcurrent: boolean
+    keepFileFresh: boolean
 }
 
 export interface FileMap {

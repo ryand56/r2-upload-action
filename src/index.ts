@@ -14,7 +14,10 @@ import {
     CreateMultipartUploadCommand,
     CreateMultipartUploadCommandInput,
     UploadPartCommand,
-    CompleteMultipartUploadCommandOutput
+    CompleteMultipartUploadCommandOutput,
+    ListObjectsV2Command,
+    DeleteObjectsCommand,
+    DeleteObjectsCommandInput
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import * as fs from "fs";
@@ -33,7 +36,8 @@ let config: R2Config = {
     outputFileUrl: getInput("output-file-url") === 'true',
     multiPartSize: parseInt(getInput("multipart-size")) || 100,
     maxTries: parseInt(getInput("max-retries")) || 5,
-    multiPartConcurrent: getInput("multipart-concurrent") === 'true'
+    multiPartConcurrent: getInput("multipart-concurrent") === 'true',
+    keepFileFresh: getInput("keep-file-fresh") === 'false'
 };
 
 const S3 = new S3Client({
@@ -45,9 +49,41 @@ const S3 = new S3Client({
     },
 });
 
+const deleteRemoteFiles = async (bucket: string, prefix: string) => {
+    try {
+        const listParams = {
+            Bucket: bucket,
+            Prefix: prefix
+        };
+        
+        const listedObjects = await S3.send(new ListObjectsV2Command(listParams));
+        
+        if (listedObjects.Contents && listedObjects.Contents.length > 0) {
+            const deleteParams: DeleteObjectsCommandInput = {
+                Bucket: bucket,
+                Delete: {
+                    Objects: listedObjects.Contents.map(({ Key }) => ({ Key })),
+                    Quiet: true
+                }
+            };
+
+            await S3.send(new DeleteObjectsCommand(deleteParams));
+            console.log(`Deleted all objects under ${prefix}`);
+        }
+    } catch (err) {
+        console.error("Error deleting remote files: ", err);
+        throw err;
+    }
+};
+
 const run = async (config: R2Config) => {
     const map = new Map<string, PutObjectCommandOutput | CompleteMultipartUploadCommandOutput>();
     const urls: FileMap = {};
+
+    if (config.keepFileFresh) {
+        const remotePrefix = config.destinationDir !== "" ? config.destinationDir : config.sourceDir;
+        await deleteRemoteFiles(config.bucket, remotePrefix);
+    }
 
     const files: string[] = getFileList(config.sourceDir);
 
