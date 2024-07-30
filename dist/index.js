@@ -40122,7 +40122,8 @@ let config = {
     bucket: (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("r2-bucket", { required: true }),
     sourceDir: (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("source-dir", { required: true }),
     destinationDir: (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("destination-dir"),
-    outputFileUrl: (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("output-file-url") === 'true'
+    outputFileUrl: (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("output-file-url") === 'true',
+    keepFileFresh: (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)("keep-file-fresh") === 'false'
 };
 const S3 = new _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6__.S3Client({
     region: "auto",
@@ -40149,9 +40150,37 @@ const getFileList = (dir) => {
     }
     return files;
 };
+const deleteRemoteFiles = async (bucket, prefix) => {
+    try {
+        const listParams = {
+            Bucket: bucket,
+            Prefix: prefix
+        };
+        const listedObjects = await S3.send(new _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6__.ListObjectsV2Command(listParams));
+        if (listedObjects.Contents && listedObjects.Contents.length > 0) {
+            const deleteParams = {
+                Bucket: bucket,
+                Delete: {
+                    Objects: listedObjects.Contents.map(({ Key }) => ({ Key })),
+                    Quiet: true
+                }
+            };
+            await S3.send(new _aws_sdk_client_s3__WEBPACK_IMPORTED_MODULE_6__.DeleteObjectsCommand(deleteParams));
+            console.log(`Deleted all objects under ${prefix}`);
+        }
+    }
+    catch (err) {
+        console.error("Error deleting remote files: ", err);
+        throw err;
+    }
+};
 const run = async (config) => {
     const map = new Map();
     const urls = {};
+    if (config.keepFileFresh) {
+        const remotePrefix = config.destinationDir !== "" ? config.destinationDir : config.sourceDir;
+        await deleteRemoteFiles(config.bucket, remotePrefix);
+    }
     const files = getFileList(config.sourceDir);
     for (const file of files) {
         console.log(file);
