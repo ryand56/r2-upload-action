@@ -35,6 +35,7 @@ Change `destination-dir` input to specify the location of where the directory wi
     source-dir: src
     destination-dir: artifacts # Can be anything as long as it is an actual path
     output-file-url: 'true' # defaults to true
+    keep-file-fresh: 'false' # defaults to false
 ```
 See the latest [action.yml](https://github.com/ryand56/r2-upload-action/blob/master/action.yml) for every input and output or take a look below.
 <!-- -->
@@ -50,6 +51,7 @@ See the latest [action.yml](https://github.com/ryand56/r2-upload-action/blob/mas
 | `r2-bucket` | **(Required)** Your Cloudflare R2 bucket name. | *N/A* |
 | `source-dir` | **(Required)** The directory to upload to the Cloudflare R2 bucket. | *N/A* |
 | `destination-dir` | (Optional) The destination to upload the directory to in the Cloudflare R2 bucket. | Empty string |
+| `keep-file-fresh` | (Optional) Keep the destination up-to-date, **which will permanently delete the previous contents** | false |
 
 <!-- ACTION OUTPUTS -->
 ## Outputs

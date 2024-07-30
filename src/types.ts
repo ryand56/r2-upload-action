@@ -6,6 +6,7 @@ export interface R2Config {
     sourceDir: string
     destinationDir: string
     outputFileUrl: boolean
+    keepFileFresh: boolean
 }
 
 export interface FileMap {
