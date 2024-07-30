@@ -38,6 +38,9 @@ inputs:
   multipart-concurrent:
     description: 'whether to use concurrent while multipart upload'
     default: 'true'
+  keep-file-fresh:
+    description: ''
+    default: 'false'
     required: false
 outputs:
   result:
