@@ -3,6 +3,7 @@ export interface R2Config {
     accessKeyId: string
     secretAccessKey: string
     bucket: string
+    jurisdiction: string
     sourceDir: string
     destinationDir: string
     outputFileUrl: boolean

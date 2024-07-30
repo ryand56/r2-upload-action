@@ -31,6 +31,7 @@ let config: R2Config = {
     accessKeyId: getInput("r2-access-key-id", { required: true }),
     secretAccessKey: getInput("r2-secret-access-key", { required: true }),
     bucket: getInput("r2-bucket", { required: true }),
+    jurisdiction: getInput("r2-jurisdiction"),
     sourceDir: getInput("source-dir", { required: true }),
     destinationDir: getInput("destination-dir"),
     outputFileUrl: getInput("output-file-url") === 'true',
@@ -42,7 +43,7 @@ let config: R2Config = {
 
 const S3 = new S3Client({
     region: "auto",
-    endpoint: `https://${config.accountId}.r2.cloudflarestorage.com`,
+    endpoint: `https://${config.accountId}.${config.jurisdiction != "" ? config.jurisdiction + "." : ""}r2.cloudflarestorage.com`,
     credentials: {
         accessKeyId: config.accessKeyId,
         secretAccessKey: config.secretAccessKey,
