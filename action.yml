@@ -17,6 +17,9 @@ inputs:
   r2-bucket:
     description: ''
     required: true
+  r2-jurisdiction:
+    description: ''
+    required: false
   source-dir:
     description: ''
     required: true
