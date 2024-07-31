@@ -126,7 +126,7 @@ const run = async (config: R2Config) => {
 };
 
 const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = async (file: string, config: R2Config) => {
-    const fileName = path.basename(file);
+    const fileName = file.replace(config.sourceDir, "");
     const fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
     const mimeType = mime.getType(file);
 
@@ -227,7 +227,7 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
 
 
 const putObject: UploadHandler<PutObjectCommandOutput> = async (file, config) => {
-    const fileName = path.basename(file);
+    const fileName = file.replace(config.sourceDir, "");
     const fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
     const mimeType = mime.getType(file);
 
