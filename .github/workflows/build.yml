@@ -11,17 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           token: ${{ secrets.PAT }}
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: latest
       - name: Install Dependencies
         run: pnpm i --frozen-lockfile
-      - name: Install Build Tool
-        run: pnpm i -g @vercel/ncc
       - name: Build
         run: pnpm run build
       - name: Update Mappings

@@ -3,6 +3,9 @@ GitHub Action to upload files to a Cloudflare R2 bucket, built on top of @aws-sd
 <br>
 Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-upload-action) and [Cloudflare R2 Upload](https://github.com/Karbust/Cloudflare_R2_Upload).
 
+> [!IMPORTANT]  
+> Node.js 20 is now required to run this action.
+
 <!-- ACTION USAGE -->
 ## Usage
 
@@ -35,6 +38,9 @@ Change `destination-dir` input to specify the location of where the directory wi
     source-dir: src
     destination-dir: artifacts # Can be anything as long as it is an actual path
     output-file-url: 'true' # defaults to true
+    multipart-size: 100 # If the file size is greater than the value provided here, then use multipart upload
+    max-retries: 5 # The maximum number of retries it takes to upload a multipart chunk until it moves on to the next part
+    multipart-concurrent: true # Whether to concurrently upload a multipart chunk
     keep-file-fresh: 'false' # defaults to false
 ```
 See the latest [action.yml](https://github.com/ryand56/r2-upload-action/blob/master/action.yml) for every input and output or take a look below.
