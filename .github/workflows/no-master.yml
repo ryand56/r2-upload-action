@@ -1,0 +1,25 @@
+name: Action CI
+
+on:
+  pull_request:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  fail:
+    permissions:
+      contents: none
+    name: "Targeting master"
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          cat <<EOF
+          You are targeting master as your base branch.
+          The master branch should be used for releases and important fixes only.
+
+          Please rebase to the develop branch.
+          EOF
+          exit 1
