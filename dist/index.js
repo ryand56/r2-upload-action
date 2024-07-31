@@ -36791,7 +36791,7 @@ const run = async (config) => {
     return map;
 };
 const uploadMultiPart = async (file, config) => {
-    const fileName = external_path_default().basename(file);
+    const fileName = file.replace(config.sourceDir, "");
     const fileKey = external_path_default().join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
     const mimeType = src.getType(file);
     const createMultiPartParams = {
@@ -36879,7 +36879,7 @@ const uploadMultiPart = async (file, config) => {
     };
 };
 const putObject = async (file, config) => {
-    const fileName = external_path_default().basename(file);
+    const fileName = file.replace(config.sourceDir, "");
     const fileKey = external_path_default().join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
     const mimeType = src.getType(file);
     console.info(`using put object upload for ${fileKey}`);
