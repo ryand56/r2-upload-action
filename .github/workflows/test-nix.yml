@@ -19,6 +19,6 @@ jobs:
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v13
       - name: Magic Nix Cache
-        uses: uses: DeterminateSystems/magic-nix-cache-action@v7
+        uses: DeterminateSystems/magic-nix-cache-action@v7
       - name: Build
         run: nix-build shell.nix
