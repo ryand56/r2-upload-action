@@ -25,7 +25,10 @@ jobs:
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H:%M:%S')"
       - name: Create test file
-        run: echo Upload test - ${{ steps.date.outputs.date }} >> tests/log/upload-${{ steps.date.outputs.date }}
+        run: |
+          mkdir tests/log
+          touch tests/log/upload-${{ steps.date.outputs.date }}
+          echo Upload test - ${{ steps.date.outputs.date }} >> tests/log/upload-${{ steps.date.outputs.date }}
       - name: Upload to R2
         uses: ./
         with:
