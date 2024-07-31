@@ -33,9 +33,6 @@ importers:
       '@types/md5':
         specifier: ^2.3.2
         version: 2.3.5
-      '@types/mime':
-        specifier: ^4.0.0
-        version: 4.0.0
       '@types/node':
         specifier: ^20.6.2
         version: 20.14.13
@@ -791,10 +788,6 @@ packages:
 
   '@types/md5@2.3.5':
     resolution: {integrity: sha512-/i42wjYNgE6wf0j2bcTX6kuowmdL/6PE4IVitMpm2eYKBUuYCprdcWVK+xEF0gcV6ufMCRhtxmReGfc6hIK7Jw==}
-
-  '@types/mime@4.0.0':
-    resolution: {integrity: sha512-5eEkJZ/BLvTE3vXGKkWlyTSUVZuzj23Wj8PoyOq2lt5I3CYbiLBOPb3XmCW6QcuOibIUE6emHXHt9E/F/rCa6w==}
-    deprecated: This is a stub types definition. mime provides its own type definitions, so you do not need this installed.
 
   '@types/node@20.14.13':
     resolution: {integrity: sha512-+bHoGiZb8UiQ0+WEtmph2IWQCjIqg8MDZMAV+ppRRhUZnquF5mQkP/9vpSwJClEiSM/C7fZZExPzfU0vJTyp8w==}
@@ -3274,10 +3267,6 @@ snapshots:
       pretty-format: 29.7.0
 
   '@types/md5@2.3.5': {}
-
-  '@types/mime@4.0.0':
-    dependencies:
-      mime: 4.0.4
 
   '@types/node@20.14.13':
     dependencies:
