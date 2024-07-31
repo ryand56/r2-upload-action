@@ -35,7 +35,7 @@ importers:
         version: 2.3.5
       '@types/mime':
         specifier: ^3.0.1
-        version: 3.0.1
+        version: 3.0.4
       '@types/node':
         specifier: ^20.6.2
         version: 20.14.13
@@ -792,8 +792,8 @@ packages:
   '@types/md5@2.3.5':
     resolution: {integrity: sha512-/i42wjYNgE6wf0j2bcTX6kuowmdL/6PE4IVitMpm2eYKBUuYCprdcWVK+xEF0gcV6ufMCRhtxmReGfc6hIK7Jw==}
 
-  '@types/mime@3.0.1':
-    resolution: {integrity: sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==}
+  '@types/mime@3.0.4':
+    resolution: {integrity: sha512-iJt33IQnVRkqeqC7PzBHPTC6fDlRNRW8vjrgqtScAhrmMwe8c4Eo7+fUGTa+XdWrpEgpyKWMYmi2dIwMAYRzPw==}
 
   '@types/node@20.14.13':
     resolution: {integrity: sha512-+bHoGiZb8UiQ0+WEtmph2IWQCjIqg8MDZMAV+ppRRhUZnquF5mQkP/9vpSwJClEiSM/C7fZZExPzfU0vJTyp8w==}
@@ -3274,7 +3274,7 @@ snapshots:
 
   '@types/md5@2.3.5': {}
 
-  '@types/mime@3.0.1': {}
+  '@types/mime@3.0.4': {}
 
   '@types/node@20.14.13':
     dependencies:
