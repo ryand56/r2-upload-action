@@ -4,3 +4,5 @@
 # NixOS
 **/.direnv
 **/.envrc
+
+.github/workflows/test-upload-local.yml
