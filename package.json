@@ -23,7 +23,6 @@
     "@types/dedent": "^0.7.0",
     "@types/jest": "^29.5.3",
     "@types/md5": "^2.3.2",
-    "@types/mime": "^3.0.1",
     "@types/node": "^20.6.2",
     "@vercel/ncc": "^0.38.1",
     "dotenv": "^16.3.1",
@@ -38,6 +37,6 @@
     "@aws-sdk/client-s3": "^3.395.0",
     "@aws-sdk/s3-request-presigner": "^3.395.0",
     "md5": "^2.3.0",
-    "mime": "^3.0.0"
+    "mime": "^4.0.0"
   }
 }
