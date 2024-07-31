@@ -38,7 +38,7 @@ let config: R2Config = {
     multiPartSize: parseInt(getInput("multipart-size")) || 100,
     maxTries: parseInt(getInput("max-retries")) || 5,
     multiPartConcurrent: getInput("multipart-concurrent") === 'true',
-    keepFileFresh: getInput("keep-file-fresh") === 'false'
+    keepFileFresh: getInput("keep-file-fresh") === 'true' || false
 };
 
 const S3 = new S3Client({
