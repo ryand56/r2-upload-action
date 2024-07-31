@@ -40115,6 +40115,7 @@ var external_path_ = __nccwpck_require__(71017);
 var external_path_default = /*#__PURE__*/__nccwpck_require__.n(external_path_);
 ;// CONCATENATED MODULE: ./src/utils.ts
 
+
 const formatBytes = function (bytes) {
     const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
     if (bytes == 0) {
@@ -40137,7 +40138,7 @@ const getFileList = (dir) => {
     });
     for (const item of items) {
         const isDir = item.isDirectory();
-        const absolutePath = `${dir}/${item.name}`;
+        const absolutePath = external_path_default().join(dir, item.name);
         if (isDir) {
             files = [...files, ...getFileList(absolutePath)];
         }
@@ -40239,8 +40240,7 @@ const run = async (config) => {
         console.log(file);
         console.log(config.sourceDir);
         console.log(config.destinationDir);
-        //const fileName = file.replace(/^.*[\\\/]/, "");
-        const fileName = external_path_default().basename(file);
+        const fileName = file.replace(config.sourceDir, "");
         const fileKey = external_path_default().join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
         if (fileKey.includes('.gitkeep'))
             continue;
