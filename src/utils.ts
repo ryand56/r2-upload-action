@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 export const formatBytes = function (bytes: number): string {
     const sizes = ["Bytes", "KB", "MB", "GB", "TB"]
@@ -30,7 +31,7 @@ export const getFileList = (dir: string) => {
 
     for (const item of items) {
         const isDir = item.isDirectory();
-        const absolutePath = `${dir}/${item.name}`;
+        const absolutePath = path.join(dir, item.name);
         if (isDir) {
             files = [...files, ...getFileList(absolutePath)];
         } else {
