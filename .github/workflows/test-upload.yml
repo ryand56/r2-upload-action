@@ -11,12 +11,7 @@ on:
 jobs:
   build:
     name: Upload to R2 - Log File
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
