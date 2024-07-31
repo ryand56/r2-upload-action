@@ -1,0 +1,37 @@
+name: Action CI
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    name: Upload to R2 - Log File
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%dT%H:%M:%S')"
+      - name: Create test file
+        run: echo Upload test - ${{ steps.date.outputs.date }} >> tests/log/upload-${{ steps.date.outputs.date }}
+      - name: Upload to R2
+        uses: ./
+        with:
+          r2-account-id: ${{ secrets.TEST_R2_ACCOUNT_ID }}
+          r2-access-key-id: ${{ secrets.TEST_R2_AKID }}
+          r2-secret-access-key: ${{ secrets.TEST_R2_SECRET_AK }}
+          r2-bucket: ${{ secrets.TEST_R2_BUCKET }}
+          source-dir: tests/log
+          destination-dir: r2-upload-action/test-logs
