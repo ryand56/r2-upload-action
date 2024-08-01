@@ -1,16 +1,13 @@
 name: Action CI
 
 on:
-  push:
-    branches:
-      - develop
   pull_request:
     branches:
       - '*'
 
 jobs:
-  build:
-    name: Build
+  test:
+    name: Test
     runs-on: ubuntu-latest
 
     strategy:
