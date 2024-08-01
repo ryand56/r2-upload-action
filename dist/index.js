@@ -36713,7 +36713,7 @@ let config = {
     multiPartSize: parseInt((0,core.getInput)("multipart-size")) || 100,
     maxTries: parseInt((0,core.getInput)("max-retries")) || 5,
     multiPartConcurrent: (0,core.getInput)("multipart-concurrent") === 'true',
-    keepFileFresh: (0,core.getInput)("keep-file-fresh") === 'false'
+    keepFileFresh: (0,core.getInput)("keep-file-fresh") === 'true'
 };
 const S3 = new dist_cjs.S3Client({
     region: "auto",

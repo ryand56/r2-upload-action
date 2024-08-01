@@ -9,7 +9,7 @@ on:
       - '*'
 
 jobs:
-  build:
+  upload-log:
     name: Upload to R2 - Log File
     runs-on: ubuntu-latest
 
