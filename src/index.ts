@@ -86,13 +86,14 @@ const run = async (config: R2Config) => {
         await deleteRemoteFiles(config.bucket, remotePrefix);
     }
 
-    const files: string[] = getFileList(config.sourceDir);
+    const files: FileMap = getFileList(config.sourceDir);
 
-    for (const file of files) {
+    for (const file in files) {
         console.log(file);
         console.log(config.sourceDir);
         console.log(config.destinationDir);
-        const fileName = file.replace(config.sourceDir, "");
+        //const fileName = file.replace(config.sourceDir, "");
+        const fileName = files[file];
         const fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
 
         if (fileKey.includes('.gitkeep'))
@@ -104,7 +105,7 @@ const run = async (config: R2Config) => {
             const fileMB = getFileSizeMB(file);
             console.info(`R2 Info - Uploading ${file} (${formatFileSize(file)}) to ${fileKey}`);
             const upload = fileMB > config.multiPartSize ? uploadMultiPart : putObject;
-            const result = await upload(file, config);
+            const result = await upload(file, fileKey, config);
             map.set(file, result.output);
             urls[file] = result.url;
         } catch (err: unknown) {
@@ -125,8 +126,7 @@ const run = async (config: R2Config) => {
     return map;
 };
 
-const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = async (file: string, config: R2Config) => {
-    const fileName = file.replace(config.sourceDir, "");
+const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = async (file: string, fileName: string, config: R2Config) => {
     const fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
     const mimeType = mime.getType(file);
 
@@ -225,8 +225,7 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
     };
 };
 
-const putObject: UploadHandler<PutObjectCommandOutput> = async (file: string, config: R2Config) => {
-    const fileName = file.replace(config.sourceDir, "");
+const putObject: UploadHandler<PutObjectCommandOutput> = async (file: string, fileName: string, config: R2Config) => {
     const fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
     const mimeType = mime.getType(file);
 

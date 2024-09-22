@@ -1,3 +1,4 @@
+import { FileMap } from "./types.js";
 import fs from 'fs';
 import path from 'path';
 
@@ -18,28 +19,30 @@ export const formatBytes = (bytes: number) => {
 };
 
 export const getFileList = (dir: string) => {
-    let files: string[] = [];
-    let dirSplit = dir.split("\n");
+    let files: FileMap = {};
+    let dirSplit = dir.trim().split("\n");
 
     for (const singleDir of dirSplit) {
-        if (fs.statSync(singleDir).isFile()) {
+        if (fs.statSync(singleDir).isFile())
+        {
             console.log(`Is file: ${singleDir}`);
-            files.push(singleDir);
-            return files;
+            files[singleDir] = path.basename(singleDir);
         }
+        else
+        {
+            const items = fs.readdirSync(singleDir, {
+                withFileTypes: true,
+            });
     
-        const items = fs.readdirSync(singleDir, {
-            withFileTypes: true,
-        });
-    
-        for (const item of items) {
-            const isDir = item.isDirectory();
-            const absolutePath = path.join(dir, item.name);
-            console.log(`The absolute path: ${absolutePath}`);
-            if (isDir) {
-                files = [...files, ...getFileList(absolutePath)];
-            } else {
-                files.push(absolutePath);
+            for (const item of items) {
+                const isDir = item.isDirectory();
+                const absolutePath = path.join(singleDir, item.name);
+                console.log(`The absolute path: ${absolutePath}`);
+                if (isDir) {
+                    files = {...files, ...getFileList(absolutePath)};
+                } else {
+                    files[absolutePath] = item.name;
+                }
             }
         }
     }

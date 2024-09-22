@@ -36994,26 +36994,28 @@ const formatBytes = (bytes) => {
     return (bytes / Math.pow(1024, i)).toFixed(2) + " " + sizes[i];
 };
 const getFileList = (dir) => {
-    let files = [];
-    let dirSplit = dir.split("\n");
+    let files = {};
+    let dirSplit = dir.trim().split("\n");
+    console.log(dirSplit);
     for (const singleDir of dirSplit) {
         if (external_fs_default().statSync(singleDir).isFile()) {
             console.log(`Is file: ${singleDir}`);
-            files.push(singleDir);
-            return files;
+            files[singleDir] = external_path_default().basename(singleDir);
         }
-        const items = external_fs_default().readdirSync(singleDir, {
-            withFileTypes: true,
-        });
-        for (const item of items) {
-            const isDir = item.isDirectory();
-            const absolutePath = external_path_default().join(dir, item.name);
-            console.log(`The absolute path: ${absolutePath}`);
-            if (isDir) {
-                files = [...files, ...getFileList(absolutePath)];
-            }
-            else {
-                files.push(absolutePath);
+        else {
+            const items = external_fs_default().readdirSync(singleDir, {
+                withFileTypes: true,
+            });
+            for (const item of items) {
+                const isDir = item.isDirectory();
+                const absolutePath = external_path_default().join(singleDir, item.name);
+                console.log(`The absolute path: ${absolutePath}`);
+                if (isDir) {
+                    files = { ...files, ...getFileList(absolutePath) };
+                }
+                else {
+                    files[absolutePath] = item.name;
+                }
             }
         }
     }
@@ -37107,11 +37109,12 @@ const run = async (config) => {
         await deleteRemoteFiles(config.bucket, remotePrefix);
     }
     const files = getFileList(config.sourceDir);
-    for (const file of files) {
+    for (const file in files) {
         console.log(file);
         console.log(config.sourceDir);
         console.log(config.destinationDir);
-        const fileName = file.replace(config.sourceDir, "");
+        //const fileName = file.replace(config.sourceDir, "");
+        const fileName = files[file];
         const fileKey = external_path_default().join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
         if (fileKey.includes('.gitkeep'))
             continue;
@@ -37120,8 +37123,8 @@ const run = async (config) => {
             const fileMB = getFileSizeMB(file);
             console.info(`R2 Info - Uploading ${file} (${formatFileSize(file)}) to ${fileKey}`);
             const upload = fileMB > config.multiPartSize ? uploadMultiPart : putObject;
-            const result = await upload(file, config);
-            //map.set(file, result.output);
+            const result = await upload(file, fileKey, config);
+            map.set(file, result.output);
             urls[file] = result.url;
         }
         catch (err) {
@@ -37142,9 +37145,7 @@ const run = async (config) => {
         (0,core.setOutput)('file-urls', urls);
     return map;
 };
-// UploadHandler<CompleteMultipartUploadCommandOutput>
-const uploadMultiPart = async (file, config) => {
-    const fileName = file.replace(config.sourceDir, "");
+const uploadMultiPart = async (file, fileName, config) => {
     const fileKey = external_path_default().join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
     const mimeType = src.getType(file);
     const createMultiPartParams = {
@@ -37223,17 +37224,15 @@ const uploadMultiPart = async (file, config) => {
         MultipartUpload: multiPartMap
     };
     const completeCmd = new dist_cjs.CompleteMultipartUploadCommand(completeMultiPartUploadParams);
-    //const data = await S3.send(completeCmd);
+    const data = await S3.send(completeCmd);
     console.log(`R2 Success - ${file}`);
     const url = await (0,s3_request_presigner_dist_cjs.getSignedUrl)(S3, completeCmd);
     return {
-        //output: data,
+        output: data,
         url
     };
 };
-// UploadHandler<PutObjectCommandOutput>
-const putObject = async (file, config) => {
-    const fileName = file.replace(config.sourceDir, "");
+const putObject = async (file, fileName, config) => {
     const fileKey = external_path_default().join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
     const mimeType = src.getType(file);
     console.info(`using put object upload for ${fileKey}`);
@@ -37254,11 +37253,11 @@ const putObject = async (file, config) => {
         step: 'build',
         name: 'addETag'
     });
-    //const data = await S3.send(cmd);
+    const data = await S3.send(cmd);
     console.log(`R2 Success - ${file}`);
     const url = await (0,s3_request_presigner_dist_cjs.getSignedUrl)(S3, cmd);
     return {
-        //output: data,
+        output: data,
         url
     };
 };
