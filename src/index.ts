@@ -225,8 +225,7 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
     };
 };
 
-
-const putObject: UploadHandler<PutObjectCommandOutput> = async (file, config) => {
+const putObject: UploadHandler<PutObjectCommandOutput> = async (file: string, config: R2Config) => {
     const fileName = file.replace(config.sourceDir, "");
     const fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
     const mimeType = mime.getType(file);

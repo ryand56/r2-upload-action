@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export const formatBytes = function (bytes: number): string {
+export const formatBytes = (bytes: number) => {
     const sizes = ["Bytes", "KB", "MB", "GB", "TB"]
 
     if (bytes == 0) {
@@ -19,23 +19,28 @@ export const formatBytes = function (bytes: number): string {
 
 export const getFileList = (dir: string) => {
     let files: string[] = [];
+    let dirSplit = dir.split("\n");
 
-    if (fs.statSync(dir).isFile()) {
-        files.push(fs.realpathSync(dir));
-        return files;
-    }
-
-    const items = fs.readdirSync(dir, {
-        withFileTypes: true,
-    });
-
-    for (const item of items) {
-        const isDir = item.isDirectory();
-        const absolutePath = path.join(dir, item.name);
-        if (isDir) {
-            files = [...files, ...getFileList(absolutePath)];
-        } else {
-            files.push(absolutePath);
+    for (const singleDir of dirSplit) {
+        if (fs.statSync(singleDir).isFile()) {
+            console.log(`Is file: ${singleDir}`);
+            files.push(singleDir);
+            return files;
+        }
+    
+        const items = fs.readdirSync(singleDir, {
+            withFileTypes: true,
+        });
+    
+        for (const item of items) {
+            const isDir = item.isDirectory();
+            const absolutePath = path.join(dir, item.name);
+            console.log(`The absolute path: ${absolutePath}`);
+            if (isDir) {
+                files = [...files, ...getFileList(absolutePath)];
+            } else {
+                files.push(absolutePath);
+            }
         }
     }
 
