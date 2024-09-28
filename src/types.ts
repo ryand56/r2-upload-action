@@ -22,4 +22,4 @@ export interface UploadResult<T extends object> {
     url: string
 }
 
-export type UploadHandler<T extends object> = (file: string, config: R2Config) => Promise<UploadResult<T>>
+export type UploadHandler<T extends object> = (file: string, fileName: string, config: R2Config) => Promise<UploadResult<T>>

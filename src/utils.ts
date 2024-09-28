@@ -1,7 +1,8 @@
+import { FileMap } from "./types.js";
 import fs from 'fs';
 import path from 'path';
 
-export const formatBytes = function (bytes: number): string {
+export const formatBytes = (bytes: number) => {
     const sizes = ["Bytes", "KB", "MB", "GB", "TB"]
 
     if (bytes == 0) {
@@ -17,25 +18,30 @@ export const formatBytes = function (bytes: number): string {
     return (bytes / Math.pow(1024, i)).toFixed(2) + " " + sizes[i]
 };
 
-export const getFileList = (dir: string) => {
-    let files: string[] = [];
+export const getFileList = (dir: string, oldDir?: string) => {
+    let files: FileMap = {};
+    let dirSplit = dir.trim().split("\n");
 
-    if (fs.statSync(dir).isFile()) {
-        files.push(fs.realpathSync(dir));
-        return files;
-    }
+    for (const singleDir of dirSplit) {
+        const trimmedDir = singleDir.trim();
 
-    const items = fs.readdirSync(dir, {
-        withFileTypes: true,
-    });
-
-    for (const item of items) {
-        const isDir = item.isDirectory();
-        const absolutePath = path.join(dir, item.name);
-        if (isDir) {
-            files = [...files, ...getFileList(absolutePath)];
-        } else {
-            files.push(absolutePath);
+        if (fs.statSync(trimmedDir).isFile())
+            files[singleDir] = path.basename(trimmedDir);
+        else
+        {
+            const items = fs.readdirSync(trimmedDir, {
+                withFileTypes: true,
+            });
+    
+            for (const item of items) {
+                const isDir = item.isDirectory();
+                const absolutePath = path.join(trimmedDir, item.name);
+                if (isDir) {
+                    files = {...files, ...getFileList(absolutePath, trimmedDir)};
+                } else {
+                    files[absolutePath] = path.relative(oldDir ? oldDir : trimmedDir, absolutePath)
+                }
+            }
         }
     }
 
