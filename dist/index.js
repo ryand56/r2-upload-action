@@ -36993,28 +36993,25 @@ const formatBytes = (bytes) => {
     }
     return (bytes / Math.pow(1024, i)).toFixed(2) + " " + sizes[i];
 };
-const getFileList = (dir) => {
+const getFileList = (dir, oldDir) => {
     let files = {};
     let dirSplit = dir.trim().split("\n");
-    console.log(dirSplit);
     for (const singleDir of dirSplit) {
-        if (external_fs_default().statSync(singleDir).isFile()) {
-            console.log(`Is file: ${singleDir}`);
-            files[singleDir] = external_path_default().basename(singleDir);
-        }
+        const trimmedDir = singleDir.trim();
+        if (external_fs_default().statSync(trimmedDir).isFile())
+            files[singleDir] = external_path_default().basename(trimmedDir);
         else {
-            const items = external_fs_default().readdirSync(singleDir, {
+            const items = external_fs_default().readdirSync(trimmedDir, {
                 withFileTypes: true,
             });
             for (const item of items) {
                 const isDir = item.isDirectory();
-                const absolutePath = external_path_default().join(singleDir, item.name);
-                console.log(`The absolute path: ${absolutePath}`);
+                const absolutePath = external_path_default().join(trimmedDir, item.name);
                 if (isDir) {
-                    files = { ...files, ...getFileList(absolutePath) };
+                    files = { ...files, ...getFileList(absolutePath, trimmedDir) };
                 }
                 else {
-                    files[absolutePath] = item.name;
+                    files[absolutePath] = external_path_default().relative(oldDir ? oldDir : trimmedDir, absolutePath);
                 }
             }
         }
@@ -37110,13 +37107,12 @@ const run = async (config) => {
     }
     const files = getFileList(config.sourceDir);
     for (const file in files) {
-        console.log(file);
         console.log(config.sourceDir);
         console.log(config.destinationDir);
         //const fileName = file.replace(config.sourceDir, "");
         const fileName = files[file];
-        const fileKey = external_path_default().join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
-        if (fileKey.includes('.gitkeep'))
+        const fileKey = external_path_default().join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, files[file]);
+        if (fileName.includes('.gitkeep'))
             continue;
         console.log(fileKey);
         try {
@@ -37146,11 +37142,10 @@ const run = async (config) => {
     return map;
 };
 const uploadMultiPart = async (file, fileName, config) => {
-    const fileKey = external_path_default().join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
     const mimeType = src.getType(file);
     const createMultiPartParams = {
         Bucket: config.bucket,
-        Key: fileKey,
+        Key: fileName,
         ContentType: mimeType ?? 'application/octet-stream'
     };
     const cmd = new dist_cjs.CreateMultipartUploadCommand(createMultiPartParams);
@@ -37167,7 +37162,7 @@ const uploadMultiPart = async (file, fileName, config) => {
     for await (const chunk of readFixedChunkSize(file, chunkSize)) {
         const uploadPartParams = {
             Bucket: config.bucket,
-            Key: fileKey,
+            Key: fileName,
             PartNumber: ++partNumber,
             UploadId: created.UploadId,
             Body: chunk,
@@ -37196,7 +37191,7 @@ const uploadMultiPart = async (file, fileName, config) => {
                 interrupted = true;
                 const abortParams = {
                     Bucket: config.bucket,
-                    Key: fileKey,
+                    Key: fileName,
                     UploadId: created.UploadId
                 };
                 const cmd = new dist_cjs.AbortMultipartUploadCommand(abortParams);
@@ -37216,10 +37211,10 @@ const uploadMultiPart = async (file, fileName, config) => {
     if (config.multiPartConcurrent) {
         await Promise.all(uploads);
     }
-    console.info(`R2 Info - Completing upload of ${file} to ${fileKey}`);
+    console.info(`R2 Info - Completing upload of ${file} to ${fileName}`);
     const completeMultiPartUploadParams = {
         Bucket: config.bucket,
-        Key: fileKey,
+        Key: fileName,
         UploadId: created.UploadId,
         MultipartUpload: multiPartMap
     };
@@ -37233,13 +37228,12 @@ const uploadMultiPart = async (file, fileName, config) => {
     };
 };
 const putObject = async (file, fileName, config) => {
-    const fileKey = external_path_default().join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
     const mimeType = src.getType(file);
-    console.info(`using put object upload for ${fileKey}`);
+    console.info(`using put object upload for ${fileName}`);
     const fileStream = external_fs_.readFileSync(file);
     const uploadParams = {
         Bucket: config.bucket,
-        Key: fileKey,
+        Key: fileName,
         Body: fileStream,
         ContentLength: external_fs_.statSync(file).size,
         ContentType: mimeType ?? 'application/octet-stream'

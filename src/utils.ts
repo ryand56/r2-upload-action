@@ -18,30 +18,28 @@ export const formatBytes = (bytes: number) => {
     return (bytes / Math.pow(1024, i)).toFixed(2) + " " + sizes[i]
 };
 
-export const getFileList = (dir: string) => {
+export const getFileList = (dir: string, oldDir?: string) => {
     let files: FileMap = {};
     let dirSplit = dir.trim().split("\n");
 
     for (const singleDir of dirSplit) {
-        if (fs.statSync(singleDir).isFile())
-        {
-            console.log(`Is file: ${singleDir}`);
-            files[singleDir] = path.basename(singleDir);
-        }
+        const trimmedDir = singleDir.trim();
+
+        if (fs.statSync(trimmedDir).isFile())
+            files[singleDir] = path.basename(trimmedDir);
         else
         {
-            const items = fs.readdirSync(singleDir, {
+            const items = fs.readdirSync(trimmedDir, {
                 withFileTypes: true,
             });
     
             for (const item of items) {
                 const isDir = item.isDirectory();
-                const absolutePath = path.join(singleDir, item.name);
-                console.log(`The absolute path: ${absolutePath}`);
+                const absolutePath = path.join(trimmedDir, item.name);
                 if (isDir) {
-                    files = {...files, ...getFileList(absolutePath)};
+                    files = {...files, ...getFileList(absolutePath, trimmedDir)};
                 } else {
-                    files[absolutePath] = item.name;
+                    files[absolutePath] = path.relative(oldDir ? oldDir : trimmedDir, absolutePath)
                 }
             }
         }
