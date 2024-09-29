@@ -3,8 +3,8 @@
 }:
 let
   nixpkgs = fetchTarball {
-    url = "https://flakehub.com/f/NixOS/nixpkgs/0.1.*.tar.gz";
-    sha256 = "1aabz2zbbf2l6b85v04cc64ff8hfp09g3hnj41iq45kcpb9r3qmx";
+    url = "https://github.com/NixOS/nixpkgs/archive/b5b2fecd0cadd82ef107c9583018f381ae70f222.tar.gz"; # Pinned from nixpkgs
+    sha256 = "0bj1mjz2m4m5ns7c0cxxvraw0rc84cd172pv6vyqrgiw7ld339lk";
   };
 
   pkgs = import nixpkgs {
