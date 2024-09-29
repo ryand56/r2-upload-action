@@ -37108,7 +37108,7 @@ const run = async (config) => {
         console.log(config.destinationDir);
         //const fileName = file.replace(config.sourceDir, "");
         const fileName = files[file];
-        const fileKey = external_path_default().join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, files[file]);
+        const fileKey = external_path_default().join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
         if (fileName.includes('.gitkeep'))
             continue;
         console.log(fileKey);
