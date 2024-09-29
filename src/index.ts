@@ -86,16 +86,16 @@ const run = async (config: R2Config) => {
         await deleteRemoteFiles(config.bucket, remotePrefix);
     }
 
-    const files: string[] = getFileList(config.sourceDir);
+    const files: FileMap = getFileList(config.sourceDir);
 
-    for (const file of files) {
-        console.log(file);
+    for (const file in files) {
         console.log(config.sourceDir);
         console.log(config.destinationDir);
-        const fileName = file.replace(config.sourceDir, "");
-        const fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
+        //const fileName = file.replace(config.sourceDir, "");
+        const fileName = files[file];
+        const fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, files[file]);
 
-        if (fileKey.includes('.gitkeep'))
+        if (fileName.includes('.gitkeep'))
             continue;
 
         console.log(fileKey);
@@ -104,7 +104,7 @@ const run = async (config: R2Config) => {
             const fileMB = getFileSizeMB(file);
             console.info(`R2 Info - Uploading ${file} (${formatFileSize(file)}) to ${fileKey}`);
             const upload = fileMB > config.multiPartSize ? uploadMultiPart : putObject;
-            const result = await upload(file, config);
+            const result = await upload(file, fileKey, config);
             map.set(file, result.output);
             urls[file] = result.url;
         } catch (err: unknown) {
@@ -113,8 +113,6 @@ const run = async (config: R2Config) => {
                 if (error.$metadata.httpStatusCode !== 412) // If-None-Match
                     throw error;
             } else {
-                // why not throw normal error ?
-                // if there's a reason, feel free to remove it
                 console.error(`Error while uploading ${file} to ${fileKey}: `, err);
                 throw error;
             }
@@ -125,14 +123,12 @@ const run = async (config: R2Config) => {
     return map;
 };
 
-const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = async (file: string, config: R2Config) => {
-    const fileName = file.replace(config.sourceDir, "");
-    const fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
+const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = async (file: string, fileName: string, config: R2Config) => {
     const mimeType = mime.getType(file);
 
     const createMultiPartParams: CreateMultipartUploadCommandInput = {
         Bucket: config.bucket,
-        Key: fileKey,
+        Key: fileName,
         ContentType: mimeType ?? 'application/octet-stream'
     }
 
@@ -155,7 +151,7 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
 
         const uploadPartParams: UploadPartCommandInput = {
             Bucket: config.bucket,
-            Key: fileKey,
+            Key: fileName,
             PartNumber: ++partNumber,
             UploadId: created.UploadId,
             Body: chunk,
@@ -184,7 +180,7 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
                 interrupted = true;
                 const abortParams: AbortMultipartUploadCommandInput = {
                     Bucket: config.bucket,
-                    Key: fileKey,
+                    Key: fileName,
                     UploadId: created.UploadId
                 }
                 const cmd = new AbortMultipartUploadCommand(abortParams);
@@ -206,11 +202,11 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
         await Promise.all(uploads);
     }
 
-    console.info(`R2 Info - Completing upload of ${file} to ${fileKey}`)
+    console.info(`R2 Info - Completing upload of ${file} to ${fileName}`)
 
     const completeMultiPartUploadParams: CompleteMultipartUploadCommandInput = {
         Bucket: config.bucket,
-        Key: fileKey,
+        Key: fileName,
         UploadId: created.UploadId,
         MultipartUpload: multiPartMap
     }
@@ -225,18 +221,15 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
     };
 };
 
-
-const putObject: UploadHandler<PutObjectCommandOutput> = async (file, config) => {
-    const fileName = file.replace(config.sourceDir, "");
-    const fileKey = path.join(config.destinationDir !== "" ? config.destinationDir : config.sourceDir, fileName);
+const putObject: UploadHandler<PutObjectCommandOutput> = async (file: string, fileName: string, config: R2Config) => {
     const mimeType = mime.getType(file);
 
-    console.info(`using put object upload for ${fileKey}`);
+    console.info(`using put object upload for ${fileName}`);
 
     const fileStream = fs.readFileSync(file);
     const uploadParams: PutObjectCommandInput = {
         Bucket: config.bucket,
-        Key: fileKey,
+        Key: fileName,
         Body: fileStream,
         ContentLength: fs.statSync(file).size,
         ContentType: mimeType ?? 'application/octet-stream'
