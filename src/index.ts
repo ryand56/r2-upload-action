@@ -113,8 +113,6 @@ const run = async (config: R2Config) => {
                 if (error.$metadata.httpStatusCode !== 412) // If-None-Match
                     throw error;
             } else {
-                // why not throw normal error ?
-                // if there's a reason, feel free to remove it
                 console.error(`Error while uploading ${file} to ${fileKey}: `, err);
                 throw error;
             }

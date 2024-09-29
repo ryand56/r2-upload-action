@@ -37,9 +37,9 @@ export const getFileList = (dir: string, oldDir?: string) => {
                 const isDir = item.isDirectory();
                 const absolutePath = path.join(trimmedDir, item.name);
                 if (isDir) {
-                    files = {...files, ...getFileList(absolutePath, trimmedDir)};
+                    files = {...files, ...getFileList(absolutePath, oldDir || trimmedDir)};
                 } else {
-                    files[absolutePath] = path.relative(oldDir ? oldDir : trimmedDir, absolutePath)
+                    files[absolutePath] = path.relative(oldDir || trimmedDir, absolutePath);
                 }
             }
         }

@@ -37008,10 +37008,10 @@ const getFileList = (dir, oldDir) => {
                 const isDir = item.isDirectory();
                 const absolutePath = external_path_default().join(trimmedDir, item.name);
                 if (isDir) {
-                    files = { ...files, ...getFileList(absolutePath, trimmedDir) };
+                    files = { ...files, ...getFileList(absolutePath, oldDir || trimmedDir) };
                 }
                 else {
-                    files[absolutePath] = external_path_default().relative(oldDir ? oldDir : trimmedDir, absolutePath);
+                    files[absolutePath] = external_path_default().relative(oldDir || trimmedDir, absolutePath);
                 }
             }
         }
@@ -37106,6 +37106,7 @@ const run = async (config) => {
         await deleteRemoteFiles(config.bucket, remotePrefix);
     }
     const files = getFileList(config.sourceDir);
+    console.log(files);
     for (const file in files) {
         console.log(config.sourceDir);
         console.log(config.destinationDir);
@@ -37130,8 +37131,6 @@ const run = async (config) => {
                     throw error;
             }
             else {
-                // why not throw normal error ?
-                // if there's a reason, feel free to remove it
                 console.error(`Error while uploading ${file} to ${fileKey}: `, err);
                 throw error;
             }
