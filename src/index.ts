@@ -38,7 +38,8 @@ let config: R2Config = {
     multiPartSize: parseInt(getInput("multipart-size")) || 100,
     maxTries: parseInt(getInput("max-retries")) || 5,
     multiPartConcurrent: getInput("multipart-concurrent") === 'true',
-    keepFileFresh: getInput("keep-file-fresh") === 'true'
+    keepFileFresh: getInput("keep-file-fresh") === 'true',
+    customCharset: getInput("custom-charset")
 };
 
 const S3 = new S3Client({
@@ -230,12 +231,17 @@ const putObject: UploadHandler<PutObjectCommandOutput> = async (file: string, fi
     console.info(`using put object upload for ${fileName}`);
 
     const fileStream = fs.readFileSync(file);
+
+    let contentType = mimeType ?? 'application/octet-stream';
+    if (config.customCharset)
+        contentType = `${contentType}; charset=${config.customCharset}`;
+
     const uploadParams: PutObjectCommandInput = {
         Bucket: config.bucket,
         Key: fileName,
         Body: fileStream,
         ContentLength: fs.statSync(file).size,
-        ContentType: mimeType ?? 'application/octet-stream'
+        ContentType: contentType
     };
     const cmd = new PutObjectCommand(uploadParams);
     const digest = md5(fileStream);

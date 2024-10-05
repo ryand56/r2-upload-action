@@ -11,6 +11,7 @@ export interface R2Config {
     maxTries: number
     multiPartConcurrent: boolean
     keepFileFresh: boolean
+    customCharset: string
 }
 
 export interface FileMap {
