@@ -38,6 +38,10 @@ inputs:
     description: 'maximum number of retries'
     default: '5'
     required: false
+  retry-timeout:
+    description: 'time to wait between retries'
+    default: '2000'
+    required: false
   multipart-concurrent:
     description: 'whether to use concurrent while multipart upload'
     default: 'true'

@@ -9,6 +9,7 @@ export interface R2Config {
     outputFileUrl: boolean
     multiPartSize: number
     maxTries: number
+    retryTimeout: number
     multiPartConcurrent: boolean
     keepFileFresh: boolean
     customCharset: string

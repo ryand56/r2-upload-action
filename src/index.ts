@@ -37,6 +37,7 @@ let config: R2Config = {
     outputFileUrl: getInput("output-file-url") === 'true',
     multiPartSize: parseInt(getInput("multipart-size")) || 100,
     maxTries: parseInt(getInput("max-retries")) || 5,
+    retryTimeout: parseInt(getInput("retry-timeout")) || 2000,
     multiPartConcurrent: getInput("multipart-concurrent") === 'true',
     keepFileFresh: getInput("keep-file-fresh") === 'true',
     customCharset: getInput("custom-charset")
@@ -108,7 +109,7 @@ const run = async (config: R2Config) => {
             const fileMB = getFileSizeMB(file);
             console.info(`R2 Info - Uploading ${file} (${formatFileSize(file)}) to ${fileKey}`);
             const upload = fileMB > config.multiPartSize ? uploadMultiPart : putObject;
-            const result = await upload(file, fileKey, config);
+            const result = await upload(file, fileKey, config, config.maxTries, config.retryTimeout);
             map.set(file, result.output);
             urls[file] = result.url;
         } catch (err: unknown) {
@@ -127,7 +128,7 @@ const run = async (config: R2Config) => {
     return map;
 };
 
-const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = async (file: string, fileName: string, config: R2Config, retries: number = 4, retryTimeout: number = 2000) => {
+const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = async (file: string, fileName: string, config: R2Config, retries: number = 5, retryTimeout: number = 2000) => {
     const mimeType = mime.getType(file);
 
     const createMultiPartParams: CreateMultipartUploadCommandInput = {
@@ -163,8 +164,8 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
 
         const uploadPart = async (partNumber: number) => {
             const cmd = new UploadPartCommand(uploadPartParams);
-            let retries = 0
-            while (retries < config.maxTries) {
+            let attempts = 0
+            while (attempts < retries) {
                 if (interrupted) {
                     console.info(`R2 Info - Aborting upload part ${partNumber} of ${file} due to previous error`)
                     return;
@@ -179,7 +180,7 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
                     await sleep(300);
                 }
             }
-            if (retries >= config.maxTries) {
+            if (attempts >= retries) {
                 console.info(`Retries exhausted, aborting upload`)
                 interrupted = true;
                 const abortParams: AbortMultipartUploadCommandInput = {
@@ -243,7 +244,7 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
     }
 };
 
-const putObject: UploadHandler<PutObjectCommandOutput> = async (file: string, fileName: string, config: R2Config, retries: number = 4, retryTimeout: number = 2000) => {
+const putObject: UploadHandler<PutObjectCommandOutput> = async (file: string, fileName: string, config: R2Config, retries: number = 5, retryTimeout: number = 2000) => {
     const mimeType = mime.getType(file);
 
     console.info(`using put object upload for ${fileName}`);
