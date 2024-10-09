@@ -264,13 +264,13 @@ const putObject: UploadHandler<PutObjectCommandOutput> = async (file: string, fi
     };
     const cmd = new PutObjectCommand(uploadParams);
     const digest = md5(fileStream);
-    cmd.middlewareStack.add((next: any) => async (args: any) => {
-        args.request.headers['if-none-match'] = `"${digest}"`;
-        return await next(args);
-    }, {
-        step: 'build',
-        name: 'addETag'
-    });
+    // cmd.middlewareStack.add((next: any) => async (args: any) => {
+    //     args.request.headers['if-none-match'] = `"${digest}"`;
+    //     return await next(args);
+    // }, {
+    //     step: 'build',
+    //     name: 'addETag'
+    // });
 
     let attempts = 0;
     while (attempts < retries)
