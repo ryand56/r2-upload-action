@@ -71,6 +71,7 @@ jobs:
           r2-bucket: ${{ secrets.TEST_R2_BUCKET }}
           source-dir: tests/log
           destination-dir: r2-upload-action/test-logs
+          keep-file-fresh: true
   
   upload-multiple:
     name: R2 Test / Upload Multiple
@@ -113,5 +114,5 @@ jobs:
             tests/log/upload-${{ steps.date.outputs.date }}-file1
             tests/log/upload-${{ steps.date.outputs.date }}-file2
             tests/log2
-            tests/dir
           destination-dir: r2-upload-action/test-logs
+          keep-file-fresh: true
