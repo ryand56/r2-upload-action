@@ -1,4 +1,4 @@
-name: Action CI
+name: Action CI / Branch
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   fail:
-    if: github.owner_name != 'ryand56' || github.head_ref != 'develop'
+    if: github.repository_owner != 'ryand56' || github.head_ref != 'develop'
     permissions:
       contents: none
     name: "Targeting master"

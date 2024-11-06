@@ -37,8 +37,10 @@ let config: R2Config = {
     outputFileUrl: getInput("output-file-url") === 'true',
     multiPartSize: parseInt(getInput("multipart-size")) || 100,
     maxTries: parseInt(getInput("max-retries")) || 5,
+    retryTimeout: parseInt(getInput("retry-timeout")) || 2000,
     multiPartConcurrent: getInput("multipart-concurrent") === 'true',
-    keepFileFresh: getInput("keep-file-fresh") === 'true'
+    keepFileFresh: getInput("keep-file-fresh") === 'true',
+    customCharset: getInput("custom-charset")
 };
 
 const S3 = new S3Client({
@@ -107,7 +109,7 @@ const run = async (config: R2Config) => {
             const fileMB = getFileSizeMB(file);
             console.info(`R2 Info - Uploading ${file} (${formatFileSize(file)}) to ${fileKey}`);
             const upload = fileMB > config.multiPartSize ? uploadMultiPart : putObject;
-            const result = await upload(file, fileKey, config);
+            const result = await upload(file, fileKey, config, config.maxTries, config.retryTimeout);
             map.set(file, result.output);
             urls[file] = result.url;
         } catch (err: unknown) {
@@ -126,7 +128,7 @@ const run = async (config: R2Config) => {
     return map;
 };
 
-const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = async (file: string, fileName: string, config: R2Config) => {
+const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = async (file: string, fileName: string, config: R2Config, retries: number = 5, retryTimeout: number = 2000) => {
     const mimeType = mime.getType(file);
 
     const createMultiPartParams: CreateMultipartUploadCommandInput = {
@@ -162,8 +164,8 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
 
         const uploadPart = async (partNumber: number) => {
             const cmd = new UploadPartCommand(uploadPartParams);
-            let retries = 0
-            while (retries < config.maxTries) {
+            let attempts = 0
+            while (attempts < retries) {
                 if (interrupted) {
                     console.info(`R2 Info - Aborting upload part ${partNumber} of ${file} due to previous error`)
                     return;
@@ -178,7 +180,7 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
                     await sleep(300);
                 }
             }
-            if (retries >= config.maxTries) {
+            if (attempts >= retries) {
                 console.info(`Retries exhausted, aborting upload`)
                 interrupted = true;
                 const abortParams: AbortMultipartUploadCommandInput = {
@@ -215,44 +217,85 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
     }
 
     const completeCmd = new CompleteMultipartUploadCommand(completeMultiPartUploadParams);
-    const data = await S3.send(completeCmd);
-    console.log(`R2 Success - ${file}`);
-    const url = await getSignedUrl(S3, completeCmd);
-    return {
-        output: data,
-        url
-    };
+
+    let attempts = 0;
+    while (attempts < retries)
+    {
+        try
+        {
+            console.log(`Attempting multipart upload (${attempts + 1}/${retries}) of ${file}`);
+
+            const data = await S3.send(completeCmd);
+            console.log(`R2 Success - ${file}`);
+            const url = await getSignedUrl(S3, completeCmd);
+            return {
+                output: data,
+                url
+            };
+        } catch (err) {
+            attempts++;
+            console.error(`Attempt ${attempts} of ${retries} failed for ${file}, retrying...`);
+
+            if (attempts >= retries)
+                throw new Error(`Failed to upload multipart of ${file} after ${attempts} attempts for ${retries} retries`);
+
+            await new Promise(resolve => setTimeout(resolve, retryTimeout));
+        }
+    }
 };
 
-const putObject: UploadHandler<PutObjectCommandOutput> = async (file: string, fileName: string, config: R2Config) => {
+const putObject: UploadHandler<PutObjectCommandOutput> = async (file: string, fileName: string, config: R2Config, retries: number = 5, retryTimeout: number = 2000) => {
     const mimeType = mime.getType(file);
 
     console.info(`using put object upload for ${fileName}`);
 
     const fileStream = fs.readFileSync(file);
+
+    let contentType = mimeType ?? 'application/octet-stream';
+    if (config.customCharset)
+        contentType = `${contentType}; charset=${config.customCharset}`;
+
     const uploadParams: PutObjectCommandInput = {
         Bucket: config.bucket,
         Key: fileName,
         Body: fileStream,
         ContentLength: fs.statSync(file).size,
-        ContentType: mimeType ?? 'application/octet-stream'
+        ContentType: contentType
     };
     const cmd = new PutObjectCommand(uploadParams);
     const digest = md5(fileStream);
-    cmd.middlewareStack.add((next: any) => async (args: any) => {
-        args.request.headers['if-none-match'] = `"${digest}"`;
-        return await next(args);
-    }, {
-        step: 'build',
-        name: 'addETag'
-    });
-    const data = await S3.send(cmd);
-    console.log(`R2 Success - ${file}`);
-    const url = await getSignedUrl(S3, cmd);
-    return {
-        output: data,
-        url
-    };
+    // cmd.middlewareStack.add((next: any) => async (args: any) => {
+    //     args.request.headers['if-none-match'] = `"${digest}"`;
+    //     return await next(args);
+    // }, {
+    //     step: 'build',
+    //     name: 'addETag'
+    // });
+
+    let attempts = 0;
+    while (attempts < retries)
+    {
+        try
+        {
+            console.log(`Attempting upload (${attempts + 1}/${retries}) of ${file}`);
+
+            const data = await S3.send(cmd);
+            console.log(`R2 Success - ${file}`);
+            const url = await getSignedUrl(S3, cmd);
+            return {
+                output: data,
+                url
+            };
+        } catch (err) {
+            attempts++;
+            console.error(`Attempt ${attempts} of ${retries} failed for ${file}, retrying...`);
+
+            if (attempts >= retries)
+                throw new Error(`Failed to upload ${file} after ${attempts} attempts for ${retries} retries`);
+
+            await new Promise(resolve => setTimeout(resolve, retryTimeout));
+        }
+    }
 };
 
 run(config)
