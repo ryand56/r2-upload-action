@@ -38,7 +38,7 @@ importers:
         version: 22.16.0
       '@vercel/ncc':
         specifier: ^0.38.1
-        version: 0.38.3
+        version: 0.38.4
       dotenv:
         specifier: ^16.3.1
         version: 16.6.0
@@ -812,8 +812,8 @@ packages:
   '@types/yargs@17.0.32':
     resolution: {integrity: sha512-xQ67Yc/laOG5uMfX/093MRlGGCIBzZMarVa+gfNKJxWAIgykYpVGkBdbqEzGDDfCrVUj6Hiff4mTZ5BA6TmAog==}
 
-  '@vercel/ncc@0.38.3':
-    resolution: {integrity: sha512-rnK6hJBS6mwc+Bkab+PGPs9OiS0i/3kdTO+CkI8V0/VrW3vmz7O2Pxjw/owOlmo6PKEIxRSeZKv/kuL9itnpYA==}
+  '@vercel/ncc@0.38.4':
+    resolution: {integrity: sha512-8LwjnlP39s08C08J5NstzriPvW1SP8Zfpp1BvC2sI35kPeZnHfxVkCwu4/+Wodgnd60UtT1n8K8zw+Mp7J9JmQ==}
     hasBin: true
 
   acorn-walk@8.3.3:
@@ -3287,7 +3287,7 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.3
 
-  '@vercel/ncc@0.38.3': {}
+  '@vercel/ncc@0.38.4': {}
 
   acorn-walk@8.3.3:
     dependencies:
