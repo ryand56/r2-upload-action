@@ -32,7 +32,7 @@ importers:
         version: 30.0.0
       '@types/md5':
         specifier: ^2.3.2
-        version: 2.3.5
+        version: 2.3.6
       '@types/node':
         specifier: ^22.0.0
         version: 22.18.8
@@ -849,8 +849,8 @@ packages:
   '@types/jest@30.0.0':
     resolution: {integrity: sha512-XTYugzhuwqWjws0CVz8QpM36+T+Dz5mTEBKhNs/esGLnCIlGdRy+Dq78NRjd7ls7r8BC8ZRMOrKlkO1hU0JOwA==}
 
-  '@types/md5@2.3.5':
-    resolution: {integrity: sha512-/i42wjYNgE6wf0j2bcTX6kuowmdL/6PE4IVitMpm2eYKBUuYCprdcWVK+xEF0gcV6ufMCRhtxmReGfc6hIK7Jw==}
+  '@types/md5@2.3.6':
+    resolution: {integrity: sha512-WD69gNXtRBnpknfZcb4TRQ0XJQbUPZcai/Qdhmka3sxUR3Et8NrXoeAoknG/LghYHTf4ve795rInVYHBTQdNVA==}
 
   '@types/node@22.18.8':
     resolution: {integrity: sha512-pAZSHMiagDR7cARo/cch1f3rXy0AEXwsVsVH09FcyeJVAzCnGgmYis7P3JidtTUjyadhTeSo8TgRPswstghDaw==}
@@ -3511,7 +3511,7 @@ snapshots:
       expect: 30.1.2
       pretty-format: 30.0.5
 
-  '@types/md5@2.3.5': {}
+  '@types/md5@2.3.6': {}
 
   '@types/node@22.18.8':
     dependencies:
