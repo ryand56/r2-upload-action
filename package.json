@@ -25,7 +25,7 @@
     "@types/md5": "^2.3.2",
     "@types/node": "^24.0.0",
     "@vercel/ncc": "^0.38.1",
-    "dotenv": "^16.3.1",
+    "dotenv": "^17.0.0",
     "github-action-ts-run-api": "^3.0.4",
     "jest": "^30.0.0",
     "ts-jest": "^29.1.1",
