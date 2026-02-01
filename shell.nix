@@ -3,8 +3,8 @@
 }:
 let
   nixpkgs = fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/b5b2fecd0cadd82ef107c9583018f381ae70f222.tar.gz"; # Pinned from nixpkgs
-    sha256 = "0bj1mjz2m4m5ns7c0cxxvraw0rc84cd172pv6vyqrgiw7ld339lk";
+    url = "https://github.com/NixOS/nixpkgs/archive/6308c3b21396534d8aaeac46179c14c439a89b8a.tar.gz"; # Pinned from nixpkgs
+    sha256 = "14qnx22pkl9v4r0lxnnz18f4ybxj8cv18hyf1klzap98hckg58y4";
   };
 
   pkgs = import nixpkgs {
@@ -15,8 +15,7 @@ let
 in
 pkgs.mkShellNoCC {
   packages = with pkgs; [
-    # Format using nixfmt
-    nixfmt-rfc-style
+    nixfmt
 
     node2nix
     nodejs
