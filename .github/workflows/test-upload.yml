@@ -39,12 +39,12 @@ jobs:
   upload:
     name: R2 Test / Upload
     needs: build
-    
+
     strategy:
       matrix:
-        os: ["ubuntu-latest", "macos-latest"]
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
         node-version: ["lts/*"]
-    
+
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -72,16 +72,16 @@ jobs:
           source-dir: tests/log
           destination-dir: r2-upload-action/test-logs
           keep-file-fresh: true
-  
+
   upload-multiple:
     name: R2 Test / Upload Multiple
     needs: upload
 
     strategy:
       matrix:
-        os: ["ubuntu-latest", "macos-latest"]
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
         node-version: ["lts/*"]
-    
+
     runs-on: ${{ matrix.os }}
 
     steps:

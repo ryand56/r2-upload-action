@@ -26,6 +26,9 @@ inputs:
   destination-dir:
     description: ''
     required: false
+  exclude-dirs:
+    description: ''
+    required: false
   output-file-url:
     description: ''
     default: 'true'
