@@ -35,6 +35,7 @@ Change `destination-dir` input to specify the location of where the directory wi
     r2-access-key-id: ${{ secrets.R2_ACCESS_KEY_ID }}
     r2-secret-access-key: ${{ secrets.R2_SECRET_ACCESS_KEY }}
     r2-bucket: ${{ secrets.R2_BUCKET }}
+    r2-jurisdiction: eu # Add if the bucket location is different from the default one
     source-dir: src
     destination-dir: artifacts # Can be anything as long as it is an actual path
     output-file-url: true # defaults to true
@@ -55,6 +56,7 @@ See the latest [action.yml](https://github.com/ryand56/r2-upload-action/blob/mas
 | `r2-access-key-id` | **(Required)** Your Cloudflare R2 bucket access key ID. | *N/A* |
 | `r2-secret-access-key` | **(Required)** Your Cloudflare R2 bucket secret access key. | *N/A* |
 | `r2-bucket` | **(Required)** Your Cloudflare R2 bucket name. | *N/A* |
+| `r2-jurisdiction` | (Optional) The location of the bucket | Empty string |
 | `source-dir` | **(Required)** The directory to upload to the Cloudflare R2 bucket. | *N/A* |
 | `destination-dir` | (Optional) The destination to upload the directory to in the Cloudflare R2 bucket. | Empty string |
 | `output-file-url` | (Optional) Output the results of the action uploaded files to the `file-urls` output | true |
