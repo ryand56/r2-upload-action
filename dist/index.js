@@ -14438,7 +14438,7 @@ exports.getRuntimeConfig = void 0;
 const tslib_1 = __nccwpck_require__(5034);
 const package_json_1 = tslib_1.__importDefault(__nccwpck_require__(4178));
 const core_1 = __nccwpck_require__(7402);
-const credential_provider_node_1 = __nccwpck_require__(7457);
+const credential_provider_node_1 = __nccwpck_require__(2894);
 const middleware_bucket_endpoint_1 = __nccwpck_require__(8910);
 const middleware_flexible_checksums_1 = __nccwpck_require__(6230);
 const middleware_sdk_s3_1 = __nccwpck_require__(8829);
@@ -15701,7 +15701,7 @@ exports.getRuntimeConfig = void 0;
 const tslib_1 = __nccwpck_require__(5034);
 const package_json_1 = tslib_1.__importDefault(__nccwpck_require__(118));
 const core_1 = __nccwpck_require__(7402);
-const credential_provider_node_1 = __nccwpck_require__(7457);
+const credential_provider_node_1 = __nccwpck_require__(2894);
 const util_user_agent_node_1 = __nccwpck_require__(1540);
 const config_resolver_1 = __nccwpck_require__(2849);
 const hash_node_1 = __nccwpck_require__(7924);
@@ -18296,7 +18296,7 @@ exports.getRuntimeConfig = void 0;
 const tslib_1 = __nccwpck_require__(5034);
 const package_json_1 = tslib_1.__importDefault(__nccwpck_require__(6087));
 const core_1 = __nccwpck_require__(7402);
-const credential_provider_node_1 = __nccwpck_require__(7457);
+const credential_provider_node_1 = __nccwpck_require__(2894);
 const util_user_agent_node_1 = __nccwpck_require__(1540);
 const config_resolver_1 = __nccwpck_require__(2849);
 const core_2 = __nccwpck_require__(9135);
@@ -19356,7 +19356,7 @@ Object.defineProperty(exports, "fromHttp", ({ enumerable: true, get: function ()
 
 /***/ }),
 
-/***/ 5122:
+/***/ 1945:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 
@@ -19624,7 +19624,7 @@ var fromIni = /* @__PURE__ */ __name((init = {}) => async () => {
 
 /***/ }),
 
-/***/ 7457:
+/***/ 2894:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 
@@ -19741,7 +19741,7 @@ var defaultProvider = /* @__PURE__ */ __name((init = {}) => (0, import_property_
     async () => {
       var _a;
       (_a = init.logger) == null ? void 0 : _a.debug("@aws-sdk/credential-provider-node - defaultProvider::fromIni");
-      const { fromIni } = await Promise.resolve().then(() => __toESM(__nccwpck_require__(5122)));
+      const { fromIni } = await Promise.resolve().then(() => __toESM(__nccwpck_require__(1945)));
       return fromIni(init)();
     },
     async () => {
