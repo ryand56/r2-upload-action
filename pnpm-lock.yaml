@@ -41,7 +41,7 @@ importers:
         version: 0.38.4
       dotenv:
         specifier: ^17.0.0
-        version: 17.3.1
+        version: 17.4.2
       github-action-ts-run-api:
         specifier: ^3.0.4
         version: 3.0.4
@@ -1214,8 +1214,8 @@ packages:
     resolution: {integrity: sha512-raigMkn7CJNNo6Ihro1fzG7wr3fHuYVytzquZKX5n0yizGsTcYgzdIUwj1X9pK0VvjeihV+XiclP+DjwbsSKug==}
     deprecated: Use your platform's native DOMException instead
 
-  dotenv@17.3.1:
-    resolution: {integrity: sha512-IO8C/dzEb6O3F9/twg6ZLXz164a2fhTnEWb95H23Dm4OuN+92NmEAlTrupP9VW6Jm3sO26tQlqyvyi4CsnY9GA==}
+  dotenv@17.4.2:
+    resolution: {integrity: sha512-nI4U3TottKAcAD9LLud4Cb7b2QztQMUEfHbvhTH09bqXTxnSie8WnjPALV/WMCrJZ6UV/qHJ6L03OqO3LcdYZw==}
     engines: {node: '>=12'}
 
   eastasianwidth@0.2.0:
@@ -3828,7 +3828,7 @@ snapshots:
     dependencies:
       webidl-conversions: 4.0.2
 
-  dotenv@17.3.1: {}
+  dotenv@17.4.2: {}
 
   eastasianwidth@0.2.0: {}
 
