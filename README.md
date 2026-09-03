@@ -4,7 +4,7 @@ GitHub Action to upload files to a Cloudflare R2 bucket, built on top of @aws-sd
 Combination of these two repos: [S3 Upload Action](https://github.com/hkusu/s3-upload-action) and [Cloudflare R2 Upload](https://github.com/Karbust/Cloudflare_R2_Upload).
 
 > [!IMPORTANT]  
-> Node.js 20 is now required to run this action.
+> Node.js 24 is now required to run this action.
 
 <!-- ACTION USAGE -->
 ## Usage

@@ -1,16 +1,14 @@
 {
-  system ? builtins.currentSystem,
+  system ? builtins.currentSystem or "x86_64-linux",
 }:
 let
   nixpkgs = fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/6308c3b21396534d8aaeac46179c14c439a89b8a.tar.gz"; # Pinned from nixpkgs
-    sha256 = "14qnx22pkl9v4r0lxnnz18f4ybxj8cv18hyf1klzap98hckg58y4";
+    url = "https://github.com/NixOS/nixpkgs/archive/9387b3fcc0c23c86661636da63faabad4235a0a6.tar.gz"; # Pinned from nixpkgs
+    sha256 = "0364mbq5s3yjj1bq5qhwwsllxmgsrjfydh6377wky4y0zap89apd";
   };
 
   pkgs = import nixpkgs {
     inherit system;
-    config = { };
-    overlays = [ ];
   };
 in
 pkgs.mkShellNoCC {
