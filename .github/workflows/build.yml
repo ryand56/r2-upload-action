@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.PAT }}
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: latest
       - name: Install Dependencies
@@ -23,7 +23,7 @@ jobs:
       - name: Build
         run: pnpm run build
       - name: Update Mappings
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: '[skip ci] Update mappings'
           file_pattern: 'dist/*.js dist/*.js.map dist/*.cjs'

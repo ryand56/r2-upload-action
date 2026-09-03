@@ -10,12 +10,18 @@ jobs:
     name: Build Nix Shell
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: write
+      contents: read
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v15
-      - name: Magic Nix Cache
-        uses: DeterminateSystems/magic-nix-cache-action@v8
+        uses: DeterminateSystems/nix-installer-action@v22
+        with:
+          determinate: true
+      - name: FlakeHub Cache
+        uses: DeterminateSystems/flakehub-cache-action@v3
       - name: Build
         run: nix-build shell.nix
