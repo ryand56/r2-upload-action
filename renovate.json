@@ -3,5 +3,9 @@
   "extends": [
     "config:recommended"
   ],
-  "baseBranches": ["develop"]
+  "baseBranches": ["develop"],
+  "packageRules": [
+    { "matchPackageNames": ["typescript"], "allowedVersions": "<7" }
+  ],
+  "minimumReleaseAge": "3 days"
 }
