@@ -6,6 +6,7 @@ import {
     PutObjectCommand,
     PutObjectCommandOutput,
     S3ServiceException,
+    CompletedMultipartUpload,
     CompleteMultipartUploadCommand,
     CompleteMultipartUploadCommandInput,
     UploadPartCommandInput,
@@ -143,7 +144,7 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
 
     const chunkSize = 10 * 1024 * 1024; // 10MB
 
-    const multiPartMap = {
+    const multiPartMap: CompletedMultipartUpload = {
         Parts: []
     }
 
@@ -172,7 +173,7 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
                 }
                 try {
                     const result = await S3.send(cmd);
-                    multiPartMap.Parts.push({ PartNumber: partNumber, ETag: result.ETag });
+                    multiPartMap.Parts!.push({ PartNumber: partNumber, ETag: result.ETag });
                     break;
                 } catch (err: any) {
                     retries++;
@@ -235,13 +236,12 @@ const uploadMultiPart: UploadHandler<CompleteMultipartUploadCommandOutput> = asy
         } catch (err) {
             attempts++;
             console.error(`Attempt ${attempts} of ${retries} failed for ${file}, retrying...`);
-
-            if (attempts >= retries)
-                throw new Error(`Failed to upload multipart of ${file} after ${attempts} attempts for ${retries} retries`);
-
+            if (attempts >= retries) break;
             await new Promise(resolve => setTimeout(resolve, retryTimeout));
         }
     }
+
+    throw new Error(`Failed to upload multipart of ${file} after ${attempts} attempts for ${retries} retries`);
 };
 
 const putObject: UploadHandler<PutObjectCommandOutput> = async (file: string, fileName: string, config: R2Config, retries: number = 5, retryTimeout: number = 2000) => {
@@ -289,13 +289,12 @@ const putObject: UploadHandler<PutObjectCommandOutput> = async (file: string, fi
         } catch (err) {
             attempts++;
             console.error(`Attempt ${attempts} of ${retries} failed for ${file}, retrying...`);
-
-            if (attempts >= retries)
-                throw new Error(`Failed to upload ${file} after ${attempts} attempts for ${retries} retries`);
-
+            if (attempts >= retries) break;
             await new Promise(resolve => setTimeout(resolve, retryTimeout));
         }
     }
+
+    throw new Error(`Failed to upload ${file} after ${attempts} attempts for ${retries} retries`);
 };
 
 run(config)
