@@ -15,9 +15,8 @@ pkgs.mkShellNoCC {
   packages = with pkgs; [
     nixfmt
 
-    node2nix
     nodejs
-    nodePackages.pnpm
+    pnpm
     yarn
   ];
 }
