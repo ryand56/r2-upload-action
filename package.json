@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/ryand56/r2-upload-action#readme",
   "devDependencies": {
-    "@types/dedent": "^0.7.0",
+    "@types/dedent": "^1.0.0",
     "@types/jest": "^30.0.0",
     "@types/md5": "^2.3.2",
     "@types/node": "^24.13.3",
